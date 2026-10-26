@@ -1,0 +1,19 @@
+{
+  "method": "Supabase SQL editor plus connector, independent PostgreSQL backends",
+  "fixture": "S02_concurrency",
+  "acceptance": {
+    "browser": { "outcome": "accepted", "started": 1793033102.815, "finished": 1793033132.88988, "backend_pid": 37258 },
+    "connector": { "outcome": "forbidden", "started": 1793033120.48383, "finished": 1793033132.8925, "backend_pid": 37602 },
+    "overlapping": true,
+    "membersAfter": 3
+  },
+  "ownershipTransfer": {
+    "browser": { "outcome": "transferred", "started": 1793033545.2648, "finished": 1793033575.31745, "backend_pid": 37706 },
+    "connector": { "outcome": "forbidden", "started": 1793033559.7255, "finished": 1793033575.32796, "backend_pid": 37708 },
+    "overlapping": true,
+    "ownersAfter": 1,
+    "ownerReferencesAgree": true
+  },
+  "cleanupVerified": true,
+  "realStateAfterCleanup": { "users": 1, "profiles": 1, "workspaces": 1, "invitations": 0 }
+}

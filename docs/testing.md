@@ -4,6 +4,8 @@ S01 evidence: npm test passed 13 unit/component tests; Playwright passed 6 produ
 
 ## Planned layers
 
+S02 evidence: combined S01/S02 checks passed 43 unit/component tests, 12 Chromium production browser tests and five live anonymous API tests, plus lint/typecheck/build. Full hosted rollback assertions and true overlapping invitation/ownership races passed with test fixtures cleaned up. Team UI browser tests use controlled API fixtures; the real logged-in profile separately loaded the membership-backed personal setup page. No two-account Google invitation rehearsal or physical phone test is claimed. See [S02 record](sprints/S02.md).
+
 Unit checks: document validation, lyric breaking/content preservation, revisions, manifests/readiness. Component/browser checks: navigation/input states, freeform keyboard movement, consistent rendering, presenter/blackout/audio/popup recovery. Database/Storage integration: tenant isolation, roles, invitation expiry/replay, cross-workspace references, atomic quotas.
 
 Offline browser checks must use the production build/service worker, not Vite dev: prepare/disconnect/restart/play; missing/corrupt files; quota denial; update deferral. Real laptop/projector rehearsal covers extended display/fullscreen, room-distance readability, smooth video, single audio source, and internet loss. Viewport emulation is not real-device evidence.

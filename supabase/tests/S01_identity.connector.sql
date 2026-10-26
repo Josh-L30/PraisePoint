@@ -51,9 +51,9 @@ do $$ begin
 end $$;
 reset role;
 do $$ begin
-  assert (select count(*) = 2 from public.profiles), 'unexpected profile count';
-  assert (select count(*) = 2 from public.workspaces), 'unexpected workspace count';
-  assert (select count(*) = 2 from public.workspace_members), 'unexpected membership count';
+  assert (select count(*) = 2 from public.profiles where id in ('11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222')), 'unexpected fixture profile count';
+  assert (select count(*) = 2 from public.workspaces where created_by in ('11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222')), 'unexpected fixture workspace count';
+  assert (select count(*) = 2 from public.workspace_members where user_id in ('11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222')), 'unexpected fixture membership count';
 end $$;
 select 'S01 identity: initialization, isolation, ownership, roles, and provider assertions passed; fixtures rolled back' as result;
 rollback;

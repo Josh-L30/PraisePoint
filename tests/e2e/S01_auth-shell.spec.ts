@@ -24,6 +24,9 @@ async function sessionFixture(page: Page, expired = false) {
   await page.route('**/rest/v1/rpc/ensure_personal_workspace', route => route.fulfill({ json: {
     profileId, workspaceId, displayName: 'Test volunteer', avatarUrl: null,
   } }));
+  await page.route('**/rest/v1/workspace_members*', route => route.fulfill({ json: [{ role: 'owner', workspaces: {
+    id: workspaceId, kind: 'personal', name: 'Personal workspace', owner_id: profileId,
+  } }] }));
 }
 test('anonymous protected navigation returns to Google sign-in', async ({ page }) => {
   await page.goto('/app');

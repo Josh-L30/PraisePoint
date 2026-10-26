@@ -33,6 +33,7 @@ export function createAuthService(client: SupabaseClient | null, providerReady: 
         if (!ready.value) return failure('FORBIDDEN', 'Google sign-in is not enabled yet. The administrator needs to finish connecting Google.');
         const { error } = await client.auth.signInWithOAuth({ provider: 'google', options: {
           redirectTo: window.location.origin + '/auth/callback', scopes: 'openid email profile',
+          queryParams: { prompt: 'select_account' },
         } });
         return error ? failure('NETWORK', 'Google sign-in could not start. Check your connection or ask the administrator to check Google settings.')
           : { ok: true, value: undefined };

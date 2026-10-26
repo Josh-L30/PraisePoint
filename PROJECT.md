@@ -10,7 +10,7 @@ Use Supabase's database/API/auth capabilities. Add small authenticated TypeScrip
 
 ## Data and trust boundaries
 
-Proposed record groups: profiles; personal/church workspaces; memberships/invitations; songs; decks and ordered slide documents; service plans/items; media metadata. Exact tables/types/constraints/migrations belong to the detailed implementation plan after design acceptance. No SQL is being applied.
+Implemented record groups: profiles, personal/church workspaces, memberships/invitations and private operation budgets. S01/S02 migrations are applied to the existing Supabase Free project. Later record groups: songs, decks and ordered slide documents, service plans/items and media metadata; their schemas belong to their owning sprint.
 
 Every resource belongs to a workspace. Enforce personal ownership/church membership/roles with Postgres RLS, private Storage policies, and authenticated operations, including user-supplied IDs. Add relational integrity and indexes for membership/ownership paths. Prevent cross-workspace child/asset references and client-controlled privilege escalation. Elevated keys stay server-side.
 
