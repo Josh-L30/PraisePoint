@@ -4,6 +4,8 @@ S01 evidence: npm test passed 13 unit/component tests; Playwright passed 6 produ
 
 ## Planned layers
 
+S03 evidence: combined S01–S03 checks passed 80 unit/component, 21 production Chromium and eight live anonymous API tests, plus lint/typecheck/build. Hosted rollback assertions cover document validation, every category, permissions/revocation, revisions, explicit copies and capacity. A true two-connection race produced one successful save and one CONFLICT, followed by verified cleanup. Browser layout checks match logical positions/line breaks at 1080p and letterboxed 1024×768 and reject missing Figtree. Draft failure/recovery/sign-out/navigation cases pass. UI mocks, live anonymous API, hosted authorization and real logged-in browsing remain distinct evidence. See [S03 record](sprints/S03.md).
+
 S02 evidence: combined S01/S02 checks passed 43 unit/component tests, 12 Chromium production browser tests and five live anonymous API tests, plus lint/typecheck/build. Full hosted rollback assertions and true overlapping invitation/ownership races passed with test fixtures cleaned up. Team UI browser tests use controlled API fixtures; the real logged-in profile separately loaded the membership-backed personal setup page. No two-account Google invitation rehearsal or physical phone test is claimed. See [S02 record](sprints/S02.md).
 
 Unit checks: document validation, lyric breaking/content preservation, revisions, manifests/readiness. Component/browser checks: navigation/input states, freeform keyboard movement, consistent rendering, presenter/blackout/audio/popup recovery. Database/Storage integration: tenant isolation, roles, invitation expiry/replay, cross-workspace references, atomic quotas.

@@ -1,16 +1,16 @@
 # Architecture and collaboration
 
-Status: architecture and plan accepted; Native execution started. S01 identity/private workspace, real Google login/cancellation/logout, and the responsive glass shell are verified. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
+Status: architecture and plan accepted; Native execution continues. S01–S03 identity/workspaces/invitations, the responsive glass shell and template slide editing/safe saves are verified. Real Google login/cancellation/logout is verified separately. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
 
 ## Stack recommendation
 
 React + TypeScript + Vite + Tailwind CSS, Supabase Auth/Postgres/limited private Storage, Cloudflare Pages Free with its provided address. The full stack direction was accepted with the design. Compatible versions are pinned in package.json/package-lock.json. VSCode is the editor. This folder is a Git repository on feat/church-workspace. Sprint commits and verification are recorded in the execution ledger. Remote repository and deployment remain pending.
 
-Use Supabase's database/API/auth capabilities. Add small authenticated TypeScript Edge Functions only for operations requiring a server boundary, such as invitations/quota-controlled uploads, backed by atomic database transactions when needed. No separate Node server, queue, or conversion service.
+Use Supabase's database/API/auth capabilities. S02/S03 use private transactional database bodies behind authenticated security-invoker wrappers for invitations, membership and document writes/capacity. Add small authenticated TypeScript Edge Functions only when an external service or upload-signing boundary requires one. No separate Node server, queue, or conversion service.
 
 ## Data and trust boundaries
 
-Implemented record groups: profiles, personal/church workspaces, memberships/invitations and private operation budgets. S01/S02 migrations are applied to the existing Supabase Free project. Later record groups: songs, decks and ordered slide documents, service plans/items and media metadata; their schemas belong to their owning sprint.
+Implemented record groups: profiles, personal/church workspaces, memberships/invitations, validated revisioned deck documents, private operation budgets and document capacity accounting. S01–S03 migrations are applied to the existing Supabase Free project. Later record groups: songs, service plans/items and media metadata; their schemas belong to their owning sprint.
 
 Every resource belongs to a workspace. Enforce personal ownership/church membership/roles with Postgres RLS, private Storage policies, and authenticated operations, including user-supplied IDs. Add relational integrity and indexes for membership/ownership paths. Prevent cross-workspace child/asset references and client-controlled privilege escalation. Elevated keys stay server-side.
 

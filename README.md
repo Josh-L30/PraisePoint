@@ -1,8 +1,8 @@
 # Church presentation workspace
 
-Planning-stage project for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
+Website under development for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
 
-**Current state:** Native implementation has started on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, and private-workspace database foundation are implemented. Real Google login, callback, reload, logout, repeat login, and cancellation recovery are verified. Google is the only enabled provider. The website is not deployed and later presentation features have not been implemented.
+**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations and five-template slide editor are implemented and verified. Google is the only enabled provider. The website is not deployed; freeform editing, songs/services, real media, presenter windows and offline preparation remain later work.
 
 ## Start here
 
@@ -28,4 +28,4 @@ Disposable HTML mockups are local files under the ignored .superpowers/brainstor
 
 Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Verified checks: npm test (13 passed), browser checks (6 passed), npm run lint, npm run build including typecheck, and live anonymous API checks (2 passed). Hosted SQL assertions also passed with fixtures rolled back. Tests use one worker to limit development memory usage. The production build currently reports a large main chunk; feature splitting remains before release. See [setup and current connection state](docs/setup.md).
 
-S01 and S02 are verified. Shared church workspaces, Google-account invitation links, membership management, ownership transfer and workspace switching are implemented. Current combined checks: 43 unit/component, 12 production browser, five live anonymous API tests, plus hosted authorization and overlapping concurrency checks. See [S02 evidence](docs/sprints/S02.md). Next: slide templates and safe saves in S03. Do not recreate the already saved Google credential or Supabase project.
+S01–S03 are verified: Google/private and shared workspaces, invitations/team management, five editable slide templates, cloud save/reopen/copy/delete, safe revision conflicts, draft guards and fixed-layout preview. Open Presentations → New presentation to begin. Current combined checks: 80 unit/component, 21 production browser and eight live anonymous API tests, plus hosted authorization/capacity and overlapping concurrency checks. See [S03 evidence and limitations](docs/sprints/S03.md). Next: freeform positioning/layers/undo in S04. Videos, service plans, two-window presentation and offline preparation are still being built. Do not recreate the saved Google credential or Supabase project.

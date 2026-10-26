@@ -1,0 +1,94 @@
+import { test, expect } from '@playwright/test';
+import { deckFixture, deckId, libraryPath } from './support/deck-fixture';
+const templates = [ ['Lyrics','Lyrics'],['Scripture','Passage'],['Sermon','Message title'],['Announcement','Announcement title'],['Welcome / closing','Welcome or closing message'] ];
+for (const [name,field] of templates) test(name + ' template saves and reopens with literal words and styles (UI fixture)',async ({ page }) => {
+  const state = await deckFixture(page,false);
+  await page.setViewportSize({ width: 1440,height: 1000 });
+  await page.goto(libraryPath);
+  await page.getByRole('button',{ name: 'New presentation' }).click();
+  await page.getByRole('button',{ name,exact: true }).click();
+  const content = 'Panginoon 🙏\n主よ\n<script>literal words</script>';
+  await page.getByRole('textbox',{ name: field,exact: true }).fill(content);
+  await page.getByRole('textbox',{ name: 'Presentation title' }).fill('Sunday · ' + name);
+  await page.getByRole('spinbutton',{ name: 'Text size' }).first().fill('68');
+  await page.getByRole('combobox',{ name: 'Text alignment' }).first().selectOption('left');
+  await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();
+  await expect(page.getByText('Saved · revision 2',{ exact: true })).toBeVisible();
+  const current = [...state.documents.values()][0];
+  expect(current.document.slides[0].elements[0]).toMatchObject({ text: content,fontSize: 68,align: 'left' });
+  if (name==='Lyrics') await page.screenshot({ path: 'docs/evidence/S03-lyrics-editor.png',fullPage: true });
+  await page.getByRole('link',{ name: 'Back to presentations' }).click();
+  await page.getByRole('link',{ name: 'Sunday · ' + name,exact: true }).click();
+  await expect(page.getByRole('textbox',{ name: field,exact: true })).toHaveValue(content);
+});
+test('failed save keeps the draft, conflict copy keeps it separately, and sign-out can be cancelled',async ({ page }) => {
+  const state = await deckFixture(page);
+  await page.goto(libraryPath + '/' + deckId);
+  const field = page.getByRole('textbox',{ name: 'Lyrics',exact: true });
+  await field.fill('My draft is kept');
+  page.once('dialog',dialog => dialog.dismiss());
+  await page.getByRole('button',{ name: 'Sign out' }).click();
+  await expect(field).toHaveValue('My draft is kept');
+  state.failNextSave='network';
+  await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('could not be confirmed');
+  await expect(field).toHaveValue('My draft is kept');
+  state.failNextSave='conflict';
+  await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();
+  await expect(page.getByRole('button',{ name: 'Save draft as a copy' })).toBeVisible();
+  await page.getByRole('button',{ name: 'Save draft as a copy' }).click();
+  await expect(page).not.toHaveURL(libraryPath + '/' + deckId);
+  await expect(page.getByRole('textbox',{ name: 'Lyrics',exact: true })).toHaveValue('My draft is kept');
+  expect(state.documents.size).toBe(2);
+  expect(state.documents.get(deckId)?.document.title).toBe('Newer volunteer version');
+});
+test('unsaved navigation needs an explicit decision and copying/deleting is explicit',async ({ page }) => {
+  const state = await deckFixture(page);
+  await page.goto(libraryPath + '/' + deckId);
+  await page.getByRole('textbox',{ name: 'Lyrics',exact: true }).fill('Not saved online');
+  await page.getByRole('link',{ name: 'Back to presentations' }).click();
+  await expect(page.getByRole('alertdialog')).toContainText('Leave without saving');
+  await page.getByRole('button',{ name: 'Keep editing' }).click();
+  await expect(page.getByRole('textbox',{ name: 'Lyrics',exact: true })).toHaveValue('Not saved online');
+  await page.getByRole('link',{ name: 'Back to presentations' }).click();
+  await page.getByRole('button',{ name: 'Discard changes and leave' }).click();
+  await page.getByRole('button',{ name: 'Make a copy' }).click();
+  expect(state.documents.size).toBe(1);
+  await page.getByRole('button',{ name: 'Create separate copy' }).click();
+  await page.getByRole('link',{ name: 'Back to presentations' }).click();
+  await page.getByRole('article').first().getByRole('button',{ name: 'Delete',exact: true }).click();
+  expect(state.documents.size).toBe(2);
+  await page.getByRole('button',{ name: 'Confirm presentation deletion' }).click();
+  await expect(page.getByRole('article')).toHaveCount(1);
+});
+test('full-window preview keeps the same logical text geometry at 1080p and letterboxed 1024×768',async ({ page }) => {
+  await deckFixture(page);
+  await page.goto(libraryPath + '/' + deckId + '/preview');
+  const measurements = [];
+  for (const [width,height] of [[1920,1080],[1024,768]]) {
+    await page.setViewportSize({ width,height });
+    const stage = page.getByTestId('slide-stage'); await expect(stage).toBeVisible();
+    await expect.poll(() => stage.evaluate(element => new DOMMatrix(getComputedStyle(element).transform).a)).toBeCloseTo(width/1920,4);
+    measurements.push(await stage.evaluate(element => {
+      const text = element.querySelector<HTMLElement>('[data-text-id]')!, stageRect = element.getBoundingClientRect(), rect = text.getBoundingClientRect(), scale = new DOMMatrix(getComputedStyle(element).transform).a;
+      return { text: text.textContent,whiteSpace: getComputedStyle(text).whiteSpace,x: (rect.left-stageRect.left)/scale,y: (rect.top-stageRect.top)/scale,width: rect.width/scale,height: rect.height/scale,top: stageRect.top };
+    }));
+  }
+  expect(measurements[0]).toMatchObject({ x: 96,y: 300,width: 1728,height: 480,whiteSpace: 'pre',top: 0 });
+  expect(measurements[1]).toMatchObject({ text: measurements[0].text,whiteSpace: 'pre' });
+  expect(measurements[1].x).toBeCloseTo(96); expect(measurements[1].y).toBeCloseTo(300); expect(measurements[1].top).toBeCloseTo(96);
+  await page.screenshot({ path: 'docs/evidence/S03-letterboxed-preview.png' });
+});
+test('font failure blocks full-window output and phone preview gives the desktop editing requirement',async ({ page }) => {
+  await deckFixture(page);
+  await page.route('**/fonts/Figtree.ttf',route => route.abort('failed'));
+  await page.goto(libraryPath + '/' + deckId + '/preview');
+  await expect(page.getByRole('alert')).toContainText('Figtree');
+  await expect(page.getByTestId('slide-stage')).toHaveCount(0);
+  await page.unroute('**/fonts/Figtree.ttf');
+  await page.setViewportSize({ width: 390,height: 844 });
+  await page.goto(libraryPath + '/' + deckId);
+  await expect(page.getByText(/Open this presentation on a laptop/)).toBeVisible();
+  await expect(page.getByRole('textbox',{ name: 'Lyrics',exact: true })).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

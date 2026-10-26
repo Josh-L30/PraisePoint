@@ -1,0 +1,10 @@
+{
+  "project": "tnrmotwiarlpknamxoyp",
+  "fixture": "S03_save_race",
+  "first": { "pid": 45235, "status": "saved", "started": 1793039449.200842, "finished": 1793039479.25154, "revision": 2 },
+  "second": { "pid": 45239, "status": "conflict", "started": 1793039472.219724, "finished": 1793039479.260666 },
+  "distinctBackends": true,
+  "overlapSeconds": 7.031816,
+  "persisted": { "revision": 2, "title": "First race writer", "documentTitle": "First race writer" },
+  "cleanup": { "remainingFixtureUsers": 0, "users": 1, "profiles": 1, "workspaces": 1, "decks": 0, "documentBytes": 0 }
+}

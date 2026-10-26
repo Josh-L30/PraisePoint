@@ -1,5 +1,6 @@
 import { openDB } from 'idb';
 import { failure, type Result } from '../domain/result';
+import { forgetDraft } from './draft-memory';
 export type DeviceSession = { profileId: string; signedOut: boolean };
 const db = () => openDB('gather-device', 1, { upgrade(database) { database.createObjectStore('meta'); } });
 export async function readDeviceSession(): Promise<DeviceSession | null> {
@@ -24,6 +25,7 @@ export async function purgeProfileData(profileId: string): Promise<Result<void>>
       if (session?.profileId === profileId) await tx.store.delete('session');
       await tx.done;
     } finally { database.close(); }
+    forgetDraft(profileId);
     return { ok: true, value: undefined };
   } catch { return failure('STORAGE_UNAVAILABLE', 'Local data could not be removed. Try again before changing accounts.'); }
 }

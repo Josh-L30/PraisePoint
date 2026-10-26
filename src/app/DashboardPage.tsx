@@ -17,6 +17,6 @@ export function DashboardPage({ workspaceId, shared = false }: { workspaceId?: s
       <article><span className="feature-icon"><Music /></span><h3>Keep songs together</h3><p>A reusable library for the songs your church loves to sing.</p></article>
       <article><span className="feature-icon"><MonitorPlay /></span><h3>Present with confidence</h3><p>Clear operator controls with a distraction-free audience screen.</p></article>
     </div>
-    <footer className="workspace-footer">{shared ? 'You’re in a shared church workspace.' : 'You’re in your personal workspace.'} <Link to={base + '/team'}>{shared ? 'View your church team' : 'Set up your church team'}</Link>. Presentation tools are being prepared.</footer>
+    <footer className="workspace-footer">{shared ? 'You’re in a shared church workspace.' : 'You’re in your personal workspace.'} <Link to={base + '/team'}>{shared ? 'View your church team' : 'Set up your church team'}</Link>. Presenter controls and offline preparation are being built.</footer>
   </div>;
 }

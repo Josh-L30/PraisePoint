@@ -5,6 +5,7 @@ import type { ProfileWorkspace } from '../features/auth/auth-service';
 import { DashboardPage } from './DashboardPage';
 import { WorkspacePicker } from '../features/workspaces/WorkspacePicker';
 import type { Workspace } from '../features/workspaces/workspace-service';
+import { mayChangeAccount } from '../lib/navigation-guard';
 export function AppShell({ profile, onSignOut, children, activeWorkspace, workspaces }: {
   profile: ProfileWorkspace; onSignOut(): Promise<void>; children?: ReactNode; activeWorkspace?: Workspace; workspaces?: Workspace[];
 }) {
@@ -58,7 +59,7 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
         <button className="nav-item" aria-label="Reduce transparency" aria-pressed={solid} onClick={() => setSolid(v => !v)}><ShieldCheck size={19} /><span className="collapse-copy">Reduce transparency</span></button>
         <button className="collapse-button" aria-label={collapsed ? 'Expand navigation' : 'Collapse navigation'} aria-expanded={!collapsed} onClick={() => setCollapsed(v => !v)}>{collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}<span className="collapse-copy">Collapse sidebar</span></button>
         <div className="profile"><span className="avatar">{profile.avatarUrl ? <img src={profile.avatarUrl} alt="" referrerPolicy="no-referrer" /> : initials}</span><span className="collapse-copy"><strong>{profile.displayName}</strong><small>Church volunteer</small></span>
-          <button className="icon-button sign-out" aria-label="Sign out" disabled={signingOut} onClick={async () => { setSigningOut(true); await onSignOut(); setSigningOut(false); }}><LogOut size={17} /></button></div>
+          <button className="icon-button sign-out" aria-label="Sign out" disabled={signingOut} onClick={async () => { if (!mayChangeAccount()) return; setSigningOut(true); await onSignOut(); setSigningOut(false); }}><LogOut size={17} /></button></div>
       </div>
     </aside>
     <div className="main-column"><header className="top-bar glass">
