@@ -1,10 +1,10 @@
 # Architecture and collaboration
 
-Status: architecture direction accepted with the full design on 2026-10-26; detailed implementation plan awaits review/execution choice. No runtime/schema/cloud setup/deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
+Status: architecture and plan accepted; Native execution started. S01 identity/private workspace, real Google login/cancellation/logout, and the responsive glass shell are verified. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
 
 ## Stack recommendation
 
-React + TypeScript + Vite + Tailwind CSS, Supabase Auth/Postgres/limited private Storage, Cloudflare Pages Free with its provided address. React/Tailwind/Vite/VSCode/Supabase were requested; TypeScript, hosting, and backend shape are recommendations. Pin compatible supported versions and a lockfile during scaffolding. VSCode is the editor; Git and a shared repository are proposed for collaboration. This folder is not yet a Git repository.
+React + TypeScript + Vite + Tailwind CSS, Supabase Auth/Postgres/limited private Storage, Cloudflare Pages Free with its provided address. The full stack direction was accepted with the design. Compatible versions are pinned in package.json/package-lock.json. VSCode is the editor. This folder is a Git repository on feat/church-workspace. Sprint commits and verification are recorded in the execution ledger. Remote repository and deployment remain pending.
 
 Use Supabase's database/API/auth capabilities. Add small authenticated TypeScript Edge Functions only for operations requiring a server boundary, such as invitations/quota-controlled uploads, backed by atomic database transactions when needed. No separate Node server, queue, or conversion service.
 

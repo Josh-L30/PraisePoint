@@ -1,10 +1,10 @@
 # Sprint plan and status ledger
 
-Roadmap for the accepted first-release design. All implementation sprints are **Planned**; the detailed implementation plan awaits review and execution-method selection. IDs describe dependency-ordered slices, not calendar periods. Estimate duration after feasibility checks; no deadline or staffing was supplied.
+Roadmap for the accepted first-release design and implementation plan. S01 foundation is verified, including real Google OAuth and automated browser checks. Later sprints remain Planned until activated. IDs describe dependency-ordered slices, not calendar periods.
 
 | ID | Usable outcome and acceptance | Depends on | Status | Record/evidence |
 | --- | --- | --- | --- | --- |
-| S01 | Google/profile/private workspace and approved glass shell; login recovery, collapsing navigation A01/A10 | Design approval, detailed plan, account configuration | Planned | [Record](sprints/S01.md), [test map](../tests/sprints/S01/README.md) |
+| S01 | Google/profile/private workspace and approved glass shell; login recovery, collapsing navigation A01/A10 | Accepted design and user-owned provider setup | Done | [Record](sprints/S01.md), [test map](../tests/sprints/S01/README.md) |
 | S02 | Church creation/invitations/shared access with tenant/role enforcement A02 | S01 | Planned | Create when activated |
 | S03 | All five template slide categories save/reopen; shared renderer/revision conflicts A03/A05 | S01; ownership contract | Planned | Create when activated |
 | S04 | Freeform text/images, resize/layers/alignment/undo/reorder/overflow A03/A04 | S03 | Planned | Create when activated |
@@ -23,8 +23,8 @@ Before investing fully in high-risk slices, run bounded disposable checks for sh
 
 - Discovery gathered; visual direction approved 2026-10-26.
 - Full scope/operating defaults accepted by the user on 2026-10-26; independent builder check complete and its deletion-lifecycle ambiguity resolved.
-- No implementation sprint started or product tests executed.
-- [Detailed implementation plan](superpowers/plans/2026-10-26-church-presentations.md) prepared. Next: plan review/execution-method selection → S01 setup and implementation.
+- Native execution authorized and started. S01 has 13 passing unit/component checks, 6 passing browser checks, 2 passing live anonymous API checks, passing hosted SQL assertions, and real Google success/cancel/logout evidence; typecheck/lint/build passed.
+- [Detailed implementation plan](superpowers/plans/2026-10-26-church-presentations.md) accepted. Next: S02 without recreating the project or credential.
 - Before S01: user-owned provider accounts/redirects, safe test environment, repository destination.
 - Before S10: actual laptop/projector/browser, final branding, account/backup owner, rehearsal.
 

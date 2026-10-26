@@ -10,7 +10,7 @@
 
 **Spec:** [Accepted design](../specs/2026-10-26-church-presentations-design.md), including its PRODUCT.md, DESIGN.md, PROJECT.md references. User accepted the full design/defaults on 2026-10-26.
 
-**Status:** implementation plan awaiting review/execution choice. No task below has been executed. Commands/tests described below are future instructions, not evidence of passing checks.
+**Status:** accepted; Native execution in progress. S01 is complete with evidence in docs/sprints/S01.md and the execution ledger. Later unchecked tasks remain future instructions, not evidence of passing checks. Applied migration filenames follow the actual server versions recorded in the ledger.
 
 ## Global Constraints
 

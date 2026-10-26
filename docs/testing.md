@@ -1,6 +1,6 @@
 # Verification strategy
 
-Test plan only. No React runtime/executable product tests exist; no build/test commands are verified. [Preview checks](discovery/2026-10-26-visual-preview.md) are separate evidence.
+S01 evidence: npm test passed 13 unit/component tests; Playwright passed 6 production-build browser checks; live anonymous API checks passed 2 tests; typecheck/lint/build passed. Hosted SQL assertions passed with synthetic fixtures rolled back. Real Google success, cancellation, reload and logout were verified separately. Browser expiry/mobile workspace cases use controlled server fixtures and prove UI behavior only. Physical devices and later-sprint acceptance remain unverified. See docs/sprints/S01.md. [Preview checks](discovery/2026-10-26-visual-preview.md) remain separate evidence. Use one test worker on this development machine; build/preview separately if cold startup exceeds the browser runner timeout.
 
 ## Planned layers
 

@@ -1,0 +1,13 @@
+project_id = "ccf-church-presentations"
+[api]
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+[db]
+port = 54322
+major_version = 17
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:5173"
+additional_redirect_urls = ["http://127.0.0.1:5173/auth/callback", "http://localhost:5173/auth/callback", "http://127.0.0.1:4173/auth/callback"]
+enable_signup = true
