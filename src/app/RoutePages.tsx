@@ -12,6 +12,8 @@ import { TeamPage } from '../features/workspaces/TeamPage';
 const DeckListPage = lazy(() => import('../features/decks/DeckListPage').then(module => ({ default: module.DeckListPage })));
 const DeckEditorPage = lazy(() => import('../features/decks/DeckEditorPage').then(module => ({ default: module.DeckEditorPage })));
 const DeckPreviewPage = lazy(() => import('../features/decks/DeckPreviewPage').then(module => ({ default: module.DeckPreviewPage })));
+const SongLibraryPage = lazy(() => import('../features/songs/SongLibraryPage').then(module => ({ default: module.SongLibraryPage })));
+const ServicePlanPage = lazy(() => import('../features/services/ServicePlanPage').then(module => ({ default: module.ServicePlanPage })));
 export function AuthPage() {
   const auth = useAuth();
   if (auth.status === 'loading') return <LoadingScreen />;
@@ -35,6 +37,8 @@ export function TeamRoute() {
   return <TeamPage key={active.id} workspace={active} profileId={auth.profile.profileId} onRefresh={refresh} />;
 }
 export function Dashboard() { const { active } = useWorkspace(); return <DashboardPage workspaceId={active.id} shared={active.kind==='church'} />; }
+export function SongLibrary() { const {active}=useWorkspace();return <SongLibraryPage key={active.id} workspace={active}/>; }
+export function ServicePlans() { const {active}=useWorkspace(),{serviceId}=useParams();return <ServicePlanPage key={active.id+(serviceId??'list')} workspace={active} serviceId={serviceId}/>; }
 export function DeckLibrary({ showTemplates = false }: { showTemplates?: boolean }) {
   const auth = useAuth(), { active, workspaces } = useWorkspace();
   return auth.status==='authenticated' ? <DeckListPage key={active.id + showTemplates} workspace={active} workspaces={workspaces} profileId={auth.profile.profileId} startWithTemplates={showTemplates} /> : null;

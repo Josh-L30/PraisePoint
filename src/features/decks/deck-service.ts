@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { validateDeck, categories } from '../../domain/slide-schema';
 import { createTemplate, templateNames } from './templates';
 import { supabase } from '../../lib/supabase';
+import { contentError } from '../songs/content-api';
 export type DeckSummary = { id: string; workspaceId: string; title: string; revision: number; createdBy: string; updatedAt: string };
 export type DeckService = {
   list(workspaceId: string,page?: number): Promise<Result<{ items: DeckSummary[]; hasMore: boolean }>>;
@@ -26,7 +27,7 @@ export function createDeckService(client: SupabaseClient | null): DeckService {
     switch (code) {
       case '40001': return failure('CONFLICT','Someone saved a newer revision. Your draft is still here. Reload their version or save your draft as a copy.');
       case '23505': return failure('CONFLICT','This presentation already exists. Refresh your library before trying again.');
-      case '23503': return failure('CONFLICT','This presentation is used elsewhere. Remove or replace its references before deleting it.');
+      case '23503': return contentError(error);
       case '53000': case '53100': return failure('CAPACITY','The free application document capacity has been reached. Your draft is still here. Ask your owner to free space.');
       case 'P0001': return failure('CAPACITY','The save limit has been reached. Keep your draft and try again in a minute.');
       case '0A000': return failure('UNSUPPORTED','This presentation contains media that is not available in the destination workspace. Add or relink those files first.');

@@ -2,7 +2,7 @@
 
 Website under development for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
 
-**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor and safe saves are implemented and verified. Google is the only enabled provider. The website is not deployed; songs/services, real media, presenter windows and offline preparation remain later work.
+**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library and service plans are implemented and verified. Google is the only enabled provider. The website is not deployed; real media, presenter windows and offline preparation remain later work.
 
 ## Start here
 
@@ -26,8 +26,10 @@ Use Vite to open this React/TypeScript project. VSCode's Live Server / Go Live s
 
 Disposable HTML mockups are local files under the ignored .superpowers/brainstorm/ folder. They are design evidence, not application source. The companion's active state/server-info contains its local access URL; never publish session keys. Figtree's OFL license is stored with the preview.
 
-Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Current verified checks: 98 unit/component tests, 24 browser checks, eight live anonymous API checks, lint and build including TypeScript. All four hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The production build still reports a large initial chunk; broader performance work remains before release. See [setup and connection state](docs/setup.md).
+Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Current verified checks: 117 unit/component tests (local `--testTimeout=15000` allowance), 26 production Chromium checks, ten live anonymous API checks, lint and build including TypeScript. All five hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The production build still reports a large initial chunk; broader performance work remains before release. See [setup and connection state](docs/setup.md).
 
 S01–S03 established Google/private and shared workspaces, invitations/team management, five editable slide templates, cloud save/reopen/copy/delete, safe revision conflicts, draft guards and fixed-layout preview. Open Presentations → New presentation to begin. See [S03 evidence and limitations](docs/sprints/S03.md). Do not recreate the saved Google credential or Supabase project.
+
+S05 adds Song library → New song for typed/pasted lyrics and break review, then Service plans → New service for ordering and independent song copies. Existing service copies keep their words when a song master changes. [S05 verification and limitations](docs/sprints/S05.md).
 
 S04 adds freeform text dragging/resizing, position fields, keyboard alternatives, alignment/layers, thumbnail ordering and gesture undo/redo. The wide desktop inspector scrolls independently. Current combined checks: 98 unit/component, 24 browser, eight live API and all four hosted SQL suites. See [S04 evidence and limits](docs/sprints/S04.md). Next: songs and service plans in S05. Real image insertion remains S06.
