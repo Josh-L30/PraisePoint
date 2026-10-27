@@ -1,10 +1,10 @@
 import { measureSlideOverflow, type Slide } from '../../domain/slide';
 import type { MediaResolver } from '../../domain/media';
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties,type ReactNode } from 'react';
 import { BackgroundLayer, MediaLayer } from './BackgroundLayer';
 import { unavailableMedia } from './media-context';
-export type SlideRendererProps = { slide: Slide; resolveMedia?: MediaResolver; mode: 'editor' | 'preview' | 'audience'; onIssues?(issues: string[]): void };
-export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, onIssues }: SlideRendererProps) {
+export type SlideRendererProps = { slide: Slide; resolveMedia?: MediaResolver; mode: 'editor' | 'preview' | 'audience'; onIssues?(issues: string[]): void; editorOverlay?(scale: number): ReactNode };
+export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, onIssues,editorOverlay }: SlideRendererProps) {
   const viewport = useRef<HTMLDivElement>(null), stage = useRef<HTMLDivElement>(null);
   const [font,setFont] = useState<'loading' | 'ready' | 'missing'>('loading');
   const [layout,setLayout] = useState({ scale: 0, left: 0, top: 0 });
@@ -47,6 +47,7 @@ export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, on
           return element.kind==='text' ? <div key={element.id} data-testid={'element-' + element.id} data-text-id={element.id} style={{ ...style, fontFamily: 'Figtree', fontSize: element.fontSize, color: element.color, textAlign: element.align, whiteSpace: 'pre', lineHeight: 1.2, overflow: 'hidden' }}>{element.text}</div>
             : <MediaLayer key={element.id} mediaId={element.mediaId} kind="image" fit={element.fit} resolver={resolveMedia} style={style} />;
         })}
+        {mode==='editor' && editorOverlay?.(layout.scale)}
       </div> : <p className="slide-font-message" role={font==='missing' ? 'alert' : 'status'}>{font==='missing' ? 'Figtree could not load. Reconnect and reload before presenting.' : 'Loading presentation font…'}</p>}
     </div>
     {mode!=='audience' && issues.length>0 && <p className="slide-overflow-warning" role="status">Some text or elements extend beyond their box. Add line breaks, reduce text size, or split this slide.</p>}

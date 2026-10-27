@@ -5,7 +5,7 @@ import { LIMITS } from './limits';
 export const categories = ['lyrics','scripture','sermon','announcement','welcome-closing'] as const;
 const id = z.uuid().regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).transform(value => value.toLowerCase()), color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
 const rect = { x: z.number().min(0).max(1920), y: z.number().min(0).max(1080), width: z.number().positive().max(1920), height: z.number().positive().max(1080) };
-const common = { ...rect, id, z: z.number().int().min(0).max(10000) };
+const common = { ...rect, id, z: z.number().int().min(0).max(10000), label: z.string().trim().min(1).max(LIMITS.nameCharacters).optional() };
 const element = z.discriminatedUnion('kind',[
   z.object({ ...common, kind: z.literal('text'), text: z.string().max(LIMITS.textCharacters), fontFamily: z.literal('Figtree'), fontSize: z.number().min(8).max(300), color, align: z.enum(['left','center','right']) }).strict(),
   z.object({ ...common, kind: z.literal('image'), mediaId: id, fit: z.enum(['contain','cover']) }).strict(),

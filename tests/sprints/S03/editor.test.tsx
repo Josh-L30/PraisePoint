@@ -95,3 +95,18 @@ it('waits for a pending save before leaving or changing account',async () => {
   await act(async () => complete({ ok: true,value: { document: saved!,revision: 2 } }));
   expect(await screen.findByText('Presentation library')).toBeVisible();
 });
+it('keeps the saved checkpoint distinct from undo and redo',async () => {
+  const saveDeck=vi.fn(async (document: DeckDocument) => ({ ok: true as const,value: { document,revision: 2 } }));
+  editor({ saveDeck });
+  const lyrics=await screen.findByRole('textbox',{ name: 'Lyrics' });
+  await userEvent.clear(lyrics); await userEvent.type(lyrics,'Saved new words');
+  await userEvent.click(screen.getByRole('button',{ name: 'Save presentation' }));
+  expect(await screen.findByText('Saved · revision 2')).toBeVisible();
+  await userEvent.click(screen.getByRole('button',{ name: 'Undo' }));
+  expect(lyrics).toHaveValue('Enter your lyrics here\nOne line at a time');
+  expect(screen.getByRole('button',{ name: 'Save presentation' })).toBeEnabled();
+  await userEvent.click(screen.getByRole('button',{ name: 'Redo' }));
+  expect(lyrics).toHaveValue('Saved new words');
+  expect(screen.getByRole('button',{ name: 'Save presentation' })).toBeDisabled();
+  expect(saveDeck).toHaveBeenCalledOnce();
+});

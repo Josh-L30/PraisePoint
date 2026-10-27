@@ -1,6 +1,6 @@
 # Architecture and collaboration
 
-Status: architecture and plan accepted; Native execution continues. S01–S03 identity/workspaces/invitations, the responsive glass shell and template slide editing/safe saves are verified. Real Google login/cancellation/logout is verified separately. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
+Status: architecture and plan accepted; Native execution continues. S01–S04 identity/workspaces/invitations, the responsive glass shell, template/freeform text editing, safe saves and undo/redo are verified. Real Google login/cancellation/logout is verified separately. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
 
 ## Stack recommendation
 
@@ -10,7 +10,7 @@ Use Supabase's database/API/auth capabilities. S02/S03 use private transactional
 
 ## Data and trust boundaries
 
-Implemented record groups: profiles, personal/church workspaces, memberships/invitations, validated revisioned deck documents, private operation budgets and document capacity accounting. S01–S03 migrations are applied to the existing Supabase Free project. Later record groups: songs, service plans/items and media metadata; their schemas belong to their owning sprint.
+Implemented record groups: profiles, personal/church workspaces, memberships/invitations, validated revisioned deck documents with optional field labels, private operation budgets and document capacity accounting. S01–S04 migrations are applied to the existing Supabase Free project. Later record groups: songs, service plans/items and media metadata; their schemas belong to their owning sprint.
 
 Every resource belongs to a workspace. Enforce personal ownership/church membership/roles with Postgres RLS, private Storage policies, and authenticated operations, including user-supplied IDs. Add relational integrity and indexes for membership/ownership paths. Prevent cross-workspace child/asset references and client-controlled privilege escalation. Elevated keys stay server-side.
 

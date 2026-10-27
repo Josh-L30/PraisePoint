@@ -24,6 +24,13 @@ it('reports missing Figtree instead of substituting a different presentation fon
   expect(await screen.findByRole('alert')).toHaveTextContent('Figtree');
   expect(screen.queryByTestId('element-' + slide.elements[0].id)).not.toBeInTheDocument();
 });
+it('includes selection controls only in the editor tree',async () => {
+  font(); const slide=createTemplate('lyrics'),overlay=() => <button>Editor selection</button>;
+  const view=render(<SlideRenderer slide={slide} mode="editor" editorOverlay={overlay} />);
+  expect(await screen.findByRole('button',{ name: 'Editor selection' })).toBeVisible();
+  view.rerender(<SlideRenderer slide={slide} mode="audience" editorOverlay={overlay} />);
+  expect(screen.queryByRole('button',{ name: 'Editor selection' })).not.toBeInTheDocument();
+});
 it('shows unavailable media honestly and releases a late resolution after unmount', async () => {
   font(); const slide = createTemplate('lyrics'); slide.background={ kind: 'image', mediaId: crypto.randomUUID() };
   const view = render(<SlideRenderer slide={slide} mode="preview" />);

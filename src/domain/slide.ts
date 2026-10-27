@@ -1,7 +1,7 @@
 export type SlideCategory = 'lyrics' | 'scripture' | 'sermon' | 'announcement' | 'welcome-closing';
 export type Rect = { x: number; y: number; width: number; height: number };
-export type TextElement = Rect & { id: string; kind: 'text'; z: number; text: string; fontFamily: 'Figtree'; fontSize: number; color: string; align: 'left' | 'center' | 'right' };
-export type ImageElement = Rect & { id: string; kind: 'image'; z: number; mediaId: string; fit: 'contain' | 'cover' };
+export type TextElement = Rect & { id: string; kind: 'text'; z: number; label?: string; text: string; fontFamily: 'Figtree'; fontSize: number; color: string; align: 'left' | 'center' | 'right' };
+export type ImageElement = Rect & { id: string; kind: 'image'; z: number; label?: string; mediaId: string; fit: 'contain' | 'cover' };
 export type SlideElement = TextElement | ImageElement;
 export type Slide = { id: string; category: SlideCategory; background: { kind: 'solid'; color: string } | { kind: 'image' | 'video'; mediaId: string }; elements: SlideElement[]; standaloneVideoId?: string };
 export function measureSlideOverflow(slide: Slide): string[] {
