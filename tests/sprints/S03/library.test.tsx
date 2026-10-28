@@ -1,15 +1,14 @@
 import { expect, it, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router';
+import {createMemoryRouter,RouterProvider} from 'react-router';
 import { DeckListPage } from '../../../src/features/decks/DeckListPage';
 import { createDeckService, type DeckService } from '../../../src/features/decks/deck-service';
 import { church, personal, ownerId, memberId } from '../S02/fixtures';
 import { deckFixture } from '../../support/deck-fixture';
 function library(overrides: Partial<DeckService> = {}, member = false) {
   const service: DeckService = { ...createDeckService(null), list: async () => ({ ok: true, value: { items: [], hasMore: false } }), ...overrides };
-  return render(<MemoryRouter><Routes><Route path="/" element={<DeckListPage workspace={{ ...church, role: member ? 'member' : 'owner' }} workspaces={[personal,church]} profileId={member ? memberId : ownerId} service={service} />} />
-    <Route path="/app/w/:workspaceId/decks/:deckId" element={<p>Editor opened</p>} /></Routes></MemoryRouter>);
+  return render(<RouterProvider router={createMemoryRouter([{path:"/",element:<DeckListPage workspace={{ ...church, role: member ? 'member' : 'owner' }} workspaces={[personal,church]} profileId={member ? memberId : ownerId} service={service} />},{path:"/app/w/:workspaceId/decks/:deckId",element:<p>Editor opened</p>}])}/>);
 }
 it('creates a presentation only after an explicit template selection',async () => {
   const createDeck = vi.fn(async () => ({ ok: true as const, value: { document: { ...deckFixture(), workspaceId: church.id }, revision: 1 } }));

@@ -14,6 +14,8 @@ const DeckEditorPage = lazy(() => import('../features/decks/DeckEditorPage').the
 const DeckPreviewPage = lazy(() => import('../features/decks/DeckPreviewPage').then(module => ({ default: module.DeckPreviewPage })));
 const SongLibraryPage = lazy(() => import('../features/songs/SongLibraryPage').then(module => ({ default: module.SongLibraryPage })));
 const ServicePlanPage = lazy(() => import('../features/services/ServicePlanPage').then(module => ({ default: module.ServicePlanPage })));
+const MediaLibraryPage=lazy(()=>import('../features/media/MediaLibraryPage').then(module=>({default:module.MediaLibraryPage})));
+export function MediaLibrary(){const auth=useAuth(),{active,workspaces}=useWorkspace();return auth.status==='authenticated'?<MediaLibraryPage key={active.id} workspace={active} workspaces={workspaces} profileId={auth.profile.profileId}/>:null;}
 export function AuthPage() {
   const auth = useAuth();
   if (auth.status === 'loading') return <LoadingScreen />;
@@ -38,7 +40,7 @@ export function TeamRoute() {
 }
 export function Dashboard() { const { active } = useWorkspace(); return <DashboardPage workspaceId={active.id} shared={active.kind==='church'} />; }
 export function SongLibrary() { const {active}=useWorkspace();return <SongLibraryPage key={active.id} workspace={active}/>; }
-export function ServicePlans() { const {active}=useWorkspace(),{serviceId}=useParams();return <ServicePlanPage key={active.id+(serviceId??'list')} workspace={active} serviceId={serviceId}/>; }
+export function ServicePlans() { const auth=useAuth(),{active}=useWorkspace(),{serviceId}=useParams();return auth.status==='authenticated'?<ServicePlanPage key={active.id+(serviceId??'list')} workspace={active} serviceId={serviceId} profileId={auth.profile.profileId}/>:null; }
 export function DeckLibrary({ showTemplates = false }: { showTemplates?: boolean }) {
   const auth = useAuth(), { active, workspaces } = useWorkspace();
   return auth.status==='authenticated' ? <DeckListPage key={active.id + showTemplates} workspace={active} workspaces={workspaces} profileId={auth.profile.profileId} startWithTemplates={showTemplates} /> : null;

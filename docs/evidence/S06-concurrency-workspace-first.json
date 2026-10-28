@@ -1,0 +1,13 @@
+{
+  "pid": 107929,
+  "reason": null,
+  "status": "reserved",
+  "started": 1793090539.77607,
+  "finished": 1793090594.849599,
+  "reservation": {
+    "status": "pending",
+    "expiresAt": "2026-10-27T08:57:19.765637+00:00",
+    "objectKey": "9bc0bc7d-82fa-4c60-909f-b1395e4a916b/a6600000-0000-4000-8000-000000000010/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png",
+    "reservationId": "734d0230-f8af-494f-8023-17aadf7e551c"
+  }
+}

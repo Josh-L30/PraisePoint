@@ -11,3 +11,7 @@ enabled = true
 site_url = "http://127.0.0.1:5173"
 additional_redirect_urls = ["http://127.0.0.1:5173/auth/callback", "http://localhost:5173/auth/callback", "http://127.0.0.1:4173/auth/callback"]
 enable_signup = true
+
+# The function verifies each JWT with Auth.getUser and requires trusted Google identity.
+[functions.media-upload]
+verify_jwt = false

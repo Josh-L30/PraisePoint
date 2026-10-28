@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { CallbackPage } from '../features/auth/CallbackPage';
-import { AuthPage, ProtectedShell, Dashboard, TeamRoute, DeckLibrary, DeckEditor, DeckPreview,SongLibrary,ServicePlans } from './RoutePages';
+import { AuthPage, ProtectedShell, Dashboard, TeamRoute, DeckLibrary, DeckEditor, DeckPreview,SongLibrary,ServicePlans,MediaLibrary } from './RoutePages';
 import { AcceptInvitePage } from '../features/workspaces/AcceptInvitePage';
 import { FeaturePendingPage } from './FeaturePendingPage';
 import { SetupPage } from './SetupPage';
@@ -17,6 +17,7 @@ export const router = createBrowserRouter([
     { path: 'w/:workspaceId/decks/:deckId', element: <DeckEditor /> },
     { path: 'w/:workspaceId/decks/:deckId/preview', element: <DeckPreview /> },
     { path: 'w/:workspaceId/templates', element: <DeckLibrary showTemplates /> },
+    { path: 'w/:workspaceId/media', element: <MediaLibrary /> },
     { path: 'w/:workspaceId/songs', element: <SongLibrary /> },
     { path: 'w/:workspaceId/services', element: <ServicePlans /> },
     { path: 'w/:workspaceId/services/:serviceId', element: <ServicePlans /> },

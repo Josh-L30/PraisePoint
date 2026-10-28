@@ -1,0 +1,150 @@
+{
+  "source": "https://developer.mozilla.org/shared-assets/videos/flower.mp4",
+  "sourceBytes": 1128375,
+  "h264SampleEntries": 2,
+  "aacSampleEntries": 1,
+  "fixtureNote": "Valid MP4 with trailing ISO BMFF free-box padding for 32/128 MiB storage tests; encoded clip remains the small MDN sample. This is not a long-duration worship-video rehearsal.",
+  "memoryNote": "Precise Chromium JS heap snapshots only; not whole-browser/GPU/process peak memory.",
+  "imports": [
+    {
+      "ok": true,
+      "phase": "import",
+      "bytes": 33554432,
+      "elapsedMs": 3498.7999999523163,
+      "before": {
+        "used": 3272896,
+        "total": 4607312,
+        "limit": 4251189248
+      },
+      "after": {
+        "used": 70338921,
+        "total": 72310165,
+        "limit": 4251189248
+      },
+      "duration": 5.055,
+      "width": 960,
+      "height": 540,
+      "sha256": "c8fd0a7b3e4ba75588395b174fa255806f70b7e743f5bfa904519003d16f2e7e",
+      "playback": {
+        "ok": true,
+        "phase": "play",
+        "currentTime": 0.46999,
+        "muted": true,
+        "decodedFrames": 19
+      },
+      "ending": {
+        "ok": true,
+        "phase": "seek",
+        "currentTime": 4.855,
+        "duration": 5.055
+      }
+    },
+    {
+      "ok": true,
+      "phase": "import",
+      "bytes": 134217728,
+      "elapsedMs": 11576.800000190735,
+      "before": {
+        "used": 70637130,
+        "total": 72048218,
+        "limit": 4251189248
+      },
+      "after": {
+        "used": 271894731,
+        "total": 274685435,
+        "limit": 4251189248
+      },
+      "duration": 5.055,
+      "width": 960,
+      "height": 540,
+      "sha256": "fea8cbc4a9a30236949dfd073e66f314a9f692ab65b923e2130014798d1d9352",
+      "playback": {
+        "ok": true,
+        "phase": "play",
+        "currentTime": 0.442168,
+        "muted": true,
+        "decodedFrames": 18
+      },
+      "ending": {
+        "ok": true,
+        "phase": "seek",
+        "currentTime": 4.855,
+        "duration": 5.055
+      }
+    }
+  ],
+  "reopens": [
+    {
+      "ok": true,
+      "phase": "reopen",
+      "elapsedMs": 996.2999999523163,
+      "before": {
+        "used": 3260009,
+        "total": 4607213,
+        "limit": 4251189248
+      },
+      "after": {
+        "used": 37580006,
+        "total": 39017902,
+        "limit": 4251189248
+      },
+      "duration": 5.055,
+      "width": 960,
+      "height": 540,
+      "fixtureMiB": 32
+    },
+    {
+      "ok": true,
+      "phase": "reopen",
+      "elapsedMs": 4524.099999904633,
+      "before": {
+        "used": 36828043,
+        "total": 39280007,
+        "limit": 4251189248
+      },
+      "after": {
+        "used": 137292294,
+        "total": 139943186,
+        "limit": 4251189248
+      },
+      "duration": 5.055,
+      "width": 960,
+      "height": 540,
+      "fixtureMiB": 128
+    }
+  ],
+  "completed": true,
+  "quota": {
+    "ok": false,
+    "error": {
+      "code": "STORAGE_UNAVAILABLE",
+      "message": "This browser could not store or reopen the file. Free device space, keep the original file, and retry."
+    }
+  },
+  "quotaInstrumentation": {
+    "usage": 1135090,
+    "quota": 8388608,
+    "overrideActive": true,
+    "usageBreakdown": [
+      {
+        "storageType": "file_systems",
+        "usage": 0
+      },
+      {
+        "storageType": "indexeddb",
+        "usage": 1135090
+      },
+      {
+        "storageType": "cache_storage",
+        "usage": 0
+      },
+      {
+        "storageType": "service_workers",
+        "usage": 0
+      }
+    ]
+  },
+  "quotaRetainedOriginal": true,
+  "profilePurge": true,
+  "pageErrors": []
+}

@@ -1,6 +1,6 @@
 # Setup and connection status
 
-Updated 2026-10-26. Do not put passwords, Google secrets, elevated Supabase keys, or tokens into chat or source control.
+Updated 2026-10-28. Do not put passwords, Google secrets, elevated Supabase keys, or tokens into chat or source control.
 
 ## Created and connected
 
@@ -45,4 +45,12 @@ Node 24.x; installed versions are pinned in package.json and package-lock.json.
 
 Hosted database assertions are in supabase/tests/S01_identity.connector.sql. Run through the connected SQL tool; it uses a transaction and rollback, with synthetic identities only. It is deliberately not a pgTAP script. No test fixtures remain in the live project.
 
-The project is not deployed. Creating a backend project does not publish the website.
+The frontend is not published. The authenticated media-upload Edge Function v2 is deployed in this existing Free project; creating or updating the backend does not publish the website.
+
+## Media backend
+
+Use the existing private gather-images bucket and applied migration history through 20261028065536. The Edge Function reads the platform-provided server keys only; do not copy those keys into Vite or browser storage. Built-in gateway JWT verification is disabled for this function because its handler verifies each bearer token with auth.getUser and requires a confirmed Google identity; anonymous calls return 401. The public key alone does not authorize writes.
+
+Uploads are bounded and decoded by the proxy, reserved atomically, claimed once, and finalized only after stored metadata verification. A request shares a 90-second upstream deadline; failed started writes stay charged until the 15-minute lease expires and cleanup verifies object removal. Media library → Unfinished uploads exposes recovery. Keep local originals; local catalog records do not transfer video bytes to another laptop. Native local-file playback and complete prepared offline services are separate milestones.
+
+Hosted rollback regression files now cover S01–S06. Real v2 media verification and zero-fixture cleanup are recorded in [S06](sprints/S06.md). No billing upgrade, new OAuth credential or unrestricted Google publishing was performed.

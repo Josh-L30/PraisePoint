@@ -1,3 +1,4 @@
+import type {MediaService} from '../media/media-service';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { DeckDocument, SavedDeck } from '../../domain/deck';
 import type { SlideCategory } from '../../domain/slide';
@@ -17,7 +18,7 @@ export type DeckService = {
   saveCopy(document: DeckDocument,destinationWorkspaceId: string): Promise<Result<SavedDeck>>;
   deleteDeck(id: string): Promise<Result<void>>;
 };
-export function createDeckService(client: SupabaseClient | null): DeckService {
+export function createDeckService(client: SupabaseClient | null,media?:Pick<MediaService,'copyMedia'>): DeckService {
   const id = z.uuid(), revision = z.number().int().positive().max(2147483647), pageSize = 24;
   const summary = z.array(z.object({ id, workspace_id: id, title: z.string().min(1).max(120), revision, created_by: id, updated_at: z.iso.datetime({ offset: true }) }).strict()).max(pageSize+1);
   const invalid = () => failure('VALIDATION','This presentation response could not be verified. Refresh before continuing.');
@@ -51,8 +52,25 @@ export function createDeckService(client: SupabaseClient | null): DeckService {
     try { const { data,error } = await client.rpc(name,args); return error ? serverError(error) : saved(data,expectedId,expectedWorkspace); }
     catch { return serverError(null); }
   }
-  async function copy(sourceId: string,destination: string,draft: DeckDocument | null) {
+  async function copy(sourceId: string,destination: string,draft: DeckDocument | null):Promise<Result<SavedDeck>> {
     if (!id.safeParse(sourceId).success || !id.safeParse(destination).success) return invalid();
+    if(media && client){
+      try{
+        const {data,error}=await client.from('decks').select('document,revision').eq('id',sourceId).single();if(error)return serverError(error);
+        const source=saved(data,sourceId);if(!source.ok)return source;
+        if(source.value.document.workspaceId!==destination.toLowerCase()){
+          const document=draft??source.value.document,refs=new Set<string>();
+          for(const slide of document.slides){if(slide.background.kind!=='solid')refs.add(slide.background.mediaId);if(slide.standaloneVideoId)refs.add(slide.standaloneVideoId);for(const element of slide.elements)if(element.kind==='image')refs.add(element.mediaId);}
+          if(refs.size){
+            const mapping:{sourceId:string;destinationId:string}[]=[];
+            for(const mediaId of refs){const copied=await media.copyMedia(mediaId,destination);if(!copied.ok)return {ok:false,error:{...copied.error,message:copied.error.message+' Any completed media copies remain in the destination library for review.'}};
+              if(!id.safeParse(copied.value.id).success || copied.value.workspaceId!==destination.toLowerCase())return invalid();mapping.push({sourceId:mediaId,destinationId:copied.value.id});}
+            const result=await write('duplicate_slide_deck_with_media',{p_deck_id:sourceId,p_destination_workspace_id:destination,p_expected_revision:source.value.revision,p_media_map:mapping,p_draft:draft},undefined,destination);
+            return result.ok && (result.value.document.id===sourceId.toLowerCase() || result.value.revision!==1)?invalid():result;
+          }
+        }
+      }catch{return serverError(null);}
+    }
     const result = await write('duplicate_slide_deck',{ p_deck_id: sourceId, p_destination_workspace_id: destination, p_draft: draft },undefined,destination);
     return result.ok && (result.value.document.id===sourceId.toLowerCase() || result.value.revision!==1) ? invalid() : result;
   }

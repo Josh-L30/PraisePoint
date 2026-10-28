@@ -1,3 +1,4 @@
+import {mediaAssetSchema,type MediaAsset} from '../../../../supabase/functions/_shared/media-contract';
 import type { DeckDocument } from '../../../domain/deck';
 import type { Rect, SlideCategory, SlideElement, TextElement } from '../../../domain/slide';
 import { snapshot,pushSnapshot,type EditorSnapshot,type HistoryEntry } from './history';
@@ -14,6 +15,7 @@ export type EditorCommand =
   | { type: 'resize'; id: string; delta: { width: number; height: number }; origin?: Rect }
   | { type: 'align'; id: string; alignment: 'left' | 'center' | 'right' | 'top' | 'middle' | 'bottom' }
   | { type: 'reorder-layer'; id: string; direction: 'forward' | 'backward' | 'front' | 'back' }
+  | {type:'add-image';asset:MediaAsset} | {type:'set-media-background';asset:MediaAsset} | {type:'set-standalone-video';asset:MediaAsset|null} | {type:'set-image-fit';id:string;fit:'contain'|'cover'}
   | { type: 'add-text' } | { type: 'delete-element'; id: string }
   | { type: 'add-slide'; category: SlideCategory } | { type: 'duplicate-slide'; id: string }
   | { type: 'delete-slide'; id: string } | { type: 'reorder-slide'; id: string; toIndex: number }
@@ -75,6 +77,29 @@ export function reduceEditor(state: EditorState,command: EditorCommand): EditorS
   if (command.type==='resize') return elementChange(state,command.id,element => ({ ...element,...resizeElement(rectOf(command.origin ?? element),command.delta) }));
   if (command.type==='align') return elementChange(state,command.id,element => ({ ...element,...alignElement(rectOf(element),command.alignment) }));
   const slide=state.document.slides.find(current => current.id===state.selectedSlideId)!;
+  if(command.type==='set-image-fit')return elementChange(state,command.id,element=>element.kind==='image'?{...element,fit:command.fit}:element);
+  if(command.type==='add-image' || command.type==='set-media-background' || command.type==='set-standalone-video'){
+    if(command.type==='set-standalone-video' && command.asset===null){
+      if(!slide.standaloneVideoId)return state;const next={...slide};delete next.standaloneVideoId;
+      return changed(state,{...state.document,slides:state.document.slides.map(current=>current.id===slide.id?next:current)});
+    }
+    const parsed=mediaAssetSchema.safeParse(command.asset);if(!parsed.success || parsed.data.workspaceId!==state.document.workspaceId)return state;
+    const asset=parsed.data;
+    if(command.type==='add-image'){
+      if(asset.kind!=='image' || slide.elements.length>=LIMITS.elementsPerSlide)return state;
+      const ordered=[...slide.elements].sort((a,b)=>a.z-b.z || a.id.localeCompare(b.id)).map((element,index)=>({...element,z:index+1}));
+      const element:SlideElement={id:crypto.randomUUID(),kind:'image',label:asset.originalName.slice(0,120),mediaId:asset.id,fit:'contain',x:480,y:270,width:960,height:540,z:ordered.length+1};
+      return changed(state,{...state.document,slides:state.document.slides.map(current=>current.id===slide.id?{...current,elements:[...ordered,element]}:current)},{selectedElementId:element.id});
+    }
+    const next={...slide};
+    if(command.type==='set-media-background'){
+      next.background={kind:asset.kind,mediaId:asset.id};if(asset.kind==='video')delete next.standaloneVideoId;
+    }else{
+      if(asset.kind!=='video')return state;next.standaloneVideoId=asset.id;if(next.background.kind==='video')next.background={kind:'solid',color:'#101A20'};
+    }
+    if(JSON.stringify(next)===JSON.stringify(slide))return state;
+    return changed(state,{...state.document,slides:state.document.slides.map(current=>current.id===slide.id?next:current)});
+  }
   if (command.type==='set-background') {
     if (!/^#[0-9a-f]{6}$/i.test(command.color) || (slide.background.kind==='solid' && slide.background.color===command.color)) return state;
     return changed(state,{ ...state.document,slides: state.document.slides.map(current => current.id===slide.id ? { ...current,background: { kind: 'solid',color: command.color } } : current) });

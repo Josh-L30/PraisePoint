@@ -1,0 +1,61 @@
+{
+  "metadataOnly": true,
+  "noPhysicalBoundaryFiles": true,
+  "global": {
+    "first": {
+      "pid": 106395,
+      "reason": null,
+      "status": "reserved",
+      "started": 1793089581.699689,
+      "finished": 1793089616.79019,
+      "reservation": {
+        "status": "pending",
+        "expiresAt": "2026-10-27T08:41:21.651783+00:00",
+        "objectKey": "c34ad0a8-871e-4690-8381-70dc9505cd17/a6600000-0000-4000-8000-000000000010/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png",
+        "reservationId": "15e7d90d-956d-4b18-8afd-a85145b04cf2"
+      }
+    },
+    "second": {
+      "pid": 106402,
+      "reason": "The free image capacity has been reached.",
+      "status": "capacity",
+      "started": 1793089609.889336,
+      "finished": 1793089616.79839,
+      "reservation": null
+    },
+    "overlapSeconds": 6.900853872299194
+  },
+  "workspace": {
+    "first": {
+      "pid": 107929,
+      "reason": null,
+      "status": "reserved",
+      "started": 1793090539.77607,
+      "finished": 1793090594.849599,
+      "reservation": {
+        "status": "pending",
+        "expiresAt": "2026-10-27T08:57:19.765637+00:00",
+        "objectKey": "9bc0bc7d-82fa-4c60-909f-b1395e4a916b/a6600000-0000-4000-8000-000000000010/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png",
+        "reservationId": "734d0230-f8af-494f-8023-17aadf7e551c"
+      }
+    },
+    "second": {
+      "pid": 107931,
+      "reason": "The free image capacity has been reached.",
+      "status": "capacity",
+      "started": 1793090554.528546,
+      "finished": 1793090594.859491,
+      "reservation": null
+    },
+    "overlapSeconds": 40.32105278968811
+  },
+  "cleanup": {
+    "quota": {
+      "id": true,
+      "used_bytes": 692,
+      "reserved_bytes": 0
+    },
+    "pending": 0,
+    "fixtureUsers": 0
+  }
+}

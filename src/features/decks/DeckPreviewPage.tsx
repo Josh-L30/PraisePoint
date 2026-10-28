@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
 import { deckService, type DeckService } from './deck-service';
 import type { DeckDocument } from '../../domain/deck';
 import { readDraft } from '../../lib/draft-memory';
 import { validateDeck } from '../../domain/slide-schema';
+import {createMediaService} from '../media/media-service';
 import { SlideRenderer } from '../../components/slide-renderer/SlideRenderer';
 export function DeckPreviewPage({ workspaceId, deckId, profileId, service = deckService }: { workspaceId: string; deckId: string; profileId: string; service?: DeckService }) {
+  const media=useMemo(()=>createMediaService(profileId),[profileId]);
   const navigate = useNavigate(), exit = useRef<HTMLAnchorElement>(null);
   const [document,setDocument] = useState<DeckDocument | null>(null), [error,setError] = useState<string | null>(null), [selected,setSelected] = useState(0);
   const back = '/app/w/' + workspaceId + '/decks/' + deckId;
@@ -42,6 +44,6 @@ export function DeckPreviewPage({ workspaceId, deckId, profileId, service = deck
   },[document,back,navigate]);
   return <section className="full-slide-preview" role="dialog" aria-modal="true" aria-label="Presentation preview">
     <Link ref={exit} className="button preview-exit" to={back}><ArrowLeft size={16} />Exit preview</Link>
-    {error ? <p role="alert" className="preview-error">{error}</p> : document ? <SlideRenderer slide={document.slides[selected]} mode="audience" /> : <p className="preview-error" role="status">Opening preview…</p>}
+    {error ? <p role="alert" className="preview-error">{error}</p> : document ? <SlideRenderer slide={document.slides[selected]} resolveMedia={media.resolveMedia} mode="audience" /> : <p className="preview-error" role="status">Opening preview…</p>}
   </section>;
 }

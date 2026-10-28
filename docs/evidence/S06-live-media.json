@@ -1,0 +1,146 @@
+{
+  "runId": "51515f5c",
+  "checks": [
+    {
+      "name": "real upload, private read and full decode image/png",
+      "pass": true,
+      "elapsedMs": 3087,
+      "detail": {
+        "bytes": 118,
+        "kind": "image",
+        "location": "cloud"
+      }
+    },
+    {
+      "name": "real upload, private read and full decode image/jpeg",
+      "pass": true,
+      "elapsedMs": 2076,
+      "detail": {
+        "bytes": 767,
+        "kind": "image",
+        "location": "cloud"
+      }
+    },
+    {
+      "name": "real upload, private read and full decode image/webp",
+      "pass": true,
+      "elapsedMs": 2283,
+      "detail": {
+        "bytes": 566,
+        "kind": "image",
+        "location": "cloud"
+      }
+    },
+    {
+      "name": "server rejects wrong MIME",
+      "pass": true,
+      "elapsedMs": 1449,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "server rejects truncated PNG",
+      "pass": true,
+      "elapsedMs": 1118,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "server rejects wrong hash",
+      "pass": true,
+      "elapsedMs": 875,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "server rejects actual bytes exceed declaration",
+      "pass": true,
+      "elapsedMs": 838,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "server rejects empty size",
+      "pass": true,
+      "elapsedMs": 713,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "server rejects video MIME denied before cloud storage",
+      "pass": true,
+      "elapsedMs": 620,
+      "detail": "VALIDATION"
+    },
+    {
+      "name": "local MP4 real first/ending frame decode, hash and IndexedDB import",
+      "pass": true,
+      "elapsedMs": 11836,
+      "detail": {
+        "bytes": 1128375,
+        "duration": 5.055,
+        "width": 960,
+        "height": 540,
+        "location": "local"
+      }
+    },
+    {
+      "name": "independent cloud media copy",
+      "pass": true,
+      "elapsedMs": 2391,
+      "detail": {
+        "independentId": true,
+        "matchingHash": true
+      }
+    },
+    {
+      "name": "independent local media copy",
+      "pass": true,
+      "elapsedMs": 4078,
+      "detail": {
+        "independentId": true,
+        "matchingHash": true
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "S06-probe-51515f5c-flower.mp4",
+      "pass": true
+    },
+    {
+      "name": "S06-probe-51515f5c-still.webp",
+      "pass": true
+    },
+    {
+      "name": "S06-probe-51515f5c-flower.mp4",
+      "pass": true
+    },
+    {
+      "name": "S06-probe-51515f5c-still.webp",
+      "pass": true
+    },
+    {
+      "name": "S06-probe-51515f5c-still.jpg",
+      "pass": true
+    },
+    {
+      "name": "S06-probe-51515f5c-still.png",
+      "pass": true
+    }
+  ],
+  "completed": true,
+  "before": {
+    "workspaceUsed": 692,
+    "workspaceLimit": 52428800,
+    "applicationUsed": 692,
+    "applicationLimit": 524288000,
+    "workspaceReserved": 0,
+    "applicationReserved": 0
+  },
+  "after": {
+    "workspaceUsed": 692,
+    "workspaceLimit": 52428800,
+    "applicationUsed": 692,
+    "applicationLimit": 524288000,
+    "workspaceReserved": 0,
+    "applicationReserved": 0
+  },
+  "quotaRestored": true,
+  "elapsedMs": 40101
+}

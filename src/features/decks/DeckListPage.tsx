@@ -1,17 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Presentation, Plus, Copy, Trash2, ArrowRight } from 'lucide-react';
-import { deckService, type DeckService, type DeckSummary } from './deck-service';
+import { createDeckService, type DeckService, type DeckSummary } from './deck-service';
 import type { Workspace } from '../workspaces/workspace-service';
 import { TemplatePicker } from './TemplatePicker';
 import type { SlideCategory } from '../../domain/slide';
+import {supabase} from '../../lib/supabase';
+import {createMediaService} from '../media/media-service';
+import {useContentGuard} from '../songs/use-content-guard';
 export type DeckListPageProps = { workspace: Workspace; profileId: string; workspaces: Workspace[]; service?: DeckService; startWithTemplates?: boolean };
-export function DeckListPage({ workspace, profileId, workspaces, service = deckService, startWithTemplates = false }: DeckListPageProps) {
+export function DeckListPage({ workspace, profileId, workspaces, service:provided, startWithTemplates = false }: DeckListPageProps) {
+  const service=useMemo(()=>provided??createDeckService(supabase,createMediaService(profileId)),[provided,profileId]);
   const navigate = useNavigate(), mounted = useRef(true), writing = useRef(false);
   const [items,setItems] = useState<DeckSummary[]>([]), [hasMore,setHasMore] = useState(false), [page,setPage] = useState(0);
   const [loading,setLoading] = useState(true), [busy,setBusy] = useState(false), [version,setVersion] = useState(0);
   const [error,setError] = useState<string | null>(null), [choosing,setChoosing] = useState(startWithTemplates);
   const [action,setAction] = useState<{ kind: 'copy' | 'delete'; deck: DeckSummary } | null>(null), [destination,setDestination] = useState(workspace.id);
+  const guard=useContentGuard(false,busy);
   const base = '/app/w/' + workspace.id + '/decks';
   useEffect(() => { mounted.current=true; return () => { mounted.current=false; }; },[]);
   useEffect(() => {
@@ -57,7 +62,7 @@ export function DeckListPage({ workspace, profileId, workspaces, service = deckS
     finally { writing.current=false; if (mounted.current) setBusy(false); }
   }
   return <div className="page-content deck-library" aria-busy={busy}>
-    <header className="page-heading library-heading"><div><h1>Words with purpose.</h1><p>Your presentations, ready for thoughtful preparation.</p></div>
+    {guard}<header className="page-heading library-heading"><div><h1>Words with purpose.</h1><p>Your presentations, ready for thoughtful preparation.</p></div>
       <button className="button button-primary desktop-edit-only" disabled={busy} onClick={() => setChoosing(value => !value)}><Plus size={17} />New presentation</button></header>
     {error && <p className="form-message form-error" role="alert">{error}</p>}
     <p className="desktop-edit-note">Use a laptop or desktop to create and edit presentations. Open an existing presentation to preview it here.</p>

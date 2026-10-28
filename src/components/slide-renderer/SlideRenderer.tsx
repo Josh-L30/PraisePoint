@@ -3,8 +3,8 @@ import type { MediaResolver } from '../../domain/media';
 import { useEffect, useRef, useState, type CSSProperties,type ReactNode } from 'react';
 import { BackgroundLayer, MediaLayer } from './BackgroundLayer';
 import { unavailableMedia } from './media-context';
-export type SlideRendererProps = { slide: Slide; resolveMedia?: MediaResolver; mode: 'editor' | 'preview' | 'audience'; onIssues?(issues: string[]): void; editorOverlay?(scale: number): ReactNode };
-export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, onIssues,editorOverlay }: SlideRendererProps) {
+export type SlideRendererProps = { slide: Slide; resolveMedia?: MediaResolver; mode: 'editor' | 'preview' | 'audience';animateMedia?:boolean; onIssues?(issues: string[]): void; editorOverlay?(scale: number): ReactNode };
+export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, onIssues,editorOverlay,animateMedia=true }: SlideRendererProps) {
   const viewport = useRef<HTMLDivElement>(null), stage = useRef<HTMLDivElement>(null);
   const [font,setFont] = useState<'loading' | 'ready' | 'missing'>('loading');
   const [layout,setLayout] = useState({ scale: 0, left: 0, top: 0 });
@@ -40,8 +40,8 @@ export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, on
   return <>
     <div ref={viewport} className="slide-viewport" data-mode={mode} data-font-ready={font==='ready'} style={{ position: 'relative', overflow: 'hidden', width: '100%', aspectRatio: '16/9', height: mode==='audience' ? '100%' : undefined, background: '#000' }}>
       {font==='ready' ? <div ref={stage} data-testid="slide-stage" className="slide-stage" style={{ position: 'absolute', width: 1920, height: 1080, left: layout.left, top: layout.top, transform: `scale(${layout.scale})`, transformOrigin: 'top left', overflow: 'hidden' }}>
-        <BackgroundLayer background={slide.background} resolver={resolveMedia} />
-        {slide.standaloneVideoId && <div className="slide-media-missing">Standalone video controls are being prepared.</div>}
+        <BackgroundLayer background={slide.background} resolver={resolveMedia} animate={animateMedia} />
+        {slide.standaloneVideoId && <MediaLayer mediaId={slide.standaloneVideoId} kind="video" videoMode="standalone" fit="contain" resolver={resolveMedia} style={{position:'absolute',inset:0,width:1920,height:1080}} />}
         {[...slide.elements].sort((a,b) => a.z-b.z || a.id.localeCompare(b.id)).map(element => {
           const style: CSSProperties = { position: 'absolute', left: element.x, top: element.y, width: element.width, height: element.height, zIndex: element.z+1 };
           return element.kind==='text' ? <div key={element.id} data-testid={'element-' + element.id} data-text-id={element.id} style={{ ...style, fontFamily: 'Figtree', fontSize: element.fontSize, color: element.color, textAlign: element.align, whiteSpace: 'pre', lineHeight: 1.2, overflow: 'hidden' }}>{element.text}</div>

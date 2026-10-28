@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useBlocker, useNavigate } from 'react-router';
 import { ArrowLeft, Save, Copy, Trash2,Undo2,Redo2 } from 'lucide-react';
 import { deckService, type DeckService } from './deck-service';
@@ -13,8 +13,13 @@ import { createEditorState,reduceEditor,type EditorState,type EditorCommand } fr
 import { EditorCanvas } from './editor/EditorCanvas';
 import { PropertiesPanel } from './editor/PropertiesPanel';
 import { SlideStrip } from './editor/SlideStrip';
+import {createMediaService} from '../media/media-service';
+import {MediaPicker} from '../media/MediaPicker';
+import type {MediaDescriptor} from '../../domain/media';
 export type DeckEditorPageProps = { workspaceId: string; deckId: string; profileId: string; service?: DeckService };
 export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckService }: DeckEditorPageProps) {
+  const media=useMemo(()=>createMediaService(profileId),[profileId]);
+  const [mediaAction,setMediaAction]=useState<'image'|'background'|'clip'|null>(null);
   const navigate = useNavigate(), mounted = useRef(true), writing = useRef(false), allowNavigation = useRef(false);
   const [editor,setEditor] = useState<EditorState | null>(null), [revision,setRevision] = useState(1);
   const editorRef=useRef<EditorState | null>(null),savedVersion=useRef(0),root=useRef<HTMLDivElement>(null);
@@ -100,6 +105,13 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
     } catch { if (mounted.current) setError({ code: 'NETWORK', message: 'Reload failed. Your draft has been kept.' }); }
     finally { writing.current=false; if (mounted.current) setBusy(false); }
   }
+  async function selectMedia(asset:MediaDescriptor){
+    if(writing.current || !mediaAction)return;const action=mediaAction;writing.current=true;setBusy(true);setError(null);
+    try{const verified=await media.verifyMedia(asset.id);if(!mounted.current)return;writing.current=false;
+      if(!verified.ok){setError(verified.error);return;}
+      execute(action==='image'?{type:'add-image',asset:verified.value}:action==='background'?{type:'set-media-background',asset:verified.value}:{type:'set-standalone-video',asset:verified.value});setMediaAction(null);
+    }finally{writing.current=false;if(mounted.current)setBusy(false);}
+  }
   const back = <Link className="text-button" to={'/app/w/' + workspaceId + '/decks'}><ArrowLeft size={16} />Back to presentations</Link>;
   if (loading) return <section className="page-content"><p role="status">Opening your presentation…</p></section>;
   if (!draft || !editor) return <section className="page-content">{back}<h1>Let’s reopen your presentation.</h1><p role="alert">{error?.message}</p><button className="button" onClick={() => window.location.reload()}>Reload page</button></section>;
@@ -127,9 +139,11 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
       <div className="action-row"><button className="button button-primary" onClick={() => blocker.reset()}>Keep editing</button><button className="button" disabled={busy} onClick={() => { forgetDraft(profileId,deckId); allowNavigation.current=true; blocker.proceed(); }}>Discard changes and leave</button></div>
     </section>}
     <div className="editor-layout">
-      <SlideStrip state={editor} disabled={busy} onCommand={command => { execute(command); setDeleteSlide(false); }} onAdd={() => setAdding(value => !value)} />
+      <SlideStrip state={editor} resolveMedia={media.resolveMedia} disabled={busy} onCommand={command => { execute(command); setDeleteSlide(false); }} onAdd={() => setAdding(value => !value)} />
       <div className="editor-canvas"><div className="canvas-toolbar"><strong>{templateNames[slide.category]}</strong><span>1920 × 1080 · 16:9</span></div>
-        <EditorCanvas state={editor} onCommand={execute} disabled={busy} />
+        <div className="action-row desktop-edit-only media-editor-tools"><button className="button" disabled={busy} onClick={()=>setMediaAction('background')}>Choose background</button><button className="button" disabled={busy} onClick={()=>setMediaAction('clip')}>Standalone video</button>{slide.standaloneVideoId && <button className="text-button" disabled={busy} onClick={()=>execute({type:'set-standalone-video',asset:null})}>Remove standalone video</button>}</div>
+        {mediaAction && <><p className="field-help">Choosing a background video replaces a standalone video, and vice versa. Editor previews stay silent.</p><MediaPicker workspaceId={workspaceId} service={media} kind={mediaAction==='image'?'image':mediaAction==='clip'?'video':undefined} busy={busy} onClose={()=>{if(!busy)setMediaAction(null);}} onSelect={asset=>void selectMedia(asset)}/></>}
+        <EditorCanvas state={editor} resolveMedia={media.resolveMedia} onCommand={execute} disabled={busy} />
         <p className="canvas-caption">Line breaks stay exactly as entered. The same layout scales to your projector.</p>
         {adding && <section className="template-add-panel desktop-edit-only"><h2>Choose your next slide.</h2><TemplatePicker disabled={busy} onSelect={category => {
           execute({ type: 'add-slide',category }); setAdding(false);
@@ -139,7 +153,7 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
         }}><Copy size={15} />Duplicate slide</button><button className="text-button" disabled={busy || draft.slides.length<=1} onClick={() => setDeleteSlide(true)}><Trash2 size={15} />Delete slide</button></div>
         {deleteSlide && <section className="confirmation-panel"><h3>Delete slide {selected+1}?</h3><p>This removes the slide from your draft. Undo restores it during this session.</p><div className="action-row"><button className="button" disabled={busy} onClick={() => { execute({ type: 'delete-slide',id: slide.id }); setDeleteSlide(false); }}>Confirm slide deletion</button><button className="button" onClick={() => setDeleteSlide(false)}>Cancel</button></div></section>}
       </div>
-      <PropertiesPanel state={editor} onCommand={execute} disabled={busy} />
+      <PropertiesPanel state={editor} onCommand={execute} disabled={busy} onPickImage={()=>setMediaAction('image')} />
     </div>
   </div>;
 }
