@@ -53,3 +53,6 @@ export function DeckPreview() {
   const { deckId } = useParams(), auth = useAuth(), { active } = useWorkspace();
   return auth.status==='authenticated' && deckId ? <DeckPreviewPage key={active.id + deckId} workspaceId={active.id} deckId={deckId} profileId={auth.profile.profileId} /> : null;
 }
+
+const OperatorPage=lazy(()=>import('../features/presenter/OperatorPage').then(module=>({default:module.OperatorPage})));
+export function Presenter(){const auth=useAuth(),{serviceId}=useParams();if(auth.status==='loading')return <LoadingScreen/>;return auth.status==='authenticated' && serviceId?<Suspense fallback={<LoadingScreen/>}><OperatorPage key={auth.profile.profileId+serviceId} profileId={auth.profile.profileId} serviceId={serviceId}/></Suspense>:<Navigate to="/auth" replace/>;}

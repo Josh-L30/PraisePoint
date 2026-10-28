@@ -1,0 +1,15 @@
+{
+  "source": "https://developer.mozilla.org/shared-assets/videos/flower.mp4",
+  "bytes": 1128375,
+  "sameSongVideoInstancePreserved": true,
+  "newSectionReplacesVideo": true,
+  "beforeBlackoutSeconds": 1.199128,
+  "duringBlackoutSeconds": 1.516898,
+  "backgroundContinuesMuted": true,
+  "standaloneAudienceUnmutedOnPlay": true,
+  "operatorVideosMuted": true,
+  "blackoutPausesAndMutes": true,
+  "restoreStaysPaused": true,
+  "restartSeeksToZero": true,
+  "physicalAudioChecked": false
+}

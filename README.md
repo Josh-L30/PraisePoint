@@ -2,7 +2,7 @@
 
 Website under development for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
 
-**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans and media library are implemented and verified. Google is the only enabled provider. The frontend is not published; the authenticated media-upload backend is deployed. Presenter windows and complete offline preparation remain later work.
+**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans, media library and operator/projector presenter are implemented and verified. Google is the only enabled provider. The frontend is not published; the authenticated media-upload backend is deployed. Complete offline preparation, backup recovery and physical rehearsal remain later work.
 
 ## Start here
 
@@ -26,7 +26,7 @@ Use Vite to open this React/TypeScript project. VSCode's Live Server / Go Live s
 
 Disposable HTML mockups are local files under the ignored .superpowers/brainstorm/ folder. They are design evidence, not application source. The companion's active state/server-info contains its local access URL; never publish session keys. Figtree's OFL license is stored with the preview.
 
-Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Current verified checks: 173 unit/component tests (local `--testTimeout=15000 --pool=vmThreads`), 29 production Chromium checks, 13 live anonymous API checks, lint and build including TypeScript. All six hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The production build still reports a large initial chunk; broader performance work remains before release. See [setup and connection state](docs/setup.md).
+Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Current verified checks: 187 unit/component tests (local `--testTimeout=15000 --pool=vmThreads`), 33 production Chromium checks, 13 live anonymous API checks, lint and build including TypeScript. All six hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The production build still reports a large initial chunk; broader performance work remains before release. See [setup and connection state](docs/setup.md).
 
 S01–S03 established Google/private and shared workspaces, invitations/team management, five editable slide templates, cloud save/reopen/copy/delete, safe revision conflicts, draft guards and fixed-layout preview. Open Presentations → New presentation to begin. See [S03 evidence and limitations](docs/sprints/S03.md). Do not recreate the saved Google credential or Supabase project.
 
@@ -34,4 +34,6 @@ S05 adds Song library → New song for typed/pasted lyrics and break review, the
 
 S04 adds freeform text dragging/resizing, position fields, keyboard alternatives, alignment/layers, thumbnail ordering and gesture undo/redo. The wide desktop inspector scrolls independently. Current combined checks: 98 unit/component, 24 browser, eight live API and all four hosted SQL suites. See [S04 evidence and limits](docs/sprints/S04.md). Image insertion is now connected through S06.
 
-S06 adds Media library imports, private cloud stills, persistent local videos, file verification/reselect, independent copies, safe storage limits and real image/background selection in the editor and service review. [S06 evidence and limitations](docs/sprints/S06.md). Local videos are limited to 128 MiB; retain originals. Next: the operator/projector presenter in S07.
+S06 adds Media library imports, private cloud stills, persistent local videos, file verification/reselect, independent copies, safe storage limits and real image/background selection in the editor and service review. [S06 evidence and limitations](docs/sprints/S06.md). Local videos are limited to 128 MiB; retain originals. S07 now connects the operator/projector presenter.
+
+S07 adds Service plans → Review service slides → Present service. Open projector, move its black output window to the projector, then Send current slide. Manual controls, current/next previews, thumbnails, blackout and audience-only standalone video transport are available. Reopened output requires another explicit send. [S07 operation and hardware limitations](docs/sprints/S07.md). Complete offline preparation remains S08.

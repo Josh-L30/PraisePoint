@@ -54,3 +54,9 @@ Use the existing private gather-images bucket and applied migration history thro
 Uploads are bounded and decoded by the proxy, reserved atomically, claimed once, and finalized only after stored metadata verification. A request shares a 90-second upstream deadline; failed started writes stay charged until the 15-minute lease expires and cleanup verifies object removal. Media library → Unfinished uploads exposes recovery. Keep local originals; local catalog records do not transfer video bytes to another laptop. Native local-file playback and complete prepared offline services are separate milestones.
 
 Hosted rollback regression files now cover S01–S06. Real v2 media verification and zero-fixture cleanup are recorded in [S06](sprints/S06.md). No billing upgrade, new OAuth credential or unrestricted Google publishing was performed.
+
+## Presenter windows
+
+S07 uses same-origin BroadcastChannel and profile-bound IndexedDB on the presentation laptop. The audience entry has no AuthProvider or Supabase client and never downloads from cloud independently. Sign in and open a saved service through the operator; it verifies/caches required media before sending. Allow this website's projector popup. Move output to the projector and use F or the browser fullscreen command manually. New/reopened output starts black until Send current slide.
+
+Only audience standalone video can produce audio. If autoplay is blocked, request Play, focus the projector window and press Space, or retry Play. Blackout pauses/mutes the standalone clip and restore stays paused. Physical audio routing, fullscreen and projector placement still need the actual equipment rehearsal. This online startup is not a prepared offline package.
