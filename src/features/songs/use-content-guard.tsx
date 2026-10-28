@@ -1,7 +1,9 @@
+import {markRuntimeBusy} from '../offline/runtime-client';
 import { useEffect } from 'react';
 import { useBlocker } from 'react-router';
 export function useContentGuard(dirty:boolean,busy:boolean){
  const blocker=useBlocker(dirty || busy);
+ useEffect(()=>{if(dirty || busy)return markRuntimeBusy();},[dirty,busy]);
  useEffect(()=>{
   const unload=(event:BeforeUnloadEvent)=>{if(dirty || busy){event.preventDefault();event.returnValue='';}};
   const account=(event:Event)=>{if(busy || (dirty && !window.confirm('Discard your unsaved changes and sign out?')))event.preventDefault();};

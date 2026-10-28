@@ -1,3 +1,4 @@
+import {noteLocalContentChange} from '../offline/content-changes';
 import {validateServiceSnapshot} from './snapshot-validation';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
@@ -21,7 +22,7 @@ export type ServiceService={
 export function createServiceService(client:SupabaseClient|null):ServiceService{
  async function rpc(name:string,args:Record<string,unknown>):Promise<Result<unknown>>{
   if(!client) return contentError(null);
-  try{const {data,error}=await client.rpc(name,args);return error?contentError(error):{ok:true,value:data};}catch{return contentError(null);}
+  try{const {data,error}=await client.rpc(name,args);if(!error && ['save_service_plan','delete_service_plan','add_song_to_service'].includes(name))await noteLocalContentChange();return error?contentError(error):{ok:true,value:data};}catch{return contentError(null);}
  }
  function plan(data:unknown,expectedId:string,workspace?:string):Result<ServicePlan>{
   const parsed=servicePlanSchema.safeParse(data);

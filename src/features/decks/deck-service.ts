@@ -1,3 +1,4 @@
+import {noteLocalContentChange} from '../offline/content-changes';
 import type {MediaService} from '../media/media-service';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { DeckDocument, SavedDeck } from '../../domain/deck';
@@ -49,7 +50,7 @@ export function createDeckService(client: SupabaseClient | null,media?:Pick<Medi
   }
   async function write(name: string,args: Record<string,unknown>,expectedId?: string,expectedWorkspace?: string): Promise<Result<SavedDeck>> {
     if (!client) return unavailable();
-    try { const { data,error } = await client.rpc(name,args); return error ? serverError(error) : saved(data,expectedId,expectedWorkspace); }
+    try { const { data,error } = await client.rpc(name,args); if(!error)await noteLocalContentChange(); return error ? serverError(error) : saved(data,expectedId,expectedWorkspace); }
     catch { return serverError(null); }
   }
   async function copy(sourceId: string,destination: string,draft: DeckDocument | null):Promise<Result<SavedDeck>> {
@@ -112,7 +113,7 @@ export function createDeckService(client: SupabaseClient | null,media?:Pick<Medi
     async deleteDeck(deckId) {
       if (!id.safeParse(deckId).success) return invalid();
       if (!client) return unavailable();
-      try { const { error } = await client.rpc('delete_slide_deck',{ p_deck_id: deckId }); return error ? serverError(error) : { ok: true, value: undefined }; }
+      try { const { error } = await client.rpc('delete_slide_deck',{ p_deck_id: deckId }); if(!error)await noteLocalContentChange(); return error ? serverError(error) : { ok: true, value: undefined }; }
       catch { return serverError(null); }
     },
   };

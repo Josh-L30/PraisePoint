@@ -6,6 +6,8 @@ import {writeLocalMedia,hashMedia,removeLocalMedia} from '../../../src/features/
 import {decodeMedia} from '../../../src/features/media/decode-media';
 import {setDeviceSession,purgeProfileData} from '../../../src/lib/device-session';
 vi.mock('../../../src/features/media/decode-media',()=>({decodeMedia:vi.fn()}));
+const deviceStorage=new Map<string,string>();
+vi.stubGlobal('localStorage',{getItem:(key:string)=>deviceStorage.get(key)??null,setItem:(key:string,value:string)=>deviceStorage.set(key,value),removeItem:(key:string)=>deviceStorage.delete(key)});
 const profile='a6000000-0000-4000-8000-000000000001',ws='a6000000-0000-4000-8000-000000000002';
 function mockClient(){const invoke=vi.fn(),rpc=vi.fn(),getSession=vi.fn().mockResolvedValue({data:{session:{user:{id:profile},access_token:'captured-token'}},error:null});const client={auth:{getSession},functions:{invoke},rpc} as unknown as SupabaseClient;return {invoke,rpc,getSession,client};}
 beforeEach(async()=>{await setDeviceSession(profile);vi.mocked(decodeMedia).mockReset();});

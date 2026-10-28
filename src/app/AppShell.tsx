@@ -1,6 +1,7 @@
+import {UpdatePrompt} from '../features/offline/UpdatePrompt';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router';
-import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, ShieldCheck, PanelLeftClose, PanelLeftOpen, LogOut, Menu, X } from 'lucide-react';
+import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, ShieldCheck, HardDriveDownload, PanelLeftClose, PanelLeftOpen, LogOut, Menu, X } from 'lucide-react';
 import type { ProfileWorkspace } from '../features/auth/auth-service';
 import { DashboardPage } from './DashboardPage';
 import { WorkspacePicker } from '../features/workspaces/WorkspacePicker';
@@ -55,6 +56,7 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
       <Link className="brand" to="/app" onClick={() => setMobileOpen(false)} aria-label="Gather overview"><span className="brand-cross" aria-hidden="true" /><span className="collapse-copy"><strong>Gather</strong><small>Prepare. Present. Worship.</small></span></Link>
       <WorkspacePicker workspaces={workspaces ?? [selected]} selected={selected} onSelect={closeDrawer} />
       <nav className="primary-navigation" aria-label="Workspace">{items.map(({ label, icon: Icon, path, end }) => <NavLink key={label} to={path} end={end} aria-label={label} title={collapsed ? label : undefined} onClick={() => setMobileOpen(false)} className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}><Icon size={19} /><span className="collapse-copy">{label}</span></NavLink>)}</nav>
+      <a className="nav-item" href="/offline" aria-label="Prepared services"><HardDriveDownload size={19}/><span className="collapse-copy">Prepared services</span></a>
       <div className="sidebar-bottom"><Link className="nav-item" to={base + '/team'} onClick={closeDrawer} aria-label="Church workspace"><Users size={19} /><span className="collapse-copy">Church workspace</span></Link>
         <button className="nav-item" aria-label="Reduce transparency" aria-pressed={solid} onClick={() => setSolid(v => !v)}><ShieldCheck size={19} /><span className="collapse-copy">Reduce transparency</span></button>
         <button className="collapse-button" aria-label={collapsed ? 'Expand navigation' : 'Collapse navigation'} aria-expanded={!collapsed} onClick={() => setCollapsed(v => !v)}>{collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}<span className="collapse-copy">Collapse sidebar</span></button>
@@ -66,6 +68,6 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
       <button ref={menuRef} className="icon-button mobile-menu" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen} aria-controls="workspace-navigation" onClick={() => mobileOpen ? closeDrawer() : setMobileOpen(true)}>{mobileOpen ? <X size={20} /> : <Menu size={20} />}</button>
       <div className="breadcrumb"><span>Workspace</span><span aria-hidden="true">/</span><strong title={selected.name}>{selected.kind==='personal' ? 'Personal' : selected.name}</strong></div>
       <div className="top-bar-right"><span className="private-label"><ShieldCheck size={14} />{selected.kind==='personal' ? 'Private workspace' : selected.role==='owner' ? 'Church owner' : 'Church volunteer'}</span><span className="avatar" aria-label={profile.displayName}>{initials}</span></div>
-    </header><main id="main-content" className="main-panel glass">{children ?? <DashboardPage workspaceId={selected.id} shared={selected.kind==='church'} />}</main></div>
+    </header><main id="main-content" className="main-panel glass"><UpdatePrompt/>{children ?? <DashboardPage workspaceId={selected.id} shared={selected.kind==='church'} />}</main></div>
   </div>;
 }

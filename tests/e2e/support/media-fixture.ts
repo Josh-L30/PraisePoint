@@ -14,7 +14,8 @@ export async function mediaFixture(page:Page){
   if(id){const asset=state.assets.get(id);return route.fulfill(asset?{json:row(asset)}:{status:406,json:{code:'PGRST116'}});}
   return route.fulfill({json:[...state.assets.values()].filter(asset=>asset.workspaceId===personalId).map(row)});
  });
- await page.route('**/rest/v1/rpc/get_media_usage',route=>route.fulfill({json:{workspaceUsed:[...state.assets.values()].reduce((total,asset)=>total+asset.bytes,0),workspaceReserved:0,workspaceLimit:52428800,applicationUsed:[...state.assets.values()].reduce((total,asset)=>total+asset.bytes,0),applicationReserved:0,applicationLimit:524288000}}));
+ await page.route('**/rest/v1/rpc/register_local_media',route=>{const {p_asset}=route.request().postDataJSON();state.assets.set(p_asset.id,p_asset);return route.fulfill({json:p_asset});});
+ await page.route('**/rest/v1/rpc/get_media_usage',route=>route.fulfill({json:{workspaceUsed:[...state.assets.values()].filter(asset=>asset.location==='cloud').reduce((total,asset)=>total+asset.bytes,0),workspaceReserved:0,workspaceLimit:52428800,applicationUsed:[...state.assets.values()].filter(asset=>asset.location==='cloud').reduce((total,asset)=>total+asset.bytes,0),applicationReserved:0,applicationLimit:524288000}}));
  await page.route('**/rest/v1/rpc/get_media_management',route=>route.fulfill({json:[]}));
  await page.route('**/functions/v1/media-upload',async route=>{
   if(route.request().method()==='OPTIONS'){await route.fulfill({status:204,headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization,apikey,x-client-info,content-type,x-media-action,x-media-id,x-workspace-id,x-file-size,x-file-sha256,x-file-name','Access-Control-Allow-Methods':'POST,OPTIONS'}});return;}

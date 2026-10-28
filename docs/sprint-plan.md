@@ -11,7 +11,7 @@ Roadmap for the accepted first-release design and implementation plan. S01 found
 | S05 | Reusable songs, both entry methods, service copies and ordering A04/A05 | S02–S04 | Done | [Record](sprints/S05.md), [test map](../tests/sprints/S05/README.md) |
 | S06 | Limited cloud stills, persistent local videos, decode validation/quota enforcement/media controls A06/A12 | S03–S05 | Done | [Record](sprints/S06.md), [test map](../tests/sprints/S06/README.md) |
 | S07 | Operator/projector, manual controls, continuous backgrounds/audio/blackout/reconnect A07/A09 | S05–S06 | Done | [Record](sprints/S07.md), [test map](../tests/sprints/S07/README.md) |
-| S08 | Complete offline preparation, disconnected restart, safe app updates A08 | S07; offline preflight | Planned | Create when activated |
+| S08 | Complete offline preparation, disconnected restart, safe app updates A08 | S07; offline preflight | Done | [Record](sprints/S08.md), [test map](../tests/sprints/S08/README.md) |
 | S09 | Metadata backup/import/media relink and second-laptop recovery A11 | S06–S08 | Planned | Create when activated |
 | S10 | Physical rehearsal, accessibility/performance, capacity/recovery review and release acceptance A01–A12 | S01–S09 | Planned | Create when activated |
 
@@ -30,8 +30,10 @@ Before investing fully in high-risk slices, run bounded disposable checks for sh
 - S05 complete: song masters, typed/pasted lyric review, independent service copies, ordering, frozen snapshots and dependency deletion. Combined checks: 117 unit/component (local 15-second assertion allowance), 26 browser, ten live API and all five hosted rollback suites. [Evidence and timing limitation](sprints/S05.md).
 - S06 complete: private still uploads, local media persistence/decode, independent copies, image editor/review, quota races and safe recovery. Combined 173 unit/component, 29 browser, 13 live API and six hosted rollback suites; twelve real media checks passed against backend v2 and their fixtures were removed. [Evidence](sprints/S06.md).
 - S07 complete: manual operator/projector controls, explicit black-until-send recovery, local audience isolation, continuous backgrounds and audience-only standalone transport. Combined 187 unit/component and 33 production browser checks; actual MP4 clocks and cross-tab sign-out verified. Physical equipment rehearsal remains S10. [Evidence](sprints/S07.md).
-- [Detailed implementation plan](superpowers/plans/2026-10-26-church-presentations.md) accepted. Next: S08 complete offline preparation. Reuse the existing project and credential.
+- [Detailed implementation plan](superpowers/plans/2026-10-26-church-presentations.md) accepted. Next: S09 metadata backup/import and media relink. Reuse the existing project and credential.
 - Before S01: user-owned provider accounts/redirects, safe test environment, repository destination.
 - Before S10: actual laptop/projector/browser, final branding, account/backup owner, rehearsal.
 
 Statuses: Planned → Ready → In progress → Implemented → Done. Blocked requires a concrete obstacle and next action. Done requires acceptance evidence/review. Keep one active implementation sprint and add later detailed records/tests only when activated.
+
+S08 complete: verified complete preparation, point-in-time readiness, true disconnected browser restart, atomic recovery and safe idle-only app updates. 215 unit/component checks, all 38 distinct production Chromium cases, lint/build/TypeScript passed; one native-dropdown teardown issue was corrected and passed two focused repetitions. [Evidence and limits](sprints/S08.md).

@@ -1,0 +1,12 @@
+{
+  "beforeBuild": "de8d80f386a11d9e805e014161edf9051c2f691d59c6f413355c44fe9d0534cd",
+  "afterBuild": "e0252b310ee4aac8968e99daec0db82065a85d428dc68857867b74a5dd452cb2",
+  "presentingDeferred": true,
+  "unknownClientDeferred": true,
+  "oldCacheKeptWhileWaiting": true,
+  "backgroundContinuedDuringWaiting": true,
+  "idleClientsReloaded": true,
+  "oldCacheRemovedAfterIdleActivation": true,
+  "preparedLibraryRetained": true,
+  "previousPackageVerifiedAfterUpdate": true
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Gather Church Presentations",
+  "short_name": "Gather",
+  "start_url": "/offline",
+  "display": "standalone",
+  "theme_color": "#006c78",
+  "background_color": "#e8f4f2",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

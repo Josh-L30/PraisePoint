@@ -80,5 +80,7 @@ test('collapsed desktop navigation keeps the workspace picker accessible', async
   await page.getByRole('button',{ name: 'Collapse navigation' }).click();
   await page.getByRole('combobox',{ name: 'Switch workspace' }).focus();
   await page.keyboard.press('Home'); await page.keyboard.press('Enter');
+  // Home already changes this native select; Enter can reopen its OS popup.
+  await page.keyboard.press('Escape');
   await expect(page).toHaveURL('/app/w/' + personalId);
 });
