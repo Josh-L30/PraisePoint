@@ -4,10 +4,13 @@ import { forgetDraft } from './draft-memory';
 import {revokeMediaUrls} from '../features/media/media-urls';
 export type {DeviceSession} from './browser-db';
 const db = openBrowserDB;
-const accessBlockKey='gather-device-access-blocked';
+const accessBlockKey='gather-device-access-blocked',signOutKey='gather-sign-out-pending';
+export const deviceSignOutPending=()=>localStorage.getItem(signOutKey)!==null;
+export const beginDeviceSignOut=()=>localStorage.setItem(signOutKey,'1');
+export const completeDeviceSignOut=()=>localStorage.removeItem(signOutKey);
 export async function readDeviceSession(): Promise<DeviceSession | null> {
   const database = await db();
-  try { const marker=await database.get('meta', 'session');return marker ? {...marker,signedOut:marker.signedOut || localStorage.getItem(accessBlockKey)===marker.profileId} : null; } finally { database.close(); }
+  try { const marker=await database.get('meta', 'session');return marker ? {...marker,signedOut:marker.signedOut || deviceSignOutPending() || localStorage.getItem(accessBlockKey)===marker.profileId} : null; } finally { database.close(); }
 }
 export async function setDeviceSession(profileId: string): Promise<void> {
   const previous = await readDeviceSession();

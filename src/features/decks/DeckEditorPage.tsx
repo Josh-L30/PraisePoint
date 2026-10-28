@@ -1,3 +1,4 @@
+import {acquireRuntimeActivity} from '../offline/runtime-client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useBlocker, useNavigate } from 'react-router';
 import { ArrowLeft, Save, Copy, Trash2,Undo2,Redo2 } from 'lucide-react';
@@ -29,9 +30,10 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
   const [adding,setAdding] = useState(false), [deleteSlide,setDeleteSlide] = useState(false);
   const blocker = useBlocker(() => !allowNavigation.current && (dirty || writing.current));
   useEffect(() => {
-    mounted.current=true; let active = true;
+    mounted.current=true; let active = true,releaseActivity:(()=>void)|undefined;
     async function load() {
       try {
+        if(import.meta.env.PROD){const lease=await acquireRuntimeActivity();if(!active){if(lease.ok)lease.value();return;}if(!lease.ok){setError(lease.error);return;}releaseActivity=lease.value;}
         const result = await service.getDeck(deckId);
         if (!active) return;
         if (!result.ok) { setError(result.error); return; }
@@ -45,7 +47,7 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
       finally { if (active) setLoading(false); }
     }
     queueMicrotask(() => { if (active) void load(); });
-    return () => { active=false; mounted.current=false; };
+    return () => { active=false; mounted.current=false;releaseActivity?.(); };
   },[deckId,workspaceId,profileId,service]);
   useEffect(() => {
     function beforeUnload(event: BeforeUnloadEvent) { if (dirty || writing.current) { event.preventDefault(); event.returnValue=''; } }

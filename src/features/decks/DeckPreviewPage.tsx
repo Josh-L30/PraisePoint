@@ -1,3 +1,4 @@
+import {acquireRuntimeActivity} from '../offline/runtime-client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
@@ -13,9 +14,10 @@ export function DeckPreviewPage({ workspaceId, deckId, profileId, service = deck
   const [document,setDocument] = useState<DeckDocument | null>(null), [error,setError] = useState<string | null>(null), [selected,setSelected] = useState(0);
   const back = '/app/w/' + workspaceId + '/decks/' + deckId;
   useEffect(() => {
-    let active = true;
+    let active = true,releaseActivity:(()=>void)|undefined;
     async function load() {
       try {
+        if(import.meta.env.PROD){const lease=await acquireRuntimeActivity();if(!active){if(lease.ok)lease.value();return;}if(!lease.ok){setError(lease.error.message);return;}releaseActivity=lease.value;}
         const result = await service.getDeck(deckId);
         if (!active) return;
         if (!result.ok) { setError(result.error.message); return; }
@@ -28,7 +30,7 @@ export function DeckPreviewPage({ workspaceId, deckId, profileId, service = deck
       } catch { if (active) setError('The preview could not be opened. Check your connection and return to the editor.'); }
     }
     queueMicrotask(() => { if (active) void load(); });
-    return () => { active=false; };
+    return () => { active=false;releaseActivity?.(); };
   },[workspaceId,deckId,profileId,service]);
   useEffect(() => {
     const previous = window.document.body.style.overflow;

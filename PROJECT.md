@@ -1,6 +1,6 @@
 # Architecture and collaboration
 
-Status: architecture and plan accepted; Native execution continues. S01–S09 identity, private/shared workspaces, templates/freeform editing, songs, service plans, media, projector, offline preparation and transfer/relink are implemented with evidence in the sprint records. S10 software rehearsal/review is in progress; physical acceptance and frontend publication remain open. Real Google login is recorded separately. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) remain binding.
+Status: architecture and plan accepted; Native execution continues. S01–S09 identity, private/shared workspaces, templates/freeform editing, songs, service plans, media, projector, offline preparation and transfer/relink are implemented with evidence in the sprint records. S10 software checks and the independent-review fix pass are verified; physical acceptance and frontend publication remain open. Real Google login is recorded separately. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) remain binding.
 
 ## Stack recommendation
 

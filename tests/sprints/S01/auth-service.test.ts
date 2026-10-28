@@ -1,8 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import {installTestLocks} from '../../support/web-locks';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import type { SupabaseClient, Session } from '@supabase/supabase-js';
 import { createAuthService } from '../../../src/features/auth/auth-service';
 import { readDeviceSession, setDeviceSession } from '../../../src/lib/device-session';
 
+let locks:ReturnType<typeof installTestLocks>;beforeEach(()=>{locks=installTestLocks();localStorage.removeItem('gather-sign-out-pending');});afterEach(()=>locks.restore());
 const session = { user: { id: '11111111-1111-4111-8111-111111111111' } } as Session;
 function clientFixture(options: { session?: Session | null; rpcError?: string; signOutError?: string; malformed?: boolean; expired?: boolean; foreignUser?: boolean } = {}) {
   let rpcCalls = 0;

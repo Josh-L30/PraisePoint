@@ -1,6 +1,6 @@
 # Release candidate acceptance
 
-Status: software verification passed; independent whole-branch review pending; physical acceptance and frontend publication are not complete. Latest app build identity will be in docs/evidence/S10-service-rehearsal.json. The proposed frontend host is Cloudflare Pages Free; there is no live frontend URL yet.
+Status: software verification is complete and independent-review findings are addressed; physical acceptance remains pending; physical acceptance and frontend publication are not complete. Latest app build identity will be in docs/evidence/S10-service-rehearsal.json. The proposed frontend host is Cloudflare Pages Free; there is no live frontend URL yet.
 
 ## Evidence matrix
 
@@ -51,3 +51,5 @@ Record the date, operator, laptop model/OS, installed Chrome or Edge version, pr
 - [ ] Record pilot user acceptance and unresolved limits before calling S10 Done. Apply no destructive database rollback or restore as part of frontend publication.
 
 See [operations](operations.md), [backup/restore](backup-restore.md) and [S10 evidence](sprints/S10.md).
+
+The user will rehearse equipment later. Follow the [plain-language rehearsal guide and results sheet](rehearsal-guide.md), including stopping the local preview server before the disconnected browser restart.

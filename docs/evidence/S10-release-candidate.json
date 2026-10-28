@@ -1,0 +1,21 @@
+{
+  "verifiedOn": "2026-10-29",
+  "appBuild": "ee24300ca76e28acbb7fbf8a10f1cfa82b2d57d78ba89d090747a35e94cb70fa",
+  "reviewedHead": "0cce509b0417205fa53344e91e4f4dcdd9bf1166",
+  "reviewFindingsAddressed": 4,
+  "unitTests": 251,
+  "unitFiles": 63,
+  "productionBrowserCases": 45,
+  "browserSuiteMinutes": 5.4,
+  "typecheck": true,
+  "lint": true,
+  "productionFiles": 45,
+  "artifactScanFindings": 0,
+  "localArchive": ".superpowers/sdd/2026-10-26-church-presentations/release-candidates/ee24300c-production.zip",
+  "archiveSha256": "b840b27afc14566f22a51445ef21467e09269d914cce184d5c693410d3c1b625",
+  "node": "24.11.1",
+  "automatedBrowser": "Playwright Chromium 156.0.8078.4 revision 1248",
+  "published": false,
+  "physicalAcceptance": false,
+  "phase": "Local rehearsal candidate; physical/provider/recovery/hosted acceptance remains open"
+}

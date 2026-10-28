@@ -42,12 +42,12 @@ export function SlideRenderer({ slide, resolveMedia = unavailableMedia, mode, on
   return <>
     <div ref={viewport} className="slide-viewport" data-mode={mode} data-font-ready={font==='ready'} style={{ position: 'relative', overflow: 'hidden', width: '100%', aspectRatio: '16/9', height: mode==='audience' ? '100%' : undefined, background: '#000' }}>
       {font==='ready' ? <div ref={stage} data-testid="slide-stage" className="slide-stage" style={{ position: 'absolute', width: 1920, height: 1080, left: layout.left, top: layout.top, transform: `scale(${layout.scale})`, transformOrigin: 'top left', overflow: 'hidden' }}>
-        <BackgroundLayer key={backgroundIdentity} background={slide.background} resolver={resolveMedia} animate={animateMedia} onFailure={onBackgroundError} />
-        {slide.standaloneVideoId && <MediaLayer key={slide.id} playback={videoPlayback} mediaId={slide.standaloneVideoId} kind="video" videoMode="standalone" fit="contain" resolver={resolveMedia} style={{position:'absolute',inset:0,width:1920,height:1080}} />}
+        <BackgroundLayer audience={mode==='audience'} key={backgroundIdentity} background={slide.background} resolver={resolveMedia} animate={animateMedia} onFailure={onBackgroundError} />
+        {slide.standaloneVideoId && <MediaLayer audience={mode==='audience'} key={slide.id} playback={videoPlayback} mediaId={slide.standaloneVideoId} kind="video" videoMode="standalone" fit="contain" resolver={resolveMedia} style={{position:'absolute',inset:0,width:1920,height:1080}} />}
         {[...slide.elements].sort((a,b) => a.z-b.z || a.id.localeCompare(b.id)).map(element => {
           const style: CSSProperties = { position: 'absolute', left: element.x, top: element.y, width: element.width, height: element.height, zIndex: element.z+1 };
           return element.kind==='text' ? <div key={element.id} data-testid={'element-' + element.id} data-text-id={element.id} style={{ ...style, fontFamily: 'Figtree', fontSize: element.fontSize, color: element.color, textAlign: element.align, whiteSpace: 'pre', lineHeight: 1.2, overflow: 'hidden' }}>{element.text}</div>
-            : <MediaLayer key={element.id} mediaId={element.mediaId} kind="image" fit={element.fit} resolver={resolveMedia} style={style} />;
+            : <MediaLayer audience={mode==='audience'} key={element.id} mediaId={element.mediaId} kind="image" fit={element.fit} resolver={resolveMedia} style={style} />;
         })}
         {mode==='editor' && editorOverlay?.(layout.scale)}
       </div> : <p className="slide-font-message" role={font==='missing' ? 'alert' : 'status'}>{font==='missing' ? 'Figtree could not load. Reconnect and reload before presenting.' : 'Loading presentation font…'}</p>}

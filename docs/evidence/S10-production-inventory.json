@@ -1,6 +1,7 @@
 {
+  "appBuild": "ee24300ca76e28acbb7fbf8a10f1cfa82b2d57d78ba89d090747a35e94cb70fa",
   "files": 45,
   "findings": [],
   "publicConnectionConfigExpected": true,
-  "scope": "Actual dist file inventory and high-confidence private credential/fixture markers; public Supabase URL/publishable key are expected, not secrets."
+  "scope": "Actual final dist inventory and high-confidence private credential/fixture markers; public Supabase URL/publishable key are expected. This does not certify every possible secret pattern."
 }

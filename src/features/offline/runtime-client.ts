@@ -40,7 +40,7 @@ export async function acquireRuntimeActivity(kind:'present'|'prepare'='present')
  const releaseBusy=markRuntimeBusy();return new Promise(resolve=>{
   let releaseHold:(()=>void)|undefined,settled=false;const finish=(result:Result<()=>void>)=>{if(!settled){settled=true;resolve(result);}};
   void navigator.locks.request(RUNTIME_LOCK,kind==='prepare'?{mode:'exclusive',ifAvailable:true}:{mode:'shared',signal:AbortSignal.timeout(15000)},async lock=>{
-   if(!lock){releaseBusy();finish(failure('CONFLICT','Finish presenting or preparing in the other window before changing prepared copies.'));return;}
+   if(!lock){releaseBusy();finish(failure('CONFLICT','Close editors and finish account changes, presentations or preparation in other windows before changing prepared copies.'));return;}
    try{
     if(import.meta.env.PROD){if(await pendingUpdate()){releaseBusy();finish(failure('CONFLICT','An app update is finishing. Wait for it or close all Gather windows and reopen before presenting.'));return;}const worker=await controlledWorker();
      const response=await message(worker,'GATHER_BUILD');if(response.build!==APP_BUILD){releaseBusy();finish(failure('CONFLICT','The app has updated. Reload before preparing or presenting.'));return;}}
@@ -51,12 +51,12 @@ export async function acquireRuntimeActivity(kind:'present'|'prepare'='present')
 }
 export async function requestAppUpdate():Promise<Result<void>>{
  const target=registration?.waiting;if(!target)return failure('NOT_FOUND','No app update is waiting.');if(!navigator.locks)return failure('UNSUPPORTED','Close all Gather windows and reopen to update safely.');
- const previous=navigator.serviceWorker.controller;let changed:(()=>void)|undefined;
- const activated=new Promise<void>(resolve=>{changed=()=>{if(navigator.serviceWorker.controller!==previous)resolve();};navigator.serviceWorker.addEventListener('controllerchange',changed);});
+ const previous=navigator.serviceWorker.controller;let changed:(()=>void)|undefined,timer:ReturnType<typeof setTimeout>|undefined;
+ const activated=new Promise<boolean>(resolve=>{changed=()=>{if(navigator.serviceWorker.controller!==previous)resolve(true);};navigator.serviceWorker.addEventListener('controllerchange',changed);timer=setTimeout(()=>resolve(false),20000);});
  try{
   const capability=await message(target,'GATHER_BUILD');if(capability.updateProtocol!==UPDATE_PROTOCOL)return failure('UNSUPPORTED','Close all Gather windows and reopen the app to complete this compatibility update.');
   const accepted=await navigator.locks.request(RUNTIME_LOCK,{mode:'exclusive',ifAvailable:true},async lock=>{
-   if(!lock)return failure('CONFLICT','Finish preparing or presenting before updating the app.');
+   if(!lock)return failure('CONFLICT','Close the editor and finish account changes, preparation or presentation before updating the app.');
    if(await pendingUpdate())return failure('CONFLICT','An app update is already finishing. Close idle Gather windows and reopen if it does not finish.');
    const nonce=crypto.randomUUID();return await navigator.locks.request(updateProofName(nonce),{mode:'exclusive'},async()=>{
     const response=await message(target,'GATHER_ACTIVATE_IF_IDLE',12000,{nonce,updateProtocol:UPDATE_PROTOCOL});
@@ -65,7 +65,7 @@ export async function requestAppUpdate():Promise<Result<void>>{
   });
   // Native locks can delay activation. The persistent fence now blocks actors
   // inside their leases until the new worker claims clients and finishes cleanup.
-  if(!accepted.ok)return accepted;await activated;return {ok:true,value:undefined};
+  if(!accepted.ok)return accepted;if(!await activated)return failure('NETWORK','The update has not finished. Close all Gather windows and reopen the app before presenting. Saved services are retained.');return {ok:true,value:undefined};
  }catch{return failure('NETWORK','The update could not confirm every window is idle. Keep using this version and retry later.');}
- finally{if(changed)navigator.serviceWorker.removeEventListener('controllerchange',changed);}
+ finally{clearTimeout(timer);if(changed)navigator.serviceWorker.removeEventListener('controllerchange',changed);}
 }

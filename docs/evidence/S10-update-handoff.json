@@ -1,13 +1,13 @@
 {
-  "beforeBuild": "adc6612c432b0af0a3f24ea6c8f6e6a928de7c7f2922b7616a6e6a1349e8dfc3",
-  "afterBuild": "e3a53005397518bc83ba19e4b56d01a7b888f42fb96d842172857224da17a5a9",
+  "beforeBuild": "ee24300ca76e28acbb7fbf8a10f1cfa82b2d57d78ba89d090747a35e94cb70fa",
+  "afterBuild": "d60603cde0981f5598922bf8584672a403549369aaea694d2483f50c6e318a43",
   "stageTimes": {
-    "buildFinished": 8228,
-    "prepared": 20191,
-    "idleRequest": 37098,
-    "idleChanged": 39447
+    "buildFinished": 4964,
+    "prepared": 11397,
+    "idleRequest": 16388,
+    "idleChanged": 18706
   },
-  "idleActivationMilliseconds": 2349,
+  "idleActivationMilliseconds": 2318,
   "presentingDeferred": true,
   "unknownClientDeferred": true,
   "legacyClientDeferred": true,
