@@ -45,9 +45,10 @@ export function AudiencePage({sessionId}:{sessionId:string}){
   if(!resolver)return failure('NOT_FOUND','No service has been sent.');const result=await resolver(id);
   if(!result.ok && current.current){setFault(true);feedback({paused:true,time:0,duration:0,blocked:true,issue:'A required file is missing or damaged. Verify it, then reopen the projector.'});}return result;
  },[resolver,feedback]);
+ const backgroundError=useCallback(()=>{setFault(true);feedback({paused:true,time:0,duration:0,blocked:true,issue:'Background playback unavailable. Verify the file and reopen the projector.'});},[feedback]);
  const state=frame?.state;
  return <main className="audience-output" data-audience-id={audienceId}>
-  {state && resolver && <SlideRenderer slide={state.snapshot.slides[state.index]} mode="audience" onFontStatus={fontStatus} backgroundIdentity={backgroundIdentity(state)} resolveMedia={asyncMedia} videoPlayback={{...state.standalone,blackout:state.blackout || fault,onFeedback:feedback}}/>}
+  {state && resolver && <SlideRenderer slide={state.snapshot.slides[state.index]} mode="audience" animateMedia={!state.backgroundPaused} onBackgroundError={backgroundError} onFontStatus={fontStatus} backgroundIdentity={backgroundIdentity(state)} resolveMedia={asyncMedia} videoPlayback={{...state.standalone,blackout:state.blackout || fault,onFeedback:feedback}}/>}
   {(!state || state.blackout || fault) && <div className="audience-blackout" aria-label="Black projector output"/>}
  </main>;
 }

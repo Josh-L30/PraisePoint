@@ -13,7 +13,7 @@ Roadmap for the accepted first-release design and implementation plan. S01 found
 | S07 | Operator/projector, manual controls, continuous backgrounds/audio/blackout/reconnect A07/A09 | S05–S06 | Done | [Record](sprints/S07.md), [test map](../tests/sprints/S07/README.md) |
 | S08 | Complete offline preparation, disconnected restart, safe app updates A08 | S07; offline preflight | Done | [Record](sprints/S08.md), [test map](../tests/sprints/S08/README.md) |
 | S09 | Metadata backup/import/media relink and second-laptop recovery A11 | S06–S08 | Done | [Record](sprints/S09.md), [test map](../tests/sprints/S09/README.md) |
-| S10 | Physical rehearsal, accessibility/performance, capacity/recovery review and release acceptance A01–A12 | S01–S09 | Planned | Create when activated |
+| S10 | Physical rehearsal, accessibility/performance, capacity/recovery review and release acceptance A01–A12 | S01–S09 | In progress | [Software rehearsal and external gates](sprints/S10.md), [test map](../tests/sprints/S10/README.md) |
 
 ## Early feasibility
 

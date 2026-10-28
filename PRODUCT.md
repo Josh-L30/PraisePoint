@@ -1,6 +1,6 @@
 # Product brief
 
-Status: full written scope and operating defaults accepted by the user on 2026-10-26. S01 foundation is partially implemented/verified; later features remain planned, not shipped. See the sprint ledger for current status.
+Status: full written scope and operating defaults accepted by the user on 2026-10-26. S01–S09 are implemented and verified; S10 software rehearsal/review is in progress. Physical acceptance and frontend publication remain pending. See the sprint ledger and release checklist for evidence and limits.
 
 ## Purpose and confirmed scope
 

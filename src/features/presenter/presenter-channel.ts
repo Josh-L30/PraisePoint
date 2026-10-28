@@ -11,7 +11,7 @@ const eventSchema=z.discriminatedUnion('kind',[
  z.object({kind:z.literal('feedback'),audienceId:id,sequence,paused:z.boolean(),time:z.number().finite().min(0).max(86400),duration:z.number().finite().min(0).max(86400),blocked:z.boolean(),issue:z.string().max(250).optional()}).strict()
 ]);
 export type PresenterEvent=z.infer<typeof eventSchema>;
-const frame=z.object({sessionId:id,sequence,snapshot:z.unknown(),index:z.number().int().nonnegative().max(1999),blackout:z.boolean(),standalone:z.object({paused:z.boolean(),volume:z.number().min(0).max(1),time:z.number().min(0).max(86400),seekSequence:sequence}).strict()}).strict();
+const frame=z.object({sessionId:id,sequence,snapshot:z.unknown(),index:z.number().int().nonnegative().max(1999),blackout:z.boolean(),backgroundPaused:z.boolean(),standalone:z.object({paused:z.boolean(),volume:z.number().min(0).max(1),time:z.number().min(0).max(86400),seekSequence:sequence}).strict()}).strict();
 type Transport=Pick<BroadcastChannel,'postMessage'|'close'|'onmessage'>;
 type Options={profileId?:string;audienceId?:string;packageId?:string;onEvent?(event:PresenterEvent):void};
 /** Same-origin local messages only; never place bearer tokens in this protocol. */

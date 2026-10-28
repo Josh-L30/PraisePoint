@@ -1,0 +1,6 @@
+{
+  "files": 45,
+  "findings": [],
+  "publicConnectionConfigExpected": true,
+  "scope": "Actual dist file inventory and high-confidence private credential/fixture markers; public Supabase URL/publishable key are expected, not secrets."
+}

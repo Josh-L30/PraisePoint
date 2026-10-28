@@ -1,6 +1,6 @@
 # Architecture and collaboration
 
-Status: architecture and plan accepted; Native execution continues. S01–S05 identity/workspaces/invitations, the responsive glass shell, template/freeform text editing, safe saves, undo/redo, song masters and ordered service plans are verified. Real Google login/cancellation/logout is verified separately. No website deployment exists. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) have separate owners.
+Status: architecture and plan accepted; Native execution continues. S01–S09 identity, private/shared workspaces, templates/freeform editing, songs, service plans, media, projector, offline preparation and transfer/relink are implemented with evidence in the sprint records. S10 software rehearsal/review is in progress; physical acceptance and frontend publication remain open. Real Google login is recorded separately. [Product rules](PRODUCT.md) and [visual rules](DESIGN.md) remain binding.
 
 ## Stack recommendation
 
@@ -10,7 +10,7 @@ Use Supabase's database/API/auth capabilities. S02/S03 use private transactional
 
 ## Data and trust boundaries
 
-Implemented record groups: profiles, personal/church workspaces, memberships/invitations, validated revisioned deck documents with optional field labels, song masters, service plans/items, private operation budgets and shared document capacity accounting. S01–S05 migrations are applied to the existing Supabase Free project. Media metadata belongs to S06. Service snapshots include stable sections, distinct deterministic repeated-deck occurrence IDs and a SHA-256 source-revision digest for later offline freshness checks.
+Implemented record groups: profiles, personal/church workspaces, memberships/invitations, validated revisioned deck documents with optional field labels, song masters, service plans/items, private operation budgets and shared document capacity accounting. S01–S09 migrations are applied to the existing Supabase Free project, including local/cloud media descriptors and atomic metadata import. Service snapshots include stable sections, distinct deterministic repeated-deck occurrence IDs and a SHA-256 source-revision digest for later offline freshness checks.
 
 Every resource belongs to a workspace. Enforce personal ownership/church membership/roles with Postgres RLS, private Storage policies, and authenticated operations, including user-supplied IDs. Add relational integrity and indexes for membership/ownership paths. Prevent cross-workspace child/asset references and client-controlled privilege escalation. Elevated keys stay server-side.
 
@@ -41,6 +41,8 @@ Public build config: Supabase URL/publishable key. Google client secret, elevate
 
 Use reviewable Git slices on the existing feature branch and a repository review workflow once a destination is supplied. Update the sprint ledger with evidence. The user owns Google/Supabase/hosting/repository accounts. The existing Supabase Free project and Google connection are configured; reuse the setup record rather than creating another project or credential.
 
-Keep local disposable tests separate from church data; choose a test-project arrangement within free limits. Never reset church data for tests. Apply versioned migrations only with authorization. Before release, identify the owner for quota/inactivity checks, metadata and original-media backups, and restore rehearsal. Keep a known-good deployment/prepared service for recovery.
+Keep local disposable tests separate from church data; choose a test-project arrangement within free limits. Never reset church data for tests. Apply versioned migrations only with authorization. The project requester confirmed account and original-media backup responsibility on 2026-10-28. Physical recovery and isolated database restore rehearsals remain before release; a substitute operator is still needed. Keep a known-good deployment/prepared service for recovery.
 
 Sources checked 2026-10-26: [Google sign-in](https://supabase.com/docs/guides/auth/social-sign-in/auth-google), [Supabase pricing](https://supabase.com/pricing), [browser storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria). Additional hosting/font sources are in the research notes.
+
+Operational and release gates: [operations](docs/operations.md), [acceptance/rehearsal checklist](docs/release-checklist.md). Local production rehearsal applies the proposed host headers; the actual hosted origin still requires separate verification.

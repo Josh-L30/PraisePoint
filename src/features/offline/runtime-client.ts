@@ -1,6 +1,7 @@
+import {pendingUpdate} from './update-fence';
 import {updateProofName} from './cache-policy';
 import {failure,type Result} from '../../domain/result';
-import {APP_BUILD,RUNTIME_LOCK} from './runtime-constants';
+import {APP_BUILD,RUNTIME_LOCK,UPDATE_PROTOCOL} from './runtime-constants';
 let activity=0,initialized=false,registration:ServiceWorkerRegistration|null=null,waiting=false;
 const listeners=new Set<()=>void>();
 function changed(){for(const listener of listeners)listener();}
@@ -9,8 +10,8 @@ export const hasAppUpdate=()=>waiting;
 export function markRuntimeBusy(){activity++;let released=false;return()=>{if(!released){released=true;activity--;}};}
 export function initializeOfflineRuntime(){
  if(initialized || !import.meta.env.PROD || !('serviceWorker' in navigator))return;initialized=true;let previous=navigator.serviceWorker.controller;
- navigator.serviceWorker.addEventListener('message',event=>{if(event.data?.type==='GATHER_QUERY_IDLE')event.ports[0]?.postMessage({idle:activity===0 && !location.pathname.startsWith('/auth/callback')});});
- navigator.serviceWorker.addEventListener('controllerchange',()=>{const next=navigator.serviceWorker.controller;waiting=false;changed();if(previous && next!==previous && activity===0)location.reload();previous=next;});
+ navigator.serviceWorker.addEventListener('message',event=>{if(event.data?.type==='GATHER_QUERY_IDLE')event.ports[0]?.postMessage({idle:activity===0 && !location.pathname.startsWith('/auth/callback'),updateProtocol:UPDATE_PROTOCOL});});
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{const next=navigator.serviceWorker.controller;waiting=false;changed();if(previous && next!==previous && activity===0 && !location.pathname.startsWith('/auth/callback'))location.reload();previous=next;});
  void navigator.serviceWorker.register('/service-worker.js',{scope:'/'}).then(value=>{
   registration=value;const inspect=()=>{waiting=!!value.waiting && !!navigator.serviceWorker.controller;changed();};inspect();
   value.addEventListener('updatefound',()=>{value.installing?.addEventListener('statechange',inspect);});
@@ -41,7 +42,7 @@ export async function acquireRuntimeActivity(kind:'present'|'prepare'='present')
   void navigator.locks.request(RUNTIME_LOCK,kind==='prepare'?{mode:'exclusive',ifAvailable:true}:{mode:'shared',signal:AbortSignal.timeout(15000)},async lock=>{
    if(!lock){releaseBusy();finish(failure('CONFLICT','Finish presenting or preparing in the other window before changing prepared copies.'));return;}
    try{
-    if(import.meta.env.PROD){const worker=await controlledWorker();
+    if(import.meta.env.PROD){if(await pendingUpdate()){releaseBusy();finish(failure('CONFLICT','An app update is finishing. Wait for it or close all Gather windows and reopen before presenting.'));return;}const worker=await controlledWorker();
      const response=await message(worker,'GATHER_BUILD');if(response.build!==APP_BUILD){releaseBusy();finish(failure('CONFLICT','The app has updated. Reload before preparing or presenting.'));return;}}
     await new Promise<void>(release=>{releaseHold=release;let released=false;finish({ok:true,value:()=>{if(!released){released=true;releaseBusy();release();}}});});
    }catch{releaseBusy();finish(failure('STORAGE_UNAVAILABLE','This browser could not protect the presentation from an app update.'));}
@@ -50,13 +51,21 @@ export async function acquireRuntimeActivity(kind:'present'|'prepare'='present')
 }
 export async function requestAppUpdate():Promise<Result<void>>{
  const target=registration?.waiting;if(!target)return failure('NOT_FOUND','No app update is waiting.');if(!navigator.locks)return failure('UNSUPPORTED','Close all Gather windows and reopen to update safely.');
- try{return await navigator.locks.request(RUNTIME_LOCK,{mode:'exclusive',ifAvailable:true},async lock=>{
-  if(!lock)return failure('CONFLICT','Finish preparing or presenting before updating the app.');const nonce=crypto.randomUUID();
-  return await navigator.locks.request(updateProofName(nonce),{mode:'exclusive'},async()=>{
-   const previous=navigator.serviceWorker.controller;let changed:(()=>void)|undefined;
-   const activated=new Promise<void>(resolve=>{changed=()=>{if(navigator.serviceWorker.controller!==previous)resolve();};navigator.serviceWorker.addEventListener('controllerchange',changed);});
-   try{const response=await message(target,'GATHER_ACTIVATE_IF_IDLE',12000,{nonce});if(response.ok!==true)return failure('CONFLICT',typeof response.reason==='string'?response.reason:'Finish preparing or presenting before updating.');await activated;return {ok:true as const,value:undefined};}
-   finally{if(changed)navigator.serviceWorker.removeEventListener('controllerchange',changed);}
+ const previous=navigator.serviceWorker.controller;let changed:(()=>void)|undefined;
+ const activated=new Promise<void>(resolve=>{changed=()=>{if(navigator.serviceWorker.controller!==previous)resolve();};navigator.serviceWorker.addEventListener('controllerchange',changed);});
+ try{
+  const capability=await message(target,'GATHER_BUILD');if(capability.updateProtocol!==UPDATE_PROTOCOL)return failure('UNSUPPORTED','Close all Gather windows and reopen the app to complete this compatibility update.');
+  const accepted=await navigator.locks.request(RUNTIME_LOCK,{mode:'exclusive',ifAvailable:true},async lock=>{
+   if(!lock)return failure('CONFLICT','Finish preparing or presenting before updating the app.');
+   if(await pendingUpdate())return failure('CONFLICT','An app update is already finishing. Close idle Gather windows and reopen if it does not finish.');
+   const nonce=crypto.randomUUID();return await navigator.locks.request(updateProofName(nonce),{mode:'exclusive'},async()=>{
+    const response=await message(target,'GATHER_ACTIVATE_IF_IDLE',12000,{nonce,updateProtocol:UPDATE_PROTOCOL});
+    return response.ok===true && response.handoff===UPDATE_PROTOCOL?{ok:true as const,value:undefined}:failure('CONFLICT',typeof response.reason==='string'?response.reason:'Finish preparing or presenting before updating.');
+   });
   });
- });}catch{return failure('NETWORK','The update could not confirm every window is idle. Keep using this version and retry later.');}
+  // Native locks can delay activation. The persistent fence now blocks actors
+  // inside their leases until the new worker claims clients and finishes cleanup.
+  if(!accepted.ok)return accepted;await activated;return {ok:true,value:undefined};
+ }catch{return failure('NETWORK','The update could not confirm every window is idle. Keep using this version and retry later.');}
+ finally{if(changed)navigator.serviceWorker.removeEventListener('controllerchange',changed);}
 }

@@ -1,6 +1,7 @@
-import {expect,it,vi} from 'vitest';
+import {beforeEach,expect,it,vi} from 'vitest';
 import {render,waitFor} from '@testing-library/react';
 import {MediaLayer} from '../../../src/components/slide-renderer/BackgroundLayer';
+beforeEach(()=>{vi.spyOn(HTMLMediaElement.prototype,'play').mockResolvedValue();vi.spyOn(HTMLMediaElement.prototype,'pause').mockImplementation(()=>{});});
 it('keeps a standalone operator preview silent and paused with no native unmute control',async()=>{const release=vi.fn(),resolver=vi.fn().mockResolvedValue({ok:true,value:{url:'blob:standalone-fixture',release}});const view=render(<MediaLayer mediaId="clip" kind="video" videoMode="standalone" resolver={resolver}/>);await waitFor(()=>expect(view.container.querySelector('video')).not.toBeNull());const video=view.container.querySelector('video')!;expect(video.muted).toBe(true);expect(video.autoplay).toBe(false);expect(video.loop).toBe(false);expect(video.controls).toBe(false);view.unmount();expect(release).toHaveBeenCalledOnce();});
 it('keeps moving backgrounds muted and looping',async()=>{const resolver=vi.fn().mockResolvedValue({ok:true,value:{url:'blob:background-fixture',release:vi.fn()}});const view=render(<MediaLayer mediaId="background" kind="video" resolver={resolver}/>);await waitFor(()=>expect(view.container.querySelector('video')).not.toBeNull());const video=view.container.querySelector('video')!;expect(video.muted).toBe(true);expect(video.autoplay).toBe(true);expect(video.loop).toBe(true);});
 
