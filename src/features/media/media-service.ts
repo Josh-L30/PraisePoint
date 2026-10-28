@@ -96,6 +96,12 @@ export function createMediaService(profileId:string,client:SupabaseClient|null=s
   async relinkMedia(id:string,file:File):Promise<Result<MediaAsset>>{
    const bound=await scope();if(!bound.ok)return bound;const asset=await read(bound.value,id);if(!asset.ok)return finish(asset);const decoded=await decodeMedia(file);if(!decoded.ok)return decoded;
    if(decoded.value.sha256!==asset.value.sha256 || file.size!==asset.value.bytes || file.type!==asset.value.mime)return failure('VALIDATION','Choose the exact original file. A different file must be imported as new media.');
+   if(!await current())return denied();
+   if(asset.value.location==='local'){
+    try{const {data,error}=await bound.value.rpc('confirm_local_media_geometry',{p_media_id:id,p_width:decoded.value.width,p_height:decoded.value.height,p_duration:decoded.value.duration});if(error)return finish(contentError(error));
+     const confirmed=mediaAssetSchema.safeParse(data);if(!confirmed.success || !same(confirmed.data,asset.value))return invalid();
+    }catch{return unavailable();}
+   }
    const cached=await writeLocalMedia(profileId,asset.value,file);return cached.ok?finish(asset):cached;
   },
   async copyMedia(id:string,destinationWorkspaceId:string):Promise<Result<MediaAsset>>{

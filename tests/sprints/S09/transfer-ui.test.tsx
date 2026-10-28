@@ -1,0 +1,9 @@
+import {expect,it,vi} from 'vitest';import {render,screen,fireEvent,waitFor} from '@testing-library/react';import {MemoryRouter} from 'react-router';
+import {TransferDialog} from '../../../src/features/transfer/TransferDialog';
+import {createTemplate} from '../../../src/features/decks/templates';
+it('inspects a file before an explicit import, renders hostile words literally, and links to the new service',async()=>{
+ const sid='a9000000-0000-4000-8000-000000000001',wid='a9000000-0000-4000-8000-000000000002',created='a9000000-0000-4000-8000-000000000003';const slide=createTemplate('lyrics');const bundle={format:'church-service',version:1,snapshot:{schemaVersion:1,serviceId:sid,workspaceId:wid,sourceRevision:'a'.repeat(64),title:'<img onerror=alert(1)>',slides:[slide],media:[],sections:[{id:'a9000000-0000-4000-8000-000000000004',deckId:'a9000000-0000-4000-8000-000000000005',label:'Worship',startIndex:0,slideCount:1,sourceSongId:null}]}};
+ const importer={importServiceMetadata:vi.fn().mockResolvedValue({ok:true,value:{serviceId:created,missingMediaIds:[]}})};
+ const view=render(<MemoryRouter><TransferDialog profileId={sid} workspace={{id:wid,name:'CCF team'}} importer={importer} onBusyChange={()=>{}} onStaged={()=>{}} onCancel={()=>{}}/></MemoryRouter>);
+ fireEvent.change(screen.getByLabelText('Service metadata file'),{target:{files:[{size:JSON.stringify(bundle).length,text:async()=>JSON.stringify(bundle)}]}});await screen.findByText('<img onerror=alert(1)>');expect(view.container.querySelector('img')).toBeNull();expect(importer.importServiceMetadata).not.toHaveBeenCalled();fireEvent.click(screen.getByRole('button',{name:'Import independent service'}));await waitFor(()=>expect(importer.importServiceMetadata).toHaveBeenCalledOnce());expect(await screen.findByRole('link',{name:'Open imported service'})).toHaveAttribute('href','/app/w/'+wid+'/services/'+created);
+});

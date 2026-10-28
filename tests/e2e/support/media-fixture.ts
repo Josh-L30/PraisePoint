@@ -15,6 +15,7 @@ export async function mediaFixture(page:Page){
   return route.fulfill({json:[...state.assets.values()].filter(asset=>asset.workspaceId===personalId).map(row)});
  });
  await page.route('**/rest/v1/rpc/register_local_media',route=>{const {p_asset}=route.request().postDataJSON();state.assets.set(p_asset.id,p_asset);return route.fulfill({json:p_asset});});
+ await page.route('**/rest/v1/rpc/confirm_local_media_geometry',route=>{const {p_media_id}=route.request().postDataJSON();return route.fulfill({json:state.assets.get(p_media_id)});});
  await page.route('**/rest/v1/rpc/get_media_usage',route=>route.fulfill({json:{workspaceUsed:[...state.assets.values()].filter(asset=>asset.location==='cloud').reduce((total,asset)=>total+asset.bytes,0),workspaceReserved:0,workspaceLimit:52428800,applicationUsed:[...state.assets.values()].filter(asset=>asset.location==='cloud').reduce((total,asset)=>total+asset.bytes,0),applicationReserved:0,applicationLimit:524288000}}));
  await page.route('**/rest/v1/rpc/get_media_management',route=>route.fulfill({json:[]}));
  await page.route('**/functions/v1/media-upload',async route=>{
