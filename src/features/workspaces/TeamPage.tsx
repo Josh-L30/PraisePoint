@@ -1,3 +1,6 @@
+import {Modal} from '../../components/Modal';
+import {acquireRuntimeActivity,markRuntimeBusy} from '../offline/runtime-client';
+import {purgeWorkspaceLocalData} from './workspace-local-cleanup';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Users, ShieldCheck, Link2, Copy, UserPlus } from 'lucide-react';
@@ -17,8 +20,15 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
   const [busy,setBusy] = useState<string | null>(null), [revision,setRevision] = useState(0);
   const [receipt,setReceipt] = useState<{ url: string; expiresAt: string; recipient: string } | null>(null);
   const [copyNotice,setCopyNotice] = useState(''), [confirmation,setConfirmation] = useState<Confirmation | null>(null);
+  const [deletingChurch,setDeletingChurch]=useState(false),[deleteName,setDeleteName]=useState('');
   const mounted = useRef(true), writing = useRef(false), linkRef = useRef<HTMLInputElement>(null), confirmationRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => { mounted.current=true; return () => { mounted.current=false; }; },[]);
+  useEffect(()=>{
+    if(!busy)return;const release=markRuntimeBusy();
+    const account=(event:Event)=>event.preventDefault(),unload=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue='';};
+    window.addEventListener('gather-before-account-change',account);window.addEventListener('beforeunload',unload);
+    return()=>{release();window.removeEventListener('gather-before-account-change',account);window.removeEventListener('beforeunload',unload);};
+  },[busy]);
   useEffect(() => { if (confirmation) confirmationRef.current?.focus(); },[confirmation]);
   useEffect(() => {
     if (workspace.kind!=='church') return;
@@ -81,10 +91,21 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
       void perform('remove',() => service.removeMember(workspace.id,member.userId),() => changed('Volunteer removed from the church workspace.'));
     }
   }
+  async function deleteChurch(){
+    if(!canManage || deleteName!==workspace.name || writing.current)return;
+    void perform('delete-workspace',async()=>{
+      const lease=await acquireRuntimeActivity('prepare');if(!lease.ok)return lease;
+      try{
+        const begun=await service.beginDeleteChurch(workspace.id,deleteName);if(!begun.ok){await onRefresh();return begun;}
+        const local=await purgeWorkspaceLocalData(profileId,workspace.id);if(!local.ok){await onRefresh();return local;}
+        const result=await service.deleteChurch(workspace.id,deleteName);if(!result.ok)await onRefresh();return result;
+      }finally{lease.value();}
+    },async()=>{if(mounted.current)navigate('/app');await onRefresh();});
+  }
   return <div className="page-content team-page" aria-busy={!!busy}>
     <header className="page-heading"><h1>Prepare together.</h1><p>{workspace.kind==='personal'
       ? 'A shared space for the people behind every service.' : workspace.name}</p></header>
-    {error && <p className="form-message form-error" role="alert">{error}</p>}
+    {error && !confirmation && !deletingChurch && <p className="form-message form-error" role="alert">{error}</p>}
     {notice && <p className="form-message form-success" role="status">{notice}</p>}
     {workspace.kind==='personal' ? <div className="team-layout">
       <section className="team-card glass"><span className="feature-icon"><Users /></span><h2>Create your church workspace.</h2>
@@ -109,7 +130,7 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
           {snapshot.members.map(member => <li className="member-row" key={member.userId}>
             <span className="avatar">{member.avatarUrl ? <img src={member.avatarUrl} alt="" referrerPolicy="no-referrer" /> : initials(member.displayName)}</span>
             <div className="member-meta"><strong><bdi>{member.displayName}</bdi></strong><small>{member.role==='owner' ? 'Owner' : 'Volunteer'}{member.userId===profileId ? ' · You' : ''}</small></div>
-            {canManage && member.userId!==profileId && <div className="member-actions">
+            {canManage && !workspace.deletionPending && member.userId!==profileId && <div className="member-actions">
               <button className="text-button" disabled={!!busy} onClick={() => setConfirmation({ kind: 'transfer', member })}>Make owner</button>
               <button className="text-button" disabled={!!busy} onClick={() => setConfirmation({ kind: 'remove', member })}>Remove volunteer</button>
             </div>}
@@ -117,16 +138,16 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
         </ul>}
         {!loading && self?.role==='member' && <button className="button button-quiet" disabled={!!busy} onClick={() => setConfirmation({ kind: 'leave' })}>Leave church workspace</button>}
         {!loading && canManage && <p className="field-help">Transfer ownership to another volunteer before leaving this workspace.</p>}
-        {confirmation && <section className="confirmation-panel" aria-label="Confirm membership change">
+        {confirmation && <Modal className="confirmation-panel" aria-label="Confirm membership change" onCancel={()=>setConfirmation(null)} busy={!!busy}>
           <h3 ref={confirmationRef} tabIndex={-1}>{confirmation.kind==='leave' ? 'Leave this church workspace?' : confirmation.kind==='transfer'
-            ? <>Make <bdi>{confirmation.member.displayName}</bdi> the owner?</> : <>Remove <bdi>{confirmation.member.displayName}</bdi>?</>}</h3>
+            ? <>Make <bdi>{confirmation.member.displayName}</bdi> the owner?</> : <>Remove <bdi>{confirmation.member.displayName}</bdi>?</>}</h3>{error && <p className="form-error" role="alert">{error}</p>}
           <p>{confirmation.kind==='transfer' ? 'They will manage the church team. You will become a member.' : confirmation.kind==='leave'
             ? 'You will lose access to this shared workspace. Your personal workspace stays yours.' : 'They will lose access to this church workspace. Their personal work stays private.'}</p>
           <div className="action-row"><button className="button button-primary" disabled={!!busy} onClick={confirmChange}>{busy ? 'Updating…' : confirmation.kind==='transfer' ? 'Confirm transfer' : confirmation.kind==='remove' ? 'Confirm removal' : 'Confirm leaving'}</button>
             <button className="button" disabled={!!busy} onClick={() => setConfirmation(null)}>Cancel</button></div>
-        </section>}
+        </Modal>}
       </section>
-      {canManage && !loading ? <section className="team-card glass"><span className="feature-icon"><UserPlus /></span><h2>Invite a volunteer.</h2>
+      {canManage && !loading && !workspace.deletionPending ? <section className="team-card glass"><span className="feature-icon"><UserPlus /></span><h2>Invite a volunteer.</h2>
         <p>Create a link for their Google account, then share it with them yourself.</p>
         <form onSubmit={event => { event.preventDefault(); void perform('invite',() => service.inviteMember(workspace.id,email),async value => {
           await onRefresh(); if (mounted.current) {
@@ -156,5 +177,8 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
       </section> : <aside className="team-card glass privacy-card"><ShieldCheck size={24} /><h2>A shared space. Your own profile.</h2>
         <p>Your name and profile picture are visible to this church’s volunteers. Your personal workspace remains private.</p></aside>}
     </div>}
+
+    {workspace.kind==='church' && canManage && !loading && <section className="team-card glass workspace-danger"><h2>{workspace.deletionPending?'Workspace deletion is unfinished.':'Delete this church workspace.'}</h2><p>{workspace.deletionPending?'The workspace is locked while its files are being removed. Resume to finish cleanup.':'This permanently removes this workspace and its presentations, songs, services, invitations and cloud images. Your personal workspace stays separate.'}</p><button className="button button-danger" disabled={!!busy} onClick={()=>{setError(null);setDeleteName('');setDeletingChurch(true);}}>{workspace.deletionPending?'Resume workspace deletion':'Delete church workspace'}</button></section>}
+    {deletingChurch && <Modal className="confirmation-panel" role="alertdialog" aria-label="Delete church workspace?" busy={!!busy} onCancel={()=>setDeletingChurch(false)}><h2>Delete church workspace?</h2><p><strong>{workspace.name}</strong></p><p>This permanently deletes all of this church workspace’s slides, songs, service plans, invitations, memberships and cloud images. Its saved copies in this browser are removed too. Personal work and original files on your laptop stay separate. Copies on other disconnected devices cannot be remotely erased.</p><p>Once deletion starts it cannot be undone. If cleanup pauses, resume it here.</p>{error && <p className="form-error" role="alert">{error}</p>}<label className="field-label" htmlFor="delete-workspace-name">Type workspace name</label><input id="delete-workspace-name" className="field-input" autoComplete="off" maxLength={120} disabled={!!busy} value={deleteName} onChange={event=>setDeleteName(event.target.value)}/><p className="field-help">Enter {workspace.name} exactly to confirm.</p><div className="action-row"><button className="button" disabled={!!busy} onClick={()=>setDeletingChurch(false)}>{workspace.deletionPending?'Close':'Cancel'}</button><button className="button button-danger" disabled={!!busy || deleteName!==workspace.name} onClick={()=>void deleteChurch()}>{busy==='delete-workspace'?'Deleting workspace and files…':workspace.deletionPending?'Resume deletion':'Delete workspace'}</button></div></Modal>}
   </div>;
 }

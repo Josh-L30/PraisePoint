@@ -1,6 +1,6 @@
 import {z} from 'zod';
 import type {SupabaseClient} from '@supabase/supabase-js';
-import {cloudMediaKey,mediaAssetSchema,mediaId,type MediaBackend,type MediaErrorCode,type MediaResult} from './media-contract.ts';
+import {cloudMediaKey,mediaAssetSchema,mediaId,workspaceDeletionItemSchema,type MediaBackend,type MediaErrorCode,type MediaResult} from './media-contract.ts';
 const ok=<T>(value:T):MediaResult<T>=>({ok:true,value});
 const fail=(code:MediaErrorCode,message:string):MediaResult<never>=>({ok:false,error:{code,message}});
 export function mediaBackendError(error:unknown):MediaResult<never>{
@@ -10,6 +10,9 @@ export function mediaBackendError(error:unknown):MediaResult<never>{
   case '42501':case 'PGRST116':return fail('FORBIDDEN','This media is unavailable or you no longer have permission.');
   case '40001':case '23505':return fail('CONFLICT','This media operation has changed. Refresh the library before retrying.');
   case '23503':return fail('CONFLICT','This media is still referenced. Remove its presentation or pending copy references first.');
+  case '55000':return fail('CONFLICT','Finish or reclaim unfinished image uploads before deleting this workspace. Wait for active upload leases to expire before reclaiming.');
+  case '55006':return fail('CONFLICT','This workspace is being deleted. Its owner can resume deletion from Church workspace.');
+  case 'P0011':return fail('STORAGE_UNAVAILABLE','Some workspace files or storage charges remain. Resume deletion or contact the maintainer before considering cleanup complete.');
   case '53000':case '53100':return fail('CAPACITY','The free storage capacity is full. Ask the owner to free space.');
   case 'P0001':return fail('CAPACITY','The upload limit has been reached. Keep the original and try again later.');
   case '22023':case '22003':return fail('VALIDATION','The file details or decoded dimensions are invalid. Choose the original file.');
@@ -42,6 +45,11 @@ export function createSupabaseMediaBackend(user:SupabaseClient,admin:SupabaseCli
   }catch(error){return mediaBackendError(error);}
  }
  return {
+  workspaceDeletion:{
+   begin:(workspaceId,expectedName)=>rpc(user,'begin_workspace_deletion',{p_workspace_id:workspaceId,p_expected_name:expectedName},empty),
+   batch:workspaceId=>rpc(user,'workspace_deletion_batch',{p_workspace_id:workspaceId},workspaceDeletionItemSchema.array().max(25)),
+   finish:workspaceId=>rpc(user,'finish_workspace_deletion',{p_workspace_id:workspaceId},z.boolean()),
+  },
   reserve:(asset,sourceId)=>rpc(user,'reserve_image_upload',{p_asset:asset,p_source_media_id:sourceId},reservation),
   claim:id=>rpc(admin,'media_begin_write',{p_reservation_id:id},claim),
   finalize:(id,sha,width,height)=>rpc(admin,'media_finalize_upload',{p_reservation_id:id,p_sha256:sha,p_width:width,p_height:height},mediaAssetSchema),

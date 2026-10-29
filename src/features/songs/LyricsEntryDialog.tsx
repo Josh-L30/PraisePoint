@@ -1,9 +1,10 @@
+import {Modal} from '../../components/Modal';
 import { useMemo,useState } from 'react';
 import { splitLyrics } from './split-lyrics';
 import { createTemplate } from '../decks/templates';
 import { SlideRenderer } from '../../components/slide-renderer/SlideRenderer';
-type Props={initialLyrics:string;busy:boolean;readOnly?:boolean;onConfirm(lyrics:string):Promise<void>;onCancel():void};
-export function LyricsEntryDialog({initialLyrics,busy,readOnly=false,onConfirm,onCancel}:Props){
+type Props={initialLyrics:string;busy:boolean;readOnly?:boolean;externalError?:string|null;confirmLabel?:string;onConfirm(lyrics:string):Promise<void>;onCancel():void};
+export function LyricsEntryDialog({initialLyrics,busy,readOnly=false,externalError,confirmLabel,onConfirm,onCancel}:Props){
  const [mode,setMode]=useState<'manual'|'paste'>('manual'),[raw,setRaw]=useState(initialLyrics),[slides,setSlides]=useState<string[]|null>(null);
  const [error,setError]=useState<string|null>(null),[checking,setChecking]=useState(false),[selected,setSelected]=useState(0);
  const [measure,setMeasure]=useState<((line:string)=>boolean)|null>(null);
@@ -27,9 +28,9 @@ export function LyricsEntryDialog({initialLyrics,busy,readOnly=false,onConfirm,o
  }
  const current=slides?.[selected]??'';
  const preview=useMemo(()=>{const slide=createTemplate('lyrics');slide.elements=slide.elements.map(el=>el.kind==='text'?{...el,text:current}:el);return slide;},[current]);
- return <section className="lyrics-entry glass" aria-label="Lyric entry and break review" aria-busy={busy || checking}>
+ return <Modal className="lyrics-entry glass" aria-label="Lyric entry and break review" aria-busy={busy || checking} onCancel={onCancel} busy={busy || checking}>
   <div className="card-heading"><div><h2>{slides?'Review every slide.':'Bring the words together.'}</h2><p>Blank lines separate stanzas. Keep up to four lines per slide.</p></div><button className="text-button" disabled={busy || checking} onClick={onCancel}>Cancel lyric changes</button></div>
-  {error && <p role="alert" className="form-message form-error">{error}</p>}
+  {(error || externalError) && <p role="alert" className="form-message form-error">{error || externalError}</p>}
   {!slides?<><div className="action-row" aria-label="Lyric entry method"><button className="button" aria-pressed={mode==='manual'} disabled={busy || checking} onClick={()=>setMode('manual')}>Type lyrics</button><button className="button" aria-pressed={mode==='paste'} disabled={busy || checking} onClick={()=>setMode('paste')}>Paste full lyrics</button></div>
    <label className="field-label" htmlFor="lyric-input">{mode==='manual'?'Type lyrics':'Full lyrics'}</label><textarea id="lyric-input" className="field-input lyrics-raw" value={raw} readOnly={readOnly} disabled={busy || checking} onChange={e=>setRaw(e.target.value)} />
    <p className="field-help">Type at your own pace or paste existing words. Explicit line breaks are preserved; long lines will be flagged.</p>
@@ -39,7 +40,7 @@ export function LyricsEntryDialog({initialLyrics,busy,readOnly=false,onConfirm,o
     {text.split('\n').some(line=>measure?.(line)) && <p className="slide-overflow-warning">Line exceeds the safe width. Add a line break or adjust this slide later in the editor.</p>}
     {!readOnly && <button className="text-button" disabled={busy || slides.length===1} onClick={()=>{setSlides(values=>values!.filter((_,n)=>n!==index));setSelected(0);}}>Remove slide {index+1}</button>}
    </div>)}</div><div className="lyric-review-preview"><SlideRenderer slide={preview} mode="preview" /><p>Slide {selected+1} of {slides.length} · 72px Figtree · fixed line breaks</p></div></div>
-   <div className="action-row">{!readOnly && <button className="button" disabled={busy || slides.length>=200} onClick={()=>{setSlides([...slides,'']);setSelected(slides.length);}}>Add lyric slide</button>}<button className="button" disabled={busy} onClick={()=>{setRaw(slides.join('\n\n'));setSlides(null);}}>Back to full lyrics</button><button className="button button-primary" disabled={busy} onClick={()=>void confirm()}>{readOnly?'Add reviewed song to service':'Use reviewed lyrics'}</button></div>
+   <div className="action-row">{!readOnly && <button className="button" disabled={busy || slides.length>=200} onClick={()=>{setSlides([...slides,'']);setSelected(slides.length);}}>Add lyric slide</button>}<button className="button" disabled={busy} onClick={()=>{setRaw(slides.join('\n\n'));setSlides(null);}}>Back to full lyrics</button><button className="button button-primary" disabled={busy} onClick={()=>void confirm()}>{confirmLabel??(readOnly?'Add reviewed song to service':'Use reviewed lyrics')}</button></div>
   </>}
- </section>;
+ </Modal>;
 }

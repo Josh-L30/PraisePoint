@@ -1,0 +1,25 @@
+{
+  "appBuild": "cea83b78ec4d12beaa2ba9a89b13b248877f3a85cacb9fa6dcda8629f778c58d",
+  "fiveCategories": true,
+  "bothLyricMethods": true,
+  "slides": 12,
+  "songs": 2,
+  "freeformAndImageSaved": true,
+  "knownEditStalesOldCopy": true,
+  "productionHeadersApplied": true,
+  "renderTiming": {
+    "frames": 180,
+    "medianMs": 16.699999999999818,
+    "p95Ms": 16.799999999999272,
+    "over50ms": 0,
+    "conditions": "Headless local Chromium operator glass while verified audience background plays; no CPU throttling; not church-hardware proof"
+  },
+  "cspViolations": [],
+  "fullDisconnectedBrowserRestart": true,
+  "cloudRequests": 0,
+  "sameBackgroundElementAndTimePreserved": true,
+  "pauseResumeBackgrounds": true,
+  "blackoutAndStandaloneFlags": true,
+  "allSlideWordsReachedAudience": true,
+  "physicalProjectorAndAudibleSound": false
+}

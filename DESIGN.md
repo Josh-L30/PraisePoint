@@ -16,7 +16,7 @@ Local evidence: .superpowers/brainstorm/908-1793005996/content/worship-workspace
 | Backdrop | #B6D9D7 base | Layered teal landscape behind glass |
 | Glass fill | rgba(255,255,255,0.27) starting point | Increase opacity as needed for readability |
 
-Figtree is the approved free substitute for Proxima Nova; self-host with OFL for offline reliability. Body 400, controls 600, headings 650–700; interface scale 12/14/16/20/28/34 px. Do not reuse CCF logo/Adobe kit/imagery. “Gather” and the original preview cross are working branding, awaiting a final church name/logo.
+Figtree is the approved free substitute for Proxima Nova; self-host with OFL for offline reliability. Body 400, controls 600, headings 650–700; interface scale 12/14/16/20/28/34 px. User instruction on 2026-10-29 replaces the working name/cross with PraisePoint and the official locally cached CCF logo in our teal. Do not reuse the Adobe kit or unrelated CCF imagery.
 
 ## Material and layout
 
@@ -24,7 +24,7 @@ Make glass visible: floating rounded sidebar/top bar, tinted translucent fills, 
 
 Projected slides remain clear/opaque and contain no app glass/account details. CSS interprets Apple's material; it does not reproduce native optical refraction.
 
-Dashboard prioritizes next service/readiness/recent decks. Desktop has approximately 242 px collapsing sidebar; collapsed items retain accessible names/tooltips. Editor uses thumbnails/stage/inspector; inspector moves below at constrained widths. Presenter uses a dark operator surface, current/next previews, thumbnails, and obvious Next.
+Dashboard prioritizes next service/readiness/recent decks. Desktop has approximately 220 px compact collapsing sidebar; collapsed items retain accessible names/tooltips. Editor uses thumbnails/stage/inspector; inspector moves below at constrained widths. Presenter uses a dark operator surface, current/next previews, thumbnails, and obvious Next.
 
 Small screens use a drawer and show desktop requirements for editing/presentation. The preview's narrow icon rail is exploratory, not the final mobile contract.
 
@@ -37,3 +37,7 @@ Initialization reveal lasts only as long as real work needs; no forced delay. Ap
 Target WCAG 2.2 AA: composited contrast, focus, accessible names, keyboard order/drag alternatives, non-color status, and opaque reduced-transparency/unsupported-blur fallbacks. Keep touch targets usable. Avoid nested expensive blur; test on the church laptop and reduce complexity if needed.
 
 Lyric templates use large text, strong contrast, short lines, and safe margins, with overflow warnings. Check readability from congregation distance during rehearsal; laptop screenshots alone do not establish it.
+
+## PraisePoint refinement — 2026-10-29
+
+User-selected name: PraisePoint. Use the CCF mark sourced from https://www.ccf.org.ph/wp-content/uploads/2020/07/CCF-Logo-36x36-1.svg (linked in the official site DOM), kept locally with its original vector geometry and visible fills recolored to #007887. No logo tracing or AI recreation. Preserve Figtree and the teal glass identity. Compact laptop navigation, restrained login scale, 150ms centered native dialogs, and accessible icon file controls are the new UI rules. Internal gather-* cache/storage/protocol identifiers remain stable for compatibility.

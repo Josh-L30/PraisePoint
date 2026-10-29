@@ -1,0 +1,12 @@
+{
+  "fullBrowserClosedBeforeRestart": true,
+  "networkDisabledBeforeNavigation": true,
+  "expiredCachedCloudSession": true,
+  "cloudRequests": 0,
+  "imageNaturalWidth": 32,
+  "videoBytes": 1128375,
+  "backgroundSeconds": 0.241712,
+  "standalonePlayed": true,
+  "appFontAndAllMediaRechecked": true,
+  "physicalProjectorChecked": false
+}

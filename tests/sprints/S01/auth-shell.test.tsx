@@ -20,11 +20,11 @@ describe('workspace shell', () => {
     const menu = screen.getByRole('button', { name: 'Open navigation' });
     await userEvent.click(menu);
     expect(screen.getByRole('button', { name: 'Close navigation' })).toHaveAttribute('aria-expanded', 'true');
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Gather overview' })).toHaveFocus());
+    await waitFor(() => expect(screen.getByRole('link', { name: 'PraisePoint overview' })).toHaveFocus());
     await userEvent.tab({ shift: true });
     expect(screen.getByRole('button', { name: 'Sign out' })).toHaveFocus();
     await userEvent.tab();
-    expect(screen.getByRole('link', { name: 'Gather overview' })).toHaveFocus();
+    expect(screen.getByRole('link', { name: 'PraisePoint overview' })).toHaveFocus();
     await userEvent.keyboard('{Escape}');
     expect(screen.getByRole('button', { name: 'Open navigation' })).toHaveAttribute('aria-expanded', 'false');
     expect(menu).toHaveFocus();

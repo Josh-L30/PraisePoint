@@ -2,7 +2,7 @@ export type ShellEntry={url:string;integrity?:string;revision?:string|null};
 export function isOfflineNavigation(url:URL,origin:string):boolean{return url.origin===origin && !/^\/(?:auth\/callback|api|rest|functions|storage|oauth)(?:\/|$)/.test(url.pathname);}
 export function validateShellEntries(entries:ShellEntry[]):boolean{
  if(!entries.length || entries.length>512 || new Set(entries.map(entry=>entry.url)).size!==entries.length)return false;
- if(entries.some(entry=>!(/^(?:index\.html|assets\/[a-zA-Z0-9_.-]+\.(?:js|css)|fonts\/Figtree\.ttf|icon\.svg|manifest\.webmanifest)$/.test(entry.url)) || !/^sha256-[A-Za-z0-9+/]{43}=$/.test(entry.integrity??'')))return false;
+ if(entries.some(entry=>!(/^(?:index\.html|assets\/[a-zA-Z0-9_.-]+\.(?:js|css)|fonts\/Figtree\.ttf|(?:icon|ccf-logo)\.svg|manifest\.webmanifest)$/.test(entry.url)) || !/^sha256-[A-Za-z0-9+/]{43}=$/.test(entry.integrity??'')))return false;
  return entries.some(entry=>entry.url==='index.html') && entries.some(entry=>entry.url.endsWith('.js')) && entries.some(entry=>entry.url.endsWith('.css')) && entries.some(entry=>entry.url==='fonts/Figtree.ttf');
 }
 

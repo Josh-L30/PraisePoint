@@ -8,3 +8,6 @@ export function forgetDraft(profileId: string,deckId?: string) {
   if (deckId) drafts.delete(key(profileId,deckId));
   else for (const entry of drafts.keys()) if (entry.startsWith(profileId + ':')) drafts.delete(entry);
 }
+export function forgetWorkspaceDrafts(profileId:string,workspaceId:string){
+  for(const [entry,draft] of drafts)if(entry.startsWith(profileId+':') && draft.document.workspaceId===workspaceId)drafts.delete(entry);
+}

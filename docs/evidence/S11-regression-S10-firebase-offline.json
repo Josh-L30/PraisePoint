@@ -1,0 +1,15 @@
+{
+  "officialEmulator": true,
+  "origin": "http://127.0.0.1:59322",
+  "cloudSetupUsesSyntheticFixtures": true,
+  "actualPersistentBrowserRestart": true,
+  "disconnectedBeforeNavigation": true,
+  "preparedImageAndVideo": true,
+  "audienceInitiallyBlack": true,
+  "manualSend": true,
+  "backgroundClockAdvanced": true,
+  "cloudRequests": 0,
+  "cspViolations": [],
+  "physicalEquipment": false,
+  "publicDeployment": false
+}

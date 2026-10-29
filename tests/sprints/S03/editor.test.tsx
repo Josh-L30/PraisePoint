@@ -44,7 +44,8 @@ it('blocks navigation and account changes until the volunteer decides about thei
   const confirm = vi.spyOn(window,'confirm').mockReturnValue(false);
   editor();
   await userEvent.type(await screen.findByRole('textbox',{ name: 'Lyrics' }),' More words');
-  expect(mayChangeAccount()).toBe(false); expect(confirm).toHaveBeenCalledOnce();
+  let accountDecision!:ReturnType<typeof mayChangeAccount>;await act(async()=>{accountDecision=mayChangeAccount();});
+  await userEvent.click(await screen.findByRole('button',{name:'Cancel'}));expect(await accountDecision).toBe(false);expect(confirm).not.toHaveBeenCalled();
   await userEvent.click(screen.getByRole('link',{ name: 'Back to presentations' }));
   expect(await screen.findByRole('alertdialog')).toHaveTextContent('Leave without saving');
   await userEvent.click(screen.getByRole('button',{ name: 'Keep editing' }));
@@ -88,7 +89,7 @@ it('waits for a pending save before leaving or changing account',async () => {
   editor({ saveDeck: document => { saved=document; return new Promise(resolve => { complete=resolve; }); } });
   await userEvent.type(await screen.findByRole('textbox',{ name: 'Lyrics' }),' Pending');
   await userEvent.click(screen.getByRole('button',{ name: 'Save presentation' }));
-  expect(mayChangeAccount()).toBe(false);
+  expect(await mayChangeAccount()).toBe(false);
   await userEvent.click(screen.getByRole('link',{ name: 'Back to presentations' }));
   expect(await screen.findByRole('alertdialog')).toHaveTextContent('still finishing');
   expect(screen.getByRole('button',{ name: 'Discard changes and leave' })).toBeDisabled();

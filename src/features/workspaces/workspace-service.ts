@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { failure, type Result } from '../../domain/result';
 import { LIMITS, INVITATION_TOKEN_PATTERN } from '../../domain/limits';
 import { supabase } from '../../lib/supabase';
-export type Workspace = { id: string; kind: 'personal' | 'church'; name: string; ownerId: string; role: 'owner' | 'member' };
+export type Workspace = { id: string; kind: 'personal' | 'church'; name: string; ownerId: string; role: 'owner' | 'member';deletionPending?:boolean };
 export type TeamMember = { userId: string; displayName: string; avatarUrl: string | null; role: 'owner' | 'member' };
 export type Invitation = { id: string; email: string; expiresAt: string; acceptedAt: string | null; revokedAt: string | null };
 export type WorkspaceService = {
@@ -11,6 +11,8 @@ export type WorkspaceService = {
   team(workspaceId: string): Promise<Result<TeamMember[]>>;
   invitations(workspaceId: string): Promise<Result<Invitation[]>>;
   createChurch(name: string): Promise<Result<string>>;
+  beginDeleteChurch(workspaceId:string,expectedName:string):Promise<Result<void>>;
+  deleteChurch(workspaceId:string,expectedName:string):Promise<Result<void>>;
   inviteMember(workspaceId: string, email: string): Promise<Result<{ url: string; expiresAt: string }>>;
   acceptInvite(token: string): Promise<Result<string>>;
   revokeInvite(workspaceId: string, invitationId: string): Promise<Result<void>>;
@@ -27,7 +29,7 @@ export function createWorkspaceService(client: SupabaseClient | null, origin: st
   const avatar = z.url().refine(value => value.startsWith('https://')).nullable();
   const teamSchema = z.array(z.object({ userId: id, displayName: z.string().min(1).max(LIMITS.nameCharacters), avatarUrl: avatar, role }).strict());
   const membershipSchema = z.array(z.object({ role, workspaces: z.object({
-    id, kind: z.enum(['personal','church']), name: z.string().min(1).max(LIMITS.nameCharacters), owner_id: id,
+    id, kind: z.enum(['personal','church']), name: z.string().min(1).max(LIMITS.nameCharacters), owner_id: id,deletion_pending:z.boolean().optional().default(false),
   }).strict() }).strict());
   const invitationSchema = z.array(z.object({ id, normalized_email: z.string().email(), expires_at: date,
     accepted_at: date.nullable(), revoked_at: date.nullable() }).strict());
@@ -65,15 +67,28 @@ export function createWorkspaceService(client: SupabaseClient | null, origin: st
       return error ? serverFailure(error) : { ok: true, value: undefined };
     } catch { return serverFailure(null); }
   }
+  async function deleteWorkspace(workspaceId:string,expectedName:string,beginOnly=false):Promise<Result<void>>{
+      const name=nameSchema.safeParse(expectedName);if(!id.safeParse(workspaceId).success || !name.success)return invalidId();if(!client)return unconfigured();
+      const responseSchema=z.discriminatedUnion('ok',[
+        z.object({ok:z.literal(true),value:z.object({complete:z.boolean()}).strict()}).strict(),
+        z.object({ok:z.literal(false),error:z.object({code:z.enum(['UNAUTHENTICATED','FORBIDDEN','VALIDATION','CONFLICT','CAPACITY','NOT_FOUND','UNSUPPORTED','STORAGE_UNAVAILABLE','NETWORK']),message:z.string().min(1).max(1000)}).strict()}).strict(),
+      ]);
+      try{for(let batch=0;batch<500;batch++){
+        const {data,error}=await client.functions.invoke('media-upload',{headers:{'x-media-action':beginOnly?'begin-delete-workspace':'delete-workspace'},body:{workspaceId,expectedName:name.data}});let payload:unknown=data;
+        if(error){if(error.context instanceof Response)payload=await error.context.json();else return serverFailure(null);}
+        const parsed=responseSchema.safeParse(payload);if(!parsed.success)return serverFailure(null);if(!parsed.data.ok)return parsed.data;if(beginOnly || parsed.data.value.complete)return {ok:true,value:undefined};
+      }return failure('NETWORK','Deletion is paused. Resume deletion from Church workspace to finish the remaining files.');}
+      catch{return serverFailure(null);}
+  }
   return {
     async list() {
       if (!client) return unconfigured();
       try {
-        const { data, error } = await client.from('workspace_members').select('role,workspaces(id,kind,name,owner_id)').order('created_at',{ ascending: true });
+        const { data, error } = await client.from('workspace_members').select('role,workspaces(id,kind,name,owner_id,deletion_pending)').order('created_at',{ ascending: true });
         if (error) return serverFailure(error);
         const parsed = verified(membershipSchema,data);
         return parsed.ok ? { ok: true, value: parsed.value.map(({ role: memberRole, workspaces: w }) => ({
-          id: w.id, kind: w.kind, name: w.name, ownerId: w.owner_id, role: memberRole,
+          id: w.id, kind: w.kind, name: w.name, ownerId: w.owner_id, role: memberRole,...(w.deletion_pending?{deletionPending:true}:{}),
         })).sort((a,b) => Number(b.kind==='personal')-Number(a.kind==='personal') || a.name.localeCompare(b.name)) } : parsed;
       } catch { return serverFailure(null); }
     },
@@ -128,6 +143,8 @@ export function createWorkspaceService(client: SupabaseClient | null, origin: st
       return id.safeParse(workspaceId).success && id.safeParse(newOwnerId).success
         ? change('transfer_workspace_owner',{ p_workspace_id: workspaceId, p_new_owner_id: newOwnerId }) : invalidId();
     },
+    beginDeleteChurch:(workspaceId,expectedName)=>deleteWorkspace(workspaceId,expectedName,true),
+    deleteChurch:(workspaceId,expectedName)=>deleteWorkspace(workspaceId,expectedName),
     async leaveChurch(workspaceId) {
       return id.safeParse(workspaceId).success ? change('leave_church_workspace',{ p_workspace_id: workspaceId }) : invalidId();
     },

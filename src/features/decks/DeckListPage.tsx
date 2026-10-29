@@ -1,3 +1,4 @@
+import {Modal} from '../../components/Modal';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Presentation, Plus, Copy, Trash2, ArrowRight } from 'lucide-react';
@@ -64,7 +65,7 @@ export function DeckListPage({ workspace, profileId, workspaces, service:provide
   return <div className="page-content deck-library" aria-busy={busy}>
     {guard}<header className="page-heading library-heading"><div><h1>Words with purpose.</h1><p>Your presentations, ready for thoughtful preparation.</p></div>
       <button className="button button-primary desktop-edit-only" disabled={busy} onClick={() => setChoosing(value => !value)}><Plus size={17} />New presentation</button></header>
-    {error && <p className="form-message form-error" role="alert">{error}</p>}
+    {error && !action && <p className="form-message form-error" role="alert">{error}</p>}
     <p className="desktop-edit-note">Use a laptop or desktop to create and edit presentations. Open an existing presentation to preview it here.</p>
     {choosing && <section className="template-panel glass desktop-edit-only"><div className="card-heading"><h2>Start with a clear layout.</h2><button className="text-button" disabled={busy} onClick={() => setChoosing(false)}>Close templates</button></div><p>Choose a starting point. Every word, color and text style is editable.</p><TemplatePicker disabled={busy} onSelect={category => void create(category)} /></section>}
     {loading ? <p role="status">Loading presentations…</p> : error && !items.length ? <button className="button" onClick={() => setVersion(value => value+1)}>Try again</button>
@@ -77,12 +78,12 @@ export function DeckListPage({ workspace, profileId, workspaces, service:provide
             {(workspace.role==='owner' || deck.createdBy===profileId) && <button className="text-button" disabled={busy} onClick={() => setAction({ kind: 'delete',deck })}><Trash2 size={14} />Delete</button>}</div>
         </div>
       </article>)}</div>}
-    {action && <section className="confirmation-panel library-confirmation" role="region" aria-label={action.kind==='copy' ? 'Copy presentation' : 'Delete presentation'}>
-      <h2>{action.kind==='copy' ? 'Create a separate copy?' : 'Delete this presentation?'}</h2><p><strong><bdi>{action.deck.title}</bdi></strong></p>
+    {action && <Modal className="confirmation-panel library-confirmation" role="dialog" aria-label={action.kind==='copy' ? 'Copy presentation' : 'Delete presentation'} onCancel={()=>setAction(null)} busy={busy}>
+      <h2>{action.kind==='copy' ? 'Create a separate copy?' : 'Delete this presentation?'}</h2>{error && <p className="form-error" role="alert">{error}</p>}<p><strong><bdi>{action.deck.title}</bdi></strong></p>
       {action.kind==='copy' ? <><label className="field-label" htmlFor="copy-destination">Copy to workspace</label><select className="field-input" id="copy-destination" value={destination} disabled={busy} onChange={event => setDestination(event.target.value)}>{workspaces.map(w => <option value={w.id} key={w.id}>{w.name}{w.kind==='church' ? ' · Shared' : ' · Private'}</option>)}</select><p>Copying to a church makes this separate copy available to its volunteers. The original stays where it is. Media must belong to the destination workspace.</p></>
         : <p>This removes the saved presentation. Presentations referenced by a service must be removed from that service first.</p>}
       <div className="action-row"><button className="button button-primary" disabled={busy} onClick={() => void confirmAction()}>{busy ? 'Working…' : action.kind==='copy' ? 'Create separate copy' : 'Confirm presentation deletion'}</button><button className="button" disabled={busy} onClick={() => setAction(null)}>Cancel</button></div>
-    </section>}
+    </Modal>}
     {!loading && (page>0 || hasMore) && <nav className="library-pagination" aria-label="Presentation pages"><button className="button" disabled={page===0 || busy} onClick={() => setPage(value => value-1)}>Previous page</button><span>Page {page+1}</span><button className="button" disabled={!hasMore || busy} onClick={() => setPage(value => value+1)}>Next page</button></nav>}
     <footer className="workspace-footer">Online saves are authoritative. Prepare a service for offline use when the presentation tools are ready.</footer>
   </div>;

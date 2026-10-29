@@ -1,4 +1,4 @@
-# Operating Gather on the free pilot
+# Operating PraisePoint on the free pilot
 
 ## Responsibility and account inventory
 
@@ -11,7 +11,7 @@ Keep three separate responsibilities: the church workspace owner manages invitat
 1. Use the agreed laptop, exact production origin and browser profile. Plug in power; use current desktop Chrome/Edge and the projector's extended-display mode.
 2. Save all songs/presentations/service ordering and review the service. Check long lyrics/overflow warnings and native video playback, including audio tracks where needed.
 3. Prepare for offline and Verify prepared copy while online. Check for known changes and keep the verified previous version if refresh fails. Ready is a point-in-time local check; recheck after device/browser storage changes.
-4. Close unrelated Gather tabs before applying an app update. Apply updates and reverify before the service, while the operator is idle. Do not clear application storage or sign out during service.
+4. Close unrelated PraisePoint tabs before applying an app update. Apply updates and reverify before the service, while the operator is idle. Do not clear application storage or sign out during service.
 5. Disconnect the network, fully close/reopen the browser to the bookmarked /offline page and rehearse. Open projector, move it, enter fullscreen with F, then Send current slide. Check actual room-distance readability and audible speaker routing.
 6. Keep the original image/video files and exported service JSON on a second storage device. A prepared browser cache is not your portable backup.
 
@@ -59,6 +59,12 @@ Update handoff detail: protocol 2 writes a small persistent app-only guard befor
 
 Account and edit safety after the software review: deck editors and full-window previews hold runtime protection from before content loads until they close. Close these windows before requesting an app update or replacing prepared copies. Account transitions share a per-origin native lock and recheck the current identity before device-profile changes. Sign-out also retains a persistent access block if cleanup or token removal fails; choose Continue with Google to retry cleanup before starting a new sign-in. Reloading is not a bypass. Keep original files because a completed sign-out deliberately removes local copies.
 
-Native update recovery: a Chromium session can delay activation after window/lock activity. An accepted update now stops waiting after 20 seconds and tells the operator to close all Gather windows and reopen. The durable guard continues to refuse new presentation/preparation until the new worker completes. Close operator/projector/editor windows, fully quit the browser, reopen the same profile/origin and verify the saved copy. Do this before the service while updates are idle; do not clear prepared data as an update remedy. Normal automatic handoff and full-process recovery have separate browser checks.
+Native update recovery: a Chromium session can delay activation after window/lock activity. An accepted update now stops waiting after 20 seconds and tells the operator to close all PraisePoint windows and reopen. The durable guard continues to refuse new presentation/preparation until the new worker completes. Close operator/projector/editor windows, fully quit the browser, reopen the same profile/origin and verify the saved copy. Do this before the service while updates are idle; do not clear prepared data as an update remedy. Normal automatic handoff and full-process recovery have separate browser checks.
 
 Hosting choice supersedes the earlier Cloudflare proposal. Firebase project console: https://console.firebase.google.com/project/gather-ccf-presentations/overview. Spark was verified on 2026-10-29; no billing was linked in setup. Check the selected project’s actual Hosting quotas before publication, retain Spark and never enable Blaze/billing without new authorization. Firebase account/project administration is now included in the requester’s provider ownership. The earlier Cloudflare limits above are historical research, not this deployment’s allowance.
+
+## PraisePoint workspace deletion
+
+Only the church owner can delete a church workspace from Church workspace. Type its exact name in the centered confirmation. This permanently removes its presentations, songs, service plans, invitations, memberships and cloud images. Personal content and original files on the filesystem remain separate. Finish or reclaim pending uploads/copies first.
+
+The server authorizes and freezes the workspace before this browser removes local workspace copies. Cloud bytes are removed through Storage before metadata/quota and the workspace are finalized. A failure leaves a locked, resumable workspace; use Resume workspace deletion. Do not manually delete Storage metadata or quota rows. Copies on other disconnected devices cannot be remotely erased. Retain independent originals/backups before confirming.

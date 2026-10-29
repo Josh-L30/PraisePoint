@@ -1,0 +1,17 @@
+{
+  "fixture": true,
+  "laptopSidebar": [
+    {
+      "height": 742,
+      "scrollHeight": 742,
+      "transition": "all",
+      "transitionDuration": "0s"
+    },
+    {
+      "height": 574,
+      "scrollHeight": 574,
+      "transition": "all",
+      "transitionDuration": "0s"
+    }
+  ]
+}

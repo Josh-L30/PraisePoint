@@ -1,0 +1,25 @@
+{
+  "project": "tnrmotwiarlpknamxoyp",
+  "migration": "20261029122349_workspace_deletion",
+  "test": "supabase/tests/S11_workspace_deletion.connector.sql",
+  "testSha256": "08ba300b9f7a4a35b899695cc4235fe611f03270495a7e20cb2d845fe23e110c",
+  "liveRollbackSuitePassed": true,
+  "checks": [
+    "exact-name/Google-owner authorization",
+    "personal/member/outsider rejection",
+    "pending uploads and cross-workspace copies block begin",
+    "scoped graph removal and frozen writes",
+    "retryable begin/media finalization",
+    "Storage object metadata prevents premature quota release",
+    "baseline quota and personal content retained"
+  ],
+  "postTestSyntheticUsers": 0,
+  "postTestSyntheticWorkspaces": 0,
+  "anonymousExecute": {
+    "begin": false,
+    "batch": false,
+    "finish": false
+  },
+  "existingChurchDataDeleted": false,
+  "actualCloudObjectDeletionPerformedThisSprint": false
+}

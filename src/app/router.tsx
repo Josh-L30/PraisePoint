@@ -24,5 +24,5 @@ export const router = createBrowserRouter([
     { path: 'w/:workspaceId/services/:serviceId', element: <ServicePlans /> },
     { path: 'w/:workspaceId/:section', element: <FeaturePendingPage /> },
   ] },
-  { path: '*', element: <main className="center-page"><section className="glass message-panel"><h1>Page not found.</h1><a className="button" href="/">Return to Gather</a></section></main> },
+  { path: '*', element: <main className="center-page"><section className="glass message-panel"><h1>Page not found.</h1><a className="button" href="/">Return to PraisePoint</a></section></main> },
 ]);

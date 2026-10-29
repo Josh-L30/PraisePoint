@@ -4,7 +4,7 @@ import {writeFile,mkdtemp} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 test.setTimeout(150000);
 test('production preflight: complete image/video service survives a disconnected full browser restart',async()=>{
- const root=resolve('.superpowers/sdd/2026-10-26-church-presentations'),directory=await mkdtemp(join(root,'offline-browser-')),baseURL='http://127.0.0.1:4173';let context=await chromium.launchPersistentContext(directory,{headless:true,baseURL,viewport:{width:1440,height:900}});
+ const root=resolve('.superpowers/sdd/2026-10-29-praisepoint-usability'),directory=await mkdtemp(join(root,'offline-browser-')),baseURL='http://127.0.0.1:4173';let context=await chromium.launchPersistentContext(directory,{headless:true,baseURL,viewport:{width:1440,height:900}});
  try{
   const page=context.pages()[0],{snapshot,clipBytes}=await prepareOfflineFixture(page);await page.getByRole('link',{name:'Open prepared services',exact:true}).click();await expect(page.getByRole('heading',{name:snapshot.title,exact:true})).toBeVisible();
   await page.evaluate(()=>{for(const key of Object.keys(localStorage)){if(/^sb-.*-auth-token$/.test(key)){const session=JSON.parse(localStorage.getItem(key)!);session.expires_at=1;session.expires_in=0;localStorage.setItem(key,JSON.stringify(session));}}});

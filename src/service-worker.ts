@@ -35,10 +35,10 @@ self.addEventListener('message',event=>{
  if(data.type==='GATHER_VERIFY_SHELL')event.waitUntil(verifyShell().then(result=>port.postMessage(result)).catch(()=>port.postMessage({ok:false,reason:'The app cache could not be verified.'})));
  if(data.type==='GATHER_BUILD')port.postMessage({ok:true,build:APP_BUILD,updateProtocol:UPDATE_PROTOCOL});
  if(data.type==='GATHER_ACTIVATE_IF_IDLE')event.waitUntil((async()=>{
-  if(data.updateProtocol!==UPDATE_PROTOCOL){port.postMessage({ok:false,reason:'Close all Gather windows and reopen the app to complete this compatibility update.'});return;}
+  if(data.updateProtocol!==UPDATE_PROTOCOL){port.postMessage({ok:false,reason:'Close all PraisePoint windows and reopen the app to complete this compatibility update.'});return;}
   const source=event.source;if(!self.navigator.locks || !source || !('url' in source) || new URL(source.url).origin!==self.location.origin || !hasUpdateProof((await self.navigator.locks.query()).held??[],RUNTIME_LOCK,data.nonce)){port.postMessage({ok:false,reason:'The requesting window does not hold the exclusive update lease.'});return;}
   const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-  if(!(await Promise.all(clients.map(askIdle))).every(Boolean)){port.postMessage({ok:false,reason:'Another Gather window is busy or could not confirm its state. Close it or finish its work before updating.'});return;}
+  if(!(await Promise.all(clients.map(askIdle))).every(Boolean)){port.postMessage({ok:false,reason:'Another PraisePoint window is busy or could not confirm its state. Close it or finish its work before updating.'});return;}
   const after=await self.clients.matchAll({type:'window',includeUncontrolled:true});if(after.length!==clients.length || after.some(client=>!clients.some(before=>before.id===client.id)) || !hasUpdateProof((await self.navigator.locks.query()).held??[],RUNTIME_LOCK,data.nonce)){port.postMessage({ok:false,reason:'The open windows or update lease changed. Retry when they are idle.'});return;}
   await beginUpdate(APP_BUILD,data.nonce);
   port.postMessage({ok:true,handoff:UPDATE_PROTOCOL});

@@ -40,7 +40,8 @@ Record the date, operator, laptop model/OS, installed Chrome or Edge version, pr
 ## Publication gate
 
 - [x] User explicitly authorizes frontend publication and selects the free hosting account/address. No paid domain/trial/add-on or push/merge is implied by this checklist.
-- [ ] Final church name/logo and privacy/retention expectations accepted. Gather is working branding.
+- [x] User selected PraisePoint and the official recolored CCF mark on 2026-10-29.
+- [ ] Pilot privacy/retention expectations accepted.
 - [ ] Provider dashboard confirms Free plans, usage and billing settings. Record human owner and recovery methods privately.
 - [ ] Google consent/test-user configuration permits the intended pilot volunteers. Publishing the frontend alone does not change Google Testing restrictions.
 - [x] Keep the known-good Git commit/dist artifact/build ID, migration list and a verified offline service. Preserve original files/metadata backups.

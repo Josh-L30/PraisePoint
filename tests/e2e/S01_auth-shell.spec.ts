@@ -62,7 +62,7 @@ test('mobile workspace drawer traps keyboard focus and returns focus on Escape (
   await expect(menu).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await menu.click();
-  const first = page.getByRole('link', { name: 'Gather overview' });
+  const first = page.getByRole('link', { name: 'PraisePoint overview' });
   await expect(page.getByRole('button', { name: 'Close navigation', exact: true })).toHaveAttribute('aria-expanded', 'true');
   const drawerState = await page.evaluate(() => ({
     focus: document.activeElement?.outerHTML,

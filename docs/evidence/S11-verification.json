@@ -1,0 +1,50 @@
+{
+  "appBuild": "cea83b78ec4d12beaa2ba9a89b13b248877f3a85cacb9fa6dcda8629f778c58d",
+  "unit": {
+    "files": 73,
+    "passed": 281,
+    "failed": 0,
+    "seconds": 174.8
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 1,
+    "note": "Development-only Fast Refresh warning: Modal and its confirmation hook share a module."
+  },
+  "browser": {
+    "distinctCasesVerified": 52,
+    "fullRun": {
+      "passed": 49,
+      "failed": 3,
+      "minutes": 7.5
+    },
+    "focusedRerun": {
+      "passed": 3,
+      "failed": 0,
+      "minutes": 1.3
+    },
+    "singleCleanFullRunClaimed": false,
+    "notes": [
+      "Initial official emulator startup exceeded 45 seconds; routing check passed on rerun.",
+      "Whole-service fixture updated to enter metadata after closing the lyric modal.",
+      "One startup runtime-protection refusal did not reproduce on rerun; no runtime guard was weakened and no startup fix is claimed."
+    ]
+  },
+  "review": {
+    "freshWholeBranchReviews": 1,
+    "critical": 0,
+    "important": 1,
+    "importantFixed": 1,
+    "fix": "Authorize/freeze on the server before purging browser-local workspace data."
+  },
+  "backend": {
+    "migration": "20261029122349_workspace_deletion",
+    "edgeVersion": 3,
+    "liveRollbackSuitePassed": true,
+    "ownedOriginsPreflight": 204,
+    "foreignOrigin": 403,
+    "unauthenticatedBegin": 401,
+    "existingChurchDataDeleted": false
+  },
+  "hardwareVerified": false
+}

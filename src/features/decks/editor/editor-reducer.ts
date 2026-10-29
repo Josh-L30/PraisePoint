@@ -18,6 +18,7 @@ export type EditorCommand =
   | {type:'add-image';asset:MediaAsset} | {type:'set-media-background';asset:MediaAsset} | {type:'set-standalone-video';asset:MediaAsset|null} | {type:'set-image-fit';id:string;fit:'contain'|'cover'}
   | { type: 'add-text' } | { type: 'delete-element'; id: string }
   | { type: 'add-slide'; category: SlideCategory } | { type: 'duplicate-slide'; id: string }
+  | { type:'append-lyrics';slides:string[] }
   | { type: 'delete-slide'; id: string } | { type: 'reorder-slide'; id: string; toIndex: number }
   | { type: 'set-title'; title: string } | { type: 'set-background'; color: string }
   | { type: 'begin-gesture' | 'end-gesture' | 'cancel-gesture' | 'undo' | 'redo' }
@@ -121,6 +122,11 @@ export function reduceEditor(state: EditorState,command: EditorCommand): EditorS
     if (!slide.elements.some(element => element.id===command.id)) return state;
     const elements=slide.elements.filter(element => element.id!==command.id);
     return changed(state,{ ...state.document,slides: state.document.slides.map(current => current.id===slide.id ? { ...current,elements } : current) },{ selectedElementId: state.selectedElementId===command.id ? elements[0]?.id ?? null : state.selectedElementId });
+  }
+  if(command.type==='append-lyrics'){
+    if(!command.slides.length || state.document.slides.length+command.slides.length>LIMITS.slidesPerDeck || command.slides.some(text=>typeof text!=='string' || !text.trim() || text.length>LIMITS.textCharacters || text.split('\n').length>4 || text.split('\n').some(line=>!line.trim())))return state;
+    const current=finishGesture(state),slides=command.slides.map(text=>{const slide=createTemplate('lyrics');slide.elements=slide.elements.map(element=>element.kind==='text'?{...element,text}:element);return slide;}),first=slides[0];
+    return changed(current,{...current.document,slides:[...current.document.slides,...slides]},{selectedSlideId:first.id,selectedElementId:first.elements[0]?.id??null});
   }
   if (command.type==='add-slide' || command.type==='duplicate-slide') {
     if (state.document.slides.length>=LIMITS.slidesPerDeck) return state;

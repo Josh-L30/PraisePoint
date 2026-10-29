@@ -22,7 +22,7 @@ async function protectAuth<T>(operation:()=>Promise<Result<T>>):Promise<Result<T
   try {
     if(import.meta.env.PROD){const lease=await acquireRuntimeActivity();if(!lease.ok)return lease;release=lease.value;}
     return await operation();
-  } catch {return failure('STORAGE_UNAVAILABLE','This browser could not protect the account change. Close idle Gather windows and retry.');}
+  } catch {return failure('STORAGE_UNAVAILABLE','This browser could not protect the account change. Close idle PraisePoint windows and retry.');}
   finally {release?.();idle();}
 }
 async function deviceTransition<T>(operation:()=>Promise<Result<T>>):Promise<Result<T>> {

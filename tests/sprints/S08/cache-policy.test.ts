@@ -8,6 +8,8 @@ it('serves app navigation while excluding OAuth callbacks, API paths and foreign
 });
 it('requires an exact bounded local shell with index, compiled code, styles and Figtree',()=>{
  const entries=[{url:'index.html',integrity:'sha256-'+'a'.repeat(43)+'='},{url:'assets/app.js',integrity:'sha256-'+'b'.repeat(43)+'='},{url:'assets/app.css',integrity:'sha256-'+'c'.repeat(43)+'='},{url:'fonts/Figtree.ttf',integrity:'sha256-'+'d'.repeat(43)+'='}];
+ expect(validateShellEntries([...entries,{url:'ccf-logo.svg',integrity:entries[0].integrity}])).toBe(true);
+ expect(validateShellEntries([...entries,{url:'another-logo.svg',integrity:entries[0].integrity}])).toBe(false);
  expect(validateShellEntries(entries)).toBe(true);expect(validateShellEntries(entries.slice(0,3))).toBe(false);expect(validateShellEntries([...entries,{url:'https://example.invalid/auth',integrity:entries[0].integrity}])).toBe(false);expect(validateShellEntries([...entries,entries[0]])).toBe(false);
 });
 

@@ -5,10 +5,10 @@ const base='/app/w/'+personalId;
 test('paste review, song master, service copy and independent edits work together',async({page})=>{
  test.setTimeout(90000);const state=await songServiceFixture(page);await page.setViewportSize({width:1440,height:1000});
  await page.goto(base+'/songs');await page.getByRole('button',{name:'New song',exact:true}).click();
- await page.getByRole('textbox',{name:'Song title'}).fill('A song for Sunday');await page.getByRole('textbox',{name:'Author / writer'}).fill('Test writer');
+
  await page.getByRole('button',{name:'Paste full lyrics'}).click();await page.getByRole('textbox',{name:'Full lyrics'}).fill('First line\nSecond line\n\nChorus\n\nChorus');
  await page.getByRole('button',{name:'Review slide breaks'}).click();await expect(page.getByRole('textbox',{name:'Slide 3 words'})).toHaveValue('Chorus');
- await page.getByRole('button',{name:'Use reviewed lyrics'}).click();await page.getByRole('button',{name:'Save song master',exact:true}).click();
+ await page.getByRole('button',{name:'Use reviewed lyrics'}).click();await page.getByRole('textbox',{name:'Song title'}).fill('A song for Sunday');await page.getByRole('textbox',{name:'Author / writer'}).fill('Test writer');await page.getByRole('button',{name:'Save song master',exact:true}).click();
  await expect(page.getByRole('button',{name:'Update song master'})).toBeDisabled();expect(state.songs.size).toBe(1);
  await page.getByRole('link',{name:'Service plans',exact:true}).click();await page.getByRole('button',{name:'New service',exact:true}).click();
  await page.getByRole('textbox',{name:'Service title'}).fill('Sunday worship');await page.getByLabel('Service date').fill('2026-11-01');
@@ -30,10 +30,10 @@ test('paste review, song master, service copy and independent edits work togethe
 });
 test('manual review retains conflicts and names service dependencies when deletion is blocked',async({page})=>{
  const state=await songServiceFixture(page);await page.goto(base+'/songs');await page.getByRole('button',{name:'New song',exact:true}).click();
- await page.getByRole('textbox',{name:'Song title'}).fill('Manual song');await page.getByRole('textbox',{name:'Type lyrics',exact:true}).fill('Words typed manually\n\nAnother stanza');
+ await page.getByRole('textbox',{name:'Type lyrics',exact:true}).fill('Words typed manually\n\nAnother stanza');
  await page.getByRole('button',{name:'Review slide breaks'}).click();await page.getByRole('textbox',{name:'Slide 2 words'}).fill('Reviewed stanza');
  await page.screenshot({path:'docs/evidence/S05-lyric-review.png',fullPage:true});await page.getByRole('button',{name:'Use reviewed lyrics'}).click();
- state.failSong=true;await page.getByRole('button',{name:'Save song master',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Your draft is still here');
+ await page.getByRole('textbox',{name:'Song title'}).fill('Manual song');state.failSong=true;await page.getByRole('button',{name:'Save song master',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Your draft is still here');
  await expect(page.getByRole('textbox',{name:'Song title'})).toHaveValue('Manual song');await page.getByRole('button',{name:'Save song master',exact:true}).click();
  await expect(page.getByRole('button',{name:'Update song master'})).toBeDisabled();expect([...state.songs.values()][0].lyrics).toContain('Reviewed stanza');
  const song=[...state.songs.values()][0];const deckId=crypto.randomUUID(),planId=crypto.randomUUID();

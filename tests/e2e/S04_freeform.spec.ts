@@ -46,6 +46,7 @@ test('keyboard controls, persistent field labels, layers and slide ordering work
   await page.getByRole('button',{ name: 'Add slide',exact: true }).click();
   await page.getByRole('button',{ name: 'Sermon',exact: true }).click();
   const sermon=page.getByRole('button',{ name: 'Slide 2: Sermon',exact: true });
+  await page.locator('.slide-rail').scrollIntoViewIfNeeded();
   await sermon.dragTo(page.getByRole('button',{ name: 'Slide 1: Lyrics',exact: true }));
   await expect(page.getByRole('button',{ name: 'Slide 1: Sermon',exact: true })).toBeVisible();
   await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();

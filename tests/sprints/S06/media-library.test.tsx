@@ -24,7 +24,7 @@ it('blocks account changes while an import is still being confirmed',async()=>{
  const service={...emptyAux,list:vi.fn().mockResolvedValue({ok:true,value:{items:[],hasMore:false}}),importLocalMedia:vi.fn(()=>new Promise(resolve=>{complete=resolve;}))};
  render(<RouterProvider router={createMemoryRouter([{path:'/',element:<MediaLibraryPage workspace={workspace} profileId={workspace.id} service={service as never}/>}])}/>);
  await user.upload(screen.getByLabelText('Choose media file'),new File(['video'],'worship.mp4',{type:'video/mp4'}));await user.click(screen.getByRole('button',{name:'Import media'}));await waitFor(()=>expect(service.importLocalMedia).toHaveBeenCalledOnce());
- expect(mayChangeAccount()).toBe(false);await act(async()=>complete({ok:false,error:{code:'NETWORK',message:'Not confirmed.'}}));
+ expect(await mayChangeAccount()).toBe(false);await act(async()=>complete({ok:false,error:{code:'NETWORK',message:'Not confirmed.'}}));
 });
 
 it('refreshes a missing thumbnail after its original file is verified',async()=>{

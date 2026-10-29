@@ -1,3 +1,4 @@
+import {BrandMark} from '../../components/BrandMark';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../auth/auth-context';
@@ -28,7 +29,7 @@ export function AcceptInvitePage({ service = workspaceService }: { service?: Wor
   }
   if (!invitation || auth.status==='loading') return <LoadingScreen />;
   return <main className="center-page"><section className="glass message-panel invitation-page">
-    <span className="brand-cross" aria-hidden="true" /><h1>Prepare together.</h1>
+    <BrandMark/><h1>Prepare together.</h1>
     <p>Join your church’s shared workspace using the Google account your owner invited.</p>
     {error && <p className="form-message form-error" role="alert">{error}</p>}
     {!invitation.ok ? <p role="alert">{invitation.error.message}</p> : auth.status==='authenticated' ? <>

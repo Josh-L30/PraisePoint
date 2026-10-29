@@ -1,0 +1,21 @@
+{
+  "beforeBuild": "cea83b78ec4d12beaa2ba9a89b13b248877f3a85cacb9fa6dcda8629f778c58d",
+  "afterBuild": "da332d41d899a0f6f61357ff99559b0d57552074b914a676e07b908b4b2f74b4",
+  "stageTimes": {
+    "buildFinished": 10817,
+    "prepared": 17032,
+    "idleRequest": 22674,
+    "idleChanged": 24209
+  },
+  "idleActivationMilliseconds": 1535,
+  "presentingDeferred": true,
+  "unknownClientDeferred": true,
+  "legacyClientDeferred": true,
+  "fenceClearedAfterActivation": true,
+  "oldCacheKeptWhileWaiting": true,
+  "backgroundContinuedDuringWaiting": true,
+  "idleClientsReloaded": true,
+  "oldCacheRemovedAfterIdleActivation": true,
+  "preparedLibraryRetained": true,
+  "previousPackageVerifiedAfterUpdate": true
+}

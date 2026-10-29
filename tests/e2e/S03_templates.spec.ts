@@ -26,8 +26,8 @@ test('failed save keeps the draft, conflict copy keeps it separately, and sign-o
   await page.goto(libraryPath + '/' + deckId);
   const field = page.getByRole('textbox',{ name: 'Lyrics',exact: true });
   await field.fill('My draft is kept');
-  page.once('dialog',dialog => dialog.dismiss());
   await page.getByRole('button',{ name: 'Sign out' }).click();
+  await page.getByRole('button',{name:'Cancel',exact:true}).click();
   await expect(field).toHaveValue('My draft is kept');
   state.failNextSave='network';
   await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();

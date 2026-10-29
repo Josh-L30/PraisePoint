@@ -11,7 +11,14 @@ export type PendingUpload={status:'pending';reservationId:string;objectKey:strin
 export type Reservation=PendingUpload|{status:'active';media:MediaAsset};
 export type WriteClaim={status:'claimed'}|{status:'busy'}|{status:'active';media:MediaAsset};
 export type AbortedUpload={status:'busy'}|{status:'aborting';reservationId:string;objectKey:string}|{status:'active';media:MediaAsset}|{status:'missing'};
+export const workspaceDeletionItemSchema=z.object({id:mediaId,location:z.enum(['cloud','local']),objectKey:z.string().min(1).max(512).nullable()}).strict().refine(item=>item.location==='cloud'?item.objectKey!==null:item.objectKey===null);
+export type WorkspaceDeletionItem=z.infer<typeof workspaceDeletionItemSchema>;
 export type MediaBackend={
+ workspaceDeletion?:{
+  begin(workspaceId:string,expectedName:string):Promise<MediaResult<null>>;
+  batch(workspaceId:string):Promise<MediaResult<WorkspaceDeletionItem[]>>;
+  finish(workspaceId:string):Promise<MediaResult<boolean>>;
+ };
  reserve(asset:MediaAsset,sourceId:string|null):Promise<MediaResult<Reservation>>;
  claim(id:string):Promise<MediaResult<WriteClaim>>;
  finalize(id:string,sha:string,width:number,height:number):Promise<MediaResult<MediaAsset>>;

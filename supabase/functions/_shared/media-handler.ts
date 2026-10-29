@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {cloudMediaKey,mediaAssetSchema,mediaId,type MediaAsset,type MediaBackend,type MediaErrorCode,type MediaResult} from './media-contract.ts';
+import {cloudMediaKey,mediaAssetSchema,mediaId,workspaceDeletionItemSchema,type MediaAsset,type MediaBackend,type MediaErrorCode,type MediaResult} from './media-contract.ts';
 type DecodedImage={mime:string;width:number;height:number};
 type Options={backend(authorization:string):Promise<MediaResult<MediaBackend>>;decode(bytes:Uint8Array,mime:string):Promise<MediaResult<DecodedImage>>;origins?:string[]};
 const statuses:Record<MediaErrorCode,number>={UNAUTHENTICATED:401,FORBIDDEN:403,VALIDATION:400,CONFLICT:409,CAPACITY:429,NOT_FOUND:404,UNSUPPORTED:400,STORAGE_UNAVAILABLE:503,NETWORK:503};
@@ -23,8 +23,9 @@ function sameAsset(data:unknown,expected:MediaAsset):MediaAsset{
 }
 async function jsonBody(request:Request):Promise<unknown>{try{return JSON.parse(new TextDecoder().decode(await readBody(request,4096)));}catch(error){if(error instanceof Fault)throw error;throw new Fault('VALIDATION','Invalid operation details.');}}
 const copySchema=z.object({mediaId,destinationWorkspaceId:mediaId,newMediaId:mediaId}).strict(),deleteSchema=z.object({mediaId}).strict();
+const workspaceDeleteSchema=z.object({workspaceId:mediaId,expectedName:z.string().trim().min(1).max(120)}).strict();
 export function createMediaHandler(options:Options):(request:Request)=>Promise<Response>{
- const origins=new Set(options.origins??['http://127.0.0.1:5173','http://localhost:5173','http://127.0.0.1:4173']);
+ const origins=new Set(options.origins??['http://127.0.0.1:5173','http://localhost:5173','http://127.0.0.1:4173','https://gather-ccf-presentations.web.app','https://gather-ccf-presentations.firebaseapp.com']);
  return async(request:Request)=>{
   const origin=request.headers.get('Origin'),headers:Record<string,string>={'Content-Type':'application/json','Vary':'Origin'};
   if(origin && origins.has(origin))headers['Access-Control-Allow-Origin']=origin;
@@ -38,6 +39,17 @@ export function createMediaHandler(options:Options):(request:Request)=>Promise<R
   let backend:MediaBackend|undefined,lease:{id:string;key:string;asset:MediaAsset}|undefined;
   try{
    backend=value(await options.backend(authorization));const action=request.headers.get('x-media-action')??'upload';
+   if(action==='delete-workspace' || action==='begin-delete-workspace'){
+    const parsed=workspaceDeleteSchema.safeParse(await jsonBody(request));if(!parsed.success)throw new Fault('VALIDATION','Confirm the exact church workspace name.');
+    const deletion=backend.workspaceDeletion;if(!deletion)throw new Fault('UNSUPPORTED','Workspace deletion is not available yet.');
+    const {workspaceId,expectedName}=parsed.data;value(await deletion.begin(workspaceId,expectedName));
+    if(action==='begin-delete-workspace')return response({ok:true,value:{complete:false}});
+    const batch=workspaceDeletionItemSchema.array().max(25).safeParse(value(await deletion.batch(workspaceId)));if(!batch.success)throw unknownFailure();
+    // Verify the complete manifest before touching any private object.
+    for(const item of batch.data)if(item.location==='cloud' && !new RegExp('^'+workspaceId+'/'+item.id+'/[0-9a-f]{64}\\.(png|jpg|webp)$').test(item.objectKey!))throw unknownFailure();
+    for(const item of batch.data){if(item.location==='cloud')value(await backend.remove(item.objectKey!));value(await backend.finishDelete(item.id));}
+    return response({ok:true,value:{complete:value(await deletion.finish(workspaceId))}});
+   }
    if(action==='delete'){
     const parsed=deleteSchema.safeParse(await jsonBody(request));if(!parsed.success)throw new Fault('VALIDATION','Choose a valid media item.');
     const deleting=value(await backend.beginDelete(parsed.data.mediaId));

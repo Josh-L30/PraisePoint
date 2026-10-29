@@ -1,0 +1,27 @@
+{
+  "CheckedAt": "2026-10-29T13:15:58.2089276Z",
+  "EdgeVersion": 3,
+  "Preflight": [
+    {
+      "Origin": "https://gather-ccf-presentations.web.app",
+      "Status": 204,
+      "AllowOrigin": [
+        "https://gather-ccf-presentations.web.app"
+      ]
+    },
+    {
+      "Origin": "https://gather-ccf-presentations.firebaseapp.com",
+      "Status": 204,
+      "AllowOrigin": [
+        "https://gather-ccf-presentations.firebaseapp.com"
+      ]
+    },
+    {
+      "Origin": "https://gather-ccf-presentations.web.app.attacker.invalid",
+      "Status": 403,
+      "AllowOrigin": null
+    }
+  ],
+  "UnauthenticatedBeginStatus": 401,
+  "ExistingChurchDataDeleted": false
+}
