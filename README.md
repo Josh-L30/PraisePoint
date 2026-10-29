@@ -1,6 +1,10 @@
-# Church presentation workspace
+# PraisePoint
 
-Website under development for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
+Church presentation workspace for volunteers to prepare readable slides and present from a laptop to a projector, online or offline.
+
+**Live website:** [PraisePoint](https://gather-ccf-presentations.web.app). **Private source repository:** [Josh-L30/PraisePoint](https://github.com/Josh-L30/PraisePoint).
+
+The S11 release includes CCF branding, compact glass navigation, centered confirmation dialogs, direct canvas text editing, song-break imports, fullscreen preview and resumable owner workspace deletion. Verification: 281 unit tests and 52 browser cases across runs, plus public offline restart and ten isolated cold starts. See the [current release and remaining limits](docs/sprints/S11.md).
 
 **Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans, media library and operator/projector presenter are implemented and verified. Google is the only enabled provider. The frontend is published at [gather-ccf-presentations.web.app](https://gather-ccf-presentations.web.app) on Firebase Spark; the authenticated media-upload backend remains in Supabase. Complete offline preparation and disconnected restart are implemented; portable metadata backups and exact-file recovery are implemented; physical rehearsal and release acceptance remain.
 
@@ -23,6 +27,10 @@ Use Vite to open this React/TypeScript project. VSCode's Live Server / Go Live s
 1. Open the project folder in VSCode.
 2. Open Terminal → New Terminal and run `npm run dev`.
 3. Open http://127.0.0.1:5173 in Chrome and keep the terminal running. Use this exact address for the configured Google login callbacks.
+
+For a fresh checkout, install Node 24, run `npm ci`, copy `.env.example` to `.env.local`, and supply the existing project's public Supabase URL and publishable key before starting Vite. Follow [setup](docs/setup.md); do not recreate the Supabase project or Google credential.
+
+Git preserves source, migrations, tests, documentation and commit history. Local environment files, dependencies, build output, browser profiles and CLI credentials are ignored. Church database records, cloud images and original videos need their separate [backup workflow](docs/backup-restore.md).
 
 Disposable HTML mockups are local files under the ignored .superpowers/brainstorm/ folder. They are design evidence, not application source. The companion's active state/server-info contains its local access URL; never publish session keys. Figtree's OFL license is stored with the preview.
 
