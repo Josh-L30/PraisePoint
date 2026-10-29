@@ -62,4 +62,4 @@
 - [x] Run focused RED→GREEN native cases, then typecheck/lint/unit/full appropriate browser suite sequentially.
 - [x] Apply impeccable polish once; use worst-case data, 320/720/1024/1440/1920 widths and 600/768-height checks, reduced motion, keyboard/touch and measured sidebar responsiveness.
 - [x] Fresh read-only whole-branch review, one tested fix pass; no speculative redesign/repeated reviews.
-- [ ] Save reviewed build/source identity and honest local/live evidence; commit complete changes. Prepare release and verify public changes if deployment is authorized; preserve skipped physical acceptance and remaining limits.
+- [x] Save reviewed build/source identity and honest local/live evidence; commit complete changes. Prepare release and verify public changes if deployment is authorized; preserve skipped physical acceptance and remaining limits.

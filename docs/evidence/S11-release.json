@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "2e53feb3544ba9b46f9c6975aa1266c28b9975ac",
+  "appBuild": "cea83b78ec4d12beaa2ba9a89b13b248877f3a85cacb9fa6dcda8629f778c58d",
+  "project": "gather-ccf-presentations",
+  "primary": "https://gather-ccf-presentations.web.app",
+  "alias": "https://gather-ccf-presentations.firebaseapp.com",
+  "hosting": "Firebase Hosting Spark",
+  "published": true,
+  "publicationRecordedOn": "2026-10-29",
+  "verificationCompletedOn": "2026-10-30",
+  "cliExitCode": 0,
+  "predeployArtifactFiles": 45,
+  "allArtifactHashesMatchTestedBuild": true,
+  "publicRoutingPassed": true,
+  "publicOfflineRestartPassedOnRerun": true,
+  "syntheticCloudSetupOnly": true,
+  "publicColdStarts": {
+    "passed": 10,
+    "failed": 0,
+    "underlyingFailureCaptured": false
+  },
+  "visualScreenshot": "docs/evidence/S11-public-login.png",
+  "visualOrigin": "https://gather-ccf-presentations.firebaseapp.com",
+  "existingPrimaryProfileInitiallyUsedOldCachedGather": true,
+  "existingChurchContentDeleted": false,
+  "actualGoogleOAuthRetestedThisSprint": false,
+  "physicalEquipmentVerified": false,
+  "remaining": "Intermittent startup-protection refusal occurred once in the public offline run and did not reproduce in the successful rerun or ten cold starts; no startup fix or guard bypass is claimed."
+}

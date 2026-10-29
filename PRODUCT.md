@@ -1,6 +1,6 @@
 # Product brief
 
-Status: full written scope and operating defaults accepted by the user on 2026-10-26. S01–S09 are implemented and verified; S10 software checks and the independent-review fix pass are verified. The initial frontend was published on Firebase Hosting Spark on 2026-10-29; the S11 PraisePoint usability update is under final verification. Physical acceptance remains unverified. See the sprint ledger and release checklist for evidence and limits.
+Status: full written scope and operating defaults accepted by the user on 2026-10-26. S01–S09 are implemented and verified; S10 software checks and the independent-review fix pass are verified. The initial frontend was published on Firebase Hosting Spark on 2026-10-29; the S11 PraisePoint usability update is published and verified (2026-10-30). Physical acceptance remains unverified. See the sprint ledger and release checklist for evidence and limits.
 
 ## Purpose and confirmed scope
 

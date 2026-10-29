@@ -1,6 +1,6 @@
 # Firebase Hosting deployment
 
-Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Console release hash: 901647. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
+Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The PraisePoint update from source 2e53feb is now published; current build and post-release checks are in docs/evidence/S11-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
 
 ## Configuration
 
@@ -35,4 +35,4 @@ Sources: [Hosting configuration](https://firebase.google.com/docs/hosting/full-c
 
 ## Verified current release
 
-Release 901647 is live on Spark from source checkpoint ed7f8a1. Public HTTP/header checks and actual Google login/reload/sign-out/back-cancellation passed. A focused isolated public-origin offline image/video restart passed; synthetic cloud setup does not certify fresh hosted Storage writes. Two prior automated startup attempts failed runtime protection and were not reproduced with diagnostics; no startup fix is claimed. See [full S10 evidence and limits](sprints/S10.md#public-release-verification--2026-10-29). Physical/backup/pilot acceptance and Google volunteer test-user access remain open.
+Initial release 901647 was published on Spark from source checkpoint ed7f8a1. The current PraisePoint update is source 2e53feb, verified on 2026-10-30; see [S11 release evidence](evidence/S11-release.json). Public HTTP/header checks and actual Google login/reload/sign-out/back-cancellation passed. A focused isolated public-origin offline image/video restart passed; synthetic cloud setup does not certify fresh hosted Storage writes. Two prior automated startup attempts failed runtime protection and were not reproduced with diagnostics; no startup fix is claimed. See [full S10 evidence and limits](sprints/S10.md#public-release-verification--2026-10-29). Physical/backup/pilot acceptance and Google volunteer test-user access remain open.

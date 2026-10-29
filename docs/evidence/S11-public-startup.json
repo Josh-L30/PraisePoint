@@ -1,0 +1,57 @@
+{
+  "origin": "https://gather-ccf-presentations.web.app",
+  "isolatedColdBrowserContexts": 10,
+  "syntheticAuthOnly": true,
+  "results": [
+    {
+      "attempt": 1,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 4,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 5,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 6,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 7,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 8,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 9,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "attempt": 10,
+      "passed": true,
+      "errors": []
+    }
+  ]
+}
