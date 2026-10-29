@@ -1,0 +1,13 @@
+{
+  "officialEmulator": true,
+  "actualPersistentBrowserRestart": true,
+  "disconnectedBeforeNavigation": true,
+  "preparedImageAndVideo": true,
+  "audienceInitiallyBlack": true,
+  "manualSend": true,
+  "backgroundClockAdvanced": true,
+  "cloudRequests": 0,
+  "cspViolations": [],
+  "physicalEquipment": false,
+  "publicDeployment": false
+}

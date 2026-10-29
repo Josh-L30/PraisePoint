@@ -1,5 +1,7 @@
 # Gather rehearsal guide
 
+User decision, 2026-10-29: rehearsal is skipped for deployment preparation. These instructions remain available for optional later use; no physical checks have been performed or marked passed.
+
 Use this later with the church laptop, projector and speakers. Independent software review is complete and its fixes passed verification: 251 unit/component and 45 production-browser checks. This guide does not mark the real equipment as accepted.
 
 ## 1. Get ready online

@@ -4,7 +4,7 @@ Status: architecture and plan accepted; Native execution continues. S01–S09 id
 
 ## Stack recommendation
 
-React + TypeScript + Vite + Tailwind CSS, Supabase Auth/Postgres/limited private Storage, Cloudflare Pages Free with its provided address. The full stack direction was accepted with the design. Compatible versions are pinned in package.json/package-lock.json. VSCode is the editor. This folder is a Git repository on feat/church-workspace. Sprint commits and verification are recorded in the execution ledger. Remote repository and deployment remain pending.
+React + TypeScript + Vite + Tailwind CSS, Supabase Auth/Postgres/limited private Storage, Firebase Hosting on Spark with its provided address (user-selected 2026-10-29). The full stack direction was accepted with the design. Compatible versions are pinned in package.json/package-lock.json. VSCode is the editor. This folder is a Git repository on feat/church-workspace. Sprint commits and verification are recorded in the execution ledger. Remote repository and deployment remain pending.
 
 Use Supabase's database/API/auth capabilities. S02/S03 use private transactional database bodies behind authenticated security-invoker wrappers for invitations, membership and document writes/capacity. Add small authenticated TypeScript Edge Functions only when an external service or upload-signing boundary requires one. No separate Node server, queue, or conversion service.
 
@@ -46,3 +46,5 @@ Keep local disposable tests separate from church data; choose a test-project arr
 Sources checked 2026-10-26: [Google sign-in](https://supabase.com/docs/guides/auth/social-sign-in/auth-google), [Supabase pricing](https://supabase.com/pricing), [browser storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria). Additional hosting/font sources are in the research notes.
 
 Operational and release gates: [operations](docs/operations.md), [acceptance/rehearsal checklist](docs/release-checklist.md). Local production rehearsal applies the proposed host headers; the actual hosted origin still requires separate verification.
+
+Hosting update, 2026-10-29: created dedicated Firebase project Gather CCF Presentations (gather-ccf-presentations), Spark verified in console. Firebase Hosting configuration and emulator checks are prepared; CLI authorization and publication remain pending. See docs/firebase-deployment.md. Existing Google OAuth project ccf-presentations remains separate. See docs/setup.md for the creation record.

@@ -64,3 +64,9 @@ Only audience standalone video can produce audio. If autoplay is blocked, reques
 ## Offline production rehearsal (S08)
 
 Offline preparation is enabled only in a production build. Run `npm run build` then `npm run preview`; open http://127.0.0.1:4173 online, sign in and prepare a reviewed saved service. Use that exact origin and browser profile for `/offline` after disconnecting. The dev server on 5173 and preview on 4173 have separate storage and sessions. Localhost production rehearsal is not publication. Keep original files: browser clearing/sign-out can remove prepared data. See [S08 operation and evidence](sprints/S08.md).
+
+## Firebase hosting project
+
+Created 2026-10-29 at the user’s request: Gather CCF Presentations, project ID gather-ccf-presentations. The Firebase Console visibly confirmed Spark plan. Optional Gemini and Google Analytics switches were off during creation; no billing setup was performed. [Project console](https://console.firebase.google.com/project/gather-ccf-presentations/overview), [creation evidence](evidence/S10-firebase-project.png).
+
+This is a dedicated hosting project. The existing ccf-presentations Google Cloud project continues to hold the Google sign-in credential; Supabase Auth/database/private images remain in the existing Supabase project. No Firebase app registration, database, Auth migration or website deployment was performed. Firebase Hosting configuration and actual emulator routing/header/offline checks are prepared. CLI sign-in, verified site provisioning, exact live Supabase redirect URLs, publication and public-origin verification remain. Follow [Firebase deployment](firebase-deployment.md).

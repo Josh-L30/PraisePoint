@@ -1,0 +1,60 @@
+{
+  "officialEmulator": true,
+  "demoProject": "demo-gather-ccf",
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/auth",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/auth/callback",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/app/w/fixture/decks",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/offline",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/offline/fixture",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/audience/fixture",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/present/fixture",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/setup",
+      "status": 200,
+      "cache": "no-cache"
+    },
+    {
+      "path": "/invite",
+      "status": 200,
+      "cache": "no-cache"
+    }
+  ],
+  "workerFresh": true,
+  "hashedAssetsImmutable": true,
+  "privateAndMissingFiles404": true,
+  "publicDeployment": false
+}

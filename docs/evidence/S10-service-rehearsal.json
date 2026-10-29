@@ -1,5 +1,5 @@
 {
-  "appBuild": "ee24300ca76e28acbb7fbf8a10f1cfa82b2d57d78ba89d090747a35e94cb70fa",
+  "appBuild": "18d105b1a68311cdf9433a1e0727f993c26521a633db55893ecad7a6378150b6",
   "fiveCategories": true,
   "bothLyricMethods": true,
   "slides": 12,
@@ -10,7 +10,7 @@
   "renderTiming": {
     "frames": 180,
     "medianMs": 16.699999999999818,
-    "p95Ms": 16.799999999999727,
+    "p95Ms": 16.800000000000182,
     "over50ms": 0,
     "conditions": "Headless local Chromium operator glass while verified audience background plays; no CPU throttling; not church-hardware proof"
   },

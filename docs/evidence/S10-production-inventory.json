@@ -1,7 +1,7 @@
 {
-  "appBuild": "ee24300ca76e28acbb7fbf8a10f1cfa82b2d57d78ba89d090747a35e94cb70fa",
-  "files": 45,
+  "appBuild": "18d105b1a68311cdf9433a1e0727f993c26521a633db55893ecad7a6378150b6",
+  "files": 44,
   "findings": [],
   "publicConnectionConfigExpected": true,
-  "scope": "Actual final dist inventory and high-confidence private credential/fixture markers; public Supabase URL/publishable key are expected. This does not certify every possible secret pattern."
+  "scope": "Actual dist allowlisted paths, private key/server-key/Google-secret/service-account and named fixture-marker scan. Public Supabase configuration is expected; this does not certify every possible secret pattern."
 }

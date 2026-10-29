@@ -10,3 +10,7 @@ coverage/
 *.tsbuildinfo
 supabase/.temp/
 supabase/.branches/
+
+.firebase/
+firebase-debug.log*
+ui-debug.log*

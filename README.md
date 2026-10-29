@@ -45,3 +45,5 @@ S09 adds metadata downloads from service review/prepared copies and Service plan
 S10 adds explicit Pause/Resume backgrounds, measured glass-interface refinements, durable idle-only app update handoff and a representative production-header service rehearsal. [Operations](docs/operations.md) and the [release/rehearsal checklist](docs/release-checklist.md) explain account ownership, backups and remaining physical/provider/hosting acceptance. The requester maintains accounts and original-media backups for now. No public frontend deployment exists.
 
 For the later church-equipment check, follow the [step-by-step rehearsal guide](docs/rehearsal-guide.md) and fill in its result sheet.
+
+Firebase Hosting Spark setup: [deployment instructions](docs/firebase-deployment.md). The project and local configuration exist; the website has not been published.
