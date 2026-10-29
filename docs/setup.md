@@ -45,7 +45,7 @@ Node 24.x; installed versions are pinned in package.json and package-lock.json.
 
 Hosted database assertions are in supabase/tests/S01_identity.connector.sql. Run through the connected SQL tool; it uses a transaction and rollback, with synthetic identities only. It is deliberately not a pgTAP script. No test fixtures remain in the live project.
 
-The frontend is not published. The authenticated media-upload Edge Function v2 is deployed in this existing Free project; creating or updating the backend does not publish the website.
+The frontend is published at https://gather-ccf-presentations.web.app on Firebase Hosting Spark (2026-10-29). The authenticated media-upload Edge Function v2 is deployed in this existing Free project; creating or updating the backend does not publish the website.
 
 ## Media backend
 
@@ -69,4 +69,4 @@ Offline preparation is enabled only in a production build. Run `npm run build` t
 
 Created 2026-10-29 at the user’s request: Gather CCF Presentations, project ID gather-ccf-presentations. The Firebase Console visibly confirmed Spark plan. Optional Gemini and Google Analytics switches were off during creation; no billing setup was performed. [Project console](https://console.firebase.google.com/project/gather-ccf-presentations/overview), [creation evidence](evidence/S10-firebase-project.png).
 
-This is a dedicated hosting project. The existing ccf-presentations Google Cloud project continues to hold the Google sign-in credential; Supabase Auth/database/private images remain in the existing Supabase project. No Firebase app registration, database, Auth migration or website deployment was performed. Firebase Hosting configuration and actual emulator routing/header/offline checks are prepared. CLI sign-in, verified site provisioning, exact live Supabase redirect URLs, publication and public-origin verification remain. Follow [Firebase deployment](firebase-deployment.md).
+This is a dedicated hosting project. The existing ccf-presentations Google Cloud project continues to hold the Google sign-in credential; Supabase Auth/database/private images remain in the existing Supabase project. No Firebase app registration, database, Auth migration or website deployment was performed. Firebase Hosting configuration, CLI sign-in, site provisioning, exact Supabase live callbacks and publication are complete. Public routing/headers and real Google auth passed; a focused public-origin media/offline restart passed after two runtime-startup failures, which remain documented limitations. Follow [Firebase deployment](firebase-deployment.md).

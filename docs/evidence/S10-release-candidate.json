@@ -34,12 +34,25 @@
     "site": "gather-ccf-presentations",
     "plan": "Spark",
     "siteProvisioned": true,
-    "cliAuthorized": false,
-    "publicRelease": false
+    "cliAuthorized": true,
+    "publicRelease": true,
+    "consoleReleaseHash": "901647"
   },
-  "published": false,
+  "published": true,
   "physicalAcceptance": false,
   "physicalRehearsal": "Skipped at user request; unverified",
-  "phase": "Firebase deployment candidate; CLI access, exact hosted redirects, publication and public-origin verification pending",
-  "knownLimit": "Native Chromium update activation can stall. Durable guard refuses presentation until close-all/reopen recovery. Do not describe every run as automatic activation or claim all 47 passed together."
+  "phase": "Published Firebase pilot; physical, recovery and volunteer-access acceptance remain open",
+  "knownLimit": "Native Chromium update activation can stall. Durable guard refuses presentation until close-all/reopen recovery. Do not describe every run as automatic activation or claim all 47 passed together.",
+  "deployedSourceCommit": "ed7f8a1e9b1f7fc8394a415f0cd4dcb6a675d659",
+  "publicVerification": {
+    "httpRoutingHeaders": true,
+    "realGoogleLoginReloadSignOut": true,
+    "offlineRestartWithMedia": true,
+    "offlineCaseSeconds": 28.5,
+    "offlineFocusedSuiteSeconds": 59.7,
+    "cloudSetupUsesSyntheticFixtures": true,
+    "publicOfflineInitialFailures": 2,
+    "publicOfflineNote": "Initial fixture setup failed runtime protection before media input; waiting for worker installation did not resolve the second attempt. Diagnostic-only instrumentation then passed without product changes; root cause not established. Do not claim the startup issue was fixed.",
+    "physicalEquipment": false
+  }
 }

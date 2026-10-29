@@ -1,0 +1,21 @@
+{
+  "verifiedOn": "2026-10-29",
+  "origin": "https://gather-ccf-presentations.web.app",
+  "realGoogleSignIn": true,
+  "existingAccount": true,
+  "authenticatedReload": true,
+  "signOut": true,
+  "signedOutProtectedRouteReturnsToAuth": true,
+  "backFromGoogleChooserReturnsToSignedOutAuth": true,
+  "newCloudContentCreated": false,
+  "googleOAuthTestingRestrictionUnchanged": true,
+  "siteUrl": "https://gather-ccf-presentations.web.app",
+  "exactAddedCallbacks": [
+    "https://gather-ccf-presentations.web.app/auth/callback",
+    "https://gather-ccf-presentations.firebaseapp.com/auth/callback"
+  ],
+  "retainedLocalCallbacks": 3,
+  "cliLoginSaved": true,
+  "temporaryAuthorizationFileRemoved": true,
+  "cliNote": "Official code exchange reported success then a Windows native shutdown assertion; subsequent official login:list and hosting:sites:list succeeded. No credential files committed."
+}

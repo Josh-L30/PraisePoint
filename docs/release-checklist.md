@@ -1,6 +1,6 @@
 # Release candidate acceptance
 
-Status: software verification is complete and independent-review findings are addressed. On 2026-10-29 the user chose to skip the physical rehearsal and proceed toward deployment. Hardware checks remain unverified; rehearsal is no longer a prerequisite at the user's request. Frontend publication is not complete or authorized by that question alone. Latest app build identity is in docs/evidence/S10-service-rehearsal.json. The user-selected frontend host is Firebase Hosting Spark. Dedicated project gather-ccf-presentations was created on 2026-10-29 and Spark verified; Firebase Hosting configuration and local emulator checks are prepared; CLI authorization, site provisioning, publication and hosted verification remain pending. See [deployment guide](firebase-deployment.md).
+Status: software verification is complete and independent-review findings are addressed. On 2026-10-29 the user chose to skip the physical rehearsal and proceed toward deployment. Hardware checks remain unverified; rehearsal is no longer a prerequisite at the user's request. The user later explicitly approved CLI access, exact Supabase live redirects and frontend publication; deployment completed on 2026-10-29. Latest app build identity is in docs/evidence/S10-service-rehearsal.json. The user-selected frontend host is Firebase Hosting Spark. Dedicated project gather-ccf-presentations was created on 2026-10-29 and Spark verified; Firebase Hosting configuration and local emulator checks are prepared; CLI authorization, site provisioning, publication and the public checks below are complete; physical/recovery and volunteer acceptance remain open. See [deployment guide](firebase-deployment.md).
 
 ## Evidence matrix
 
@@ -39,15 +39,15 @@ Record the date, operator, laptop model/OS, installed Chrome or Edge version, pr
 
 ## Publication gate
 
-- [ ] User explicitly authorizes frontend publication and selects the free hosting account/address. No paid domain/trial/add-on or push/merge is implied by this checklist.
+- [x] User explicitly authorizes frontend publication and selects the free hosting account/address. No paid domain/trial/add-on or push/merge is implied by this checklist.
 - [ ] Final church name/logo and privacy/retention expectations accepted. Gather is working branding.
 - [ ] Provider dashboard confirms Free plans, usage and billing settings. Record human owner and recovery methods privately.
 - [ ] Google consent/test-user configuration permits the intended pilot volunteers. Publishing the frontend alone does not change Google Testing restrictions.
-- [ ] Keep the known-good Git commit/dist artifact/build ID, migration list and a verified offline service. Preserve original files/metadata backups.
-- [ ] Build with Node 24 and only the two public Supabase frontend variables; upload dist only. Exclude .env, SQL dumps, browser profiles, credentials and original videos.
-- [ ] After hosting exists, configure its exact Google/Supabase callback/site origin without recreating credentials. Verify real Google success/cancel/logout, protected deep links and SPA fallback.
-- [ ] Verify CDN response headers from firebase.json, actual fonts/Blob images/video, no CSP errors, correct service-worker scope and cache update prompting on the hosted origin.
-- [ ] Repeat complete offline preparation/full browser restart on that exact hosted origin. Local 5173/4173 storage does not move to a new domain.
+- [x] Keep the known-good Git commit/dist artifact/build ID, migration list and a verified offline service. Preserve original files/metadata backups.
+- [x] Build with Node 24 and only the two public Supabase frontend variables; upload dist only. Exclude .env, SQL dumps, browser profiles, credentials and original videos.
+- [x] After hosting exists, configure its exact Google/Supabase callback/site origin without recreating credentials. Verify real Google success/cancel/logout, protected deep links and SPA fallback.
+- [x] Verify CDN response headers from firebase.json, actual fonts/Blob images/video, no CSP errors, correct service-worker scope and cache update prompting on the hosted origin.
+- [x] Repeat complete offline preparation/full browser restart on that exact hosted origin. Local 5173/4173 storage does not move to a new domain.
 - [ ] Record pilot user acceptance and unresolved limits before calling S10 Done. Apply no destructive database rollback or restore as part of frontend publication.
 
 See [operations](operations.md), [backup/restore](backup-restore.md) and [S10 evidence](sprints/S10.md).
@@ -55,3 +55,5 @@ See [operations](operations.md), [backup/restore](backup-restore.md) and [S10 ev
 The user will rehearse equipment later. Follow the [plain-language rehearsal guide and results sheet](rehearsal-guide.md), including stopping the local preview server before the disconnected browser restart.
 
 Firebase preparation: project Gather CCF Presentations (gather-ccf-presentations) exists on Spark. [Console](https://console.firebase.google.com/project/gather-ccf-presentations/overview), [evidence](evidence/S10-firebase-project.png). Do not assume Cloudflare public/_headers is applied by Firebase; create and verify equivalent firebase.json headers and SPA rewrites first. Creating the Firebase project did not publish the frontend or change existing Google/Supabase credentials.
+
+Publication completed 2026-10-29 on Firebase Spark, release 901647. Exact callbacks, actual Google auth/reload/logout/back-return, public routing/headers and a focused public-origin prepared media restart are recorded in [S10](sprints/S10.md#public-release-verification--2026-10-29). Offline setup used isolated synthetic cloud records. Two initial runtime-startup failures remain an observed limitation, not a claimed fix; real equipment/backup restore and volunteer acceptance remain open.

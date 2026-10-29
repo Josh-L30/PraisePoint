@@ -2,7 +2,7 @@
 
 Website under development for volunteers to prepare attractive slides and present from a laptop to a projector, online or offline. “Gather” is a working name.
 
-**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans, media library and operator/projector presenter are implemented and verified. Google is the only enabled provider. The frontend is not published; the authenticated media-upload backend is deployed. Complete offline preparation and disconnected restart are implemented; portable metadata backups and exact-file recovery are implemented; physical rehearsal and release acceptance remain.
+**Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans, media library and operator/projector presenter are implemented and verified. Google is the only enabled provider. The frontend is published at [gather-ccf-presentations.web.app](https://gather-ccf-presentations.web.app) on Firebase Spark; the authenticated media-upload backend remains in Supabase. Complete offline preparation and disconnected restart are implemented; portable metadata backups and exact-file recovery are implemented; physical rehearsal and release acceptance remain.
 
 ## Start here
 
@@ -26,7 +26,7 @@ Use Vite to open this React/TypeScript project. VSCode's Live Server / Go Live s
 
 Disposable HTML mockups are local files under the ignored .superpowers/brainstorm/ folder. They are design evidence, not application source. The companion's active state/server-info contains its local access URL; never publish session keys. Figtree's OFL license is stored with the preview.
 
-Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Current verified checks: 251 unit/component tests (local `--testTimeout=15000 --pool=vmThreads`), 45 production Chromium checks, 15 live anonymous API checks, lint and build including TypeScript. All seven hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The presenter/offline entry is split from online authentication; physical performance rehearsal remains before release. See [setup and connection state](docs/setup.md).
+Dependencies are pinned in package.json/package-lock.json; Node 24.x is required. Run npm run dev for http://127.0.0.1:5173. If port 5173 is already in use by this app, open the address instead of starting a second server. Pre-Firebase software-review checks: 251 unit/component tests (local `--testTimeout=15000 --pool=vmThreads`), 45 production Chromium checks, 15 live anonymous API checks, lint and build including TypeScript. All seven hosted SQL suites passed with fixtures rolled back. Tests use one worker to limit memory usage. The presenter/offline entry is split from online authentication; physical performance remains unverified after the user skipped rehearsal. See [setup and connection state](docs/setup.md).
 
 S01–S03 established Google/private and shared workspaces, invitations/team management, five editable slide templates, cloud save/reopen/copy/delete, safe revision conflicts, draft guards and fixed-layout preview. Open Presentations → New presentation to begin. See [S03 evidence and limitations](docs/sprints/S03.md). Do not recreate the saved Google credential or Supabase project.
 
@@ -42,8 +42,8 @@ S08 adds Review service slides → Prepare for offline, then Prepared services �
 
 S09 adds metadata downloads from service review/prepared copies and Service plans → Import service metadata. Import makes independent records in the chosen workspace; transfer originals separately and reselect exact files in Media library before preparing. [Backup and restore instructions](docs/backup-restore.md), [S09 evidence](docs/sprints/S09.md).
 
-S10 adds explicit Pause/Resume backgrounds, measured glass-interface refinements, durable idle-only app update handoff and a representative production-header service rehearsal. [Operations](docs/operations.md) and the [release/rehearsal checklist](docs/release-checklist.md) explain account ownership, backups and remaining physical/provider/hosting acceptance. The requester maintains accounts and original-media backups for now. No public frontend deployment exists.
+S10 adds explicit Pause/Resume backgrounds, measured glass-interface refinements, durable idle-only app update handoff and a representative production-header service rehearsal. [Operations](docs/operations.md) and the [release/rehearsal checklist](docs/release-checklist.md) explain account ownership, backups and remaining physical/provider/hosting acceptance. The requester maintains accounts and original-media backups for now. The Firebase frontend was published with explicit user approval on 2026-10-29.
 
 For the later church-equipment check, follow the [step-by-step rehearsal guide](docs/rehearsal-guide.md) and fill in its result sheet.
 
-Firebase Hosting Spark setup: [deployment instructions](docs/firebase-deployment.md). The project and local configuration exist; the website has not been published.
+Firebase Hosting Spark setup: [deployment instructions](docs/firebase-deployment.md). The site is live on Spark. Real Google login/reload/sign-out, public headers/routing and a focused disconnected image/video restart passed; startup/update limits are recorded in S10.
