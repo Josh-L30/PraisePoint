@@ -1,0 +1,11 @@
+{
+  "origin": "https://gather-ccf-presentations.web.app",
+  "loginRendered": true,
+  "googleSignInNotRepeated": true,
+  "syntheticAuthAndApiOnly": true,
+  "realChurchDataMutated": false,
+  "gallery": true,
+  "workspaceHeader": true,
+  "sidebarToggle": true,
+  "externalPreviewLoaded": true
+}

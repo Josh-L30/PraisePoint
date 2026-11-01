@@ -1,0 +1,342 @@
+{
+  "date": "2026-11-01",
+  "origin": "https://gather-ccf-presentations.web.app",
+  "artifactCount": 47,
+  "allArtifactsMatch": true,
+  "artifacts": [
+    {
+      "path": "/assets/arrow-up-CQQHgjh0.js",
+      "status": 200,
+      "sha256": "da1e332ea4ed40b1f9be5e76d68067469951855fe9540f699f401dff4e43b0cc",
+      "matches": true
+    },
+    {
+      "path": "/assets/AudiencePage-CScHVWya.js",
+      "status": 200,
+      "sha256": "1a7f382e7069b90519473010c7d8e6c632893e770c975e472e50ba8c098675d9",
+      "matches": true
+    },
+    {
+      "path": "/assets/BackgroundGalleryPage-LCtp9Sgo.js",
+      "status": 200,
+      "sha256": "4ce4c2c7a6c85c128b4b779687aea0c74edf5c3f5d9673b6198d1317d7abe178",
+      "matches": true
+    },
+    {
+      "path": "/assets/check-online-Ct7DF62B.js",
+      "status": 200,
+      "sha256": "9c2a5cbdcafff60c3a5b71a92e30c793ad5d9675afda8b0b771cdc4346d6c7bd",
+      "matches": true
+    },
+    {
+      "path": "/assets/content-changes-05phH858.js",
+      "status": 200,
+      "sha256": "4c7571a9f4384f340681f1e333a1e5a92d77cb88d12d0585e8f84a1a6aca95f8",
+      "matches": true
+    },
+    {
+      "path": "/assets/deck-service-Urj_27bu.js",
+      "status": 200,
+      "sha256": "25d43bbee2f837b4ab23476cdfdf410d622ca47d351f3feef4326ccfb323497a",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckEditorPage-BQDSEx2Z.js",
+      "status": 200,
+      "sha256": "8642adeb11512c53258c6b6b6213861bae091ab30411bfba747a9ef1a04705b0",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckListPage-Bj5kep2t.js",
+      "status": 200,
+      "sha256": "2bd776b4143bb4201d6f4cc72e0a2d0678def3ca9d2a7afc93e902f9a949cde3",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckPreviewPage-CZeffLD5.js",
+      "status": 200,
+      "sha256": "a06d90e32c04ec5f80b59211b856e104e5157a686396447ddfae25e44b44a900",
+      "matches": true
+    },
+    {
+      "path": "/assets/decode-media-TPtN-Yrk.js",
+      "status": 200,
+      "sha256": "fdea2d328f0fba46cd421667c40a884047afa1369557cf5ccf7d7d12375c2bc6",
+      "matches": true
+    },
+    {
+      "path": "/assets/dist-DwO5-r_z.js",
+      "status": 200,
+      "sha256": "fcd0b1467bd465a7f518208382ede325e9cdc280a6028a2b9c6a7bdbbd3e48e9",
+      "matches": true
+    },
+    {
+      "path": "/assets/ExportMetadataButton-DdMa3UtJ.js",
+      "status": 200,
+      "sha256": "dc1715bd34003ab2659c95c8ca751611c817d49c4007920a3153c0e19e5beb47",
+      "matches": true
+    },
+    {
+      "path": "/assets/FilePicker-DO2GVrqh.js",
+      "status": 200,
+      "sha256": "c2ad251c09267fd0c1f2121e107eb09549e4eafe89068acab7a1a6631908c971",
+      "matches": true
+    },
+    {
+      "path": "/assets/film-sSdugBPA.js",
+      "status": 200,
+      "sha256": "df04aab2d7197007e2baa2d599bbb28341989b83b6ac270433bdc71f6e3f878e",
+      "matches": true
+    },
+    {
+      "path": "/assets/index-CoyFSjZe.css",
+      "status": 200,
+      "sha256": "10ac3d2ef00156ab6fb3b67f6c66bd755942511feaa70ad8a3df16278f1dfade",
+      "matches": true
+    },
+    {
+      "path": "/assets/index-t10R-VMb.js",
+      "status": 200,
+      "sha256": "05f30151f1ca0c79ed22c70c628b80398f10f75f793eec1dc1671bcddacb0292",
+      "matches": true
+    },
+    {
+      "path": "/assets/local-media-store-w6ykW85U.js",
+      "status": 200,
+      "sha256": "71d53212c88b07ec71ed6ec2d93a36330691842b48dd6d4c4d2a0228359d4ef4",
+      "matches": true
+    },
+    {
+      "path": "/assets/LyricsEntryDialog-Dqux2EV8.js",
+      "status": 200,
+      "sha256": "423ce6e2016d8b9dcdb1be19dad7a59e931c3dbb32b8c1c0ce20fa2f69fdb9d4",
+      "matches": true
+    },
+    {
+      "path": "/assets/media-service-DiFbEym9.js",
+      "status": 200,
+      "sha256": "3f4a4117c9d84a3cdef4203f2ba6e115e068bf9a1070cfbe93aa37b1cac0168b",
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaLibraryPage-CZxhtxoM.js",
+      "status": 200,
+      "sha256": "e54fa840d96bb360ccfcf31b35e2f24727c2ac4f9db30e2bbf231198b3018772",
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaPicker-DnYRT8yZ.js",
+      "status": 200,
+      "sha256": "41f2c22057745f66c03e3affe368b32f34a8eb93d856fe8232e735fc7c1d5653",
+      "matches": true
+    },
+    {
+      "path": "/assets/Modal-lR7j4Q_J.js",
+      "status": 200,
+      "sha256": "74b5607155de48ec03aa9da4a5d38e1691207d141932bc8f59713568734de76a",
+      "matches": true
+    },
+    {
+      "path": "/assets/OfflineApp-nwmdKiJr.js",
+      "status": 200,
+      "sha256": "38e8771b898d5825ca7e61f4bf9eb9912539ca585c0a5f57a30434270a574d35",
+      "matches": true
+    },
+    {
+      "path": "/assets/OperatorPage-Dk8kango.js",
+      "status": 200,
+      "sha256": "760be74f518269a49ba3f9c085a2d63481c9276e0a6c10e4a08862e36ba40573",
+      "matches": true
+    },
+    {
+      "path": "/assets/plus-BhH6VH8h.js",
+      "status": 200,
+      "sha256": "e1761566386a3cef07c700e8718a9f1dd03d83b5064d03a384e31a58c901c54e",
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-resolver-B0dq071U.js",
+      "status": 200,
+      "sha256": "f0321c569cca7f4dbc83fb0dd208e702c4777d4dff6297900d0f233b44aa7775",
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-store-CU1RH8wF.js",
+      "status": 200,
+      "sha256": "40c5f6d19ea55da2c543b196580fb9c55137c9db8a88e40de99f759db384d74e",
+      "matches": true
+    },
+    {
+      "path": "/assets/presenter-state-D5L4ne1X.js",
+      "status": 200,
+      "sha256": "d7fdf10a6d397ee7107c4b2739ff6cbe23b05988eaa88881b1baae824b0d6a7c",
+      "matches": true
+    },
+    {
+      "path": "/assets/PresenterConsole-Buh2RKnl.js",
+      "status": 200,
+      "sha256": "04269e76b983cbfa421b491492211e69cbac732c2e0f427b614eb676a43539b6",
+      "matches": true
+    },
+    {
+      "path": "/assets/readiness-LXPqQPHI.js",
+      "status": 200,
+      "sha256": "e1c04dcd4a7229dd37bf7a9e59dc4ae6cbd8561429bacc69a6dda19cb2913705",
+      "matches": true
+    },
+    {
+      "path": "/assets/rolldown-runtime-XKyaHtl9.js",
+      "status": 200,
+      "sha256": "548d1dbf321e7d2ae804fcc158b588706a7c52f8ca175de1490c6ccb4dbe55b7",
+      "matches": true
+    },
+    {
+      "path": "/assets/service-service-CYKixoeD.js",
+      "status": 200,
+      "sha256": "4df2d705bf6c360a70830ec8b576ef125e88e8400dbf9e215b4b8ad018caf880",
+      "matches": true
+    },
+    {
+      "path": "/assets/ServicePlanPage-LlQPPAy-.js",
+      "status": 200,
+      "sha256": "e1793d74372664b670c8156a7a9c60375a16cb2f3c21620d66a1046a5ca7a7a3",
+      "matches": true
+    },
+    {
+      "path": "/assets/SlideRenderer-BrpexuD4.js",
+      "status": 200,
+      "sha256": "e2b8dbc7119e0f6a701fc91b542659dbfa75ad06faaeadafb5c005b62601b43f",
+      "matches": true
+    },
+    {
+      "path": "/assets/SongLibraryPage-DZfQjvo4.js",
+      "status": 200,
+      "sha256": "a55dff1ee9546ff623224540da068e58fba778487f3ba330a702442d3a4ad584",
+      "matches": true
+    },
+    {
+      "path": "/assets/supabase-BzRpJ-wc.js",
+      "status": 200,
+      "sha256": "90aa08a49abfd9094bacdc0cb2df337fff0e6a107ae9fe446e3359ff03af52cc",
+      "matches": true
+    },
+    {
+      "path": "/assets/TemplatePicker-zRf5EAaN.js",
+      "status": 200,
+      "sha256": "fe22c91be9d4db0dc79790936e44d7bc8822e48fcaaa8d999da9190c314352df",
+      "matches": true
+    },
+    {
+      "path": "/assets/templates-C5rf56bZ.js",
+      "status": 200,
+      "sha256": "3a303b58566e699d09aafbe25d9226c732d8a3fa9267c95571b20694f6184d55",
+      "matches": true
+    },
+    {
+      "path": "/assets/use-content-guard-CF4haIQi.js",
+      "status": 200,
+      "sha256": "7591f5f4b340e6cd7fb707e88f7ae2e8c185af8a8ee59c5eb5c95e8efc676a25",
+      "matches": true
+    },
+    {
+      "path": "/assets/WorkspaceApp-8ppr2PR9.js",
+      "status": 200,
+      "sha256": "bb49d133601ce22aee8e078c7410d176c656085d1633f7008d504eb142297f9b",
+      "matches": true
+    },
+    {
+      "path": "/ccf-logo.svg",
+      "status": 200,
+      "sha256": "022512c132e08949b8277a14ca18a4916c5e00c712d8f7b3b300fb43f4607e37",
+      "matches": true
+    },
+    {
+      "path": "/fonts/Figtree.ttf",
+      "status": 200,
+      "sha256": "26ad3db9b31ff7dde67a91ff515d022d2f495cd506590699cf264f0bfe6fb714",
+      "matches": true
+    },
+    {
+      "path": "/fonts/OFL.txt",
+      "status": 200,
+      "sha256": "bb272dfcd8801eb31fb98fe51828f76f0e41ac82f89256101df8021aa3d30ce2",
+      "matches": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "sha256": "022512c132e08949b8277a14ca18a4916c5e00c712d8f7b3b300fb43f4607e37",
+      "matches": true
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "sha256": "0ae07dbf5178649e7b6cd9e64093ed8d1aaa707d078d20c2c1207cf039862306",
+      "matches": true
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "status": 200,
+      "sha256": "3c3c99dfa9b3dfc0fa20fd1e2e659ada5374762a5c91242b90a1a6bc02000c03",
+      "matches": true
+    },
+    {
+      "path": "/service-worker.js",
+      "status": 200,
+      "sha256": "4401c7266d8575283fa282d6a9629e5943ce3e2f1dfee9451bd61e1363329301",
+      "matches": true
+    }
+  ],
+  "routes": [
+    {
+      "path": "/auth",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/auth/callback",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/app/w/44444444-4444-4444-8444-444444444444/templates",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/offline",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/present/probe",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/audience/probe",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/missing-S12-release",
+      "status": 404,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://images.pexels.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    }
+  ],
+  "httpRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "alias": {
+    "status": 200,
+    "indexMatches": true
+  }
+}

@@ -1,6 +1,6 @@
 # S12 interface audit and polish
 
-Date: 2026-11-01. Scope: local PraisePoint UI refinement using Universal Web Dev and Impeccable. Preserve Figtree, CCF mark, teal palette, glass surfaces and existing data contracts. No public deployment, account changes, paid hosting, schema changes or real church-record deletion.
+Date: 2026-11-01. Scope: PraisePoint UI refinement using Universal Web Dev and Impeccable. Preserve Figtree, CCF mark, teal palette, glass surfaces and existing data contracts. The refinement pass made no account, paid-hosting, schema or real church-record changes. Subsequent user-authorized publication is recorded below.
 
 ## Implementation integrity
 
@@ -65,3 +65,7 @@ Earlier failing checks were resolved: stale test expectations were updated for t
 Not verified in this refinement: fresh real Google sign-in, production authorization/data integrity, live deployment/headers, every role/data combination, real assistive technology, physical mobile/projector/speakers, or throttled field performance. Existing offline/database authorization coverage remains in earlier sprint evidence; it is not represented as newly executed here.
 
 Impeccable reported an older PRODUCT.md record format. Refreshing it with `impeccable init` is optional and separate; this task did not rewrite confirmed product facts or global skill/hooks configuration.
+
+## Authorized publication
+
+The user then requested Firebase deployment and GitHub publication. Both completed on 2026-11-01; source commit is `54073a92d1dfc15b5402838550d154e846d9ee3e`. All 47 live artifacts matched the predeploy build, seven route/status/header checks passed, HTTPS redirection and both hosting addresses were verified. The live login and synthetic-auth gallery/navigation browser check passed after its startup wait was corrected. This does not turn the earlier local readiness score into a complete production authorization, physical-device or fresh OAuth acceptance result. Release receipts and screenshots are in S12-release.json and S12-public-*.

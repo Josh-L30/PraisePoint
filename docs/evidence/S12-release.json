@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-01",
+  "sourceCommit": "54073a92d1dfc15b5402838550d154e846d9ee3e",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "firebaseProject": "gather-ccf-presentations",
+  "hostingOnly": true,
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "alias": "https://gather-ccf-presentations.firebaseapp.com",
+  "deploymentSucceeded": true,
+  "predeployTypecheckBuildPassed": true,
+  "artifactCount": 47,
+  "allHostedArtifactsMatchBuild": true,
+  "routeChecks": 7,
+  "browserPassed": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true
+  },
+  "stagedSecretScanFindings": [],
+  "historySecretScanFindings": [],
+  "initialBrowserAttempt": "Login rendered; workspace loading exceeded the initial expectation. Updated test waits for active controlling service worker and allows 30 seconds for workspace startup; rerun passed. No runtime protection changed.",
+  "backendOrRealChurchDataChanged": false
+}
