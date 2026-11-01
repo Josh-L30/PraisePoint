@@ -67,7 +67,7 @@ Reproducible item ratings (pass=1, partial=0.5): critical flow partial and forms
 
 Trust/safety items (secret scan, production HTTPS, live authorization, rate limits, legal matching, consent assessment) were not rerun for S13. Public entry-page metadata, canonical/social preview and favicon were not reevaluated. Private workspace indexing, sitemap/structured-data discovery and multilingual hreflang are not applicable to these authenticated UI changes.
 
-Before a release claim: verify S13 on Firebase with fresh Google sign-in, deployed CSP/SW behavior and real authorized backend writes; repeat relevant access-denied checks; run a physical phone/keyboard/screen-reader pass and laptop/projector rehearsal; measure throttled performance. Physical rehearsal remains deferred by the user. Owner: developer for release checks, account owner for real equipment rehearsal. S13 remains local/uncommitted and Firebase/GitHub remain on S12.
+Before a release claim: verify S13 on Firebase with fresh Google sign-in, deployed CSP/SW behavior and real authorized backend writes; repeat relevant access-denied checks; run a physical phone/keyboard/screen-reader pass and laptop/projector rehearsal; measure throttled performance. Physical rehearsal remains deferred by the user. Owner: developer for release checks, account owner for real equipment rehearsal. At audit time S13 was local. The subsequently authorized publication and deployed checks are recorded in [S13-release.json](S13-release.json); the audit score above remains the original local-only assessment.
 
 ## Visual evidence
 

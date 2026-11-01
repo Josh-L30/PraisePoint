@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-01",
+  "sourceCommit": "bb8fdf8ac4b35e3c3b5d6c5a5a8b22b105040b54",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "firebaseProject": "gather-ccf-presentations",
+  "hostingOnly": true,
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "alias": "https://gather-ccf-presentations.firebaseapp.com",
+  "deploymentSucceeded": true,
+  "predeployTypecheckBuildPassed": true,
+  "artifactCount": 47,
+  "allHostedArtifactsMatchBuild": true,
+  "routeChecks": 7,
+  "httpRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "aliasCheck": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "browserPassed": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true,
+    "glassWorkspaceMenu": true,
+    "themePersistence": true,
+    "immediateAddSlide": true,
+    "saveReloadWithFixtures": true
+  },
+  "secretScan": {
+    "date": "2026-11-01",
+    "filesChecked": 560,
+    "findings": [],
+    "scope": "Tracked/untracked nonignored candidate files plus production build; known credential signatures, not a general security audit"
+  },
+  "backendOrRealChurchDataChanged": false,
+  "limits": [
+    "Fresh real Google sign-in not repeated",
+    "Public browser smoke used synthetic auth/API fixtures",
+    "Physical phone/projector rehearsal remains deferred",
+    "No billing-plan changes or paid products enabled"
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "date": "2026-11-01",
+  "origin": "https://gather-ccf-presentations.web.app",
+  "artifactCount": 47,
+  "allArtifactsMatch": true,
+  "artifacts": [
+    {
+      "path": "/assets/arrow-up-DjnYFvb1.js",
+      "status": 200,
+      "sha256": "c3bd1d0eaa546005ef9e84e18c16332f42fef48983d0faf05446cb3d0ee0bd3b",
+      "matches": true
+    },
+    {
+      "path": "/assets/AudiencePage-CRddhf-e.js",
+      "status": 200,
+      "sha256": "b0606fec58c7d1b7381cac043b82c553a3587c56cc2735c4643e9f11124436f0",
+      "matches": true
+    },
+    {
+      "path": "/assets/BackgroundGalleryPage-BtOfqRuP.js",
+      "status": 200,
+      "sha256": "1e9df01d65c6ccd7be17cd7a6d8796c57e03660d1911f02b4b0ed9a8187b5b59",
+      "matches": true
+    },
+    {
+      "path": "/assets/check-online-ByVbLn6t.js",
+      "status": 200,
+      "sha256": "2e7954f213986f4bec12c8a19b55ddb277a31137e1d1625c5debdb82b6f51bc5",
+      "matches": true
+    },
+    {
+      "path": "/assets/content-changes-CQbziPNZ.js",
+      "status": 200,
+      "sha256": "4ba75da6e02033fd4985a846c3c0c79273b2a0b2f795dc1b9d495f1a40b68349",
+      "matches": true
+    },
+    {
+      "path": "/assets/deck-service-DUndcnUp.js",
+      "status": 200,
+      "sha256": "d87fd6f9441f840562a9bdaf9dd7aa7fc8d76329ffb6f0d4e39cc5732e59ddfc",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckEditorPage-DiS2MODS.js",
+      "status": 200,
+      "sha256": "a60fa116f4866607db122dd7ad86278ee49f94965685ac978056d8268c739127",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckListPage-D00QXH7e.js",
+      "status": 200,
+      "sha256": "8c9777724702c665836c3a17b250c49a422a69d4b53a02bce8560e35bd5c6ca5",
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckPreviewPage-CL25cgkl.js",
+      "status": 200,
+      "sha256": "2f769f1f82e616703edd06c0aec052d1f3d46712c1645f2d1f67d31944f450eb",
+      "matches": true
+    },
+    {
+      "path": "/assets/decode-media-BAd_qlfw.js",
+      "status": 200,
+      "sha256": "b1f35b22f5fe9fc4a391b2c2fef866f3be3edbc57b818d57c5d0e61b008e7192",
+      "matches": true
+    },
+    {
+      "path": "/assets/dist-DwO5-r_z.js",
+      "status": 200,
+      "sha256": "fcd0b1467bd465a7f518208382ede325e9cdc280a6028a2b9c6a7bdbbd3e48e9",
+      "matches": true
+    },
+    {
+      "path": "/assets/ExportMetadataButton-D3soteo3.js",
+      "status": 200,
+      "sha256": "689844d2fedc92ca4311f3c8bd9d6181e2d0bd2d75b839c8290780e7cdf20f0a",
+      "matches": true
+    },
+    {
+      "path": "/assets/FilePicker-DZ8trN9W.js",
+      "status": 200,
+      "sha256": "a273356e696e4963ff7b61f01d45ddd176d98238bc75167a7860621fa6290eaa",
+      "matches": true
+    },
+    {
+      "path": "/assets/film-DeC43TxR.js",
+      "status": 200,
+      "sha256": "706cc5de4c105424b4d0496aca91368921dd3f7511c2ff6d671c5fc666c59d80",
+      "matches": true
+    },
+    {
+      "path": "/assets/index-C5y1IuZR.js",
+      "status": 200,
+      "sha256": "b55a918a5e3d4952e6477f8d343d6138d655c96e8f4c5804c8accc6b8636e8b1",
+      "matches": true
+    },
+    {
+      "path": "/assets/index-CgDWnCyQ.css",
+      "status": 200,
+      "sha256": "27e1a2a4541b524d45a556243b847dfb9c0b8bdd9640ec533601746f8bd6088f",
+      "matches": true
+    },
+    {
+      "path": "/assets/local-media-store-D8mXlcxM.js",
+      "status": 200,
+      "sha256": "9b53360bdb172226ee5b0288251119996699bf767c0bea096be4ebcbfb52d7ae",
+      "matches": true
+    },
+    {
+      "path": "/assets/LyricsEntryDialog-BX6ccxpq.js",
+      "status": 200,
+      "sha256": "fc7aa4cb77ea9a0e9aa1608af53867bfa8309768dcb0b532164623ccd947ca24",
+      "matches": true
+    },
+    {
+      "path": "/assets/media-service-D83j1lWa.js",
+      "status": 200,
+      "sha256": "c30edee6dda294de31b0b868e9071347e571793113db6939807ce72ee53084b3",
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaLibraryPage-DpmR8LrC.js",
+      "status": 200,
+      "sha256": "1327ed30fdb1aac80fd859bba8364be3aad4fc44b2d4253aebd209acf0264257",
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaPicker-BRpZOCwd.js",
+      "status": 200,
+      "sha256": "5e01b86c7da57a8b6b017d6cb63910234cd51d913f6f1d809156d5c820dae3b6",
+      "matches": true
+    },
+    {
+      "path": "/assets/Modal-BPiE1POS.js",
+      "status": 200,
+      "sha256": "a66885daa1ae14765ed6cf1a29eefbf93eb0a6098265f4066131888177c43124",
+      "matches": true
+    },
+    {
+      "path": "/assets/OfflineApp-MgGeAo0o.js",
+      "status": 200,
+      "sha256": "fa55c8f6a426256f3a771994ba98a403c02368fe4c29f8cff34c686dda120a21",
+      "matches": true
+    },
+    {
+      "path": "/assets/OperatorPage-D9-BNQrn.js",
+      "status": 200,
+      "sha256": "f8d277c51c410a9e985752d33c804ad2c2c4ac3d315d5dbdca1b16b5b4f4e5e8",
+      "matches": true
+    },
+    {
+      "path": "/assets/plus-CaC4TsNm.js",
+      "status": 200,
+      "sha256": "86624aa2e832861866bd90b76deec3eb930b123d26da8656a431d9f49acdfce1",
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-resolver-CVF08VEy.js",
+      "status": 200,
+      "sha256": "c00ee8a5a6b14f9706d92ea4799924a90e65f80598e12abe949e58acf007db6c",
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-store-Catu6Kha.js",
+      "status": 200,
+      "sha256": "2a5603a612bd4fd59112fda169877fcb6218ffdc749be4108720e84511a0dfc9",
+      "matches": true
+    },
+    {
+      "path": "/assets/presenter-state-Qejwa1CF.js",
+      "status": 200,
+      "sha256": "8f5c68d317c1ac0bd4d55b3b43bb8012b47677bdf2d923fed30782158383e15a",
+      "matches": true
+    },
+    {
+      "path": "/assets/PresenterConsole-Dpv9510o.js",
+      "status": 200,
+      "sha256": "bcb2124be15b9fb59913a154469796061aadae981a2a8a933fdcfab692ed90ff",
+      "matches": true
+    },
+    {
+      "path": "/assets/readiness-CuucJlKg.js",
+      "status": 200,
+      "sha256": "efc1ab34aa6d99089602a4bb8cfc3ac69b71ef85531bb164260844fd3b9d8b14",
+      "matches": true
+    },
+    {
+      "path": "/assets/rolldown-runtime-XKyaHtl9.js",
+      "status": 200,
+      "sha256": "548d1dbf321e7d2ae804fcc158b588706a7c52f8ca175de1490c6ccb4dbe55b7",
+      "matches": true
+    },
+    {
+      "path": "/assets/service-service-DSCCEodP.js",
+      "status": 200,
+      "sha256": "c127a54d19d7dbe8eecd064e8a7d324d2b33b28c47b5e88eccf82953f0c87bea",
+      "matches": true
+    },
+    {
+      "path": "/assets/ServicePlanPage-D1f9s4Ks.js",
+      "status": 200,
+      "sha256": "08d02f06334f80346ff87c1a42d800619af87c8e9ae47a53cbec70411b294a5a",
+      "matches": true
+    },
+    {
+      "path": "/assets/SlideRenderer-v1vOQJPU.js",
+      "status": 200,
+      "sha256": "ee51c09c5edf8f4d76cc544f3b206eee18af73c3055d4492331cb82990388206",
+      "matches": true
+    },
+    {
+      "path": "/assets/SongLibraryPage-CVNXPjFX.js",
+      "status": 200,
+      "sha256": "7c2535fb5fd2fa3a963ec6bf759bbc6611573c862c20f727218ef66d5d4927e4",
+      "matches": true
+    },
+    {
+      "path": "/assets/supabase-BGaryaA0.js",
+      "status": 200,
+      "sha256": "23e8813f912489dc6da54adb9dcdb17ffac73fbf5f9c84e31b80fcc0589ae243",
+      "matches": true
+    },
+    {
+      "path": "/assets/TemplatePicker-BO-1zFVB.js",
+      "status": 200,
+      "sha256": "3537810fa66f5b554c215539a08cee3843d26361553eb67cf294809ca7029047",
+      "matches": true
+    },
+    {
+      "path": "/assets/templates-C5rf56bZ.js",
+      "status": 200,
+      "sha256": "3a303b58566e699d09aafbe25d9226c732d8a3fa9267c95571b20694f6184d55",
+      "matches": true
+    },
+    {
+      "path": "/assets/use-content-guard-Cja0gt7A.js",
+      "status": 200,
+      "sha256": "911a211386c5810f352ecb53a07e37655f5b3cb62b68fb0d1c4c6bf62af888bd",
+      "matches": true
+    },
+    {
+      "path": "/assets/WorkspaceApp-CmuMevXW.js",
+      "status": 200,
+      "sha256": "1eec54453702e522ae9efef862654b6202fce164981bb63ea30095a41ede53a3",
+      "matches": true
+    },
+    {
+      "path": "/ccf-logo.svg",
+      "status": 200,
+      "sha256": "022512c132e08949b8277a14ca18a4916c5e00c712d8f7b3b300fb43f4607e37",
+      "matches": true
+    },
+    {
+      "path": "/fonts/Figtree.ttf",
+      "status": 200,
+      "sha256": "26ad3db9b31ff7dde67a91ff515d022d2f495cd506590699cf264f0bfe6fb714",
+      "matches": true
+    },
+    {
+      "path": "/fonts/OFL.txt",
+      "status": 200,
+      "sha256": "bb272dfcd8801eb31fb98fe51828f76f0e41ac82f89256101df8021aa3d30ce2",
+      "matches": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "sha256": "022512c132e08949b8277a14ca18a4916c5e00c712d8f7b3b300fb43f4607e37",
+      "matches": true
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "sha256": "970714b6668fdaaa1f4438d23fdd1bae3f8bb59f777e980527c948592c3dc705",
+      "matches": true
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "status": 200,
+      "sha256": "3c3c99dfa9b3dfc0fa20fd1e2e659ada5374762a5c91242b90a1a6bc02000c03",
+      "matches": true
+    },
+    {
+      "path": "/service-worker.js",
+      "status": 200,
+      "sha256": "2bece2207808e1a376a8da9b4e7da7bfd9c6a77937bd685130022473b5e1ced9",
+      "matches": true
+    }
+  ],
+  "routes": [
+    {
+      "path": "/auth",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/auth/callback",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/app/w/44444444-4444-4444-8444-444444444444/templates",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/offline",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/present/probe",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/audience/probe",
+      "status": 200,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/missing-S13-release",
+      "status": 404,
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https://*.googleusercontent.com https://www.churchraise.ai https://www.churchmediastudio.com; media-src 'self' blob:; connect-src 'self' https://tnrmotwiarlpknamxoyp.supabase.co wss://tnrmotwiarlpknamxoyp.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "cacheControl": "no-cache"
+    }
+  ],
+  "httpRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "alias": {
+    "status": 200,
+    "indexMatches": true
+  }
+}

@@ -1,6 +1,6 @@
 # Firebase Hosting deployment
 
-Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The PraisePoint update from source 2e53feb is now published; current build and post-release checks are in docs/evidence/S11-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
+Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S13 PraisePoint update from source bb8fdf8 is now published; current build and post-release checks are in docs/evidence/S13-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
 
 ## Configuration
 
@@ -36,3 +36,7 @@ Sources: [Hosting configuration](https://firebase.google.com/docs/hosting/full-c
 ## Verified current release
 
 Initial release 901647 was published on Spark from source checkpoint ed7f8a1. The current PraisePoint update is source 2e53feb, verified on 2026-10-30; see [S11 release evidence](evidence/S11-release.json). Public HTTP/header checks and actual Google login/reload/sign-out/back-cancellation passed. A focused isolated public-origin offline image/video restart passed; synthetic cloud setup does not certify fresh hosted Storage writes. Two prior automated startup attempts failed runtime protection and were not reproduced with diagnostics; no startup fix is claimed. See [full S10 evidence and limits](sprints/S10.md#public-release-verification--2026-10-29). Physical/backup/pilot acceptance and Google volunteer test-user access remain open.
+
+## S13 release — 2026-11-01
+
+Source `bb8fdf8ac4b35e3c3b5d6c5a5a8b22b105040b54` is published on the existing Hosting site and GitHub branch `feat/church-workspace`. Production build and publication succeeded. All 47 public artifacts matched their local hashes; seven route/header checks, HTTP-to-HTTPS redirect and alias checks passed. Public browser smoke passed with synthetic auth/API fixtures, including persistent themes, workspace glass menu, worship previews and immediate Add slide/save/reopen. See [S13 release receipt](evidence/S13-release.json). Real Google sign-in, actual church-data writes and physical equipment rehearsal were not repeated. No billing upgrade or backend change was performed.
