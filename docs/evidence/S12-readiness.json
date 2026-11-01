@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-01",
+  "environment": "Local Chromium browser/API fixtures plus narrow production-build hosting-policy check",
+  "score": 88.54,
+  "coverage": {
+    "checked": 14,
+    "applicable": 22,
+    "percent": 63.64
+  },
+  "provisional": true,
+  "verdict": "Readiness unverified",
+  "categories": {
+    "Works as intended": {
+      "weight": 20,
+      "items": {
+        "critical creation/edit/save flow": 1,
+        "form success, failure, conflict and retry": 1,
+        "console errors across responsive route pass": 1,
+        "navigation and internal deep links": 1,
+        "real deployed 404 response": null
+      },
+      "checked": 4,
+      "applicable": 5,
+      "score": 100.0
+    },
+    "Works for everyone": {
+      "weight": 25,
+      "items": {
+        "contrast (primary measured; not all text/states)": 0.5,
+        "keyboard focus and modal/drawer operation": 1,
+        "labels and named controls": 1,
+        "heading hierarchy on changed app routes": 1,
+        "reduced motion": 1,
+        "desktop/tablet/narrow reflow": 1,
+        "phone checks (emulation and synthesized touch only)": 0.5,
+        "worst-case content": 1
+      },
+      "checked": 8,
+      "applicable": 8,
+      "score": 87.5
+    },
+    "Trust and safety": {
+      "weight": 25,
+      "items": {
+        "full secret/history scan": null,
+        "deployed HTTPS and redirects": null,
+        "live server authorization/data integrity": null,
+        "live rate limits": null,
+        "full privacy/terms review": null
+      },
+      "checked": 0,
+      "applicable": 5,
+      "score": null
+    },
+    "Speed": {
+      "weight": 15,
+      "items": {
+        "throttled phone load": null,
+        "dimensioned lazy gallery images": 1,
+        "route splitting/build review (no detailed profiling)": 0.5,
+        "field Core Web Vitals": null
+      },
+      "checked": 2,
+      "applicable": 4,
+      "score": 75.0
+    }
+  },
+  "notApplicable": {
+    "Found and shared": "Authenticated internal app routes intentionally remain noindex; no marketing/search changes requested.",
+    "Consent": "No analytics/advertising/nonessential-storage integration added. External previews are explicitly explained."
+  },
+  "releaseGate": "No deployment, real provider authorization audit or physical device acceptance performed."
+}

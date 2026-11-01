@@ -108,6 +108,6 @@ it('keeps the saved checkpoint distinct from undo and redo',async () => {
   expect(screen.getByRole('button',{ name: 'Save presentation' })).toBeEnabled();
   await userEvent.click(screen.getByRole('button',{ name: 'Redo' }));
   expect(lyrics).toHaveValue('Saved new words');
-  expect(screen.getByRole('button',{ name: 'Save presentation' })).toBeDisabled();
+  expect(screen.getByRole('button',{ name: 'Saved' })).toBeDisabled();
   expect(saveDeck).toHaveBeenCalledOnce();
 });

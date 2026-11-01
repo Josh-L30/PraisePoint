@@ -41,3 +41,11 @@ Lyric templates use large text, strong contrast, short lines, and safe margins, 
 ## PraisePoint refinement — 2026-10-29
 
 User-selected name: PraisePoint. Use the CCF mark sourced from https://www.ccf.org.ph/wp-content/uploads/2020/07/CCF-Logo-36x36-1.svg (linked in the official site DOM), kept locally with its original vector geometry and visible fills recolored to #007887. No logo tracing or AI recreation. Preserve Figtree and the teal glass identity. Compact laptop navigation, restrained login scale, 150ms centered native dialogs, and accessible icon file controls are the new UI rules. Internal gather-* cache/storage/protocol identifiers remain stable for compatibility.
+
+## Navigation and editing refinement — 2026-11-01
+
+The workspace identity and native dropdown belong in the sticky top navigation bar. Only the dropdown arrow opens workspace choices; the visible name is descriptive. Keep one account identity in the sidebar. On desktop, the collapsed rail shows the CCF mark, revealing the menu on hover or keyboard focus; the expanded sidebar puts its collapse control beside the brand. Hide sign-out in the collapsed desktop rail, retaining it in the expanded sidebar and mobile drawer.
+
+Use a clear teal primary action, pale teal secondary action, outlined neutral action and red destructive action, with visible hover/focus/pressed states. Separate related actions by at least 12px where space permits and wrap them at smaller widths. Disabled controls retain their state without implying an available action. Save labels represent confirmed writes and reset on editing.
+
+Presentations owns slide creation. Templates is a background gallery with externally hosted still previews and links to free originals. Download/import is explicit; viewing the gallery never uploads originals into Supabase. Moving backgrounds remain local for presentation and offline preparation. Double-click slide text to edit/select words; a separate handle moves the box. Keep pointer targets active inside the otherwise non-interactive selection overlay. Full-window preview is rendered outside the glass shell so filters cannot constrain it.

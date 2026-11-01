@@ -27,7 +27,7 @@ test('PraisePoint login and compact sidebar fit laptop and narrow screens',async
  await page.setViewportSize({width:1366,height:768});await page.screenshot({path:'docs/evidence/S11-sidebar-expanded.png'});
  await page.getByRole('button',{name:'Collapse navigation'}).click();
  await expect(page.getByRole('button',{name:'Expand navigation'})).toBeVisible();
- await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeHidden();
  expect(await page.locator('.workspace-shell').evaluate(el=>getComputedStyle(el).transitionProperty)).not.toContain('grid-template-columns');
  await page.screenshot({path:'docs/evidence/S11-sidebar-collapsed.png'});
  await writeFile('docs/evidence/S11-layout.json',JSON.stringify({fixture:true,laptopSidebar:measurements},null,2));
@@ -38,7 +38,7 @@ test('song breaks import independently, canvas text edits, and preview enters fu
  state.songs.set(id,{id,workspaceId:personalId,title:'Sunday song 🙏',lyrics,author:'',source:'',usageNotes:'',revision:1});
  await page.setViewportSize({width:1440,height:1000});await page.goto(libraryPath);
  await page.getByRole('button',{name:'New presentation',exact:true}).click();await page.getByRole('button',{name:'Lyrics',exact:true}).click();
- await page.getByRole('button',{name:'Select Lyrics',exact:true}).click();
+ await page.getByRole('button',{name:'Select Lyrics',exact:true}).dblclick();
  const inline=page.getByRole('textbox',{name:'Edit slide text',exact:true});await expect(inline).toBeVisible();await inline.fill('Direct text editing');await inline.press('Home');await inline.press('Control+Shift+ArrowRight');expect(await inline.evaluate((el:HTMLTextAreaElement)=>el.selectionEnd>el.selectionStart)).toBe(true);await inline.press('Delete');await expect(inline).not.toHaveValue('Direct text editing');await inline.fill('Direct text editing');await inline.press('Escape');
  await expect(page.getByRole('textbox',{name:'Lyrics',exact:true})).toHaveValue('Direct text editing');
  await expect(page.getByRole('button',{name:'Move text box',exact:true})).toBeVisible();
@@ -52,13 +52,13 @@ test('song breaks import independently, canvas text edits, and preview enters fu
  await page.getByRole('button',{name:'Save presentation',exact:true}).click();await expect(page.getByText('Saved · revision 2',{exact:true})).toBeVisible();
  const saved=[...state.documents.values()][0];expect(saved.document.slides).toHaveLength(3);expect(state.songs.get(id)?.lyrics).toBe(lyrics);
  expect(saved.document.slides.slice(1).map(s=>s.elements[0]).map(e=>e.kind==='text'?e.text:'')).toEqual(lyrics.split('\n\n'));
- await page.getByRole('button',{name:'Full-window preview',exact:true}).click();await expect(page.getByTestId('slide-stage')).toBeVisible();
+ await page.getByRole('button',{name:'Full-window preview',exact:true}).click();await expect(page.getByRole('dialog',{name:'Presentation preview'}).getByTestId('slide-stage')).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>!!document.fullscreenElement)).toBe(true);
- const viewport=await page.locator('.slide-viewport').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,innerWidth,innerHeight}));
+ const viewport=await page.locator('.full-slide-preview .slide-viewport').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,innerWidth,innerHeight}));
  expect(viewport.width).toBe(viewport.innerWidth);expect(viewport.height).toBe(viewport.innerHeight);
  await page.screenshot({path:'docs/evidence/S11-fullscreen-preview.png'});
  await page.getByRole('link',{name:'Back to editor'}).click();await expect.poll(()=>page.evaluate(()=>!!document.fullscreenElement)).toBe(false);
- await expect(page.getByRole('button',{name:'Save presentation',exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Saved',exact:true})).toBeVisible();
 });
 
 test('icon file picker and centered media confirmation preserve cancel and remove on confirm (API fixture)',async({page})=>{

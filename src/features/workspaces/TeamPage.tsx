@@ -132,7 +132,7 @@ export function TeamPage({ workspace, profileId, service = workspaceService, onR
             <div className="member-meta"><strong><bdi>{member.displayName}</bdi></strong><small>{member.role==='owner' ? 'Owner' : 'Volunteer'}{member.userId===profileId ? ' · You' : ''}</small></div>
             {canManage && !workspace.deletionPending && member.userId!==profileId && <div className="member-actions">
               <button className="text-button" disabled={!!busy} onClick={() => setConfirmation({ kind: 'transfer', member })}>Make owner</button>
-              <button className="text-button" disabled={!!busy} onClick={() => setConfirmation({ kind: 'remove', member })}>Remove volunteer</button>
+              <button className="text-button text-button-danger" disabled={!!busy} onClick={() => setConfirmation({ kind: 'remove', member })}>Remove volunteer</button>
             </div>}
           </li>)}
         </ul>}

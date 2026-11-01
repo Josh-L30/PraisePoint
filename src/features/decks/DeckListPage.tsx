@@ -9,13 +9,13 @@ import type { SlideCategory } from '../../domain/slide';
 import {supabase} from '../../lib/supabase';
 import {createMediaService} from '../media/media-service';
 import {useContentGuard} from '../songs/use-content-guard';
-export type DeckListPageProps = { workspace: Workspace; profileId: string; workspaces: Workspace[]; service?: DeckService; startWithTemplates?: boolean };
-export function DeckListPage({ workspace, profileId, workspaces, service:provided, startWithTemplates = false }: DeckListPageProps) {
+export type DeckListPageProps = { workspace: Workspace; profileId: string; workspaces: Workspace[]; service?: DeckService };
+export function DeckListPage({ workspace, profileId, workspaces, service:provided }: DeckListPageProps) {
   const service=useMemo(()=>provided??createDeckService(supabase,createMediaService(profileId)),[provided,profileId]);
   const navigate = useNavigate(), mounted = useRef(true), writing = useRef(false);
   const [items,setItems] = useState<DeckSummary[]>([]), [hasMore,setHasMore] = useState(false), [page,setPage] = useState(0);
   const [loading,setLoading] = useState(true), [busy,setBusy] = useState(false), [version,setVersion] = useState(0);
-  const [error,setError] = useState<string | null>(null), [choosing,setChoosing] = useState(startWithTemplates);
+  const [error,setError] = useState<string | null>(null), [choosing,setChoosing] = useState(false);
   const [action,setAction] = useState<{ kind: 'copy' | 'delete'; deck: DeckSummary } | null>(null), [destination,setDestination] = useState(workspace.id);
   const guard=useContentGuard(false,busy);
   const base = '/app/w/' + workspace.id + '/decks';
@@ -82,7 +82,7 @@ export function DeckListPage({ workspace, profileId, workspaces, service:provide
       <h2>{action.kind==='copy' ? 'Create a separate copy?' : 'Delete this presentation?'}</h2>{error && <p className="form-error" role="alert">{error}</p>}<p><strong><bdi>{action.deck.title}</bdi></strong></p>
       {action.kind==='copy' ? <><label className="field-label" htmlFor="copy-destination">Copy to workspace</label><select className="field-input" id="copy-destination" value={destination} disabled={busy} onChange={event => setDestination(event.target.value)}>{workspaces.map(w => <option value={w.id} key={w.id}>{w.name}{w.kind==='church' ? ' · Shared' : ' · Private'}</option>)}</select><p>Copying to a church makes this separate copy available to its volunteers. The original stays where it is. Media must belong to the destination workspace.</p></>
         : <p>This removes the saved presentation. Presentations referenced by a service must be removed from that service first.</p>}
-      <div className="action-row"><button className="button button-primary" disabled={busy} onClick={() => void confirmAction()}>{busy ? 'Working…' : action.kind==='copy' ? 'Create separate copy' : 'Confirm presentation deletion'}</button><button className="button" disabled={busy} onClick={() => setAction(null)}>Cancel</button></div>
+      <div className="action-row"><button className={'button '+(action.kind==='copy'?'button-primary':'button-danger')} disabled={busy} onClick={() => void confirmAction()}>{busy ? 'Working…' : action.kind==='copy' ? 'Create separate copy' : 'Confirm presentation deletion'}</button><button className="button" disabled={busy} onClick={() => setAction(null)}>Cancel</button></div>
     </Modal>}
     {!loading && (page>0 || hasMore) && <nav className="library-pagination" aria-label="Presentation pages"><button className="button" disabled={page===0 || busy} onClick={() => setPage(value => value-1)}>Previous page</button><span>Page {page+1}</span><button className="button" disabled={!hasMore || busy} onClick={() => setPage(value => value+1)}>Next page</button></nav>}
     <footer className="workspace-footer">Online saves are authoritative. Prepare a service for offline use when the presentation tools are ready.</footer>

@@ -1,0 +1,156 @@
+{
+  "measurements": [
+    {
+      "width": 320,
+      "route": "",
+      "fits": true
+    },
+    {
+      "width": 320,
+      "route": "/decks",
+      "fits": true
+    },
+    {
+      "width": 320,
+      "route": "/songs",
+      "fits": true
+    },
+    {
+      "width": 320,
+      "route": "/services",
+      "fits": true
+    },
+    {
+      "width": 320,
+      "route": "/templates",
+      "fits": true
+    },
+    {
+      "width": 320,
+      "route": "/team",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "/decks",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "/songs",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "/services",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "/templates",
+      "fits": true
+    },
+    {
+      "width": 390,
+      "route": "/team",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "/decks",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "/songs",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "/services",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "/templates",
+      "fits": true
+    },
+    {
+      "width": 768,
+      "route": "/team",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "/decks",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "/songs",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "/services",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "/templates",
+      "fits": true
+    },
+    {
+      "width": 1024,
+      "route": "/team",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "/decks",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "/songs",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "/services",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "/templates",
+      "fits": true
+    },
+    {
+      "width": 1366,
+      "route": "/team",
+      "fits": true
+    }
+  ],
+  "pageErrors": [],
+  "device": "Chromium viewport emulation; no physical device"
+}

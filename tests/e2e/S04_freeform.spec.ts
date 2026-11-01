@@ -5,7 +5,7 @@ test('scaled pointer move/resize each undo as one gesture and preserve cloud geo
   await page.setViewportSize({ width: 1440,height: 1000 });
   await page.goto(libraryPath + '/' + deckId);
   await page.getByRole('spinbutton',{ name: 'Box width' }).fill('800');
-  const box=page.getByRole('button',{ name: 'Select Lyrics' }); await box.scrollIntoViewIfNeeded();
+  const box=page.getByRole('button',{ name: 'Move text box',exact:true }); await box.scrollIntoViewIfNeeded();
   const rect=await box.boundingBox(); if (!rect) throw new Error('Selection box missing');
   const scale=await page.locator('.editor-canvas .slide-stage').evaluate(element => element.getBoundingClientRect().width/1920);
   const start={ x: rect.x+rect.width/2,y: rect.y+rect.height/2 };
@@ -59,7 +59,7 @@ test('keyboard controls, persistent field labels, layers and slide ordering work
 test('Escape cancels a captured drag and long words remain intact with an overflow warning',async ({ page }) => {
   const state=await deckFixture(page); await page.setViewportSize({ width: 1440,height: 1000 }); await page.goto(libraryPath + '/' + deckId);
   await page.getByRole('spinbutton',{ name: 'Box width' }).fill('800');
-  const box=page.getByRole('button',{ name: 'Select Lyrics' }); await box.scrollIntoViewIfNeeded();
+  const box=page.getByRole('button',{ name: 'Move text box',exact:true }); await box.scrollIntoViewIfNeeded();
   const rect=await box.boundingBox(); if (!rect) throw new Error('Selection missing');
   await page.mouse.move(rect.x+rect.width/2,rect.y+rect.height/2); await page.mouse.down(); await page.mouse.move(rect.x+rect.width/2+25,rect.y+rect.height/2+15,{ steps: 4 });
   await expect(page.getByRole('spinbutton',{ name: 'X position' })).not.toHaveValue('96');

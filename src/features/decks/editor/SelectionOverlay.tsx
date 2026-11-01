@@ -75,7 +75,10 @@ export function SelectionOverlay({ slide,selectedId,scale,disabled,instructionsI
       value={element.text} onChange={event=>onCommand({type:'update-text',id:element.id,text:event.target.value})} onPointerDown={event=>event.stopPropagation()} onBlur={()=>{onCommand({type:'end-gesture'});setEditingId(null);}}
       onKeyDown={event=>{event.stopPropagation();if(event.key==='Escape'){event.preventDefault();onCommand({type:'end-gesture'});setEditingId(null);}}}/> : <button type="button" key={element.id} className={'element-hitbox'+(element.kind==='text'?' text-hitbox':'')} aria-label={'Select ' + title(element)} aria-pressed={element.id===selectedId} aria-describedby={instructionsId} disabled={disabled}
       style={{ position: 'absolute',left: element.x,top: element.y,width: element.width,height: element.height,zIndex: element.id===selectedId ? 10002 : element.z }}
-      onFocus={() => { if (!disabled) onCommand({ type: 'select',elementId: element.id }); }} onClick={() => {onCommand({ type: 'select',elementId: element.id });edit(element);}} onPointerDown={event => start(event,element,'move')} onKeyDown={event => keyboard(event,element,'move')} {...shared} />)}
+      onFocus={() => { if (!disabled) onCommand({ type: 'select',elementId: element.id }); }} onClick={event => {onCommand({ type: 'select',elementId: element.id });if(event.detail===0)edit(element);}} onDoubleClick={()=>edit(element)} onPointerDown={event => {
+        if(element.kind==='text'){event.stopPropagation();moved.current=false;if(!disabled)onCommand({type:'select',elementId:element.id});}
+        else start(event,element,'move');
+      }} onKeyDown={event => keyboard(event,element,'move')} {...shared} />)}
     {selected && <>
       {selected.kind==='text' && <button type="button" className="editor-move-handle" aria-label="Move text box" title="Drag to move text" disabled={disabled} style={{left:selected.x,top:Math.max(0,selected.y-30*inverse),width:28*inverse,height:28*inverse,zIndex:10004}} onPointerDown={event=>start(event,selected,'move')} onKeyDown={event=>keyboard(event,selected,'move')} {...shared}><Move style={{width:16*inverse,height:16*inverse}}/></button>}
       <div className="selection-outline" aria-hidden="true" style={{ left: selected.x,top: selected.y,width: selected.width,height: selected.height,borderWidth: 2*inverse }} />

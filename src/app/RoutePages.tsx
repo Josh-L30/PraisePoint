@@ -10,6 +10,7 @@ import { WorkspaceProvider } from '../features/workspaces/WorkspaceProvider';
 import { useWorkspace } from '../features/workspaces/workspace-context';
 import { TeamPage } from '../features/workspaces/TeamPage';
 const DeckListPage = lazy(() => import('../features/decks/DeckListPage').then(module => ({ default: module.DeckListPage })));
+const BackgroundGalleryPage = lazy(() => import('../features/decks/BackgroundGalleryPage').then(module => ({ default: module.BackgroundGalleryPage })));
 const DeckEditorPage = lazy(() => import('../features/decks/DeckEditorPage').then(module => ({ default: module.DeckEditorPage })));
 const DeckPreviewPage = lazy(() => import('../features/decks/DeckPreviewPage').then(module => ({ default: module.DeckPreviewPage })));
 const SongLibraryPage = lazy(() => import('../features/songs/SongLibraryPage').then(module => ({ default: module.SongLibraryPage })));
@@ -43,7 +44,8 @@ export function SongLibrary() { const {active}=useWorkspace();return <SongLibrar
 export function ServicePlans() { const auth=useAuth(),{active}=useWorkspace(),{serviceId}=useParams();return auth.status==='authenticated'?<ServicePlanPage key={active.id+(serviceId??'list')} workspace={active} serviceId={serviceId} profileId={auth.profile.profileId}/>:null; }
 export function DeckLibrary({ showTemplates = false }: { showTemplates?: boolean }) {
   const auth = useAuth(), { active, workspaces } = useWorkspace();
-  return auth.status==='authenticated' ? <DeckListPage key={active.id + showTemplates} workspace={active} workspaces={workspaces} profileId={auth.profile.profileId} startWithTemplates={showTemplates} /> : null;
+  if(auth.status!=='authenticated')return null;
+  return showTemplates?<BackgroundGalleryPage key={active.id} workspace={active}/>:<DeckListPage key={active.id} workspace={active} workspaces={workspaces} profileId={auth.profile.profileId}/>;
 }
 export function DeckEditor() {
   const { deckId } = useParams(), auth = useAuth(), { active } = useWorkspace();
