@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-01",
+  "results": [
+    {
+      "id": "floral-cross",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 23074
+    },
+    {
+      "id": "sunset-cross",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 17228
+    },
+    {
+      "id": "church-pews",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 21964
+    },
+    {
+      "id": "barn-cross",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 36597
+    },
+    {
+      "id": "gold-cross",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 20601
+    },
+    {
+      "id": "snowy-church",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 38505
+    },
+    {
+      "id": "cross-rays",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 30170
+    },
+    {
+      "id": "starry-church",
+      "provider": "ChurchRaise",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 23135
+    },
+    {
+      "id": "bokeh-cool",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 9969
+    },
+    {
+      "id": "aurora-warm",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 11439
+    },
+    {
+      "id": "bokeh-warm",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 10660
+    },
+    {
+      "id": "aurora-cool",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 9386
+    },
+    {
+      "id": "nebula-cool",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 11635
+    },
+    {
+      "id": "rays-cool",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 11404
+    },
+    {
+      "id": "nebula-warm",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 12984
+    },
+    {
+      "id": "rays-warm",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 15095
+    },
+    {
+      "id": "starfield-warm",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 14502
+    },
+    {
+      "id": "starfield-cool",
+      "provider": "Church Media Studio",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 13417
+    }
+  ]
+}

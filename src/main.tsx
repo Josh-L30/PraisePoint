@@ -3,7 +3,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/tokens.css';
 import './styles/glass.css';
-if (localStorage.getItem('gather-transparency') === 'reduced') document.documentElement.dataset.transparency = 'reduced';
+import './styles/themes.css';
+import {initializeTheme} from './lib/theme';
+initializeTheme();
 initializeOfflineRuntime();
 const root=createRoot(document.getElementById('root')!),audience=location.pathname.match(/^\/audience\/([^/]+)\/?$/);
 if(audience){

@@ -44,8 +44,19 @@ User-selected name: PraisePoint. Use the CCF mark sourced from https://www.ccf.o
 
 ## Navigation and editing refinement — 2026-11-01
 
-The workspace identity and native dropdown belong in the sticky top navigation bar. Only the dropdown arrow opens workspace choices; the visible name is descriptive. Keep one account identity in the sidebar. On desktop, the collapsed rail shows the CCF mark, revealing the menu on hover or keyboard focus; the expanded sidebar puts its collapse control beside the brand. Hide sign-out in the collapsed desktop rail, retaining it in the expanded sidebar and mobile drawer.
+The workspace trigger belongs in the sticky top navigation bar. It shows initials and a chevron; full workspace names are shown only in the anchored glass choice list. Keep one account identity in the sidebar. On desktop, the collapsed rail shows the CCF mark, revealing the menu on hover or keyboard focus; the expanded sidebar puts its collapse control beside the brand. Hide sign-out in the collapsed desktop rail, retaining it in the expanded sidebar and mobile drawer.
 
 Use a clear teal primary action, pale teal secondary action, outlined neutral action and red destructive action, with visible hover/focus/pressed states. Separate related actions by at least 12px where space permits and wrap them at smaller widths. Disabled controls retain their state without implying an available action. Save labels represent confirmed writes and reset on editing.
 
 Presentations owns slide creation. Templates is a background gallery with externally hosted still previews and links to free originals. Download/import is explicit; viewing the gallery never uploads originals into Supabase. Moving backgrounds remain local for presentation and offline preparation. Double-click slide text to edit/select words; a separate handle moves the box. Keep pointer targets active inside the otherwise non-interactive selection overlay. Full-window preview is rendered outside the glass shell so filters cannot constrain it.
+
+
+## Themes and filmstrip refinement — 2026-11-01 (S13)
+
+Use PW for personal workspace initials and the first letters of church workspace names. The compact button opens a viewport-bounded, portalled Liquid Glass list; support arrows, Home/End, Enter, Escape with focus restoration and outside dismissal. Keep full names and owner/member descriptions inside that list.
+
+The sidebar uses a Sun/Moon theme action instead of a manual transparency setting. Respect the system theme until a choice is saved under praisepoint-theme; apply it before rendering, and follow changes across tabs. Theme UI surfaces, dialogs and controls coherently. Never invert or recolor authored slide/media content. Keep OS reduced-transparency and reduced-motion fallbacks.
+
+Desktop editing uses a horizontal filmstrip below the canvas with a separately scrolling inspector beside it. Selection reveals the active thumbnail within the strip without scrolling the page vertically. Add slide immediately appends a fresh slide in the current category; Choose layout opens the separate category chooser. Retain undo/redo, keyboard reorder and save/reopen.
+
+Templates is a worship-media gallery: ChurchRaise still previews and Church Media Studio motion-loop posters, plus CMG free-source links. Embed previews only, credit the source and link to provider downloads/usage terms. No automatic original-media uploads, rehosting or streaming inside slides. Provider previews may include branding and need internet; explicit import/preparation remains required for presenting offline.

@@ -12,10 +12,13 @@ function Harness({ onSelect }: { onSelect(): void }) {
 it('switches only the active workspace route and not personal content', async () => {
   const onSelect = vi.fn();
   render(<MemoryRouter initialEntries={['/app/w/' + personal.id]}><Harness onSelect={onSelect} /></MemoryRouter>);
-  const picker = screen.getByRole('combobox', { name: 'Switch workspace' });
-  await userEvent.selectOptions(picker,church.id);
+  const picker = screen.getByRole('button', { name: 'Switch workspace' });
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  await userEvent.click(picker);
+  await userEvent.click(screen.getByRole('option',{name:church.name}));
   expect(screen.getByTestId('route')).toHaveTextContent('/app/w/' + church.id);
-  expect(picker).toHaveValue(church.id);
+  expect(picker).toHaveAttribute('aria-expanded','false');
   expect(onSelect).toHaveBeenCalledOnce();
-  expect(screen.getByRole('option', { name: 'Personal workspace' })).toBeInTheDocument();
+  await userEvent.click(picker);
+  expect(screen.getByRole('option', { name: /Personal workspace/ })).toBeInTheDocument();
 });

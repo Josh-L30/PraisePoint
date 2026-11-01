@@ -29,10 +29,11 @@ describe('workspace shell', () => {
     expect(screen.getByRole('button', { name: 'Open navigation' })).toHaveAttribute('aria-expanded', 'false');
     expect(menu).toHaveFocus();
   });
-  it('offers solid surfaces and a useful empty workspace without invented decks', async () => {
+  it('switches theme and keeps a useful empty workspace without invented decks', async () => {
     render(<MemoryRouter><AppShell profile={profile} onSignOut={async () => {}} /></MemoryRouter>);
-    await userEvent.click(screen.getByRole('button', { name: 'Reduce transparency' }));
-    expect(document.documentElement).toHaveAttribute('data-transparency', 'reduced');
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to dark mode' }));
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+    expect(localStorage.getItem('praisepoint-theme')).toBe('dark');
     expect(screen.queryByText('24 slides')).not.toBeInTheDocument();
   });
   it('offers recovery when Google login is not configured', async () => {

@@ -1,8 +1,9 @@
+import {ThemeToggle} from '../components/ThemeToggle';
 import {BrandMark} from '../components/BrandMark';
 import {UpdatePrompt} from '../features/offline/UpdatePrompt';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink,useLocation } from 'react-router';
-import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, ShieldCheck, HardDriveDownload, PanelLeftClose, LogOut, Menu, X } from 'lucide-react';
+import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, HardDriveDownload, PanelLeftClose, LogOut, Menu, X } from 'lucide-react';
 import type { ProfileWorkspace } from '../features/auth/auth-service';
 import { DashboardPage } from './DashboardPage';
 import { WorkspacePicker } from '../features/workspaces/WorkspacePicker';
@@ -14,7 +15,6 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
   const location=useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [solid, setSolid] = useState(() => localStorage.getItem('gather-transparency') === 'reduced');
   const [signingOut, setSigningOut] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
@@ -28,10 +28,6 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
     { label: 'Media library', icon: Image, path: base + '/media' },
     { label: 'Templates', icon: LayoutTemplate, path: base + '/templates' },
   ];
-  useEffect(() => {
-    document.documentElement.dataset.transparency = solid ? 'reduced' : 'full';
-    localStorage.setItem('gather-transparency', solid ? 'reduced' : 'full');
-  }, [solid]);
   useEffect(() => {
     if (!mobileOpen) return;
     const previousOverflow = document.body.style.overflow;
@@ -60,14 +56,14 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
       <nav className="primary-navigation" aria-label="Workspace">{items.map(({ label, icon: Icon, path, end }) => <NavLink key={label} to={path} end={end} aria-label={label} title={collapsed ? label : undefined} onClick={() => setMobileOpen(false)} className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}><Icon size={19} /><span className="collapse-copy">{label}</span></NavLink>)}</nav>
       <a className="nav-item" href="/offline" aria-label="Prepared services"><HardDriveDownload size={19}/><span className="collapse-copy">Prepared services</span></a>
       <div className="sidebar-bottom"><Link className="nav-item" to={base + '/team'} onClick={closeDrawer} aria-label="Church workspace"><Users size={19} /><span className="collapse-copy">Church workspace</span></Link>
-        <button className="nav-item" aria-label="Reduce transparency" aria-pressed={solid} onClick={() => setSolid(v => !v)}><ShieldCheck size={19} /><span className="collapse-copy">Reduce transparency</span></button>
+        <ThemeToggle/>
         <div className="profile"><span className="avatar">{profile.avatarUrl ? <img src={profile.avatarUrl} alt="" referrerPolicy="no-referrer" /> : initials}</span><span className="collapse-copy"><strong>{profile.displayName}</strong><small>Church volunteer</small></span>
           <button className="icon-button sign-out" aria-label="Sign out" disabled={signingOut} onClick={async () => { if (!await mayChangeAccount()) return; setSigningOut(true); try{await onSignOut();}finally{setSigningOut(false);} }}><LogOut size={17} /></button></div>
       </div>
     </aside>
     <div className="main-column"><header className="top-bar glass">
       <button ref={menuRef} className="icon-button mobile-menu" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen} aria-controls="workspace-navigation" onClick={() => mobileOpen ? closeDrawer() : setMobileOpen(true)}>{mobileOpen ? <X size={20} /> : <Menu size={20} />}</button>
-      <div className="breadcrumb"><span>Workspace</span><span aria-hidden="true">/</span><strong title={selected.name}>{selected.kind==='personal' ? 'Personal' : selected.name}</strong></div>
+      <div className="breadcrumb"><span>Workspace</span></div>
       <div className="top-bar-right"><WorkspacePicker workspaces={workspaces ?? [selected]} selected={selected}/></div>
     </header><main id="main-content" className="main-panel glass"><UpdatePrompt/>{selected.deletionPending && location.pathname!==base+'/team'?<section className="page-content"><h1>Workspace deletion is in progress.</h1><p>Changes are paused while this workspace’s content and files are removed.</p><Link className="button" to={base+'/team'}>{selected.role==='owner'?'Resume workspace deletion':'View workspace status'}</Link></section>:children ?? <DashboardPage workspaceId={selected.id} shared={selected.kind==='church'} />}</main></div>
   </div>;

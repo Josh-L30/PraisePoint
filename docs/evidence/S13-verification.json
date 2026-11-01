@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-01",
+  "scope": "Local S13; not published",
+  "browser": {
+    "startTime": "2026-11-01T13:28:35.768Z",
+    "duration": 374342.415,
+    "expected": 40,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "productionThemeFilmstrip": {
+    "startTime": "2026-11-01T13:26:16.344Z",
+    "duration": 6344.786,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "unitBaseline": {
+    "passed": 282,
+    "files": 74,
+    "note": "Full suite passed during S13 implementation; later redundant thread reruns stalled at startup and were stopped. See audit for final focused check."
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 1,
+    "existingWarning": "Modal.tsx react-refresh/only-export-components"
+  },
+  "build": {
+    "passed": true,
+    "precacheEntries": 45,
+    "precacheKiB": 1017.94,
+    "note": "Production TypeScript/Vite build completed before final test-only refinements."
+  },
+  "detectorFindings": 0,
+  "physicalDevice": false,
+  "archivedRegressionFiles": [
+    "docs/evidence/S13-regression-S02-team-desktop.png",
+    "docs/evidence/S13-regression-S02-team-mobile.png",
+    "docs/evidence/S13-regression-S03-letterboxed-preview.png",
+    "docs/evidence/S13-regression-S03-lyrics-editor.png",
+    "docs/evidence/S13-regression-S04-freeform-editor.png",
+    "docs/evidence/S13-regression-S05-lyric-review.png",
+    "docs/evidence/S13-regression-S05-service-plan.png",
+    "docs/evidence/S13-regression-S10-contrast.json",
+    "docs/evidence/S13-regression-S10-demo-desktop.png",
+    "docs/evidence/S13-regression-S10-opaque-fallback.png",
+    "docs/evidence/S13-regression-S10-viewport-1440.png",
+    "docs/evidence/S13-regression-S10-viewport-320.png",
+    "docs/evidence/S13-regression-S10-worst-1440.png",
+    "docs/evidence/S13-regression-S10-worst-320.png",
+    "docs/evidence/S13-regression-S11-login-desktop.png",
+    "docs/evidence/S13-regression-S11-login-mobile.png",
+    "docs/evidence/S13-regression-S11-media-confirmation.png",
+    "docs/evidence/S13-regression-S11-sidebar-collapsed.png",
+    "docs/evidence/S13-regression-S11-sidebar-expanded.png",
+    "docs/evidence/S13-regression-S11-song-break-review.png",
+    "docs/evidence/S13-regression-S11-song-worst-case.png",
+    "docs/evidence/S13-regression-S11-workspace-confirmation.png",
+    "docs/evidence/S13-regression-S12-background-gallery.png",
+    "docs/evidence/S13-regression-S12-collapsed-rail.png",
+    "docs/evidence/S13-regression-S12-external-previews.json",
+    "docs/evidence/S13-regression-S12-mobile-gallery.png",
+    "docs/evidence/S13-regression-S12-service-actions.png",
+    "docs/evidence/S13-regression-S12-sticky-header.png"
+  ],
+  "focusedUnitFinal": {
+    "files": 2,
+    "passed": 5,
+    "pool": "forks",
+    "durationSeconds": 12.15
+  }
+}

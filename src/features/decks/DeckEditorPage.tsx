@@ -139,7 +139,7 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
       event.preventDefault(); execute({ type: event.key.toLowerCase()==='y' || event.shiftKey ? 'redo' : 'undo' });
     }
   }}>
-    {confirmationDialog}<header className="editor-heading">{back}<div className="editor-title-row"><div><span className="quiet-label">Presentation editor</span><h1>{draft.title}</h1></div>
+    {confirmationDialog}<header className="editor-heading">{back}<div className="editor-title-row"><div><h1>{draft.title}</h1></div>
       <div className="action-row"><button className="button desktop-edit-only" disabled={busy || (!editor.past.length && (!editor.gesture || editor.version===editor.gesture.version))} onClick={() => execute({ type: 'undo' })}><Undo2 size={15} />Undo</button>
         <button className="button desktop-edit-only" disabled={busy || !editor.future.length || !!(editor.gesture && editor.version!==editor.gesture.version)} onClick={() => execute({ type: 'redo' })}><Redo2 size={15} />Redo</button>
         <button className="button" disabled={busy} onClick={() => { if (!validControls()) return; execute({ type: 'end-gesture' }); allowNavigation.current=true;if(window.document.documentElement.requestFullscreen)void window.document.documentElement.requestFullscreen().catch(()=>{});navigate('/app/w/' + workspaceId + '/decks/' + deckId + '/preview'); }}>Full-window preview</button>
@@ -158,19 +158,20 @@ export function DeckEditorPage({ workspaceId, deckId, profileId, service = deckS
     {songPickerOpen && <SongPicker workspaceId={workspaceId} onClose={()=>setSongPickerOpen(false)} onSelect={song=>{setSongPickerOpen(false);setImportSong(song);}}/>}
     {importSong && <LyricsEntryDialog key={importSong.id} initialLyrics={importSong.lyrics} busy={busy} externalError={error?.message} confirmLabel="Add lyric slides to presentation" onConfirm={importLyrics} onCancel={()=>setImportSong(null)}/>}
     <div className="editor-layout">
-      <SlideStrip state={editor} resolveMedia={media.resolveMedia} disabled={busy} onCommand={command => { execute(command); setDeleteSlide(false); }} onAdd={() => setAdding(value => !value)} />
+      <div className="editor-work-area">
       <div className="editor-canvas"><div className="canvas-toolbar"><strong>{templateNames[slide.category]}</strong><span>1920 × 1080 · 16:9</span></div>
         <div className="action-row desktop-edit-only media-editor-tools"><button className="button" disabled={busy} onClick={()=>{setError(null);setSongPickerOpen(true);}}>Import from Song library</button><button className="button" disabled={busy} onClick={()=>setMediaAction('background')}>Choose background</button><button className="button" disabled={busy} onClick={()=>setMediaAction('clip')}>Standalone video</button>{slide.standaloneVideoId && <button className="text-button" disabled={busy} onClick={()=>execute({type:'set-standalone-video',asset:null})}>Remove standalone video</button>}</div>
         {mediaAction && <><p className="field-help">Choosing a background video replaces a standalone video, and vice versa. Editor previews stay silent.</p><MediaPicker externalError={error?.message} workspaceId={workspaceId} service={media} kind={mediaAction==='image'?'image':mediaAction==='clip'?'video':undefined} busy={busy} onClose={()=>{if(!busy)setMediaAction(null);}} onSelect={asset=>void selectMedia(asset)}/></>}
         <EditorCanvas state={editor} resolveMedia={media.resolveMedia} onCommand={execute} disabled={busy} />
-        <p className="canvas-caption">Line breaks stay exactly as entered. The same layout scales to your projector.</p>
         {adding && <section className="template-add-panel desktop-edit-only"><h2>Choose your next slide.</h2><TemplatePicker disabled={busy} onSelect={category => {
           execute({ type: 'add-slide',category }); setAdding(false);
         }} /></section>}
-        <div className="slide-actions desktop-edit-only"><button className="text-button" disabled={busy || draft.slides.length>=LIMITS.slidesPerDeck} onClick={() => {
-          execute({ type: 'duplicate-slide',id: slide.id });
-        }}><Copy size={15} />Duplicate slide</button><button className="text-button" disabled={busy || draft.slides.length<=1} onClick={() => setDeleteSlide(true)}><Trash2 size={15} />Delete slide</button></div>
+
         {deleteSlide && <Modal className="confirmation-panel" aria-label="Delete slide" onCancel={()=>setDeleteSlide(false)} busy={busy}><h3>Delete slide {selected+1}?</h3><p>This removes the slide from your draft. Undo restores it during this session.</p><div className="action-row"><button className="button" disabled={busy} onClick={() => { execute({ type: 'delete-slide',id: slide.id }); setDeleteSlide(false); }}>Confirm slide deletion</button><button className="button" onClick={() => setDeleteSlide(false)}>Cancel</button></div></Modal>}
+      </div>
+      <SlideStrip state={editor} resolveMedia={media.resolveMedia} disabled={busy} onCommand={command => { execute(command); setDeleteSlide(false); }} onAdd={() => {execute({type:'add-slide',category:slide.category});setAdding(false);setDeleteSlide(false);}} onChooseLayout={()=>setAdding(value=>!value)}>        <button className="text-button" disabled={busy || draft.slides.length>=LIMITS.slidesPerDeck} onClick={() => {
+          execute({ type: 'duplicate-slide',id: slide.id });
+        }}><Copy size={15} />Duplicate slide</button><button className="text-button" disabled={busy || draft.slides.length<=1} onClick={() => setDeleteSlide(true)}><Trash2 size={15} />Delete slide</button></SlideStrip>
       </div>
       <PropertiesPanel state={editor} onCommand={execute} disabled={busy} onPickImage={()=>setMediaAction('image')} />
     </div>

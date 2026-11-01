@@ -5,7 +5,7 @@
   font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
   --ink: #153c43; --muted: #42676e; --accent: #00a6b6; --action: #006c78;
   --rim: rgba(255,255,255,.78); --glass: rgba(255,255,255,.3);
-  --control-border: #769f9f; --control-hover: #f2fffc; --control-pressed: #d9eeea;
+  --control-border: #62868a; --control-hover: #f2fffc; --control-pressed: #d9eeea;
   --danger: #9d3030; --danger-hover: #7d2323; --secondary-fill: #e0f1ed; --secondary-hover: #cae6df;
   --glass-shadow: 0 12px 36px #13495024, 0 2px 6px #1349500f, inset 0 1px 1px #fffffff2, inset 0 -1px 1px #ffffff4d;
 }

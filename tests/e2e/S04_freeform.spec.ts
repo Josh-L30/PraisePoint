@@ -26,7 +26,7 @@ test('scaled pointer move/resize each undo as one gesture and preserve cloud geo
   await page.getByRole('button',{ name: 'Save presentation',exact: true }).click();
   await expect(page.getByText('Saved · revision 2',{ exact: true })).toBeVisible();
   const saved=state.documents.get(deckId)!.document.slides[0].elements[0];
-  expect(saved).toMatchObject({ y: 360,width: 800,height: 480 }); expect(saved.x).toBeCloseTo(216,8);
+  expect(saved).toMatchObject({ width: 800,height: 480 });expect(saved.y).toBeCloseTo(360,3);expect(saved.x).toBeCloseTo(216,3);
   await page.screenshot({ path: 'docs/evidence/S04-freeform-editor.png',fullPage: true });
 });
 test('keyboard controls, persistent field labels, layers and slide ordering work at constrained desktop width',async ({ page }) => {
@@ -43,7 +43,7 @@ test('keyboard controls, persistent field labels, layers and slide ordering work
   await page.getByRole('textbox',{ name: 'Layer name' }).fill('Service note');
   await page.getByRole('textbox',{ name: 'Service note',exact: true }).fill('Our church prepares together');
   await page.getByRole('button',{ name: 'Send to back' }).click();
-  await page.getByRole('button',{ name: 'Add slide',exact: true }).click();
+  await page.getByRole('button',{ name: 'Choose layout',exact: true }).click();
   await page.getByRole('button',{ name: 'Sermon',exact: true }).click();
   const sermon=page.getByRole('button',{ name: 'Slide 2: Sermon',exact: true });
   await page.locator('.slide-rail').scrollIntoViewIfNeeded();

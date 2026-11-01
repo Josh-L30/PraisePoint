@@ -9,37 +9,36 @@ test('Templates browses backgrounds without offering presentation creation or up
  await teamFixture(page);await page.goto('/app/w/'+personalId+'/templates');
  await expect(page.getByRole('heading',{name:'Backgrounds for worship.'})).toBeVisible();
  await expect(page.getByRole('button',{name:'New presentation'})).toHaveCount(0);
- await expect(page.getByRole('link',{name:/View .* on Pexels/})).toHaveCount(4);
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/})).toHaveCount(18);
  await page.getByRole('button',{name:'Moving backgrounds',exact:true}).click();
- await expect(page.getByRole('link',{name:/View .* on Pexels/})).toHaveCount(2);
- await page.route('https://images.pexels.com/**',route=>route.abort());await page.reload();
- await expect(page.getByRole('link',{name:/View .* on Pexels/}).first()).toBeVisible();
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/})).toHaveCount(10);
+ await page.route('https://www.churchmediastudio.com/images/**',route=>route.abort());await page.reload();
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/}).first()).toBeVisible();
  await expect(page.getByRole('link',{name:'Import downloaded media'})).toHaveAttribute('href','/app/w/'+personalId+'/media');
 });
 
 test('production gallery loads external thumbnails under the hosting policy without cloud uploads',async({page})=>{
- test.setTimeout(60000);const host=await staticPolicyServer(),writes:string[]=[];
+ test.setTimeout(180000);const host=await staticPolicyServer(),writes:string[]=[];
  try{await teamFixture(page);page.on('request',request=>{if(request.url().includes('/functions/v1/') && request.method()==='POST')writes.push(request.url());});
   const response=await page.goto(host.baseURL+'/app/w/'+personalId+'/templates');
-  expect(response?.headers()['content-security-policy']).toContain('https://images.pexels.com');
+  expect(response?.headers()['content-security-policy']).toContain('https://www.churchmediastudio.com');
   await expect(page.getByRole('heading',{name:'Backgrounds for worship.'})).toBeVisible();
-  for(const img of await page.locator('.background-preview img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate((el:HTMLImageElement)=>el.naturalWidth)).toBeGreaterThan(0);}
-  expect(writes).toEqual([]);await writeFile('docs/evidence/S12-external-previews.json',JSON.stringify({productionBuild:true,hostingPolicy:true,loadedPreviews:4,cloudMediaWrites:writes},null,2));
+  for(const img of await page.locator('.background-preview img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate((el:HTMLImageElement)=>el.naturalWidth),{timeout:30000,message:'Preview did not load: '+await img.getAttribute('src')}).toBeGreaterThan(0);}
+  expect(writes).toEqual([]);await writeFile('docs/evidence/S12-external-previews.json',JSON.stringify({productionBuild:true,hostingPolicy:true,loadedPreviews:18,cloudMediaWrites:writes},null,2));
  }finally{await host.close();}
 });
 
 test('workspace switch lives in sticky header and collapsed rail hides sign out',async({page})=>{
  await teamFixture(page);await page.setViewportSize({width:1366,height:768});await page.goto('/app');
- await expect(page.locator('.top-bar').getByRole('combobox',{name:'Switch workspace'})).toBeVisible();
- await expect(page.locator('#workspace-navigation').getByRole('combobox')).toHaveCount(0);
+ await expect(page.locator('.top-bar').getByRole('button',{name:'Switch workspace',exact:true})).toBeVisible();
+ await expect(page.locator('#workspace-navigation').getByRole('button',{name:'Switch workspace',exact:true})).toHaveCount(0);
  await page.getByRole('button',{name:'Collapse navigation',exact:true}).click();
  await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeHidden();
  const toggle=page.getByRole('button',{name:'Expand navigation',exact:true});await expect(toggle).toBeVisible();await page.mouse.move(700,300);await expect(toggle.locator('.brand-menu-icon')).toHaveCSS('opacity','0');await page.screenshot({path:'docs/evidence/S12-collapsed-rail.png'});await toggle.hover();
  await expect(toggle.locator('.brand-menu-icon')).toHaveCSS('opacity','1');await expect(toggle.locator('.ccf-brand-mark')).toHaveCSS('opacity','0');await toggle.click();
  await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeVisible();
- const arrow=page.locator('.workspace-dropdown');
- expect(await arrow.evaluate(el=>{const r=el.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.tagName;})).toBe('SELECT');
- await page.getByRole('combobox',{name:'Switch workspace'}).selectOption(personalId);
+ await page.getByRole('button',{name:'Switch workspace',exact:true}).click();
+ await page.getByRole('option',{name:'Personal workspace',exact:true}).click();
  await page.evaluate(()=>{document.querySelector('main')!.insertAdjacentHTML('beforeend','<div style="height:1800px">Scroll test</div>');window.scrollTo(0,650);});
  await expect.poll(()=>page.locator('.top-bar').evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBe(12);
  await page.screenshot({path:'docs/evidence/S12-sticky-header.png'});
@@ -88,7 +87,7 @@ test('responsive screens, native dropdown, hover contrast and action spacing',as
   for(const route of ['', '/decks','/songs','/services','/templates','/team']){
    await page.goto('/app/w/'+personalId+route);await expect(page.locator('main h1')).toBeVisible();
    const fits=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);expect(fits,route+' at '+width).toBe(true);
-   await expect(page.locator('.top-bar').getByRole('combobox',{name:'Switch workspace'})).toBeVisible();
+   await expect(page.locator('.top-bar').getByRole('button',{name:'Switch workspace',exact:true})).toBeVisible();
    measurements.push({width,route,fits});
   }
   if(width===320 || width===390){await page.getByRole('button',{name:'Open navigation',exact:true}).click();await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeVisible();await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'Open navigation',exact:true})).toBeFocused();await page.evaluate(()=>{document.querySelector('main')!.insertAdjacentHTML('beforeend','<div style="height:1800px">Scroll test</div>');window.scrollTo(0,650);});await expect.poll(()=>page.locator('.top-bar').evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBe(10);}
