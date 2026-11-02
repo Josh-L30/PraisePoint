@@ -53,3 +53,7 @@ Arithmetic, pass=1 and partial=0.5: critical flow and forms partial because back
 Not run for this local revision: production 404/HTTPS/CSP/offline restart, live Google OAuth, backend authorization/rate limits and real writes, secret/legal/consent review, public title/canonical/social checks, throttled phone navigation, unused-script analysis, field CWV, physical phone/projector and screen-reader testing. Prior S14 live evidence remains historical. SEO schema, hreflang and discovery sitemap are not applicable to these private workspace changes; applicable metadata/privacy checks remain unassessed rather than credited as passes.
 
 The developer owns any future release verification; the user owns physical-equipment rehearsal. These changes are **local, uncommitted and unpublished**. No cloud records, credentials or billing settings changed.
+
+## Subsequent publication — 2026-11-02
+
+The audit above describes the local QA stage. The user later authorized deployment. S15 is now published from source `6cf1e27`; all 48 hosted artifacts match the build and all six public-origin browser cases passed, including the offline browser restart. The local audit score/coverage above is not recalculated from this separate release smoke. See [S15-release.json](S15-release.json). Physical-device, field-performance and real OAuth limitations remain.

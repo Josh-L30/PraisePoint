@@ -28,12 +28,19 @@
   },
   "impeccableDetector": [],
   "historicalEvidenceRestored": 32,
-  "deployment": false,
-  "githubPush": false,
+  "deployment": true,
+  "githubPush": true,
   "realChurchDataChanged": false,
   "limits": [
     "Viewport/coarse-pointer emulation, no physical phone/projector",
     "Synthetic auth/API fixtures, real Google OAuth and backend writes not repeated",
     "No production verification or field Core Web Vitals for these local changes"
-  ]
+  ],
+  "publication": {
+    "date": "2026-11-02",
+    "sourceCommit": "6cf1e277643ac68e244d91002ca584847f02ef48",
+    "receipt": "S15-release.json",
+    "publicBrowserPassed": 6,
+    "allHostedArtifactsMatchBuild": true
+  }
 }

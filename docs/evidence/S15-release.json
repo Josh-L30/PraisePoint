@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-02",
+  "sourceCommit": "6cf1e277643ac68e244d91002ca584847f02ef48",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "sourcePushed": true,
+  "firebaseProject": "gather-ccf-presentations",
+  "hostingOnly": true,
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "alias": "https://gather-ccf-presentations.firebaseapp.com",
+  "deploymentSucceeded": true,
+  "predeployTypecheckBuildPassed": true,
+  "freshUnit": {
+    "passed": 17,
+    "files": 6,
+    "seconds": 84.59
+  },
+  "priorLocalBrowserPassed": 38,
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 1
+  },
+  "publicBrowser": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 48.6,
+    "themeViewTransitionCalls": 0
+  },
+  "video": {
+    "duration": 7.93,
+    "playbackRate": 1.6,
+    "expectedVideoSeconds": 4.95625,
+    "observedMillisecondsFromEarlyPlaybackToLogin": 5474,
+    "visibleSkipButton": false
+  },
+  "loginDesignUnchanged": true,
+  "artifactCount": 48,
+  "allHostedArtifactsMatchBuild": true,
+  "routeChecks": 7,
+  "httpRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "aliasCheck": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "workspaceSmoke": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true,
+    "glassWorkspaceMenu": true,
+    "themePersistence": true,
+    "immediateAddSlide": true,
+    "saveReloadWithFixtures": true
+  },
+  "offlineRestart": {
+    "officialEmulator": false,
+    "origin": "https://gather-ccf-presentations.web.app",
+    "publicInstallMilliseconds": 1574,
+    "runtimeFailures": [],
+    "cloudSetupUsesSyntheticFixtures": true,
+    "actualPersistentBrowserRestart": true,
+    "disconnectedBeforeNavigation": true,
+    "preparedImageAndVideo": true,
+    "audienceInitiallyBlack": true,
+    "manualSend": true,
+    "backgroundClockAdvanced": true,
+    "cloudRequests": 0,
+    "cspViolations": [],
+    "physicalEquipment": false,
+    "publicDeployment": true
+  },
+  "secretScan": {
+    "date": "2026-11-02",
+    "sourceCommit": "6cf1e277643ac68e244d91002ca584847f02ef48",
+    "stagedFilesScanned": 33,
+    "buildFilesScanned": 48,
+    "findings": [],
+    "scope": "Known credential signatures and privileged JWTs; not a general security audit"
+  },
+  "backendOrRealChurchDataChanged": false,
+  "billingChanged": false,
+  "limits": [
+    "Real Google OAuth and actual church-data writes not repeated; authenticated browser checks use synthetic fixtures",
+    "Physical phone/projector rehearsal and field performance not repeated"
+  ]
+}
