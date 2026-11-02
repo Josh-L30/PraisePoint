@@ -1,6 +1,6 @@
 # Firebase Hosting deployment
 
-Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S15 motion refinement from source 6cf1e27 is now published; current build and post-release checks are in docs/evidence/S15-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
+Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S16 login correction from source 0d4a412 is now published; current build and post-release checks are in docs/evidence/S16-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
 
 ## Configuration
 
@@ -52,3 +52,7 @@ No backend/schema, billing or Google credential changes were made. Real Google O
 ## S15 release — 2026-11-02
 
 Source `6cf1e277643ac68e244d91002ca584847f02ef48` is published on the existing Firebase Hosting site and GitHub branch. Login design is unchanged; the welcome video plays at 1.6× without a visible Skip button, and themes switch immediately without the circle. Fresh checks: 17 unit tests across 6 files; build passed; lint 0 errors / 1 existing warning. All 48 hosted files matched local hashes; seven route checks and HTTPS redirect/alias checks passed. All six public browser cases passed, including no theme view-transition calls and a disconnected full-browser restart with prepared image/video playback, zero cloud requests and no CSP violations. See [S15 receipt](evidence/S15-release.json). No billing, backend, credential or actual church-data changes. Existing installations can use Update app when prompted.
+
+## S16 login correction — 2026-11-02
+
+Restored the user-preferred earlier glass-card login from S13, retaining the S15 faster video and instant theme switching. Source `0d4a412b705ed23c8a6d300d326f430d5d2f6105` is published and saved to the existing GitHub branch. Build, 17 focused unit tests, 3 local browser cases and all 6 live browser checks passed. All 48 hosted files match the tested build; route/header/redirect/alias and offline image/video restart checks passed. No backend, credential or billing changes. See [S16 receipt](evidence/S16-release.json).

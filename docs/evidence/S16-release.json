@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-02",
+  "sourceCommit": "0d4a412b705ed23c8a6d300d326f430d5d2f6105",
+  "restoredDesignSource": "bb8fdf8",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "firebaseProject": "gather-ccf-presentations",
+  "deploymentSucceeded": true,
+  "sourcePushed": true,
+  "scope": "Restore pre-S14 glass-card login; retain S15 entrance and theme behavior",
+  "unit": {
+    "passed": 17,
+    "files": 6,
+    "seconds": 41.08
+  },
+  "localBrowserPassed": 3,
+  "publicBrowser": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 47.5
+  },
+  "buildPassed": true,
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 1
+  },
+  "stagedSecretScan": {
+    "files": 9,
+    "findings": []
+  },
+  "allHostedArtifactsMatchBuild": true,
+  "artifactCount": 48,
+  "routeChecks": 7,
+  "httpsRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "aliasCheck": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "video": {
+    "duration": 7.93,
+    "playbackRate": 1.6,
+    "expectedVideoSeconds": 4.95625,
+    "observedMillisecondsFromEarlyPlaybackToLogin": 4420,
+    "visibleSkipButton": false
+  },
+  "instantThemesRetained": true,
+  "workspaceSmoke": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true,
+    "glassWorkspaceMenu": true,
+    "themePersistence": true,
+    "immediateAddSlide": true,
+    "saveReloadWithFixtures": true
+  },
+  "offlineRestart": {
+    "officialEmulator": false,
+    "origin": "https://gather-ccf-presentations.web.app",
+    "publicInstallMilliseconds": 691,
+    "runtimeFailures": [],
+    "cloudSetupUsesSyntheticFixtures": true,
+    "actualPersistentBrowserRestart": true,
+    "disconnectedBeforeNavigation": true,
+    "preparedImageAndVideo": true,
+    "audienceInitiallyBlack": true,
+    "manualSend": true,
+    "backgroundClockAdvanced": true,
+    "cloudRequests": 0,
+    "cspViolations": [],
+    "physicalEquipment": false,
+    "publicDeployment": true
+  },
+  "billingOrBackendChanged": false,
+  "limits": [
+    "Real Google OAuth and actual church-data writes not repeated; synthetic fixture auth/API used",
+    "No physical-device/projector rehearsal or field performance test"
+  ]
+}
