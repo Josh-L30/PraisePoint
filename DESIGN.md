@@ -88,3 +88,7 @@ Preserve the S14 login design exactly. The approved video plays at 1.6×, about 
 ## S16 login correction — 2026-11-02
 
 The user clarified that “keep the old login design” means the pre-S14/S13 glass-card login, not the simplified S14 form. Restore the earlier glass sign-in card, decorative teal story panel, feature labels, private-workspace caption and free-use note. Keep the S15 faster video, no visible Skip button, light anonymous login and immediate theme switching. This supersedes the simplified-login appearance decisions above.
+
+## S17 supplied worship photo — 2026-11-02
+
+Use the user's worship photo as the story-panel background behind “Prepare with care. Lead with clarity.” Preserve the glass sign-in card and add a dark teal gradient over the photo for readable text. Replace the story's abstract ornaments with the photo. Keep one CCF mark in the left brand and remove the duplicate mark above Google sign-in. Use a cover crop on desktop and the compact story header on mobile. Retain the faster entrance and immediate theme switching.

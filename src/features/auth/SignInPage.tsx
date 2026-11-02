@@ -24,7 +24,7 @@ export function SignInPage({ service, initialError }: { service: AuthService; in
         <div className="story-tools" aria-label="Presentation features"><span><Presentation size={17} />Slides</span><span><Music size={17} />Songs</span><span><MonitorPlay size={17} />Present</span></div>
       </div><p className="story-footer">Made for the people behind every service.</p>
     </section>
-    <section className="auth-form-area"><div className="auth-card glass"><span className="welcome-mark" aria-hidden="true"><BrandMark/></span>
+    <section className="auth-form-area"><div className="auth-card glass">
       <h2>Welcome to PraisePoint.</h2><p className="auth-intro">Your songs, your slides, your next service.<br />Let’s bring them together.</p>
       <button className="google-button" onClick={() => { void signIn(); }} disabled={busy}><span className="google-mark" aria-hidden="true">G</span>{busy ? 'Connecting to Google…' : 'Continue with Google'}<ArrowUpRight size={16} /></button>
       {error && <div className="form-error" role="alert"><p>{error}</p><Link to="/setup">View connection help</Link></div>}

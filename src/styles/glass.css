@@ -26,9 +26,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-even
 @media (hover: hover) and (pointer: fine) { .icon-button:hover:not(:disabled) { background: #ffffff70; } }
 .text-link { color: var(--action); text-decoration: underline; text-underline-offset: 4px; }
 .auth-layout { display: grid; grid-template-columns: 1.06fr 1fr; min-height: calc(100svh - 32px); margin: 16px; border: 1px solid #ffffffb3; border-radius: 30px; overflow: hidden; box-shadow: var(--glass-shadow); }
-.auth-story { background: #173f49; color: #fff; position: relative; isolation: isolate; overflow: hidden; padding: 40px 48px; display: flex; flex-direction: column; justify-content: space-between; }
+.auth-story { background: linear-gradient(180deg,#071b2499,#071d28b8 48%,#061820cc),url('../features/auth/media/login-worship.png') center / cover; background-color: #173f49; color: #fff; position: relative; isolation: isolate; overflow: hidden; padding: 40px 48px; display: flex; flex-direction: column; justify-content: space-between; }
 .auth-story::before,.worship-art::before { content: ''; position: absolute; inset: -30%; z-index: -1; background: radial-gradient(ellipse at 80% 20%,#a1c9b777,transparent 37%),radial-gradient(ellipse at 10% 80%,#112c37aa,transparent 60%),linear-gradient(145deg,#538a8b,#163e49 65%,#102c36); transform: rotate(-12deg); }
 .auth-story::after,.worship-art::after { content: ''; position: absolute; z-index: -1; inset: 15% -40% -55%; border-radius: 50%; border-top: 1px solid #b4d9d64d; background: linear-gradient(160deg,#a1d3b91a,#133a4588); transform: rotate(-18deg); box-shadow: 0 -35px 0 3px #a9dbbd12,0 -75px 0 3px #bbded40a; }
+.auth-story::before,.auth-story::after { content: none; }
 .auth-story .brand-cross { color: #bdebe4; }
 .auth-story .brand small { color: #c0d9d7; }
 .auth-story .brand strong { font-size: 26px; }
