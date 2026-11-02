@@ -12,16 +12,4 @@ export function initializeTheme(){
  const update=()=>apply(workspaceThemeEnabled?preferredTheme():'light');
  update();system.addEventListener('change',update);window.addEventListener('storage',event=>{if(event.key===key||event.key===null)update();});
 }
-export async function transitionTheme(theme:Theme,origin:{x:number;y:number}){
- if(!document.startViewTransition||window.matchMedia('(prefers-reduced-motion: reduce)').matches){setTheme(theme);return;}
- const root=document.documentElement,radius=Math.hypot(Math.max(origin.x,innerWidth-origin.x),Math.max(origin.y,innerHeight-origin.y));
- root.classList.add('theme-changing');
- let skipTransition:(()=>void)|undefined;
- try{
-  const transition=document.startViewTransition(()=>setTheme(theme));skipTransition=()=>transition.skipTransition();await transition.ready;
-  await root.animate({clipPath:[`circle(0px at ${origin.x}px ${origin.y}px)`,`circle(${radius}px at ${origin.x}px ${origin.y}px)`]},{duration:420,easing:'cubic-bezier(.16,1,.3,1)',pseudoElement:'::view-transition-new(root)'}).finished;
-  await transition.finished;
- }catch{skipTransition?.();setTheme(theme);}
- finally{root.classList.remove('theme-changing');}
-}
 export function subscribeTheme(listener:()=>void){window.addEventListener(eventName,listener);return()=>window.removeEventListener(eventName,listener);}

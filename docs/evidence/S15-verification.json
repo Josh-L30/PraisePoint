@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-02",
+  "environment": "Local production build, Chromium headless at http://127.0.0.1:5195",
+  "loginDesignSourceUnchanged": true,
+  "loginSourceSha256": "262d3a2be471b09154a08c077e55a9cd97442d2a7cd1c0ff12643f89d2727166",
+  "video": {
+    "duration": 7.93,
+    "playbackRate": 1.6,
+    "expectedVideoSeconds": 4.95625,
+    "observedMillisecondsFromEarlyPlaybackToLogin": 5198,
+    "visibleSkipButton": false
+  },
+  "unit": {
+    "passed": 17,
+    "files": 6,
+    "seconds": 44.81,
+    "scope": "Auth shell, UI foundation, entrance, theme and production CSS regressions"
+  },
+  "browser": {
+    "passed": 38,
+    "failed": 0,
+    "seconds": 263.7
+  },
+  "buildPassed": true,
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 1
+  },
+  "impeccableDetector": [],
+  "historicalEvidenceRestored": 32,
+  "deployment": false,
+  "githubPush": false,
+  "realChurchDataChanged": false,
+  "limits": [
+    "Viewport/coarse-pointer emulation, no physical phone/projector",
+    "Synthetic auth/API fixtures, real Google OAuth and backend writes not repeated",
+    "No production verification or field Core Web Vitals for these local changes"
+  ]
+}

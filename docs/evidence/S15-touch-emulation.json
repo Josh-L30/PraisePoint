@@ -1,0 +1,11 @@
+{
+  "inputSize": 16,
+  "menu": {
+    "x": 23,
+    "y": 17.5,
+    "width": 44,
+    "height": 44
+  },
+  "drawerKeyboard": true,
+  "physicalPhone": false
+}

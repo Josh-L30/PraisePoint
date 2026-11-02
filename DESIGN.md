@@ -80,3 +80,7 @@ The separate church-door concept uses photorealistic AI keyframes and a 2.5D cam
 Use the approved continuous CCF glass-door video with the same right-hand grip, opening into white before the light sign-in page. This is a rare welcome, once per tab session on desktop, with an always-available Skip action. Mobile, reduced motion, offline, failed playback and auth-error recovery go straight to sign-in. Keep the video outside the verified offline app shell. Login remains light; theme controls belong to the authenticated workspace.
 
 The login story panel is plain deep teal with no rotated or rectangular ornaments; the form has a quiet mint background and no nested glass card. Retain the existing brand, copy and functional Google sign-in. Preserve the S14 sidebar, layout-preview, media-copy and measured scroll improvements.
+
+## S15 motion refinement — 2026-11-02
+
+Preserve the S14 login design exactly. The approved video plays at 1.6×, about five seconds, without a visible Skip button. Keep Escape, reduced-motion/mobile/offline bypass and automatic media-error/stall recovery. Keep the white handoff. Theme changes apply directly without a circular reveal or theme-specific view transition; preserve the saved preference and the anonymous light-login boundary.

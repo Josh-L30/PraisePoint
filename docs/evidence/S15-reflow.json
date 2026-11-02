@@ -1,0 +1,29 @@
+{
+  "schemaBoundTitle": 120,
+  "paginatedRecords": 24,
+  "emptyAndOne": true,
+  "sizes": [
+    {
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 720,
+      "scroll": 720
+    },
+    {
+      "width": 320,
+      "scroll": 320
+    }
+  ],
+  "zoomEquivalentCssWidth": 720,
+  "physicalPhone": false
+}
