@@ -1,0 +1,266 @@
+{
+  "measurements": [
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 320,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "light",
+      "primaryContrast": 5.488911481946695
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/decks",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/songs",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/services/836bd986-bf96-4492-91d5-af2924c511c5",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/media",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/templates",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "path": "/team",
+      "fits": true
+    },
+    {
+      "theme": "dark",
+      "primaryContrast": 9.152517214689084
+    }
+  ],
+  "pageErrors": [],
+  "device": "Chromium viewport emulation; no physical phone"
+}

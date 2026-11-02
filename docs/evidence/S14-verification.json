@@ -1,0 +1,196 @@
+{
+  "requested": "2026-11-01",
+  "verified": "2026-11-02",
+  "scope": "S14 approved for publication; V4 entrance and simpler login integrated",
+  "fullUnitBeforeFinalCssPolish": {
+    "passed": 285,
+    "files": 75,
+    "seconds": 445.04
+  },
+  "finalFocusedUnit": {
+    "passed": 4,
+    "files": 2,
+    "includes": "theme boundary plus real Lightning CSS regression"
+  },
+  "browserBroad": {
+    "startTime": "2026-11-01T16:00:34.364Z",
+    "duration": 262274.42500000005,
+    "expected": 50,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "browserFollowup": {
+    "startTime": "2026-11-01T16:06:48.559Z",
+    "duration": 32893.917,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browserFinalAfterCssPolish": {
+    "startTime": "2026-11-01T16:28:05.812Z",
+    "duration": 114518.214,
+    "expected": 19,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "uniqueFunctionalBrowserScenariosVerified": 53,
+  "initialBrowserFailure": "Responsive check matched the loading heading; corrected to wait for the workspace header and rerun passed.",
+  "finalScrollSummary": {
+    "light-original-backdrop": {
+      "paintMs": {
+        "median": 469.9879999999999,
+        "range": [
+          334.72699999999986,
+          516.2840000000003
+        ]
+      },
+      "taskMs": {
+        "median": 2581.11,
+        "range": [
+          1971.1960000000001,
+          2604.339
+        ]
+      },
+      "rafP95": {
+        "median": 66.69999999999982,
+        "range": [
+          50.09999999999991,
+          66.70000000000005
+        ]
+      }
+    },
+    "light": {
+      "paintMs": {
+        "median": 19.103,
+        "range": [
+          12.669,
+          26.414
+        ]
+      },
+      "taskMs": {
+        "median": 355.767,
+        "range": [
+          325.25100000000003,
+          404.76900000000006
+        ]
+      },
+      "rafP95": {
+        "median": 16.799999999999955,
+        "range": [
+          16.799999999999955,
+          16.800000000000182
+        ]
+      }
+    },
+    "dark": {
+      "paintMs": {
+        "median": 22.805,
+        "range": [
+          21.808999999999997,
+          25.413
+        ]
+      },
+      "taskMs": {
+        "median": 385.068,
+        "range": [
+          375.26200000000006,
+          916.77
+        ]
+      },
+      "rafP95": {
+        "median": 33.30000000000018,
+        "range": [
+          16.800000000000182,
+          66.69999999999982
+        ]
+      }
+    }
+  },
+  "fieldData": "Not available; local headless Chromium, CPU 4x, 1366x900, 24-song page, 3 repetitions, 80 scroll steps. Original backdrop reconstructed on final UI to isolate that change.",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 1,
+    "warning": "Modal.tsx Fast Refresh co-export"
+  },
+  "productionBuild": {
+    "passed": true,
+    "precacheEntries": 45,
+    "precacheKiB": 1028.5
+  },
+  "providerPreviewUrls": {
+    "checked": 10,
+    "failed": 0
+  },
+  "detectorFindings": [],
+  "detectorScope": "One scan before final vendor-order/material-performance refinements; later changes reviewed manually and tested in production CSS.",
+  "cloudOrOriginalMediaWrites": false,
+  "deploymentOrGitPublication": false,
+  "awaiting": "User approval of the revised CCF entrance before integration and deployment",
+  "historicalEvidenceArchived": [
+    "docs/evidence/S14-regression-S02-team-desktop.png",
+    "docs/evidence/S14-regression-S02-team-mobile.png",
+    "docs/evidence/S14-regression-S03-letterboxed-preview.png",
+    "docs/evidence/S14-regression-S03-lyrics-editor.png",
+    "docs/evidence/S14-regression-S04-freeform-editor.png",
+    "docs/evidence/S14-regression-S05-lyric-review.png",
+    "docs/evidence/S14-regression-S05-service-plan.png",
+    "docs/evidence/S14-regression-S06-editor-image.png",
+    "docs/evidence/S14-regression-S10-contrast.json",
+    "docs/evidence/S14-regression-S10-demo-desktop.png",
+    "docs/evidence/S14-regression-S10-opaque-fallback.png",
+    "docs/evidence/S14-regression-S10-viewport-1440.png",
+    "docs/evidence/S14-regression-S10-viewport-320.png",
+    "docs/evidence/S14-regression-S10-worst-1440.png",
+    "docs/evidence/S14-regression-S10-worst-320.png",
+    "docs/evidence/S14-regression-S11-login-desktop.png",
+    "docs/evidence/S14-regression-S11-login-mobile.png",
+    "docs/evidence/S14-regression-S11-media-confirmation.png",
+    "docs/evidence/S14-regression-S11-sidebar-collapsed.png",
+    "docs/evidence/S14-regression-S11-sidebar-expanded.png",
+    "docs/evidence/S14-regression-S11-song-break-review.png",
+    "docs/evidence/S14-regression-S11-song-worst-case.png",
+    "docs/evidence/S14-regression-S11-workspace-confirmation.png",
+    "docs/evidence/S14-regression-S12-background-gallery.png",
+    "docs/evidence/S14-regression-S12-collapsed-rail.png",
+    "docs/evidence/S14-regression-S12-external-previews.json",
+    "docs/evidence/S14-regression-S12-mobile-gallery.png",
+    "docs/evidence/S14-regression-S12-service-actions.png",
+    "docs/evidence/S14-regression-S12-sticky-header.png",
+    "docs/evidence/S14-regression-S13-dark-confirmation.png",
+    "docs/evidence/S14-regression-S13-dark-editor.png",
+    "docs/evidence/S14-regression-S13-dark-gallery.png",
+    "docs/evidence/S14-regression-S13-dark-menu.png",
+    "docs/evidence/S14-regression-S13-light-editor.png",
+    "docs/evidence/S14-regression-S13-light-gallery.png",
+    "docs/evidence/S14-regression-S13-light-menu.png",
+    "docs/evidence/S14-regression-S13-mobile-dark.png",
+    "docs/evidence/S14-regression-S13-responsive.json"
+  ],
+  "doorReferenceReceived": true,
+  "entrancePreviewRevision": "v2",
+  "entranceRevisionChecks": {
+    "passed": 2,
+    "preview": "http://127.0.0.1:8765/v2.html",
+    "publication": false
+  },
+  "releaseCandidate": {
+    "date": "2026-11-02",
+    "unitPassed": 290,
+    "unitFiles": 77,
+    "unitSeconds": 452.99,
+    "browserPassed": 23,
+    "browserFailed": 0,
+    "lintErrors": 0,
+    "lintWarnings": 1,
+    "approvedEntrance": "V4",
+    "productionIntegration": true,
+    "publicationReceipt": "S14-release.json",
+    "limits": [
+      "Physical phone/projector rehearsal not performed",
+      "Live Google OAuth and real church-data writes not repeated"
+    ]
+  }
+}

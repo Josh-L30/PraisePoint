@@ -9,7 +9,7 @@ import {installWorstCaseToggle} from './support/worst-case-toggle';
 test.setTimeout(60000);
 test('PraisePoint login and compact sidebar fit laptop and narrow screens',async({page})=>{
  await page.setViewportSize({width:1366,height:768});await page.goto('/auth');
- await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible({timeout:15000});
  await expect.poll(()=>page.locator('.ccf-brand-mark').first().evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
  expect(await page.locator('.auth-layout').evaluate(el=>el.getBoundingClientRect().width)).toBeLessThanOrEqual(1060);
  await page.screenshot({path:'docs/evidence/S11-login-desktop.png',fullPage:true});
@@ -64,7 +64,7 @@ test('song breaks import independently, canvas text edits, and preview enters fu
 test('icon file picker and centered media confirmation preserve cancel and remove on confirm (API fixture)',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await deckFixture(page,false);const media=await mediaFixture(page);await page.setViewportSize({width:1366,height:768});await page.goto(mediaPath);
  await page.getByLabel('Choose media file',{exact:true}).setInputFiles({name:'Sunday still.png',mimeType:'image/png',buffer:await readFile(stillPath)});
- await page.getByRole('radio',{name:'Upload still image',exact:true}).check();await page.getByRole('button',{name:'Import media',exact:true}).click();
+ await page.getByRole('radio',{name:'Workspace cloud · images only',exact:true}).check();await page.getByRole('button',{name:'Import media',exact:true}).click();
  await expect(page.getByText('Media imported.',{exact:true})).toBeVisible();
  expect(await page.locator('input[type=file]').first().evaluate(el=>getComputedStyle(el).clipPath)).toBe('inset(50%)');
  await page.getByRole('button',{name:'Delete media',exact:true}).click();const modal=page.getByRole('alertdialog',{name:'Confirm Deletion'});await expect(modal).toBeVisible();

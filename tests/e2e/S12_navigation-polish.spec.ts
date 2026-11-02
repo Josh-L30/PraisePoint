@@ -9,11 +9,11 @@ test('Templates browses backgrounds without offering presentation creation or up
  await teamFixture(page);await page.goto('/app/w/'+personalId+'/templates');
  await expect(page.getByRole('heading',{name:'Backgrounds for worship.'})).toBeVisible();
  await expect(page.getByRole('button',{name:'New presentation'})).toHaveCount(0);
- await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/})).toHaveCount(18);
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Visual Revival|Motion Worship|Church Media Drop)/})).toHaveCount(18);
  await page.getByRole('button',{name:'Moving backgrounds',exact:true}).click();
- await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/})).toHaveCount(10);
- await page.route('https://www.churchmediastudio.com/images/**',route=>route.abort());await page.reload();
- await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/}).first()).toBeVisible();
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Visual Revival|Motion Worship|Church Media Drop)/})).toHaveCount(10);
+ await page.route('https://cdn.visualrevival.com/**',route=>route.abort());await page.reload();
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Visual Revival|Motion Worship|Church Media Drop)/}).first()).toBeVisible();
  await expect(page.getByRole('link',{name:'Import downloaded media'})).toHaveAttribute('href','/app/w/'+personalId+'/media');
 });
 
@@ -21,7 +21,7 @@ test('production gallery loads external thumbnails under the hosting policy with
  test.setTimeout(180000);const host=await staticPolicyServer(),writes:string[]=[];
  try{await teamFixture(page);page.on('request',request=>{if(request.url().includes('/functions/v1/') && request.method()==='POST')writes.push(request.url());});
   const response=await page.goto(host.baseURL+'/app/w/'+personalId+'/templates');
-  expect(response?.headers()['content-security-policy']).toContain('https://www.churchmediastudio.com');
+  expect(response?.headers()['content-security-policy']).toContain('https://cdn.visualrevival.com');
   await expect(page.getByRole('heading',{name:'Backgrounds for worship.'})).toBeVisible();
   for(const img of await page.locator('.background-preview img').all()){await img.scrollIntoViewIfNeeded();await expect.poll(()=>img.evaluate((el:HTMLImageElement)=>el.naturalWidth),{timeout:30000,message:'Preview did not load: '+await img.getAttribute('src')}).toBeGreaterThan(0);}
   expect(writes).toEqual([]);await writeFile('docs/evidence/S12-external-previews.json',JSON.stringify({productionBuild:true,hostingPolicy:true,loadedPreviews:18,cloudMediaWrites:writes},null,2));
@@ -85,7 +85,7 @@ test('responsive screens, native dropdown, hover contrast and action spacing',as
  for(const width of [320,390,768,1024,1366]){
   await page.setViewportSize({width,height:900});
   for(const route of ['', '/decks','/songs','/services','/templates','/team']){
-   await page.goto('/app/w/'+personalId+route);await expect(page.locator('main h1')).toBeVisible();
+   await page.goto('/app/w/'+personalId+route);await expect(page.locator('.top-bar').getByRole('button',{name:'Switch workspace',exact:true})).toBeVisible({timeout:15000});await expect(page.locator('main h1')).toBeVisible();
    const fits=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);expect(fits,route+' at '+width).toBe(true);
    await expect(page.locator('.top-bar').getByRole('button',{name:'Switch workspace',exact:true})).toBeVisible();
    measurements.push({width,route,fits});

@@ -1,0 +1,102 @@
+{
+  "browser": "Chromium headless",
+  "viewport": "1366x900",
+  "cpuThrottle": 4,
+  "network": "Local warm-cache; no network throttling",
+  "glassPreference": "no-preference",
+  "fieldData": "Unavailable: authenticated app, no RUM collected",
+  "conditions": "Synthetic 24-row paginated song list; 80 requestAnimationFrame scroll steps; 3 repetitions each; software/headless rendering is not church laptop GPU evidence",
+  "results": [
+    {
+      "theme": "light-original-backdrop",
+      "run": 0,
+      "rafP95": 83.29999999999973,
+      "paintMs": 300.266,
+      "prePaintMs": 22.592999999999996,
+      "rasterMs": 0,
+      "taskMs": 3049.7389999999996,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-original-backdrop",
+      "run": 1,
+      "rafP95": 66.79999999999973,
+      "paintMs": 354.3470000000001,
+      "prePaintMs": 21.292999999999996,
+      "rasterMs": 0,
+      "taskMs": 2867.615,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-original-backdrop",
+      "run": 2,
+      "rafP95": 66.70000000000027,
+      "paintMs": 357.1830000000001,
+      "prePaintMs": 23.151999999999997,
+      "rasterMs": 0,
+      "taskMs": 3339.7230000000004,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light",
+      "run": 0,
+      "rafP95": 33.399999999999636,
+      "paintMs": 25.073,
+      "prePaintMs": 43.46399999999999,
+      "rasterMs": 0,
+      "taskMs": 1366.2240000000002,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light",
+      "run": 1,
+      "rafP95": 33.40000000000009,
+      "paintMs": 12.634,
+      "prePaintMs": 36.869,
+      "rasterMs": 0,
+      "taskMs": 539.7109999999999,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light",
+      "run": 2,
+      "rafP95": 33.399999999999864,
+      "paintMs": 15.934000000000001,
+      "prePaintMs": 40.14799999999999,
+      "rasterMs": 0,
+      "taskMs": 356.613,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 0,
+      "rafP95": 33.299999999999955,
+      "paintMs": 13.166,
+      "prePaintMs": 35.70999999999998,
+      "rasterMs": 0,
+      "taskMs": 322.0719999999999,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 1,
+      "rafP95": 16.799999999999955,
+      "paintMs": 21.019000000000002,
+      "prePaintMs": 43.69900000000001,
+      "rasterMs": 0,
+      "taskMs": 374.173,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 2,
+      "rafP95": 33.29999999999973,
+      "paintMs": 29.705000000000002,
+      "prePaintMs": 44.92699999999999,
+      "rasterMs": 0,
+      "taskMs": 405.465,
+      "blurredElements": 0
+    }
+  ],
+  "observationNote": "Requested no-preference, but the built CSS retained only WebKit blur; computed main/row blur was none. This is not active-glass performance evidence. See S14-transparency-condition.json and the final comparison after declaration ordering was fixed."
+}

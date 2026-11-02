@@ -1,0 +1,10 @@
+{
+  "primaryBackgroundSample": [
+    0,
+    116,
+    130
+  ],
+  "whiteTextRatio": 5.4966661470236895,
+  "minimum": 4.5,
+  "method": "Actual screenshot background pixel beside the label; normal-size white text"
+}

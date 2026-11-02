@@ -49,10 +49,10 @@ test('worship catalogue contains only church sources, filters media and recovers
  await expect(page.getByRole('link',{name:/on Pexels/})).toHaveCount(0);
  await page.getByRole('button',{name:'Still images',exact:true}).click();await expect(page.locator('.background-card')).toHaveCount(8);
  await page.getByRole('button',{name:'Moving backgrounds',exact:true}).click();await expect(page.locator('.background-card')).toHaveCount(10);
- await page.route('https://www.churchmediastudio.com/images/**',route=>route.abort());await page.reload();
+ await page.route('https://cdn.visualrevival.com/**',route=>route.abort());await page.reload();
  await page.getByRole('button',{name:'Moving backgrounds',exact:true}).click();
  await expect(page.getByText('Preview unavailable. Open the source to view this background.').first()).toBeVisible();
- await expect(page.getByRole('link',{name:/View Aurora/}).first()).toHaveAttribute('href','https://www.churchmediastudio.com/free-worship-loops');
+ await expect(page.getByRole('link',{name:/View Thermal Cross/}).first()).toHaveAttribute('href','https://www.visualrevival.com/downloads/sermon-box-studio-free-downloads/?product_id=87544');
 });
 
 test('many slides stay in one horizontal strip and dark confirmation remains usable',async({page})=>{

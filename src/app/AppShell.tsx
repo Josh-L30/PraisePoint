@@ -3,7 +3,7 @@ import {BrandMark} from '../components/BrandMark';
 import {UpdatePrompt} from '../features/offline/UpdatePrompt';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink,useLocation } from 'react-router';
-import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, HardDriveDownload, PanelLeftClose, LogOut, Menu, X } from 'lucide-react';
+import { Home, Presentation, Music, ListOrdered, Image, LayoutTemplate, Users, HardDriveDownload, PanelLeft, ChevronLeft, LogOut, Menu, X } from 'lucide-react';
 import type { ProfileWorkspace } from '../features/auth/auth-service';
 import { DashboardPage } from './DashboardPage';
 import { WorkspacePicker } from '../features/workspaces/WorkspacePicker';
@@ -52,9 +52,9 @@ export function AppShell({ profile, onSignOut, children, activeWorkspace, worksp
     {mobileOpen && <button className="drawer-backdrop" onClick={closeDrawer} aria-label="Close navigation overlay" />}
     <aside className="side-panel glass" ref={drawerRef} id="workspace-navigation">
       <div className="sidebar-brand-row"><Link className="brand" to="/app" onClick={() => setMobileOpen(false)} aria-label="PraisePoint overview"><BrandMark/><span className="collapse-copy"><strong>PraisePoint</strong><small>Prepare. Present. Worship.</small></span></Link>
-        <button className={'icon-button sidebar-toggle'+(collapsed?' brand-toggle':'')} aria-label={collapsed?'Expand navigation':'Collapse navigation'} aria-expanded={!collapsed} aria-controls="workspace-navigation" onClick={()=>setCollapsed(value=>!value)}>{collapsed?<><BrandMark/><Menu className="brand-menu-icon" size={22}/></>:<PanelLeftClose size={19}/>}</button></div>
-      <nav className="primary-navigation" aria-label="Workspace">{items.map(({ label, icon: Icon, path, end }) => <NavLink key={label} to={path} end={end} aria-label={label} title={collapsed ? label : undefined} onClick={() => setMobileOpen(false)} className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}><Icon size={19} /><span className="collapse-copy">{label}</span></NavLink>)}</nav>
-      <a className="nav-item" href="/offline" aria-label="Prepared services"><HardDriveDownload size={19}/><span className="collapse-copy">Prepared services</span></a>
+        <button className={'icon-button sidebar-toggle'+(collapsed?' brand-toggle':'')} aria-label={collapsed?'Expand navigation':'Collapse navigation'} aria-expanded={!collapsed} aria-controls="workspace-navigation" onClick={()=>setCollapsed(value=>!value)}>{collapsed?<><BrandMark/><Menu className="brand-menu-icon" size={22}/></>:<span className="collapse-icon" aria-hidden="true"><PanelLeft size={19}/><ChevronLeft className="collapse-arrow" size={9}/></span>}</button></div>
+      <nav className="primary-navigation" aria-label="Workspace">{items.map(({ label, icon: Icon, path, end }) => <NavLink key={label} to={path} end={end} aria-label={label} title={collapsed ? label : undefined} onClick={() => setMobileOpen(false)} className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}><Icon size={19} /><span className="collapse-copy">{label}</span></NavLink>)}
+      <a className="nav-item" href="/offline" aria-label="Prepared services"><HardDriveDownload size={19}/><span className="collapse-copy">Prepared services</span></a></nav>
       <div className="sidebar-bottom"><Link className="nav-item" to={base + '/team'} onClick={closeDrawer} aria-label="Church workspace"><Users size={19} /><span className="collapse-copy">Church workspace</span></Link>
         <ThemeToggle/>
         <div className="profile"><span className="avatar">{profile.avatarUrl ? <img src={profile.avatarUrl} alt="" referrerPolicy="no-referrer" /> : initials}</span><span className="collapse-copy"><strong>{profile.displayName}</strong><small>Church volunteer</small></span>

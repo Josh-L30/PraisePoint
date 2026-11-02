@@ -1,0 +1,40 @@
+{
+  "browser": "Chromium headless",
+  "viewport": "1366x900",
+  "cpuThrottle": 4,
+  "network": "Local warm-cache; no network throttling",
+  "fieldData": "Unavailable: authenticated app, no RUM collected",
+  "conditions": "Synthetic 24-row paginated song list; 80 requestAnimationFrame scroll steps; 3 repetitions each; software/headless rendering is not church laptop GPU evidence",
+  "results": [
+    {
+      "theme": "light-fixed-layer",
+      "run": 0,
+      "rafP95": 33.40000000000009,
+      "paintMs": 23.706,
+      "prePaintMs": 47.46900000000001,
+      "rasterMs": 0,
+      "taskMs": 400.004,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-fixed-layer",
+      "run": 1,
+      "rafP95": 33.30000000000018,
+      "paintMs": 9.113000000000001,
+      "prePaintMs": 44.716,
+      "rasterMs": 0,
+      "taskMs": 777.8820000000001,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-fixed-layer",
+      "run": 2,
+      "rafP95": 16.700000000000273,
+      "paintMs": 22.16,
+      "prePaintMs": 35.86399999999998,
+      "rasterMs": 0,
+      "taskMs": 323.861,
+      "blurredElements": 0
+    }
+  ]
+}

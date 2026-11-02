@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import {setThemeAccess} from '../../lib/theme';
 import { AuthContext, type AuthState } from './auth-context';
 import { authService, type AuthService } from './auth-service';
 export function AuthProvider({ children, service = authService }: { children: ReactNode; service?: AuthService }) {
   const [state, setState] = useState<AuthState>({ status: 'loading', profile: null, error: null });
   const generation = useRef(0);
+  useLayoutEffect(()=>{setThemeAccess(state.status==='authenticated');},[state.status]);
   const invalidate = useCallback(() => { generation.current++; }, []);
   const reload = useCallback(async () => {
     const current = ++generation.current;

@@ -1,0 +1,100 @@
+{
+  "browser": "Chromium headless",
+  "viewport": "1366x900",
+  "cpuThrottle": 4,
+  "network": "Local warm-cache; no network throttling",
+  "fieldData": "Unavailable: authenticated app, no RUM collected",
+  "conditions": "Synthetic 24-row paginated song list; 80 requestAnimationFrame scroll steps; 3 repetitions each; software/headless rendering is not church laptop GPU evidence",
+  "results": [
+    {
+      "theme": "light",
+      "run": 0,
+      "rafP95": 83.40000000000055,
+      "paintMs": 362.62500000000017,
+      "prePaintMs": 26.42700000000001,
+      "rasterMs": 0,
+      "taskMs": 3785.8619999999996,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light",
+      "run": 1,
+      "rafP95": 66.69999999999982,
+      "paintMs": 494.3480000000001,
+      "prePaintMs": 23.549999999999994,
+      "rasterMs": 0,
+      "taskMs": 2743.5710000000004,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light",
+      "run": 2,
+      "rafP95": 66.70000000000027,
+      "paintMs": 505.6560000000002,
+      "prePaintMs": 26.701000000000008,
+      "rasterMs": 0,
+      "taskMs": 2880.568,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 0,
+      "rafP95": 33.29999999999973,
+      "paintMs": 11.017,
+      "prePaintMs": 39.37399999999999,
+      "rasterMs": 0,
+      "taskMs": 534.243,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 1,
+      "rafP95": 16.799999999999955,
+      "paintMs": 18.758,
+      "prePaintMs": 44.880999999999986,
+      "rasterMs": 0,
+      "taskMs": 416.40500000000003,
+      "blurredElements": 0
+    },
+    {
+      "theme": "dark",
+      "run": 2,
+      "rafP95": 33.30000000000018,
+      "paintMs": 18.693,
+      "prePaintMs": 44.208999999999996,
+      "rasterMs": 0,
+      "taskMs": 525.3050000000001,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-no-inner-blur",
+      "run": 0,
+      "rafP95": 66.70000000000027,
+      "paintMs": 464.0160000000001,
+      "prePaintMs": 38.044999999999995,
+      "rasterMs": 0,
+      "taskMs": 2905.844,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-no-inner-blur",
+      "run": 1,
+      "rafP95": 83.40000000000009,
+      "paintMs": 424.3859999999996,
+      "prePaintMs": 21.659,
+      "rasterMs": 0,
+      "taskMs": 3042.0290000000005,
+      "blurredElements": 0
+    },
+    {
+      "theme": "light-no-inner-blur",
+      "run": 2,
+      "rafP95": 66.59999999999991,
+      "paintMs": 566.3129999999999,
+      "prePaintMs": 24.999999999999993,
+      "rasterMs": 0,
+      "taskMs": 2659.0660000000003,
+      "blurredElements": 0
+    }
+  ]
+}

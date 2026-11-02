@@ -1,0 +1,24 @@
+{
+  "initial": {
+    "x": 265,
+    "y": 789.5,
+    "width": 844,
+    "height": 223
+  },
+  "final": {
+    "x": 265,
+    "y": 789.5,
+    "width": 844,
+    "height": 223
+  },
+  "selected": {
+    "x": 964,
+    "y": 863.5,
+    "width": 140,
+    "height": 107
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  }
+}

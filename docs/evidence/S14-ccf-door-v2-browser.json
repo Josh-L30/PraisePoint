@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-02",
+  "preview": "http://127.0.0.1:8765/v2.html",
+  "userDoorReference": true,
+  "approvedGreeterRetained": true,
+  "playToLightLogin": true,
+  "replay": true,
+  "skip": true,
+  "pageErrors": [],
+  "productionIntegration": false,
+  "publication": false,
+  "awaitingApproval": true
+}

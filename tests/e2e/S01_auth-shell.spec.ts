@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
+test.beforeEach(async ({page}) => { await page.addInitScript(() => sessionStorage.setItem('praisepoint-entrance-seen', '1')); });
+
 // This fixture verifies UI/session recovery only. Real OAuth and RLS have separate live evidence.
 try { process.loadEnvFile('.env.local'); } catch { /* CI can supply the public config directly. */ }
 async function sessionFixture(page: Page, expired = false) {

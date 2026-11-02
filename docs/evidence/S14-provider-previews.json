@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-01",
+  "results": [
+    {
+      "title": "Thermal Cross",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/87542/motion-background/public/Thermal-Motion-Background---Cross/Thermal-Motion-Background---Cross-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 11841
+    },
+    {
+      "title": "Ribbon Drift",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/87542/motion-background/public/Ribbon-Drift-Motion-Background---Orange/Ribbon-Drift-Motion-Background---Orange-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 84247
+    },
+    {
+      "title": "God Rays",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/87542/motion-background/public/God-Rays-Motion-Background---Blue/God-Rays-Motion-Background---Blue-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 19501
+    },
+    {
+      "title": "Liquid Marble",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/87542/motion-background/public/Liquid-Marble-Motion-Background---Orange/Liquid-Marble-Motion-Background---Orange-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 20811
+    },
+    {
+      "title": "Bokeh Candles",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/87542/motion-background/public/Silent-Night-Motion-Background---Bokeh-Candles-01/Silent-Night-Motion-Background---Bokeh-Candles-01-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 25865
+    },
+    {
+      "title": "The Risen Cross",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/72394/motion-background/public/The-Risen-Cross-Motion-Background---White-04/The-Risen-Cross-Motion-Background---White-04-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 16663
+    },
+    {
+      "title": "Sacred Glass",
+      "provider": "Visual Revival",
+      "url": "https://cdn.visualrevival.com/73468/motion-background/public/Sacred-Glass-Motion-Background-07/Sacred-Glass-Motion-Background-07-Thumbnail.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 67424
+    },
+    {
+      "title": "Particle Spin · Pink",
+      "provider": "Motion Worship",
+      "url": "https://www.motionworship.com/thumb/Abstract/ParticleSpinPinkSlowHD.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 20280
+    },
+    {
+      "title": "Particle Spin · Blue",
+      "provider": "Motion Worship",
+      "url": "https://www.motionworship.com/thumb/Abstract/ParticleSpinBlueHD.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 24193
+    },
+    {
+      "title": "Worship Hands",
+      "provider": "Church Media Drop",
+      "url": "https://d12gjiltqeago3.cloudfront.net/cmd-previews/worship-hands/thumbs/Worship_hands_loop_thumb.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 3702
+    }
+  ]
+}

@@ -60,3 +60,23 @@ The sidebar uses a Sun/Moon theme action instead of a manual transparency settin
 Desktop editing uses a horizontal filmstrip below the canvas with a separately scrolling inspector beside it. Selection reveals the active thumbnail within the strip without scrolling the page vertically. Add slide immediately appends a fresh slide in the current category; Choose layout opens the separate category chooser. Retain undo/redo, keyboard reorder and save/reopen.
 
 Templates is a worship-media gallery: ChurchRaise still previews and Church Media Studio motion-loop posters, plus CMG free-source links. Embed previews only, credit the source and link to provider downloads/usage terms. No automatic original-media uploads, rehosting or streaming inside slides. Provider previews may include branding and need internet; explicit import/preparation remains required for presenting offline.
+
+
+## Workspace refinement — 2026-11-02 (S14)
+
+Anonymous/loading/sign-in surfaces default to light, preserving the saved workspace preference. Restore the preferred theme after successful authentication; theme controls belong inside the authenticated shell. A 420ms expanding circle originates at the theme button through the View Transition API. Respect reduced motion and fall back immediately when unsupported; protect rapid repeated activation. Auth requests and workspace authorization remain unchanged.
+
+Keep Templates and Prepared services together in the primary navigation with the same 3px group gap. Separate the brand from navigation with a thin divider. The expanded collapse control retains its panel outline; show its tiny arrow on hover or keyboard focus.
+
+The light backdrop is one fixed composited layer, replacing background-attachment:fixed on the scrolling body. Workspace browsing surfaces use the approved translucent gradients, rims and shadows without live backdrop filters. The portalled workspace choice list keeps live 24px blur. Declare the Safari-prefixed filter before the standard declaration: the reverse order made Lightning CSS discard the standard property. Retain opaque reduced-transparency fallbacks.
+
+Mobile song rows put the icon, complete wrapping title/metadata and actions on separate rows. Category choices use five readable sample compositions instead of schematic lines; they illustrate purpose, and existing authored slide documents are untouched. Media library prioritizes import, location and used capacity; place format limits/backup tips behind a disclosure. Collapse upload recovery when empty and reveal pending work.
+
+Motion previews now come from Visual Revival, Motion Worship and Church Media Drop, alongside the existing ChurchRaise stills. Link free provider pages and explain account requirements; do not upload or redistribute original downloads.
+
+The separate church-door concept uses photorealistic AI keyframes and a 2.5D camera/crossfade, not filmed footage. The user accepted the greeter and will supply a church-door reference. Keep the entrance and simpler login design outside production until that revision is reviewed. The concept includes replay/skip and reduced-motion bypass.
+## Approved S14 login entrance — 2026-11-02
+
+Use the approved continuous CCF glass-door video with the same right-hand grip, opening into white before the light sign-in page. This is a rare welcome, once per tab session on desktop, with an always-available Skip action. Mobile, reduced motion, offline, failed playback and auth-error recovery go straight to sign-in. Keep the video outside the verified offline app shell. Login remains light; theme controls belong to the authenticated workspace.
+
+The login story panel is plain deep teal with no rotated or rectangular ornaments; the form has a quiet mint background and no nested glass card. Retain the existing brand, copy and functional Google sign-in. Preserve the S14 sidebar, layout-preview, media-copy and measured scroll improvements.

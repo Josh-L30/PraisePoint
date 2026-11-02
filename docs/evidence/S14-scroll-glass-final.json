@@ -1,0 +1,119 @@
+{
+  "browser": "Chromium headless",
+  "viewport": "1366x900",
+  "cpuThrottle": 4,
+  "network": "Local warm-cache; no network throttling",
+  "glassPreference": "no-preference",
+  "fieldData": "Unavailable: authenticated app, no RUM collected",
+  "conditions": "Synthetic 24-row paginated song list; 80 requestAnimationFrame scroll steps; 3 repetitions each; software/headless rendering is not church laptop GPU evidence",
+  "results": [
+    {
+      "theme": "light-original-backdrop",
+      "run": 0,
+      "rafP95": 100,
+      "paintMs": 194.98499999999993,
+      "prePaintMs": 67.185,
+      "rasterMs": 0,
+      "taskMs": 706.376,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "light-original-backdrop",
+      "run": 1,
+      "rafP95": 83.40000000000055,
+      "paintMs": 151.51399999999995,
+      "prePaintMs": 57.807000000000016,
+      "rasterMs": 0,
+      "taskMs": 680.8040000000001,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "light-original-backdrop",
+      "run": 2,
+      "rafP95": 100,
+      "paintMs": 173.12299999999996,
+      "prePaintMs": 60.625,
+      "rasterMs": 0,
+      "taskMs": 664.353,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "light",
+      "run": 0,
+      "rafP95": 83.29999999999973,
+      "paintMs": 8.248,
+      "prePaintMs": 66.398,
+      "rasterMs": 0,
+      "taskMs": 460.96099999999996,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "light",
+      "run": 1,
+      "rafP95": 133.39999999999964,
+      "paintMs": 15.823999999999998,
+      "prePaintMs": 59.67399999999999,
+      "rasterMs": 0,
+      "taskMs": 456.68499999999995,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "light",
+      "run": 2,
+      "rafP95": 116.60000000000036,
+      "paintMs": 9.491,
+      "prePaintMs": 59.115000000000016,
+      "rasterMs": 0,
+      "taskMs": 480.85599999999994,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "dark",
+      "run": 0,
+      "rafP95": 116.69999999999982,
+      "paintMs": 7.132,
+      "prePaintMs": 55.85700000000001,
+      "rasterMs": 0,
+      "taskMs": 605.981,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "dark",
+      "run": 1,
+      "rafP95": 83.39999999999964,
+      "paintMs": 8.896999999999998,
+      "prePaintMs": 59.53000000000001,
+      "rasterMs": 0,
+      "taskMs": 398.499,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    },
+    {
+      "theme": "dark",
+      "run": 2,
+      "rafP95": 83.30000000000018,
+      "paintMs": 9.613999999999999,
+      "prePaintMs": 67.182,
+      "rasterMs": 0,
+      "taskMs": 450.875,
+      "mainBlur": "blur(12px) saturate(1.2)",
+      "reducedTransparency": false,
+      "blurredElements": 1
+    }
+  ]
+}

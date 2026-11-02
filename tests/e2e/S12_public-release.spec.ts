@@ -10,7 +10,7 @@ test('published S12 serves the gallery and navigation with the intended hosting 
  await page.setViewportSize({width:1366,height:768});
  const response=await page.goto(origin+'/auth');
  expect(response?.status()).toBe(200);
- expect(response?.headers()['content-security-policy']).toContain('https://www.churchmediastudio.com');
+ expect(response?.headers()['content-security-policy']).toContain('https://cdn.visualrevival.com');
  await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible();
  await page.screenshot({path:'docs/evidence/S12-public-login.png'});
  await page.waitForFunction(async()=>!!(await navigator.serviceWorker.getRegistration())?.active && !!navigator.serviceWorker.controller,{},{timeout:30000});
@@ -19,7 +19,7 @@ test('published S12 serves the gallery and navigation with the intended hosting 
  await expect(page.getByRole('heading',{name:'Backgrounds for worship.'})).toBeVisible({timeout:30000});
  await expect(page.locator('.top-bar').getByRole('button',{name:'Switch workspace',exact:true})).toBeVisible();
  await expect(page.getByRole('button',{name:'New presentation',exact:true})).toHaveCount(0);
- await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Church Media Studio)/})).toHaveCount(18);
+ await expect(page.getByRole('link',{name:/View .* on (?:ChurchRaise|Visual Revival|Motion Worship|Church Media Drop)/})).toHaveCount(18);
  await page.getByRole('button',{name:'Collapse navigation',exact:true}).click();
  await expect(page.getByRole('button',{name:'Sign out',exact:true})).toBeHidden();
  const menu=page.getByRole('button',{name:'Expand navigation',exact:true});await menu.hover();
