@@ -1,0 +1,19 @@
+{
+  "desktopTabletFillAlpha": 0.58,
+  "previousAlpha": 0.9098039215686274,
+  "desktopTabletWidths": [
+    1440,
+    834,
+    700
+  ],
+  "mobileWidths": [
+    390,
+    320
+  ],
+  "mobileDesigns": 6,
+  "pageErrors": [],
+  "galleryAndPickerVerified": true,
+  "reducedTransparencyFallbackVerified": true,
+  "signInDisabled": true,
+  "productionChanged": false
+}

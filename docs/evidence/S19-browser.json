@@ -1,0 +1,11 @@
+{
+  "desktopWidth": 1440,
+  "phoneWidth": 390,
+  "options": 5,
+  "allSelections": true,
+  "noHorizontalOverflow": true,
+  "oneLogoPerDesign": true,
+  "signInDisabled": true,
+  "pageErrors": [],
+  "productionChanged": false
+}

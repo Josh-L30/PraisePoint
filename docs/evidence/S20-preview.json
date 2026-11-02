@@ -1,0 +1,18 @@
+{
+  "dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "source": "AI-enhanced widescreen reconstruction of supplied auditorium",
+  "fullScreenBackground": true,
+  "noBackgroundBlur": true,
+  "featureIcons": 3,
+  "widths": [
+    1440,
+    768,
+    390
+  ],
+  "pageErrors": [],
+  "signInDisabled": true,
+  "productionChanged": false
+}

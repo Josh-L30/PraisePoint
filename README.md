@@ -4,6 +4,10 @@ Church presentation workspace for volunteers to prepare readable slides and pres
 
 **Live website:** [PraisePoint](https://gather-ccf-presentations.web.app). **Private source repository:** [Josh-L30/PraisePoint](https://github.com/Josh-L30/PraisePoint).
 
+Latest UI release: login opens directly without an entrance video, and the original sidebar toggle has a larger, better-spaced hover arrow. See [S35 release verification](docs/evidence/S35-direct-login-sidebar-release.md). Earlier alternatives are retained as [design and QA history](docs/evidence/README.md).
+
+Repository workflow: the owner requests committing and pushing completed, verified project changes to the existing GitHub branch as part of future work. Keep environment secrets, CLI credentials, dependencies, build output, browser profiles and temporary preview files excluded. Website deployment remains a separate action requiring the owner's request.
+
 The S11 release includes CCF branding, compact glass navigation, centered confirmation dialogs, direct canvas text editing, song-break imports, fullscreen preview and resumable owner workspace deletion. Verification: 281 unit tests and 52 browser cases across runs, plus public offline restart and ten isolated cold starts. See the [current release and remaining limits](docs/sprints/S11.md).
 
 **Current state:** Native implementation continues on feat/church-workspace. The React/Vite/Tailwind glass interface, Google sign-in, private/shared workspaces, team invitations, template/freeform text editor, song library, service plans, media library and operator/projector presenter are implemented and verified. Google is the only enabled provider. The frontend is published at [gather-ccf-presentations.web.app](https://gather-ccf-presentations.web.app) on Firebase Spark; the authenticated media-upload backend remains in Supabase. Complete offline preparation and disconnected restart are implemented; portable metadata backups and exact-file recovery are implemented; physical rehearsal and release acceptance remain.

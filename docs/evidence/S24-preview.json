@@ -1,0 +1,16 @@
+{
+  "designs": 6,
+  "widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "pageErrors": [],
+  "signInDisabled": true,
+  "smallPhoneHeadingMaxPixels": 29,
+  "mobileFeatureIconPixels": 15,
+  "googleTouchTargetMinPixels": 44,
+  "comparisonAndSelectorVerified": true,
+  "productionChanged": false
+}
