@@ -19,4 +19,3 @@ test('provider failure remains readable and lets the user retry',async({page})=>
  await page.emulateMedia({reducedMotion:'reduce'});await page.setViewportSize({width:320,height:700});
  await page.route('**/auth/v1/settings',r=>r.abort());await page.goto('/auth');await page.getByRole('button',{name:'Continue with Google'}).click();await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('link',{name:'View connection help'})).toBeVisible();await expect(page.getByRole('button',{name:'Continue with Google'})).toBeEnabled();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
-
