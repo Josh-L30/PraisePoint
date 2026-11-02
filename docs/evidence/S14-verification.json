@@ -1,7 +1,7 @@
 {
   "requested": "2026-11-01",
   "verified": "2026-11-02",
-  "scope": "S14 approved for publication; V4 entrance and simpler login integrated",
+  "scope": "S14 published and verified on Firebase Hosting and GitHub",
   "fullUnitBeforeFinalCssPolish": {
     "passed": 285,
     "files": 75,
@@ -192,5 +192,12 @@
       "Physical phone/projector rehearsal not performed",
       "Live Google OAuth and real church-data writes not repeated"
     ]
+  },
+  "publication": {
+    "date": "2026-11-02",
+    "sourceCommit": "5d5aef86bed103e75b45c3627d7b066f752f7f59",
+    "publicBrowserPassed": 6,
+    "allHostedArtifactsMatchBuild": true,
+    "receipt": "S14-release.json"
   }
 }

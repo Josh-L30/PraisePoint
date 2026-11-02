@@ -27,3 +27,7 @@ The revised choreography keeps the anatomical right hand on the existing handle,
 Paused seeking initially returned stale decoded frames, so those captures were replaced with frames taken during actual playback. The sampling tool's pass only establishes successful extraction; hand continuity was assessed visually, not by an automated anatomy test.
 
 Current review preview: http://127.0.0.1:8765/v4.html. File: `.superpowers/S14-preview/ccf-door-flow-v4.mp4`, 2,504,788 bytes. V3 is retained as rejected history. Final V4 preview browser run: **3/3 passed in 11.9 seconds**, covering playback/white-to-login/replay/skip, reduced motion/narrow layout, and missing-video recovery. No production integration or deployment was performed.
+
+## Publication
+
+The sections above record the creation/review stages. The user subsequently approved V4 and publication. On 2026-11-02 it was integrated into the real sign-in flow and deployed with source `5d5aef8` to Firebase Hosting. The hosted MP4 hash matches the production build; desktop playback, once-per-tab behavior, mobile/reduced-motion bypass and media-error recovery passed on the public site. See [S14-release.json](S14-release.json) for the final receipt.

@@ -1,6 +1,6 @@
 # Firebase Hosting deployment
 
-Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S13 PraisePoint update from source bb8fdf8 is now published; current build and post-release checks are in docs/evidence/S13-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
+Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S14 PraisePoint update from source 5d5aef8 is now published; current build and post-release checks are in docs/evidence/S14-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
 
 ## Configuration
 
@@ -33,10 +33,18 @@ Runtime npm audit: zero findings. Full development-tool audit: four low and six 
 
 Sources: [Hosting configuration](https://firebase.google.com/docs/hosting/full-config), [CLI reference](https://firebase.google.com/docs/cli), [deferred site provisioning](https://firebase.google.com/docs/hosting/faq-and-troubleshooting#changes-for-deferred-creation), [Spark usage](https://firebase.google.com/docs/hosting/usage-quotas-pricing).
 
-## Verified current release
+## Earlier live-auth verification
 
 Initial release 901647 was published on Spark from source checkpoint ed7f8a1. The current PraisePoint update is source 2e53feb, verified on 2026-10-30; see [S11 release evidence](evidence/S11-release.json). Public HTTP/header checks and actual Google login/reload/sign-out/back-cancellation passed. A focused isolated public-origin offline image/video restart passed; synthetic cloud setup does not certify fresh hosted Storage writes. Two prior automated startup attempts failed runtime protection and were not reproduced with diagnostics; no startup fix is claimed. See [full S10 evidence and limits](sprints/S10.md#public-release-verification--2026-10-29). Physical/backup/pilot acceptance and Google volunteer test-user access remain open.
 
 ## S13 release — 2026-11-01
 
 Source `bb8fdf8ac4b35e3c3b5d6c5a5a8b22b105040b54` is published on the existing Hosting site and GitHub branch `feat/church-workspace`. Production build and publication succeeded. All 47 public artifacts matched their local hashes; seven route/header checks, HTTP-to-HTTPS redirect and alias checks passed. Public browser smoke passed with synthetic auth/API fixtures, including persistent themes, workspace glass menu, worship previews and immediate Add slide/save/reopen. See [S13 release receipt](evidence/S13-release.json). Real Google sign-in, actual church-data writes and physical equipment rehearsal were not repeated. No billing upgrade or backend change was performed.
+
+## S14 release — 2026-11-02
+
+Source `5d5aef86bed103e75b45c3627d7b066f752f7f59` is published at the same Firebase site and GitHub branch. It includes the approved V4 CCF-door entrance, simpler light login, theme transition, compact sidebar, clearer slide layouts, mobile song title, worship backgrounds and scroll improvements. The welcome video is served by Hosting, outside the offline precache and Supabase Storage.
+
+Fresh validation: 290 unit tests across 77 files; 23 release browser checks; 9 final auth/entrance checks; build passed; lint 0 errors with 1 existing warning. All 48 deployed artifacts matched their local SHA-256 hashes. Seven route checks, HTTPS redirect and alias checks passed. Six public-origin browser checks passed, including a complete disconnected browser restart with prepared image/video playback, no cloud requests and no CSP violations. See [S14 receipt](evidence/S14-release.json).
+
+No backend/schema, billing or Google credential changes were made. Real Google OAuth, physical phone/projector rehearsal and actual church-data writes were not repeated. Existing installations can use the app's safe Update app flow when prompted.

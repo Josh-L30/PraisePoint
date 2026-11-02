@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-02",
+  "sourceCommit": "5d5aef86bed103e75b45c3627d7b066f752f7f59",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "sourcePushed": true,
+  "firebaseProject": "gather-ccf-presentations",
+  "hostingOnly": true,
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "alias": "https://gather-ccf-presentations.firebaseapp.com",
+  "deploymentSucceeded": true,
+  "predeployTypecheckBuildPassed": true,
+  "unit": {
+    "passed": 290,
+    "files": 77,
+    "seconds": 452.99
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 1,
+    "existingWarning": "Modal Fast Refresh mixed export"
+  },
+  "localBrowser": {
+    "releaseSubsetPassed": 23,
+    "finalAuthAndEntrancePassed": 9,
+    "overlappingRuns": true
+  },
+  "publicBrowser": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 54.8
+  },
+  "artifactCount": 48,
+  "allHostedArtifactsMatchBuild": true,
+  "routeChecks": 7,
+  "httpRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "aliasCheck": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "workspaceSmoke": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true,
+    "glassWorkspaceMenu": true,
+    "themePersistence": true,
+    "immediateAddSlide": true,
+    "saveReloadWithFixtures": true
+  },
+  "offlineRestart": {
+    "officialEmulator": false,
+    "origin": "https://gather-ccf-presentations.web.app",
+    "publicInstallMilliseconds": 757,
+    "runtimeFailures": [],
+    "cloudSetupUsesSyntheticFixtures": true,
+    "actualPersistentBrowserRestart": true,
+    "disconnectedBeforeNavigation": true,
+    "preparedImageAndVideo": true,
+    "audienceInitiallyBlack": true,
+    "manualSend": true,
+    "backgroundClockAdvanced": true,
+    "cloudRequests": 0,
+    "cspViolations": [],
+    "physicalEquipment": false,
+    "publicDeployment": true
+  },
+  "secretScan": {
+    "date": "2026-11-02",
+    "sourceCommit": "5d5aef86bed103e75b45c3627d7b066f752f7f59",
+    "stagedFilesScanned": 146,
+    "buildFilesScanned": 48,
+    "findings": [],
+    "scope": "Known credential signatures and privileged JWTs; not a general security audit"
+  },
+  "welcomeVideo": {
+    "revision": "V4",
+    "path": "/assets/ccf-door-welcome-Bt4IFDdK.mp4",
+    "sha256": "5a9113d42c0a47872c5bdf3dd837bbc5f317bbd336f5ab2bb854576e96619fe7",
+    "supabaseUpload": false,
+    "offlinePrecache": false,
+    "oncePerTabSession": true,
+    "mobileReducedMotionOfflineBypass": true,
+    "skipEscapeAndFailureRecovery": true
+  },
+  "backendOrRealChurchDataChanged": false,
+  "billingChanged": false,
+  "limits": [
+    "Real Google sign-in not repeated; auth/API workspace smoke used synthetic fixtures",
+    "Physical phone/projector/speakers and rehearsal not repeated",
+    "No claim of field performance or full accessibility certification"
+  ]
+}

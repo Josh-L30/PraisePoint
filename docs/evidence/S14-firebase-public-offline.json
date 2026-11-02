@@ -1,0 +1,17 @@
+{
+  "officialEmulator": false,
+  "origin": "https://gather-ccf-presentations.web.app",
+  "publicInstallMilliseconds": 757,
+  "runtimeFailures": [],
+  "cloudSetupUsesSyntheticFixtures": true,
+  "actualPersistentBrowserRestart": true,
+  "disconnectedBeforeNavigation": true,
+  "preparedImageAndVideo": true,
+  "audienceInitiallyBlack": true,
+  "manualSend": true,
+  "backgroundClockAdvanced": true,
+  "cloudRequests": 0,
+  "cspViolations": [],
+  "physicalEquipment": false,
+  "publicDeployment": true
+}
