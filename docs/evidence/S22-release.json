@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-02",
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "firebaseProject": "gather-ccf-presentations",
+  "scope": "User-selected Open Welcome login design",
+  "deploymentSucceeded": true,
+  "buildPassed": true,
+  "lintErrors": 0,
+  "existingLintWarnings": 1,
+  "authAndEntranceTestsPassed": 18,
+  "localBrowserChecksPassed": 8,
+  "publicBrowserChecksPassed": 8,
+  "all51HostedFilesMatchBuild": true,
+  "viewportWidths": [1440, 768, 390, 320],
+  "physicalPhoneTested": false,
+  "realGoogleAccountLoginRepeated": false,
+  "oauthRouteAndCallbackVerified": true,
+  "backgroundBytes": 812221,
+  "supabaseChanges": false
+}

@@ -92,3 +92,7 @@ The user clarified that “keep the old login design” means the pre-S14/S13 gl
 ## S17 supplied worship photo — 2026-11-02
 
 Use the user's worship photo as the story-panel background behind “Prepare with care. Lead with clarity.” Preserve the glass sign-in card and add a dark teal gradient over the photo for readable text. Replace the story's abstract ornaments with the photo. Keep one CCF mark in the left brand and remove the duplicate mark above Google sign-in. Use a cover crop on desktop and the compact story header on mobile. Retain the faster entrance and immediate theme switching.
+
+## S22 approved Open Welcome — 2026-11-02
+
+The user selected the fifth panel alternative and authorized deployment. Supersede the earlier split login with the full-screen AI-enhanced CCF auditorium photograph, a white headline directly over the photograph, Slides/Songs/Present icons immediately below, and one compact pale glass Google sign-in panel. Keep a single brand mark above and a small service-volunteer footer below. Stack the story and sign-in panel on narrow screens. The photograph has a dark readability overlay without image blur; only the sign-in surface uses backdrop blur, with a solid reduced-transparency fallback. Login remains light, with existing Google authentication, errors/retry and the faster entrance/white handoff unchanged. The background is served by Firebase, not Supabase.

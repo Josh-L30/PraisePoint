@@ -1,0 +1,26 @@
+/* User-approved Open Welcome: the photograph remains open around one sign-in surface. */
+.open-welcome{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:30px;min-height:100svh;padding:32px 40px 40px;color:#153c43;background:#103443}
+.open-welcome::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#041d30b8,#082b384d 65%),url('./media/login-auditorium.jpg') center/cover no-repeat}
+.open-welcome-brand,.open-welcome-panels{width:min(1060px,100%);margin-inline:auto}
+.open-welcome-brand .brand{color:#fff;gap:11px}.open-welcome-brand .brand strong{font-size:25px;letter-spacing:-.035em}.open-welcome-brand .ccf-brand-mark{width:39px;height:39px;background:#fff;border-radius:50%;padding:3px}
+.open-welcome-panels{display:grid;grid-template-columns:1.15fr 1fr;gap:55px;align-items:center;margin-block:auto}
+.open-welcome-story{color:#fff;padding:36px 0;text-shadow:0 2px 14px #021b2dcc;min-width:0}
+.open-welcome-story h1{font-size:43px;line-height:1.12;letter-spacing:-.035em;font-weight:720;text-wrap:balance}
+.open-welcome-story>p{font-size:15px;line-height:1.65;margin-top:22px;color:#fff}
+.open-welcome-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:24px 0 0;padding:0;list-style:none;text-shadow:none}
+.open-welcome-features li{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 8px;border-radius:10px;background:#073344df;color:#fff;font-size:12px;font-weight:650;white-space:nowrap}
+.open-welcome-features svg{flex-shrink:0;stroke-width:1.7}
+.open-welcome-signin{min-width:0;padding:40px 34px;background:#f6fffae0;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:16px;box-shadow:0 18px 55px #031c344d}
+.open-welcome-signin h2{font-size:28px;line-height:1.12;letter-spacing:-.03em;font-weight:700;text-wrap:balance}
+.open-welcome-intro{margin:15px 0 25px;color:#315960;font-size:14px;line-height:1.7}
+.open-welcome-signin .google-button{justify-content:space-between;min-height:54px;border:1px solid #9dbcbf;border-radius:12px;padding:14px 18px;background:#fff;color:#153c43;box-shadow:none;font-size:14px;gap:16px}
+.open-welcome-signin .google-mark{font-size:21px}.open-welcome-signin .google-button>svg{color:#153c43;flex-shrink:0}
+.open-welcome-signin .google-button:disabled{opacity:.7;cursor:wait}
+.open-welcome a:focus-visible,.open-welcome button:focus-visible{outline:3px solid #18a6b3;outline-offset:5px}
+.open-welcome-privacy{font-size:11px;line-height:1.7;margin-top:24px;padding-top:20px;border-top:1px solid #789f9e73;color:#315960}
+.open-welcome-footer{margin:0 auto;color:#f5fffd;font-size:12px;line-height:1.6;text-align:center;text-shadow:0 2px 7px #061c2f}
+@media(hover:hover) and (pointer:fine){.open-welcome-signin .google-button:hover:not(:disabled){background:#e9f7f1;border-color:#39808a;box-shadow:0 5px 16px #153c431c}.open-welcome-brand a:hover{opacity:.85}}
+@media(max-width:900px){.open-welcome-brand,.open-welcome-panels{max-width:600px}.open-welcome-panels{display:flex;flex-direction:column;align-items:stretch;gap:10px}.open-welcome-story{padding:10px 5px 25px}.open-welcome-story h1{font-size:38px}.open-welcome-signin{padding:32px 34px}}
+@media(max-width:760px){.open-welcome{padding:24px 16px max(28px,env(safe-area-inset-bottom));gap:28px}.open-welcome-story h1{font-size:32px}.open-welcome-signin h2{font-size:25px}.open-welcome-signin{padding:28px 24px}.open-welcome-features{gap:8px;margin-top:21px}.open-welcome-signin .google-button{font-size:13px;padding:13px 15px;gap:12px}.open-welcome-footer{font-size:11px}}
+@media(max-width:400px){.open-welcome-features li{flex-direction:column;gap:5px;padding:10px 5px}}
+@media(prefers-reduced-transparency:reduce){.open-welcome-signin{background:#f1faf5;-webkit-backdrop-filter:none;backdrop-filter:none}.open-welcome-features li{background:#123f4b}}
