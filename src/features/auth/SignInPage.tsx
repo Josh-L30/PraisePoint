@@ -1,23 +1,18 @@
 import {BrandMark} from '../../components/BrandMark';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, MonitorPlay, Music, Presentation } from 'lucide-react';
 import './sign-in.css';
-import {LoginEntrance} from './LoginEntrance';
-import {shouldPlayLoginEntrance} from './login-entrance-policy';
 import type { AuthService } from './auth-service';
 export function SignInPage({ service, initialError }: { service: AuthService; initialError?: string | null }) {
   const [error, setError] = useState(initialError ?? '');
   const [busy, setBusy] = useState(false);
-  const [entrance, setEntrance] = useState(() => !initialError && shouldPlayLoginEntrance());
-  const finishEntrance = useCallback(() => setEntrance(false), []);
   async function signIn() {
     setError(''); setBusy(true);
     const result = await service.signInWithGoogle();
     if (!result.ok) { setError(result.error.message); setBusy(false); }
     else { setBusy(false); }
   }
-  if (entrance) return <LoginEntrance onComplete={finishEntrance}/>;
   return <main className="open-welcome">
     <header className="open-welcome-brand"><Link className="brand" to="/" aria-label="PraisePoint home"><BrandMark/><strong>PraisePoint</strong></Link></header>
     <div className="open-welcome-panels"><section className="open-welcome-story" aria-labelledby="login-headline">

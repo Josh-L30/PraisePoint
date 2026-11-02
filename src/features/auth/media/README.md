@@ -6,6 +6,8 @@
 
 ## Entrance video
 
+Retired on user request: login now opens directly on every viewport. `SignInPage` no longer imports the entrance component, so the MP4 is excluded from the production build. The source and notes below are retained as history; mobile video concepts were never integrated.
+
 S23: keep the door-opening playback at 1.6×, accelerate the final two source seconds into white to 2.6×, then reveal login after a 140ms white fade and 160ms handoff. The source video is unchanged. This supersedes the uniform playback timing below.
 
 `ccf-door-welcome.mp4` is the user-approved V4 AI-generated entrance, created in Google Flow from the supplied CCF door photo and a fictional AI greeter. Generated on 2026-11-02 using free credits; no paid subscription. It is not filmed footage. The user approved publication on 2026-11-02 after reviewing the corrected right-hand movement.

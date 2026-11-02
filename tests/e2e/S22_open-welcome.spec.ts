@@ -1,10 +1,8 @@
 import {test,expect} from '@playwright/test';
-test('entrance hands off automatically and preserves light mode',async({page})=>{
+test('login appears directly and preserves light mode',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.setViewportSize({width:1440,height:1000});
- await page.goto('/auth');await expect(page.locator('.login-entrance video')).toBeVisible();
+ await page.goto('/auth');await expect(page.locator('.login-entrance video')).toHaveCount(0);
  await expect(page.getByRole('button',{name:'Skip to sign in'})).toHaveCount(0);
- await expect.poll(()=>page.locator('video').evaluate((v:HTMLVideoElement)=>v.playbackRate)).toBe(1.6);
- await expect.poll(()=>page.locator('video').evaluate((v:HTMLVideoElement)=>v.playbackRate),{timeout:10000,intervals:[100]}).toBe(2.6);
  await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible({timeout:15000});
  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.reload();await expect(page.locator('.open-welcome-signin')).toBeVisible();await expect(page.locator('video')).toHaveCount(0);expect(errors).toEqual([]);

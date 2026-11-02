@@ -1,11 +1,21 @@
 import {test,expect} from '@playwright/test';
-import {writeFile} from 'node:fs/promises';
-test('approved desktop entrance automatically opens into light login once per session',async({page})=>{
- const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.setViewportSize({width:1440,height:1000});await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/auth');await expect(page.locator('.login-entrance video')).toBeVisible();await expect(page.getByRole('button',{name:'Skip to sign in'})).toHaveCount(0);const v=page.locator('.login-entrance video');await expect.poll(()=>v.evaluate((el:HTMLVideoElement)=>el.currentTime)).toBeGreaterThan(.2);expect(await v.evaluate((el:HTMLVideoElement)=>el.playbackRate)).toBe(1.6);const duration=await v.evaluate((el:HTMLVideoElement)=>el.duration);const started=Date.now();await page.screenshot({path:'docs/evidence/S16-entrance.png'});await expect(page.getByRole('button',{name:'Continue with Google',exact:true})).toBeVisible({timeout:15000});const elapsed=Date.now()-started;expect(elapsed).toBeLessThan(7000);await writeFile('docs/evidence/S16-entrance-timing.json',JSON.stringify({duration,playbackRate:1.6,expectedVideoSeconds:duration/1.6,observedMillisecondsFromEarlyPlaybackToLogin:elapsed,visibleSkipButton:false},null,2));await expect(page.locator('html')).toHaveAttribute('data-theme','light');await expect(page.locator('.open-welcome-signin')).toBeVisible();await expect(page.locator('.open-welcome-features>li')).toHaveCount(3);await expect(page.locator('.open-welcome-footer')).toBeVisible();await page.screenshot({path:'docs/evidence/S16-login-desktop.png'});await page.reload();await expect(page.getByRole('button',{name:'Continue with Google',exact:true})).toBeVisible();await expect(page.locator('video')).toHaveCount(0);expect(errors).toEqual([]);
-});
-test('entrance supports Escape and recovers when the video cannot load',async({page})=>{
- await page.setViewportSize({width:1366,height:900});await page.goto('/auth');await expect(page.locator('.login-entrance video')).toBeVisible();await expect(page.getByRole('button',{name:'Skip to sign in'})).toHaveCount(0);await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible();await page.evaluate(()=>sessionStorage.removeItem('praisepoint-entrance-seen'));await page.route('**/ccf-door-welcome-*.mp4',r=>r.abort());await page.reload();await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible({timeout:15000});
-});
-test('mobile and reduced motion go straight to login without requesting video',async({page})=>{
- const videos:string[]=[];page.on('request',r=>{if(r.url().endsWith('.mp4'))videos.push(r.url())});await page.setViewportSize({width:390,height:844});await page.goto('/auth');await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible();await expect(page.locator('video')).toHaveCount(0);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(page.locator('.open-welcome-signin')).toHaveCSS('opacity','1');await page.screenshot({path:'docs/evidence/S16-login-mobile.png'});await page.setViewportSize({width:1440,height:1000});await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible();await expect(page.locator('video')).toHaveCount(0);expect(videos).toEqual([]);
-});
+
+for (const width of [1440,834,390,320]) {
+ test(`login opens directly without entrance media at ${width}px`,async({page})=>{
+  const videos:string[]=[];
+  const errors:string[]=[];
+  page.on('request',r=>{if(/\.mp4(?:\?|$)/.test(r.url()))videos.push(r.url())});
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.setViewportSize({width,height:width===320?700:1000});
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.goto('/auth');
+  await expect(page.getByRole('button',{name:'Continue with Google',exact:true})).toBeVisible();
+  await expect(page.locator('video,.login-entrance')).toHaveCount(0);
+  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.reload();
+  await expect(page.getByRole('button',{name:'Continue with Google',exact:true})).toBeVisible();
+  expect(videos).toEqual([]);
+  expect(errors).toEqual([]);
+ });
+}
