@@ -84,3 +84,7 @@ The login story panel is plain deep teal with no rotated or rectangular ornament
 ## S15 motion refinement — 2026-11-02
 
 Preserve the S14 login design exactly. The approved video plays at 1.6×, about five seconds, without a visible Skip button. Keep Escape, reduced-motion/mobile/offline bypass and automatic media-error/stall recovery. Keep the white handoff. Theme changes apply directly without a circular reveal or theme-specific view transition; preserve the saved preference and the anonymous light-login boundary.
+
+## S16 login correction — 2026-11-02
+
+The user clarified that “keep the old login design” means the pre-S14/S13 glass-card login, not the simplified S14 form. Restore the earlier glass sign-in card, decorative teal story panel, feature labels, private-workspace caption and free-use note. Keep the S15 faster video, no visible Skip button, light anonymous login and immediate theme switching. This supersedes the simplified-login appearance decisions above.

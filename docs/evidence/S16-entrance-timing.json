@@ -1,0 +1,7 @@
+{
+  "duration": 7.93,
+  "playbackRate": 1.6,
+  "expectedVideoSeconds": 4.95625,
+  "observedMillisecondsFromEarlyPlaybackToLogin": 5259,
+  "visibleSkipButton": false
+}
