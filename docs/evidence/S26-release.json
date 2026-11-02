@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-02",
+  "liveUrl": "https://gather-ccf-presentations.web.app/auth",
+  "firebaseProject": "gather-ccf-presentations",
+  "desktopTabletDesign": "Evening Calm, 58% panel fill",
+  "phoneDesign": "Open Horizon, mobile option 1",
+  "phoneBreakpointMaxPixels": 699,
+  "deploymentSucceeded": true,
+  "buildPassed": true,
+  "lintErrors": 0,
+  "existingLintWarnings": 1,
+  "focusedAuthAndEntranceTestsPassed": 19,
+  "localBrowserChecksPassed": 12,
+  "publicBrowserChecksPassed": 12,
+  "all51HostedFilesMatchBuild": true,
+  "testedWidths": [1440, 834, 700, 699, 390, 320],
+  "physicalDeviceTested": false,
+  "realGoogleAccountLoginRepeated": false,
+  "oauthRouteAndCallbackVerified": true,
+  "fasterEntrancePreserved": true,
+  "supabaseChanges": false
+}

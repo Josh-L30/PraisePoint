@@ -93,6 +93,10 @@ The user clarified that “keep the old login design” means the pre-S14/S13 gl
 
 Use the user's worship photo as the story-panel background behind “Prepare with care. Lead with clarity.” Preserve the glass sign-in card and add a dark teal gradient over the photo for readable text. Replace the story's abstract ornaments with the photo. Keep one CCF mark in the left brand and remove the duplicate mark above Google sign-in. Use a cover crop on desktop and the compact story header on mobile. Retain the faster entrance and immediate theme switching.
 
+## S26 Evening Calm and Open Horizon — 2026-11-02
+
+The user approved the S25 refinement and selected phone option 1 for deployment. At 700px and wider, use Evening Calm with a shared dark teal frame at 58% fill opacity, a 6px local backdrop blur, white text and compact inline feature icons. Keep the two sections side by side on tablet. Below 700px, use Open Horizon: open white headline over the photograph, 16px inline Slides/Songs/Present icons and a separate translucent teal sign-in panel with a 26px gap. Omit the extra story paragraph on phones; preserve the sign-in description and privacy text. Use the reviewed left-aligned brand, smaller mobile typography, and solid panel fallbacks for reduced transparency. Preserve the faster S23 video and authentication. This supersedes S23's Split Glass appearance.
+
 ## S23 Split Glass and faster white handoff — 2026-11-02
 
 The user switched to the previously reviewed option 2 and authorized deployment. Use a single centered frame with a transparent dark story half and a frosted pale sign-in half, with no gap between them; stack them on mobile. Keep the full-screen auditorium, three feature icons and one brand mark. Position the brand at the page's left padding (40px desktop, 16px mobile), independent of the centered frame. Retain the base 1.6× entrance playback, accelerate the last two source seconds to 2.6×, and shorten the final white fade/handoff to 140ms/160ms. Other entrance bypass, recovery and authentication behavior stays intact. This supersedes S22's panel treatment.
