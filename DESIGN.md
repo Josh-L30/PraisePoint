@@ -93,6 +93,10 @@ The user clarified that “keep the old login design” means the pre-S14/S13 gl
 
 Use the user's worship photo as the story-panel background behind “Prepare with care. Lead with clarity.” Preserve the glass sign-in card and add a dark teal gradient over the photo for readable text. Replace the story's abstract ornaments with the photo. Keep one CCF mark in the left brand and remove the duplicate mark above Google sign-in. Use a cover crop on desktop and the compact story header on mobile. Retain the faster entrance and immediate theme switching.
 
+## S23 Split Glass and faster white handoff — 2026-11-02
+
+The user switched to the previously reviewed option 2 and authorized deployment. Use a single centered frame with a transparent dark story half and a frosted pale sign-in half, with no gap between them; stack them on mobile. Keep the full-screen auditorium, three feature icons and one brand mark. Position the brand at the page's left padding (40px desktop, 16px mobile), independent of the centered frame. Retain the base 1.6× entrance playback, accelerate the last two source seconds to 2.6×, and shorten the final white fade/handoff to 140ms/160ms. Other entrance bypass, recovery and authentication behavior stays intact. This supersedes S22's panel treatment.
+
 ## S22 approved Open Welcome — 2026-11-02
 
 The user selected the fifth panel alternative and authorized deployment. Supersede the earlier split login with the full-screen AI-enhanced CCF auditorium photograph, a white headline directly over the photograph, Slides/Songs/Present icons immediately below, and one compact pale glass Google sign-in panel. Keep a single brand mark above and a small service-volunteer footer below. Stack the story and sign-in panel on narrow screens. The photograph has a dark readability overlay without image blur; only the sign-in surface uses backdrop blur, with a solid reduced-transparency fallback. Login remains light, with existing Google authentication, errors/retry and the faster entrance/white handoff unchanged. The background is served by Firebase, not Supabase.

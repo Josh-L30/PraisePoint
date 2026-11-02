@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-02",
+  "liveUrl": "https://gather-ccf-presentations.web.app/auth",
+  "firebaseProject": "gather-ccf-presentations",
+  "scope": "Split Glass login, brand near left edge and quicker white entrance",
+  "deploymentSucceeded": true,
+  "buildPassed": true,
+  "lintErrors": 0,
+  "existingLintWarnings": 1,
+  "focusedTestsPassed": 19,
+  "localBrowserChecksPassed": 9,
+  "publicBrowserChecksPassed": 9,
+  "all51HostedFilesMatchBuild": true,
+  "baseVideoPlaybackRate": 1.6,
+  "finalTwoSecondsPlaybackRate": 2.6,
+  "whiteFadeMilliseconds": 140,
+  "whiteHandoffMilliseconds": 160,
+  "brandLeftPixels": {"desktop": 40, "phone": 16},
+  "physicalPhoneTested": false,
+  "realGoogleLoginRepeated": false,
+  "supabaseChanges": false
+}

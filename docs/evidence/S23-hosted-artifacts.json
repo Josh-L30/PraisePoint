@@ -1,0 +1,289 @@
+{
+  "date": "2026-11-02T06:34:51.750Z",
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "artifactCount": 51,
+  "artifacts": [
+    {
+      "path": "/assets/arrow-up-BbxykJs1.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/AudiencePage-Bj9N9exS.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/BackgroundGalleryPage-CWcmsIBk.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/ccf-door-welcome-Bt4IFDdK.mp4",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/check-online-CckdwxIa.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/content-changes-CuQulHN_.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/deck-service-9C7SiO_k.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckEditorPage-Bl2vp5yI.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckListPage-sjrOKwbe.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/DeckPreviewPage-DwYaivKe.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/decode-media-CNZmMg31.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/dist-DwO5-r_z.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/ExportMetadataButton-BPRyukop.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/FilePicker-BWugq0cA.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/film-CjPM6vND.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/index-CJ1R5sxy.css",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/index-ytiXS13i.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/local-media-store-oihjs5qS.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/login-auditorium-D-5lMeMW.jpg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/login-worship-CsKhyjqv.png",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/LyricsEntryDialog-Dpye_9Qu.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/media-service-DuhE9K8T.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaLibraryPage-BB7Fm-Aa.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/MediaPicker-DiiBM1Kd.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/Modal-CzDFeqWk.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/OfflineApp-CBABhPnf.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/OperatorPage-CInsRA_A.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/plus-B-CDuE0_.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-resolver-JowfvUhP.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/prepared-store-DeP9sZIC.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/presenter-state-Cz9sohc5.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/PresenterConsole-CGAmbrRr.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/readiness-BPFpUeMm.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/rolldown-runtime-XKyaHtl9.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/service-service-BfUtEQek.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/ServicePlanPage-CUtWA4C7.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/SlideRenderer-BhMcofUR.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/SongLibraryPage-CrMwUK56.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/supabase-Dif2Va8R.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/TemplatePicker-C8jL8PPG.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/templates-C5rf56bZ.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/use-content-guard-DCR6s8B-.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/WorkspaceApp-DpFqlvXW.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/assets/WorkspaceApp-mArtYYxr.css",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/ccf-logo.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/fonts/Figtree.ttf",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/fonts/OFL.txt",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "/service-worker.js",
+      "status": 200,
+      "matches": true
+    }
+  ],
+  "routes": [
+    {
+      "path": "/auth",
+      "status": 200,
+      "indexMatches": true
+    },
+    {
+      "path": "/auth/callback",
+      "status": 200,
+      "indexMatches": true
+    },
+    {
+      "path": "/app",
+      "status": 200,
+      "indexMatches": true
+    },
+    {
+      "path": "/offline",
+      "status": 200,
+      "indexMatches": true
+    }
+  ],
+  "alias": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "allHostedArtifactsMatch": true
+}

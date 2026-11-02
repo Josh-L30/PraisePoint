@@ -4,9 +4,16 @@ test('entrance hands off automatically and preserves light mode',async({page})=>
  await page.goto('/auth');await expect(page.locator('.login-entrance video')).toBeVisible();
  await expect(page.getByRole('button',{name:'Skip to sign in'})).toHaveCount(0);
  await expect.poll(()=>page.locator('video').evaluate((v:HTMLVideoElement)=>v.playbackRate)).toBe(1.6);
+ await expect.poll(()=>page.locator('video').evaluate((v:HTMLVideoElement)=>v.playbackRate),{timeout:10000,intervals:[100]}).toBe(2.6);
  await expect(page.getByRole('button',{name:'Continue with Google'})).toBeVisible({timeout:15000});
  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
  await page.reload();await expect(page.locator('.open-welcome-signin')).toBeVisible();await expect(page.locator('video')).toHaveCount(0);expect(errors).toEqual([]);
+});
+test('Split Glass shares one frame and brand stays near the left edge',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});await page.setViewportSize({width:1440,height:1000});await page.goto('/auth');await expect(page.locator('.open-welcome-signin')).toBeVisible();
+ const brand=await page.getByRole('link',{name:'PraisePoint home'}).boundingBox();expect(brand!.x).toBe(40);
+ const story=await page.locator('.open-welcome-story').boundingBox(),form=await page.locator('.open-welcome-signin').boundingBox();expect(Math.abs(story!.x+story!.width-form!.x)).toBeLessThan(1);expect(story!.y).toBe(form!.y);
+ await page.setViewportSize({width:390,height:844});const mobileBrand=await page.getByRole('link',{name:'PraisePoint home'}).boundingBox();expect(mobileBrand!.x).toBe(16);const mobileStory=await page.locator('.open-welcome-story').boundingBox(),mobileForm=await page.locator('.open-welcome-signin').boundingBox();expect(Math.abs(mobileStory!.y+mobileStory!.height-mobileForm!.y)).toBeLessThan(1);
 });
 test('keyboard sign-in starts the existing Google OAuth route',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});

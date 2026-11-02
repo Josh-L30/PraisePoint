@@ -20,12 +20,13 @@ export function LoginEntrance({onComplete}: {onComplete: () => void}) {
   }, [finish]);
   function endVideo() {
     setWhite(true);
-    handoff.current = setTimeout(finish, 420);
+    handoff.current = setTimeout(finish, 160);
   }
   return <main className={'login-entrance' + (white ? ' is-white' : '')} aria-label="Welcome to PraisePoint">
     <h1 className="sr-only">Welcome to PraisePoint.</h1>
     <video autoPlay muted playsInline preload="auto" aria-label="AI-generated greeter opening the CCF door" onEnded={endVideo} onError={finish}
       onLoadedMetadata={event => { event.currentTarget.defaultPlaybackRate = 1.6; event.currentTarget.playbackRate = 1.6; }}
+      onTimeUpdate={event => { const video = event.currentTarget; if (Number.isFinite(video.duration) && video.duration > 2) video.playbackRate = video.currentTime >= video.duration - 2 ? 2.6 : 1.6; }}
       onCanPlay={event => { void event.currentTarget.play().catch(finish); }}>
       <source src={entranceVideo} type="video/mp4" onError={finish}/>
     </video>
