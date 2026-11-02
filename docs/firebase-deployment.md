@@ -1,6 +1,6 @@
 # Firebase Hosting deployment
 
-Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S16 login correction from source 0d4a412 is now published; current build and post-release checks are in docs/evidence/S16-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
+Status: published on 2026-10-29 with explicit user approval. Primary site: https://gather-ccf-presentations.web.app. Initial console release hash: 901647. The S17 photo-backed login from source 7e0869e is now published; current build and post-release checks are in docs/evidence/S17-release.json. CLI authorization and exact Supabase production callbacks are configured. Project: Gather CCF Presentations, ID gather-ccf-presentations. Spark was verified in the console on 2026-10-29. Keep Spark; do not attach billing, start a trial or enable Blaze.
 
 ## Configuration
 
@@ -56,3 +56,7 @@ Source `6cf1e277643ac68e244d91002ca584847f02ef48` is published on the existing F
 ## S16 login correction — 2026-11-02
 
 Restored the user-preferred earlier glass-card login from S13, retaining the S15 faster video and instant theme switching. Source `0d4a412b705ed23c8a6d300d326f430d5d2f6105` is published and saved to the existing GitHub branch. Build, 17 focused unit tests, 3 local browser cases and all 6 live browser checks passed. All 48 hosted files match the tested build; route/header/redirect/alias and offline image/video restart checks passed. No backend, credential or billing changes. See [S16 receipt](evidence/S16-release.json).
+
+## S17 supplied photo — 2026-11-02
+
+Published source `7e0869e6881ebb08503018ed9798277a417f4da5` with the user-supplied worship photo behind the login headline and one left-side CCF mark. Build passed; lint 0 errors / 1 existing warning. All 49 hosted artifacts match the build, including an exact hash match to the supplied photo. Seven public browser cases passed across desktop/tablet/mobile, missing-photo recovery, workspace smoke and an offline full-browser image/video restart. No backend/auth/billing changes. See [S17 receipt](evidence/S17-release.json).

@@ -14,6 +14,11 @@
   "buildPassed": true,
   "lintErrors": 0,
   "existingLintWarnings": 1,
-  "deployment": false,
-  "githubPush": false
+  "deployment": true,
+  "githubPush": true,
+  "publication": {
+    "sourceCommit": "7e0869e6881ebb08503018ed9798277a417f4da5",
+    "receipt": "S17-release.json",
+    "publicBrowserPassed": 7
+  }
 }

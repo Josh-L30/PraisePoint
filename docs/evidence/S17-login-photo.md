@@ -9,3 +9,5 @@ Production-build Chromium checks passed at 1440px, 768px and 390px: photo return
 No entrance-video, theme, authentication or backend behavior was changed. These changes remain local and unpublished; the production site remains S16 until deployment is requested.
 
 Final verification: build/typecheck passed; lint 0 errors / 1 existing Modal Fast Refresh warning; **4/4 browser checks passed in 13.6 seconds**, including a missing-photo case that preserves the teal fallback, heading and visible sign-in control. Real Google OAuth was not repeated.
+
+Subsequently deployed with explicit user approval on 2026-11-02. All 49 public artifacts match the build; the hosted photo's SHA-256 matches the supplied source. All seven live browser checks passed, including the three viewport sizes, missing-photo fallback, workspace smoke and a full offline browser restart with prepared images/video. See [release receipt](S17-release.json). Prior release evidence was restored after reuse of its regression cases.

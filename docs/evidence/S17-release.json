@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-02",
+  "sourceCommit": "7e0869e6881ebb08503018ed9798277a417f4da5",
+  "repository": "https://github.com/Josh-L30/PraisePoint",
+  "branch": "feat/church-workspace",
+  "liveUrl": "https://gather-ccf-presentations.web.app",
+  "firebaseProject": "gather-ccf-presentations",
+  "deploymentSucceeded": true,
+  "sourcePushed": true,
+  "scope": "Supplied worship photo behind left headline; remove duplicate form-side CCF mark",
+  "buildPassed": true,
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 1
+  },
+  "priorLocalBrowserPassed": 4,
+  "publicBrowser": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 45.0
+  },
+  "artifactCount": 49,
+  "allHostedArtifactsMatchBuild": true,
+  "routeChecks": 7,
+  "httpsRedirect": {
+    "status": 301,
+    "location": "https://gather-ccf-presentations.web.app/auth"
+  },
+  "aliasCheck": {
+    "status": 200,
+    "indexMatches": true
+  },
+  "photo": {
+    "path": "/assets/login-worship-CsKhyjqv.png",
+    "sha256": "aa0e6dea9e06d6b10b196f0f3ba11c3e80e1d2de3613c041a02e4f81527d1920",
+    "matchesUserSuppliedSource": true,
+    "bytes": 247738
+  },
+  "stagedCredentialSignatureScan": {
+    "files": 10,
+    "findings": []
+  },
+  "workspaceSmoke": {
+    "origin": "https://gather-ccf-presentations.web.app",
+    "loginRendered": true,
+    "googleSignInNotRepeated": true,
+    "syntheticAuthAndApiOnly": true,
+    "realChurchDataMutated": false,
+    "gallery": true,
+    "workspaceHeader": true,
+    "sidebarToggle": true,
+    "externalPreviewLoaded": true,
+    "glassWorkspaceMenu": true,
+    "themePersistence": true,
+    "immediateAddSlide": true,
+    "saveReloadWithFixtures": true
+  },
+  "offlineRestart": {
+    "officialEmulator": false,
+    "origin": "https://gather-ccf-presentations.web.app",
+    "publicInstallMilliseconds": 3978,
+    "runtimeFailures": [],
+    "cloudSetupUsesSyntheticFixtures": true,
+    "actualPersistentBrowserRestart": true,
+    "disconnectedBeforeNavigation": true,
+    "preparedImageAndVideo": true,
+    "audienceInitiallyBlack": true,
+    "manualSend": true,
+    "backgroundClockAdvanced": true,
+    "cloudRequests": 0,
+    "cspViolations": [],
+    "physicalEquipment": false,
+    "publicDeployment": true
+  },
+  "billingBackendOrAuthChanged": false,
+  "limits": [
+    "No real Google OAuth or actual church-data writes repeated; synthetic fixtures used for authenticated flows",
+    "Viewport emulation, no physical phone/projector rehearsal"
+  ]
+}
