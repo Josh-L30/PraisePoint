@@ -1,31 +1,267 @@
-import {test,expect,chromium,type BrowserContext} from '@playwright/test';
-import {readFile,readdir,mkdtemp,writeFile} from 'node:fs/promises';
-import {resolve,join} from 'node:path';
-import {firebaseHost} from './support/firebase-host';
-import {prepareOfflineFixture,removeBrowserFixture} from './support/offline-fixture';
+import { test, expect, chromium, type BrowserContext } from '@playwright/test';
+import { readFile, readdir, mkdtemp, writeFile } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { firebaseHost } from './support/firebase-host';
+import { prepareOfflineFixture, removeBrowserFixture } from './support/offline-fixture';
 test.setTimeout(180000);
 // The optional public preflight is restricted to the explicitly approved owned site.
-const publicOrigin=process.env.GATHER_HOSTED_VERIFY_URL;
-test.skip(!publicOrigin,'Public-origin S14 release verification only; local Hosting is covered by S10.');
-if(publicOrigin && publicOrigin!=='https://gather-ccf-presentations.web.app')throw new Error('Unexpected public preflight origin');
-const hostingTarget=()=>publicOrigin?Promise.resolve({baseURL:publicOrigin,close:async()=>{}}):firebaseHost();
-const evidence=(kind:string)=>'docs/evidence/S14-firebase-'+(publicOrigin?'public-':'')+kind+'.json';
+const publicOrigin = process.env.GATHER_HOSTED_VERIFY_URL;
+test.skip(
+  !publicOrigin,
+  'Public-origin S14 release verification only; local Hosting is covered by S10.',
+);
+if (publicOrigin && publicOrigin !== 'https://gather-ccf-presentations.web.app')
+  throw new Error('Unexpected public preflight origin');
+const hostingTarget = () =>
+  publicOrigin ? Promise.resolve({ baseURL: publicOrigin, close: async () => {} }) : firebaseHost();
+const evidence = (kind: string) =>
+  'docs/evidence/S14-firebase-' + (publicOrigin ? 'public-' : '') + kind + '.json';
 
-test('official Firebase Hosting serves SPA deep links, fresh shell/worker and immutable assets without exposing private or missing files',async()=>{
- const host=await hostingTarget();try{
-  const index=await readFile('dist/index.html','utf8'),routes=['/','/auth','/auth/callback','/app/w/fixture/decks','/offline','/offline/fixture','/audience/fixture','/present/fixture','/setup','/invite'],results=[];
-  for(const path of routes){const response=await fetch(host.baseURL+path);expect(response.status,path).toBe(200);expect(await response.text(),path).toBe(index);expect(response.headers.get('cache-control'),path).toBe('no-cache');expect(response.headers.get('x-content-type-options')).toBe('nosniff');expect(response.headers.get('content-security-policy')).toContain("script-src 'self'");results.push({path,status:response.status,cache:response.headers.get('cache-control')});}
-  const worker=await fetch(host.baseURL+'/service-worker.js');expect(worker.status).toBe(200);expect(worker.headers.get('cache-control')).toBe('no-cache');expect(worker.headers.get('content-type')).toMatch(/javascript/);await worker.arrayBuffer();
-  const asset=(await readdir('dist/assets')).find(file=>file.endsWith('.js'))!;const resource=await fetch(host.baseURL+'/assets/'+asset);expect(resource.status).toBe(200);expect(resource.headers.get('cache-control')).toBe('public, max-age=31536000, immutable');await resource.arrayBuffer();
-  for(const path of ['/.env','/.firebaserc','/firebase.json','/_headers','/assets/missing-fixture.js','/fonts/missing-fixture.ttf']){const response=await fetch(host.baseURL+path);expect(response.status,path).toBe(404);await response.arrayBuffer();}
-  await writeFile(evidence('routing'),JSON.stringify({officialEmulator:!publicOrigin,origin:publicOrigin??host.baseURL,demoProject:publicOrigin?undefined:'demo-gather-ccf',routes:results,workerFresh:true,hashedAssetsImmutable:true,privateAndMissingFiles404:true,publicDeployment:!!publicOrigin},null,2));
- }finally{await host.close();}
+test('official Firebase Hosting serves SPA deep links, fresh shell/worker and immutable assets without exposing private or missing files', async () => {
+  const host = await hostingTarget();
+  try {
+    const index = await readFile('dist/index.html', 'utf8'),
+      routes = [
+        '/',
+        '/auth',
+        '/auth/callback',
+        '/app/w/fixture/decks',
+        '/offline',
+        '/offline/fixture',
+        '/audience/fixture',
+        '/present/fixture',
+        '/setup',
+        '/invite',
+      ],
+      results = [];
+    for (const path of routes) {
+      const response = await fetch(host.baseURL + path);
+      expect(response.status, path).toBe(200);
+      expect(await response.text(), path).toBe(index);
+      expect(response.headers.get('cache-control'), path).toBe('no-cache');
+      expect(response.headers.get('x-content-type-options')).toBe('nosniff');
+      expect(response.headers.get('content-security-policy')).toContain("script-src 'self'");
+      results.push({ path, status: response.status, cache: response.headers.get('cache-control') });
+    }
+    const worker = await fetch(host.baseURL + '/service-worker.js');
+    expect(worker.status).toBe(200);
+    expect(worker.headers.get('cache-control')).toBe('no-cache');
+    expect(worker.headers.get('content-type')).toMatch(/javascript/);
+    await worker.arrayBuffer();
+    const asset = (await readdir('dist/assets')).find((file) => file.endsWith('.js'))!;
+    const resource = await fetch(host.baseURL + '/assets/' + asset);
+    expect(resource.status).toBe(200);
+    expect(resource.headers.get('cache-control')).toBe('public, max-age=31536000, immutable');
+    await resource.arrayBuffer();
+    for (const path of [
+      '/.env',
+      '/.firebaserc',
+      '/firebase.json',
+      '/_headers',
+      '/assets/missing-fixture.js',
+      '/fonts/missing-fixture.ttf',
+    ]) {
+      const response = await fetch(host.baseURL + path);
+      expect(response.status, path).toBe(404);
+      await response.arrayBuffer();
+    }
+    await writeFile(
+      evidence('routing'),
+      JSON.stringify(
+        {
+          officialEmulator: !publicOrigin,
+          origin: publicOrigin ?? host.baseURL,
+          demoProject: publicOrigin ? undefined : 'demo-gather-ccf',
+          routes: results,
+          workerFresh: true,
+          hashedAssetsImmutable: true,
+          privateAndMissingFiles404: true,
+          publicDeployment: !!publicOrigin,
+        },
+        null,
+        2,
+      ),
+    );
+  } finally {
+    await host.close();
+  }
 });
 
-test('Firebase production headers support complete prepared media and a disconnected full-browser restart',async()=>{
- const scratch=resolve('.superpowers/sdd/2026-10-29-praisepoint-usability'),directory=await mkdtemp(join(scratch,'offline-browser-')),host=await hostingTarget(),options={headless:true,baseURL:host.baseURL,viewport:{width:1440,height:900}};let context:BrowserContext|null=null;const violations:string[]=[],cloud:string[]=[],runtimeFailures:string[]=[];
- const observe=(browser:BrowserContext)=>browser.on('console',message=>{if(/Content Security Policy|Refused to/.test(message.text()))violations.push(message.text().slice(0,300));if(message.text().startsWith('S11_RUNTIME_DIAGNOSTIC'))runtimeFailures.push(message.text().slice(0,1000));});
- try{
-  context=await chromium.launchPersistentContext(directory,options);if(publicOrigin)await context.addInitScript(()=>{const match=CacheStorage.prototype.match;CacheStorage.prototype.match=function(request,options){return match.call(this,request,options).catch(error=>{console.warn('S11_RUNTIME_DIAGNOSTIC cache-match',String(error));throw error;});};const post=ServiceWorker.prototype.postMessage;ServiceWorker.prototype.postMessage=function(...args:Parameters<ServiceWorker['postMessage']>){try{return Reflect.apply(post,this,args);}catch(error){console.warn('S11_RUNTIME_DIAGNOSTIC worker-post',String(error));throw error;}};});context.setDefaultTimeout(15000);observe(context);const page=context.pages()[0];let publicInstallMilliseconds:number|undefined;if(publicOrigin){const installStarted=Date.now();await page.goto('/');await page.waitForFunction(async()=>{const registration=await navigator.serviceWorker.getRegistration();return !!registration?.active && !!navigator.serviceWorker.controller;},{},{timeout:60000});publicInstallMilliseconds=Date.now()-installStarted;}await prepareOfflineFixture(page);await page.getByRole('link',{name:'Open prepared services',exact:true}).click();const offlineURL=page.url();await context.close();context=await chromium.launchPersistentContext(directory,options);observe(context);context.on('request',request=>{if(/supabase\.co|accounts\.google\.com/.test(request.url()))cloud.push(request.url());});await context.setOffline(true);const offline=context.pages()[0];await offline.goto(offlineURL);await offline.getByRole('button',{name:'Verify prepared copy',exact:true}).click();await expect(offline.getByText('Ready offline',{exact:true})).toBeVisible();await offline.getByRole('link',{name:'Open prepared service',exact:true}).click();const opened=context.waitForEvent('page');await offline.getByRole('button',{name:'Open projector',exact:true}).click();const audience=await opened;await expect(audience.locator('.audience-blackout')).toBeVisible();await offline.getByRole('button',{name:'Send current slide',exact:true}).click();await expect(audience.locator('img')).toBeVisible();await offline.getByRole('button',{name:'Next slide',exact:true}).click();await expect.poll(()=>audience.locator('video[data-media-role="background"]').evaluate((video:HTMLVideoElement)=>video.currentTime)).toBeGreaterThan(.2);expect(cloud).toEqual([]);expect(violations).toEqual([]);await writeFile(evidence('offline'),JSON.stringify({officialEmulator:!publicOrigin,origin:publicOrigin??host.baseURL,publicInstallMilliseconds,runtimeFailures,cloudSetupUsesSyntheticFixtures:true,actualPersistentBrowserRestart:true,disconnectedBeforeNavigation:true,preparedImageAndVideo:true,audienceInitiallyBlack:true,manualSend:true,backgroundClockAdvanced:true,cloudRequests:cloud.length,cspViolations:violations,physicalEquipment:false,publicDeployment:!!publicOrigin},null,2));
- }catch(error){if(publicOrigin && context){const page=context.pages()[0];await writeFile(join(scratch,'firebase-public-runtime-diagnostic.json'),JSON.stringify({runtimeFailures,body:await page.locator('body').innerText({timeout:1000}).catch(()=>''),runtime:await page.evaluate(async()=>{const registration=await navigator.serviceWorker.getRegistration();let cacheError:string|undefined,cacheKeys:string[]=[];try{cacheKeys=await caches.keys();await caches.match(new URL('/__gather_runtime_update__',location.origin),{cacheName:'gather-update-fence-v2'});}catch(error){cacheError=String(error);}const build=await new Promise(resolve=>{const worker=navigator.serviceWorker.controller;if(!worker){resolve('no controller');return;}const channel=new MessageChannel(),timer=setTimeout(()=>{channel.port1.close();resolve('message timeout');},1500);channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();resolve(event.data);};worker.postMessage({type:'GATHER_BUILD'},[channel.port2]);});return {secure:isSecureContext,controller:navigator.serviceWorker.controller?.scriptURL,active:registration?.active?.state,cacheKeys,cacheError,build,locks:await navigator.locks.query()};}).catch(error=>String(error))},null,2));}throw error;}finally{await context?.close();await host.close();await removeBrowserFixture(directory,scratch);}
+test('Firebase production headers support complete prepared media and a disconnected full-browser restart', async () => {
+  const scratch = resolve('.superpowers/sdd/2026-10-29-praisepoint-usability'),
+    directory = await mkdtemp(join(scratch, 'offline-browser-')),
+    host = await hostingTarget(),
+    options = { headless: true, baseURL: host.baseURL, viewport: { width: 1440, height: 900 } };
+  let context: BrowserContext | null = null;
+  const violations: string[] = [],
+    cloud: string[] = [],
+    runtimeFailures: string[] = [];
+  const observe = (browser: BrowserContext) =>
+    browser.on('console', (message) => {
+      if (/Content Security Policy|Refused to/.test(message.text()))
+        violations.push(message.text().slice(0, 300));
+      if (message.text().startsWith('S11_RUNTIME_DIAGNOSTIC'))
+        runtimeFailures.push(message.text().slice(0, 1000));
+    });
+  try {
+    context = await chromium.launchPersistentContext(directory, options);
+    if (publicOrigin)
+      await context.addInitScript(() => {
+        const match = CacheStorage.prototype.match;
+        CacheStorage.prototype.match = function (request, options) {
+          return match.call(this, request, options).catch((error) => {
+            console.warn('S11_RUNTIME_DIAGNOSTIC cache-match', String(error));
+            throw error;
+          });
+        };
+        const post = ServiceWorker.prototype.postMessage;
+        ServiceWorker.prototype.postMessage = function (
+          ...args: Parameters<ServiceWorker['postMessage']>
+        ) {
+          try {
+            return Reflect.apply(post, this, args);
+          } catch (error) {
+            console.warn('S11_RUNTIME_DIAGNOSTIC worker-post', String(error));
+            throw error;
+          }
+        };
+      });
+    context.setDefaultTimeout(15000);
+    observe(context);
+    const page = context.pages()[0];
+    let publicInstallMilliseconds: number | undefined;
+    if (publicOrigin) {
+      const installStarted = Date.now();
+      await page.goto('/');
+      await page.waitForFunction(
+        async () => {
+          const registration = await navigator.serviceWorker.getRegistration();
+          return !!registration?.active && !!navigator.serviceWorker.controller;
+        },
+        {},
+        { timeout: 60000 },
+      );
+      publicInstallMilliseconds = Date.now() - installStarted;
+    }
+    await prepareOfflineFixture(page);
+    await page.getByRole('link', { name: 'Open prepared services', exact: true }).click();
+    const offlineURL = page.url();
+    await context.close();
+    context = await chromium.launchPersistentContext(directory, options);
+    observe(context);
+    context.on('request', (request) => {
+      if (/supabase\.co|accounts\.google\.com/.test(request.url())) cloud.push(request.url());
+    });
+    await context.setOffline(true);
+    const offline = context.pages()[0];
+    await offline.goto(offlineURL);
+    await offline.getByRole('button', { name: 'Verify prepared copy', exact: true }).click();
+    await expect(offline.getByText('Ready offline', { exact: true })).toBeVisible();
+    await offline.getByRole('link', { name: 'Open prepared service', exact: true }).click();
+    const opened = context.waitForEvent('page');
+    await offline.getByRole('button', { name: 'Open projector', exact: true }).click();
+    const audience = await opened;
+    await expect(audience.locator('.audience-blackout')).toBeVisible();
+    await offline.getByRole('button', { name: 'Send current slide', exact: true }).click();
+    await expect(audience.locator('img')).toBeVisible();
+    await offline.getByRole('button', { name: 'Next slide', exact: true }).click();
+    await expect
+      .poll(() =>
+        audience
+          .locator('video[data-media-role="background"]')
+          .evaluate((video: HTMLVideoElement) => video.currentTime),
+      )
+      .toBeGreaterThan(0.2);
+    expect(cloud).toEqual([]);
+    expect(violations).toEqual([]);
+    await writeFile(
+      evidence('offline'),
+      JSON.stringify(
+        {
+          officialEmulator: !publicOrigin,
+          origin: publicOrigin ?? host.baseURL,
+          publicInstallMilliseconds,
+          runtimeFailures,
+          cloudSetupUsesSyntheticFixtures: true,
+          actualPersistentBrowserRestart: true,
+          disconnectedBeforeNavigation: true,
+          preparedImageAndVideo: true,
+          audienceInitiallyBlack: true,
+          manualSend: true,
+          backgroundClockAdvanced: true,
+          cloudRequests: cloud.length,
+          cspViolations: violations,
+          physicalEquipment: false,
+          publicDeployment: !!publicOrigin,
+        },
+        null,
+        2,
+      ),
+    );
+  } catch (error) {
+    if (publicOrigin && context) {
+      const page = context.pages()[0];
+      await writeFile(
+        join(scratch, 'firebase-public-runtime-diagnostic.json'),
+        JSON.stringify(
+          {
+            runtimeFailures,
+            body: await page
+              .locator('body')
+              .innerText({ timeout: 1000 })
+              .catch(() => ''),
+            runtime: await page
+              .evaluate(async () => {
+                const registration = await navigator.serviceWorker.getRegistration();
+                let cacheError: string | undefined,
+                  cacheKeys: string[] = [];
+                try {
+                  cacheKeys = await caches.keys();
+                  await caches.match(new URL('/__gather_runtime_update__', location.origin), {
+                    cacheName: 'gather-update-fence-v2',
+                  });
+                } catch (error) {
+                  cacheError = String(error);
+                }
+                const build = await new Promise((resolve) => {
+                  const worker = navigator.serviceWorker.controller;
+                  if (!worker) {
+                    resolve('no controller');
+                    return;
+                  }
+                  const channel = new MessageChannel(),
+                    timer = setTimeout(() => {
+                      channel.port1.close();
+                      resolve('message timeout');
+                    }, 1500);
+                  channel.port1.onmessage = (event) => {
+                    clearTimeout(timer);
+                    channel.port1.close();
+                    resolve(event.data);
+                  };
+                  worker.postMessage({ type: 'GATHER_BUILD' }, [channel.port2]);
+                });
+                return {
+                  secure: isSecureContext,
+                  controller: navigator.serviceWorker.controller?.scriptURL,
+                  active: registration?.active?.state,
+                  cacheKeys,
+                  cacheError,
+                  build,
+                  locks: await navigator.locks.query(),
+                };
+              })
+              .catch((error) => String(error)),
+          },
+          null,
+          2,
+        ),
+      );
+    }
+    throw error;
+  } finally {
+    await context?.close();
+    await host.close();
+    await removeBrowserFixture(directory, scratch);
+  }
 });

@@ -26,6 +26,8 @@ The S11 release includes CCF branding, compact glass navigation, centered confir
 
 ## Preview and setup
 
+Code formatting uses pinned Prettier with two-space indentation and a 100-column wrapping target. Run `npm run format` to format application code, styles, tests, scripts, local Edge Function source and root configuration; run `npm run format:check` to verify it. `.prettierrc.json` also supplies the settings to a compatible VSCode formatter. Generated output, secrets, historical evidence, dependencies and SQL migrations are excluded from the format commands.
+
 Use Vite to open this React/TypeScript project. VSCode's Live Server / Go Live serves raw source files and cannot compile the app, so it can show a blank screen.
 
 1. Open the project folder in VSCode.

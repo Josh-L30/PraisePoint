@@ -1,13 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**",
-      "_headers",
-      "_redirects"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "_headers", "_redirects"],
     "rewrites": [
       {
         "source": "/@(app|auth|offline|audience|present|setup|invite){,/**}",
@@ -58,9 +52,7 @@
         "regex": "^[\\\\/]assets[\\\\/].*"
       }
     ],
-    "predeploy": [
-      "npm run build"
-    ]
+    "predeploy": ["npm run build"]
   },
   "emulators": {
     "hosting": {

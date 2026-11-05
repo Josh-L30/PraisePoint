@@ -1,5 +1,39 @@
-import {test,expect} from '@playwright/test';
-import {teamFixture,personalId} from './support/team-fixture';
-test('new worship motion collections show cross rays and worship-footage previews',async({page})=>{
- await teamFixture(page);await page.setViewportSize({width:1440,height:1000});await page.goto('/app/w/'+personalId+'/templates');await page.getByRole('button',{name:'Moving backgrounds',exact:true}).click();await expect(page.locator('.background-card')).toHaveCount(10);await expect(page.getByRole('link',{name:'View Thermal Cross on Visual Revival',exact:true})).toBeVisible();await expect.poll(()=>page.locator('.background-preview img').first().evaluate((el:HTMLImageElement)=>el.naturalWidth),{timeout:30000}).toBeGreaterThan(0);await page.screenshot({path:'docs/evidence/S14-moving-backgrounds.png'});await page.getByRole('link',{name:'View Worship Hands on Church Media Drop',exact:true}).scrollIntoViewIfNeeded();await expect.poll(()=>page.locator('.background-card').filter({has:page.getByRole('heading',{name:'Worship Hands',exact:true})}).locator('img').evaluate((el:HTMLImageElement)=>el.naturalWidth),{timeout:30000}).toBeGreaterThan(0);
+import { test, expect } from '@playwright/test';
+import { teamFixture, personalId } from './support/team-fixture';
+test('new worship motion collections show cross rays and worship-footage previews', async ({
+  page,
+}) => {
+  await teamFixture(page);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/app/w/' + personalId + '/templates');
+  await page.getByRole('button', { name: 'Moving backgrounds', exact: true }).click();
+  await expect(page.locator('.background-card')).toHaveCount(10);
+  await expect(
+    page.getByRole('link', { name: 'View Thermal Cross on Visual Revival', exact: true }),
+  ).toBeVisible();
+  await expect
+    .poll(
+      () =>
+        page
+          .locator('.background-preview img')
+          .first()
+          .evaluate((el: HTMLImageElement) => el.naturalWidth),
+      { timeout: 30000 },
+    )
+    .toBeGreaterThan(0);
+  await page.screenshot({ path: 'docs/evidence/S14-moving-backgrounds.png' });
+  await page
+    .getByRole('link', { name: 'View Worship Hands on Church Media Drop', exact: true })
+    .scrollIntoViewIfNeeded();
+  await expect
+    .poll(
+      () =>
+        page
+          .locator('.background-card')
+          .filter({ has: page.getByRole('heading', { name: 'Worship Hands', exact: true }) })
+          .locator('img')
+          .evaluate((el: HTMLImageElement) => el.naturalWidth),
+      { timeout: 30000 },
+    )
+    .toBeGreaterThan(0);
 });

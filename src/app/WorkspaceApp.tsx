@@ -1,4 +1,10 @@
-import {RouterProvider} from 'react-router';
-import {AuthProvider} from '../features/auth/AuthProvider';
-import {router} from './router';
-export function WorkspaceApp(){return <AuthProvider><RouterProvider router={router}/></AuthProvider>;}
+import { RouterProvider } from 'react-router';
+import { AuthProvider } from '../features/auth/AuthProvider';
+import { router } from './router';
+export function WorkspaceApp() {
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
+}

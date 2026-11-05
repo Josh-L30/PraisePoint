@@ -1,0 +1,12 @@
+.superpowers/
+node_modules/
+dist/
+.env*
+.firebase/
+playwright-report/
+test-results/
+coverage/
+docs/evidence/
+package-lock.json
+supabase/.temp/
+supabase/.branches/

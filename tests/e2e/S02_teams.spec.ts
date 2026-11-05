@@ -1,85 +1,112 @@
 import { test, expect } from '@playwright/test';
 import { teamFixture, personalId, churchId, token } from './support/team-fixture';
 // UI fixtures verify interactions. Real authorization/concurrency evidence is in supabase/tests/S02*.
-test('creates a church, manually shares/revokes a link, and switches back without copying content', async ({ page }) => {
-  const state = await teamFixture(page,{ personalOnly: true });
+test('creates a church, manually shares/revokes a link, and switches back without copying content', async ({
+  page,
+}) => {
+  const state = await teamFixture(page, { personalOnly: true });
   await page.goto('/app/w/' + personalId + '/team');
-  await page.getByRole('textbox',{ name: 'Church name' }).fill('Our church');
-  await page.getByRole('button',{ name: 'Create church workspace' }).click();
+  await page.getByRole('textbox', { name: 'Church name' }).fill('Our church');
+  await page.getByRole('button', { name: 'Create church workspace' }).click();
   await expect(page).toHaveURL('/app/w/' + churchId + '/team');
-  await page.getByRole('textbox',{ name: 'Volunteer email' }).fill('new@example.invalid');
-  await page.getByRole('button',{ name: 'Create invitation link' }).click();
-  const link = page.getByRole('textbox',{ name: 'Invitation link' });
-  await expect(link).toHaveValue(String(test.info().project.use.baseURL)+'/invite#token=' + token);
-  await page.getByRole('button',{ name: 'Copy link' }).click();
-  await expect(page.getByRole('status').filter({ hasText: /Link copied|Select the link/ })).toBeVisible();
-  await page.getByRole('button',{ name: 'Revoke', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Volunteer email' }).fill('new@example.invalid');
+  await page.getByRole('button', { name: 'Create invitation link' }).click();
+  const link = page.getByRole('textbox', { name: 'Invitation link' });
+  await expect(link).toHaveValue(
+    String(test.info().project.use.baseURL) + '/invite#token=' + token,
+  );
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(
+    page.getByRole('status').filter({ hasText: /Link copied|Select the link/ }),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Revoke', exact: true }).click();
   await expect(page.getByText('No pending invitations.')).toBeVisible();
-  await page.getByRole('button',{ name: 'Switch workspace',exact:true }).click();await page.getByRole('option',{name:'Personal workspace',exact:true}).click();
+  await page.getByRole('button', { name: 'Switch workspace', exact: true }).click();
+  await page.getByRole('option', { name: 'Personal workspace', exact: true }).click();
   await expect(page).toHaveURL('/app/w/' + personalId);
-  await expect(page.getByText('Your private workspace',{ exact: true })).toBeVisible();
-  expect(state.writes).toEqual(['create_church_workspace','create_team_invitation','revoke_team_invitation']);
+  await expect(page.getByText('Your private workspace', { exact: true })).toBeVisible();
+  expect(state.writes).toEqual([
+    'create_church_workspace',
+    'create_team_invitation',
+    'revoke_team_invitation',
+  ]);
 });
-test('ownership transfer requires confirmation and removes former owner controls', async ({ page }) => {
+test('ownership transfer requires confirmation and removes former owner controls', async ({
+  page,
+}) => {
   const state = await teamFixture(page);
   await page.goto('/app/w/' + churchId + '/team');
-  await page.getByRole('button',{ name: 'Make owner' }).click();
+  await page.getByRole('button', { name: 'Make owner' }).click();
   expect(state.writes).toEqual([]);
-  await page.getByRole('button',{ name: 'Confirm transfer' }).click();
-  await expect(page.getByRole('button',{ name: 'Leave church workspace' })).toBeVisible();
-  await expect(page.getByRole('textbox',{ name: 'Volunteer email' })).toHaveCount(0);
-  await page.getByRole('button',{ name: 'Leave church workspace' }).click();
-  await page.getByRole('button',{ name: 'Confirm leaving' }).click();
+  await page.getByRole('button', { name: 'Confirm transfer' }).click();
+  await expect(page.getByRole('button', { name: 'Leave church workspace' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Volunteer email' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Leave church workspace' }).click();
+  await page.getByRole('button', { name: 'Confirm leaving' }).click();
   await expect(page).toHaveURL('/app');
-  await page.getByRole('button',{name:'Switch workspace',exact:true}).click();await expect(page.getByRole('option')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Switch workspace', exact: true }).click();
+  await expect(page.getByRole('option')).toHaveCount(1);
 });
-test('members have no owner controls and invalid workspace links reveal no team', async ({ page }) => {
-  await teamFixture(page,{ member: true });
+test('members have no owner controls and invalid workspace links reveal no team', async ({
+  page,
+}) => {
+  await teamFixture(page, { member: true });
   await page.goto('/app/w/' + churchId + '/team');
-  await expect(page.getByText('Daniel',{ exact: true }).last()).toBeVisible();
-  await expect(page.getByRole('button',{ name: 'Make owner' })).toHaveCount(0);
-  await expect(page.getByRole('textbox',{ name: 'Volunteer email' })).toHaveCount(0);
+  await expect(page.getByText('Daniel', { exact: true }).last()).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Make owner' })).toHaveCount(0);
+  await expect(page.getByRole('textbox', { name: 'Volunteer email' })).toHaveCount(0);
   await page.goto('/app/w/99999999-9999-4999-8999-999999999999/team');
-  await expect(page.getByRole('alert')).toContainText('no longer have access',{timeout:15000});
-  await expect(page.getByRole('heading',{ name: 'Your volunteers' })).toHaveCount(0);
+  await expect(page.getByRole('alert')).toContainText('no longer have access', { timeout: 15000 });
+  await expect(page.getByRole('heading', { name: 'Your volunteers' })).toHaveCount(0);
 });
-test('anonymous invitation survives sign-in callback and waits for explicit acceptance', async ({ page }) => {
+test('anonymous invitation survives sign-in callback and waits for explicit acceptance', async ({
+  page,
+}) => {
   await page.goto('/invite#token=' + token);
-  await expect(page.getByRole('link',{ name: 'Sign in with Google' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Sign in with Google' })).toBeVisible();
   await expect(page).toHaveURL('/invite');
-  expect(await page.evaluate(() => document.querySelector('meta[name=referrer]')?.getAttribute('content'))).toBe('no-referrer');
-  const state = await teamFixture(page,{ personalOnly: true });
+  expect(
+    await page.evaluate(() =>
+      document.querySelector('meta[name=referrer]')?.getAttribute('content'),
+    ),
+  ).toBe('no-referrer');
+  const state = await teamFixture(page, { personalOnly: true });
   await page.goto('/auth/callback');
   await expect(page).toHaveURL('/invite');
-  await expect(page.getByRole('button',{ name: 'Join church workspace' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Join church workspace' })).toBeVisible();
   expect(state.writes).toEqual([]);
-  await page.getByRole('button',{ name: 'Join church workspace' }).click();
+  await page.getByRole('button', { name: 'Join church workspace' }).click();
   await expect(page).toHaveURL('/app/w/' + churchId + '/team');
-  await expect(page.getByRole('heading',{ name: 'Your volunteers' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your volunteers' })).toBeVisible();
   expect(state.inviteRequests).toEqual([{ p_token: token }]);
   expect(await page.evaluate(() => sessionStorage.getItem('gather-pending-invitation'))).toBeNull();
 });
-test('team cards and long names fit a phone and workspace switching works from the header', async ({ page }) => {
-  await teamFixture(page,{ longName: true });
+test('team cards and long names fit a phone and workspace switching works from the header', async ({
+  page,
+}) => {
+  await teamFixture(page, { longName: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/app/w/' + churchId + '/team');
-  await expect(page.getByRole('heading',{ name: 'Your volunteers' })).toBeVisible();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await expect(page.getByRole('heading', { name: 'Your volunteers' })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'docs/evidence/S02-team-mobile.png', fullPage: true });
-  await page.getByRole('button',{ name: 'Open navigation' }).click();
+  await page.getByRole('button', { name: 'Open navigation' }).click();
   await page.keyboard.press('Escape');
-  await page.getByRole('button',{ name: 'Switch workspace',exact:true }).click();await page.getByRole('option',{name:'Personal workspace',exact:true}).click();
+  await page.getByRole('button', { name: 'Switch workspace', exact: true }).click();
+  await page.getByRole('option', { name: 'Personal workspace', exact: true }).click();
   await expect(page).toHaveURL('/app/w/' + personalId);
-  await expect(page.getByRole('button',{ name: 'Switch workspace',exact:true })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Switch workspace', exact: true })).toBeFocused();
 });
 test('collapsed desktop navigation keeps the workspace picker accessible', async ({ page }) => {
   await teamFixture(page);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/app/w/' + churchId + '/team');
-  await expect(page.getByRole('textbox',{ name: 'Volunteer email' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Volunteer email' })).toBeVisible();
   await page.screenshot({ path: 'docs/evidence/S02-team-desktop.png', fullPage: true });
-  await page.getByRole('button',{ name: 'Collapse navigation' }).click();
-  await page.getByRole('button',{ name: 'Switch workspace',exact:true }).focus();
-  await page.keyboard.press('ArrowDown');await page.keyboard.press('Home');await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: 'Collapse navigation' }).click();
+  await page.getByRole('button', { name: 'Switch workspace', exact: true }).focus();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Home');
+  await page.keyboard.press('Enter');
   await expect(page).toHaveURL('/app/w/' + personalId);
 });

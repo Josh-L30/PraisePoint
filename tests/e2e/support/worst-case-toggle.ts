@@ -1,7 +1,36 @@
-import type {Page} from '@playwright/test';
-export type QaMode='Demo data'|'Worst case'|'Empty'|'One';
+import type { Page } from '@playwright/test';
+export type QaMode = 'Demo data' | 'Worst case' | 'Empty' | 'One';
 /** Injected only by isolated browser tests; never imported by application source. */
-export async function installWorstCaseToggle(page:Page,select:(mode:QaMode)=>void){
- await page.exposeFunction('gatherQaSelect',(mode:QaMode)=>select(mode));
- await page.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const panel=document.createElement('fieldset');panel.dataset.qaControls='true';panel.setAttribute('aria-label','Test data controls');panel.style.cssText='position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:9999;background:#ddd;padding:4px;display:flex;gap:4px;border:1px solid #777;border-radius:8px;max-width:calc(100vw - 16px);font:12px system-ui;';for(const mode of ['Demo data','Worst case','Empty','One']){const button=document.createElement('button');button.textContent=mode;button.type='button';button.setAttribute('aria-pressed',String((new URL(location.href).searchParams.get('qaData')??'Demo data')===mode));button.style.cssText='font:inherit;padding:8px;border:0;background:white;color:#222;border-radius:4px;white-space:nowrap;';button.addEventListener('click',async()=>{await (window as unknown as {gatherQaSelect(mode:string):Promise<void>}).gatherQaSelect(mode);const url=new URL(location.href);url.searchParams.set('qaData',mode);location.assign(url.href);});panel.append(button);}document.body.append(panel);});});
+export async function installWorstCaseToggle(page: Page, select: (mode: QaMode) => void) {
+  await page.exposeFunction('gatherQaSelect', (mode: QaMode) => select(mode));
+  await page.addInitScript(() => {
+    document.addEventListener('DOMContentLoaded', () => {
+      const panel = document.createElement('fieldset');
+      panel.dataset.qaControls = 'true';
+      panel.setAttribute('aria-label', 'Test data controls');
+      panel.style.cssText =
+        'position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:9999;background:#ddd;padding:4px;display:flex;gap:4px;border:1px solid #777;border-radius:8px;max-width:calc(100vw - 16px);font:12px system-ui;';
+      for (const mode of ['Demo data', 'Worst case', 'Empty', 'One']) {
+        const button = document.createElement('button');
+        button.textContent = mode;
+        button.type = 'button';
+        button.setAttribute(
+          'aria-pressed',
+          String((new URL(location.href).searchParams.get('qaData') ?? 'Demo data') === mode),
+        );
+        button.style.cssText =
+          'font:inherit;padding:8px;border:0;background:white;color:#222;border-radius:4px;white-space:nowrap;';
+        button.addEventListener('click', async () => {
+          await (
+            window as unknown as { gatherQaSelect(mode: string): Promise<void> }
+          ).gatherQaSelect(mode);
+          const url = new URL(location.href);
+          url.searchParams.set('qaData', mode);
+          location.assign(url.href);
+        });
+        panel.append(button);
+      }
+      document.body.append(panel);
+    });
+  });
 }

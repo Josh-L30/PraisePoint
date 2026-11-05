@@ -1,6 +1,18 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { CallbackPage } from '../features/auth/CallbackPage';
-import { AuthPage, ProtectedShell, Dashboard, TeamRoute, DeckLibrary, DeckEditor, DeckPreview,SongLibrary,ServicePlans,MediaLibrary,Presenter } from './RoutePages';
+import {
+  AuthPage,
+  ProtectedShell,
+  Dashboard,
+  TeamRoute,
+  DeckLibrary,
+  DeckEditor,
+  DeckPreview,
+  SongLibrary,
+  ServicePlans,
+  MediaLibrary,
+  Presenter,
+} from './RoutePages';
 import { AcceptInvitePage } from '../features/workspaces/AcceptInvitePage';
 import { FeaturePendingPage } from './FeaturePendingPage';
 import { SetupPage } from './SetupPage';
@@ -11,18 +23,35 @@ export const router = createBrowserRouter([
   { path: '/setup', element: <SetupPage /> },
   { path: '/present/:serviceId', element: <Presenter /> },
   { path: '/invite', element: <AcceptInvitePage /> },
-  { path: '/app', element: <ProtectedShell />, children: [
-    { index: true, element: <Dashboard /> }, { path: 'w/:workspaceId', element: <Dashboard /> },
-    { path: 'w/:workspaceId/team', element: <TeamRoute /> },
-    { path: 'w/:workspaceId/decks', element: <DeckLibrary /> },
-    { path: 'w/:workspaceId/decks/:deckId', element: <DeckEditor /> },
-    { path: 'w/:workspaceId/decks/:deckId/preview', element: <DeckPreview /> },
-    { path: 'w/:workspaceId/templates', element: <DeckLibrary showTemplates /> },
-    { path: 'w/:workspaceId/media', element: <MediaLibrary /> },
-    { path: 'w/:workspaceId/songs', element: <SongLibrary /> },
-    { path: 'w/:workspaceId/services', element: <ServicePlans /> },
-    { path: 'w/:workspaceId/services/:serviceId', element: <ServicePlans /> },
-    { path: 'w/:workspaceId/:section', element: <FeaturePendingPage /> },
-  ] },
-  { path: '*', element: <main className="center-page"><section className="glass message-panel"><h1>Page not found.</h1><a className="button" href="/">Return to PraisePoint</a></section></main> },
+  {
+    path: '/app',
+    element: <ProtectedShell />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: 'w/:workspaceId', element: <Dashboard /> },
+      { path: 'w/:workspaceId/team', element: <TeamRoute /> },
+      { path: 'w/:workspaceId/decks', element: <DeckLibrary /> },
+      { path: 'w/:workspaceId/decks/:deckId', element: <DeckEditor /> },
+      { path: 'w/:workspaceId/decks/:deckId/preview', element: <DeckPreview /> },
+      { path: 'w/:workspaceId/templates', element: <DeckLibrary showTemplates /> },
+      { path: 'w/:workspaceId/media', element: <MediaLibrary /> },
+      { path: 'w/:workspaceId/songs', element: <SongLibrary /> },
+      { path: 'w/:workspaceId/services', element: <ServicePlans /> },
+      { path: 'w/:workspaceId/services/:serviceId', element: <ServicePlans /> },
+      { path: 'w/:workspaceId/:section', element: <FeaturePendingPage /> },
+    ],
+  },
+  {
+    path: '*',
+    element: (
+      <main className="center-page">
+        <section className="glass message-panel">
+          <h1>Page not found.</h1>
+          <a className="button" href="/">
+            Return to PraisePoint
+          </a>
+        </section>
+      </main>
+    ),
+  },
 ]);

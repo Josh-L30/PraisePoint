@@ -1,22 +1,257 @@
-import {useConfirmation} from '../../components/Modal';
-import {ExportMetadataButton} from '../transfer/ExportMetadataButton';
-import {useEffect,useState} from 'react';
-import {Link} from 'react-router';
-import type {PreparedRecord,Readiness} from '../../domain/prepared-service';
-import {readDeviceSession} from '../../lib/device-session';
-import {deletePrepared,listPrepared} from './prepared-store';
-import {createReadinessService} from './readiness';
-import {acquireRuntimeActivity} from './runtime-client';
-import {UpdatePrompt} from './UpdatePrompt';
-export function OfflineLibraryPage(){
- const {confirm,dialog:confirmationDialog}=useConfirmation();
- const [profile,setProfile]=useState<string|null>(null),[items,setItems]=useState<PreparedRecord[]>([]),[statuses,setStatuses]=useState<Record<string,Readiness>>({}),[error,setError]=useState<string|null>(null),[onlineNote,setOnlineNote]=useState(''),[loading,setLoading]=useState(true),[busy,setBusy]=useState<string|null>(null),[version,setVersion]=useState(0);
- useEffect(()=>{let active=true;void readDeviceSession().then(async marker=>{if(!active)return;if(!marker || marker.signedOut){setProfile(null);setItems([]);setLoading(false);return;}setProfile(marker.profileId);const saved=await listPrepared(marker.profileId);if(!active)return;if(saved.ok)setItems(saved.value);else setError(saved.error.message);setLoading(false);}).catch(()=>{if(active){setError('Device storage could not be opened.');setLoading(false);}});return()=>{active=false;};},[version]);
- useEffect(()=>{if(!profile)return;let active=true;const timer=window.setInterval(()=>{void readDeviceSession().then(marker=>{if(active && (marker?.profileId!==profile || marker.signedOut)){setItems([]);setProfile(null);setStatuses({});}}).catch(()=>{if(active){setItems([]);setProfile(null);setError('Device storage could not be verified. Reopen it before presenting.');}});},1000);return()=>{active=false;window.clearInterval(timer);};},[profile]);
- async function verify(packageId:string){if(!profile || busy)return;setBusy(packageId);setStatuses(previous=>({...previous,[packageId]:{state:'preparing',issues:[]}}));setError(null);const lease=await acquireRuntimeActivity();if(!lease.ok){setError(lease.error.message);setBusy(null);return;}try{const status=await createReadinessService(profile).checkReadiness(packageId);setStatuses(previous=>({...previous,[packageId]:status}));}finally{lease.value();setBusy(null);}}
- async function checkOnline(packageId:string){if(!profile || busy)return;setBusy(packageId);setError(null);setOnlineNote('');const lease=await acquireRuntimeActivity();if(!lease.ok){setError(lease.error.message);setBusy(null);return;}try{const {checkPreparedOnline}=await import('./check-online'),result=await checkPreparedOnline(profile,packageId);if(!result.ok)setError(result.error.message+' The saved copy has not been removed.');else{setOnlineNote(result.value.changed?'A newer version is saved online. Review and prepare it again, or present the saved version.':'This copy matches the saved service checked just now.');const status=await createReadinessService(profile).checkReadiness(packageId);setStatuses(previous=>({...previous,[packageId]:status}));setVersion(value=>value+1);}}finally{lease.value();setBusy(null);}}
- async function remove(packageId:string){if(!profile || busy || !await confirm({title:'Remove prepared copy?',message:'This removes the saved copy from this laptop. Keep original media files for recovery.',confirmLabel:'Remove prepared copy',danger:true}))return;setBusy(packageId);const lease=await acquireRuntimeActivity('prepare');if(!lease.ok){setError(lease.error.message);setBusy(null);return;}try{const result=await deletePrepared(profile,packageId);if(!result.ok)setError(result.error.message);else setVersion(value=>value+1);}finally{lease.value();setBusy(null);}}
- return <main className="page-content offline-library">{confirmationDialog}<header className="page-heading"><div><p className="eyebrow">On this laptop</p><h1>Prepared for your service.</h1><p>Complete saved copies for the device profile. No Google round trip is needed to open them.</p></div><a className="button" href="/app">Open online workspace</a></header><UpdatePrompt/>{onlineNote && <p role="status">{onlineNote}</p>}{error && <p role="alert" className="form-message form-error">{error}</p>}
- {loading?<p role="status">Opening device storage…</p>:!profile?<section className="glass content-editor"><h2>No prepared profile on this laptop.</h2><p>Sign in online, review a saved service and prepare it here before disconnecting.</p></section>:items.length===0?<section className="glass content-editor"><h2>Bring a complete service with you.</h2><p>Prepare a service in the online workspace on this laptop. Its app, font, slides and media must all be verified first.</p></section>:<div className="offline-service-grid">{items.map(record=>{const status=statuses[record.packageId];return <article className="glass content-editor" key={record.packageId}><h2>{record.manifest.snapshot.title}</h2><p>Prepared at {new Date(record.manifest.preparedAt).toLocaleString()}</p><p className="field-help">{record.checkedAt?'Online service last checked at '+new Date(record.checkedAt).toLocaleString()+'. Later changes may not be included.':'Online changes have not been checked since preparation.'} Keep original files; browser storage can be cleared by the device.</p><p>{status?.state==='ready'?'Ready offline':status?.state==='stale'?'Saved version · changes need review':status?.state==='failed'?'Needs preparation again':'Verify before presenting'}</p>{status && status.state!=='ready' && status.issues.map(issue=><p key={issue}>{issue}</p>)}<ExportMetadataButton snapshot={record.manifest.snapshot} disabled={!!busy}/><div className="action-row"><button className="button" disabled={!!busy} onClick={()=>void verify(record.packageId)}>{busy===record.packageId?'Checking…':'Verify prepared copy'}</button><Link className="button button-primary" to={'/offline/'+record.packageId+(status?.state==='stale'?'?saved=1':'')}>{status?.state==='stale'?'Present saved version':'Open prepared service'}</Link><button className="button" disabled={!!busy} onClick={()=>void checkOnline(record.packageId)}>Check online changes</button><button className="text-button" disabled={!!busy} onClick={()=>void remove(record.packageId)}>Remove prepared copy</button></div></article>;})}</div>}
- </main>;
+import { useConfirmation } from '../../components/Modal';
+import { ExportMetadataButton } from '../transfer/ExportMetadataButton';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
+import type { PreparedRecord, Readiness } from '../../domain/prepared-service';
+import { readDeviceSession } from '../../lib/device-session';
+import { deletePrepared, listPrepared } from './prepared-store';
+import { createReadinessService } from './readiness';
+import { acquireRuntimeActivity } from './runtime-client';
+import { UpdatePrompt } from './UpdatePrompt';
+export function OfflineLibraryPage() {
+  const { confirm, dialog: confirmationDialog } = useConfirmation();
+  const [profile, setProfile] = useState<string | null>(null),
+    [items, setItems] = useState<PreparedRecord[]>([]),
+    [statuses, setStatuses] = useState<Record<string, Readiness>>({}),
+    [error, setError] = useState<string | null>(null),
+    [onlineNote, setOnlineNote] = useState(''),
+    [loading, setLoading] = useState(true),
+    [busy, setBusy] = useState<string | null>(null),
+    [version, setVersion] = useState(0);
+  useEffect(() => {
+    let active = true;
+    void readDeviceSession()
+      .then(async (marker) => {
+        if (!active) return;
+        if (!marker || marker.signedOut) {
+          setProfile(null);
+          setItems([]);
+          setLoading(false);
+          return;
+        }
+        setProfile(marker.profileId);
+        const saved = await listPrepared(marker.profileId);
+        if (!active) return;
+        if (saved.ok) setItems(saved.value);
+        else setError(saved.error.message);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (active) {
+          setError('Device storage could not be opened.');
+          setLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [version]);
+  useEffect(() => {
+    if (!profile) return;
+    let active = true;
+    const timer = window.setInterval(() => {
+      void readDeviceSession()
+        .then((marker) => {
+          if (active && (marker?.profileId !== profile || marker.signedOut)) {
+            setItems([]);
+            setProfile(null);
+            setStatuses({});
+          }
+        })
+        .catch(() => {
+          if (active) {
+            setItems([]);
+            setProfile(null);
+            setError('Device storage could not be verified. Reopen it before presenting.');
+          }
+        });
+    }, 1000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, [profile]);
+  async function verify(packageId: string) {
+    if (!profile || busy) return;
+    setBusy(packageId);
+    setStatuses((previous) => ({ ...previous, [packageId]: { state: 'preparing', issues: [] } }));
+    setError(null);
+    const lease = await acquireRuntimeActivity();
+    if (!lease.ok) {
+      setError(lease.error.message);
+      setBusy(null);
+      return;
+    }
+    try {
+      const status = await createReadinessService(profile).checkReadiness(packageId);
+      setStatuses((previous) => ({ ...previous, [packageId]: status }));
+    } finally {
+      lease.value();
+      setBusy(null);
+    }
+  }
+  async function checkOnline(packageId: string) {
+    if (!profile || busy) return;
+    setBusy(packageId);
+    setError(null);
+    setOnlineNote('');
+    const lease = await acquireRuntimeActivity();
+    if (!lease.ok) {
+      setError(lease.error.message);
+      setBusy(null);
+      return;
+    }
+    try {
+      const { checkPreparedOnline } = await import('./check-online'),
+        result = await checkPreparedOnline(profile, packageId);
+      if (!result.ok) setError(result.error.message + ' The saved copy has not been removed.');
+      else {
+        setOnlineNote(
+          result.value.changed
+            ? 'A newer version is saved online. Review and prepare it again, or present the saved version.'
+            : 'This copy matches the saved service checked just now.',
+        );
+        const status = await createReadinessService(profile).checkReadiness(packageId);
+        setStatuses((previous) => ({ ...previous, [packageId]: status }));
+        setVersion((value) => value + 1);
+      }
+    } finally {
+      lease.value();
+      setBusy(null);
+    }
+  }
+  async function remove(packageId: string) {
+    if (
+      !profile ||
+      busy ||
+      !(await confirm({
+        title: 'Remove prepared copy?',
+        message:
+          'This removes the saved copy from this laptop. Keep original media files for recovery.',
+        confirmLabel: 'Remove prepared copy',
+        danger: true,
+      }))
+    )
+      return;
+    setBusy(packageId);
+    const lease = await acquireRuntimeActivity('prepare');
+    if (!lease.ok) {
+      setError(lease.error.message);
+      setBusy(null);
+      return;
+    }
+    try {
+      const result = await deletePrepared(profile, packageId);
+      if (!result.ok) setError(result.error.message);
+      else setVersion((value) => value + 1);
+    } finally {
+      lease.value();
+      setBusy(null);
+    }
+  }
+  return (
+    <main className="page-content offline-library">
+      {confirmationDialog}
+      <header className="page-heading">
+        <div>
+          <p className="eyebrow">On this laptop</p>
+          <h1>Prepared for your service.</h1>
+          <p>
+            Complete saved copies for the device profile. No Google round trip is needed to open
+            them.
+          </p>
+        </div>
+        <a className="button" href="/app">
+          Open online workspace
+        </a>
+      </header>
+      <UpdatePrompt />
+      {onlineNote && <p role="status">{onlineNote}</p>}
+      {error && (
+        <p role="alert" className="form-message form-error">
+          {error}
+        </p>
+      )}
+      {loading ? (
+        <p role="status">Opening device storage…</p>
+      ) : !profile ? (
+        <section className="glass content-editor">
+          <h2>No prepared profile on this laptop.</h2>
+          <p>Sign in online, review a saved service and prepare it here before disconnecting.</p>
+        </section>
+      ) : items.length === 0 ? (
+        <section className="glass content-editor">
+          <h2>Bring a complete service with you.</h2>
+          <p>
+            Prepare a service in the online workspace on this laptop. Its app, font, slides and
+            media must all be verified first.
+          </p>
+        </section>
+      ) : (
+        <div className="offline-service-grid">
+          {items.map((record) => {
+            const status = statuses[record.packageId];
+            return (
+              <article className="glass content-editor" key={record.packageId}>
+                <h2>{record.manifest.snapshot.title}</h2>
+                <p>Prepared at {new Date(record.manifest.preparedAt).toLocaleString()}</p>
+                <p className="field-help">
+                  {record.checkedAt
+                    ? 'Online service last checked at ' +
+                      new Date(record.checkedAt).toLocaleString() +
+                      '. Later changes may not be included.'
+                    : 'Online changes have not been checked since preparation.'}{' '}
+                  Keep original files; browser storage can be cleared by the device.
+                </p>
+                <p>
+                  {status?.state === 'ready'
+                    ? 'Ready offline'
+                    : status?.state === 'stale'
+                      ? 'Saved version · changes need review'
+                      : status?.state === 'failed'
+                        ? 'Needs preparation again'
+                        : 'Verify before presenting'}
+                </p>
+                {status &&
+                  status.state !== 'ready' &&
+                  status.issues.map((issue) => <p key={issue}>{issue}</p>)}
+                <ExportMetadataButton snapshot={record.manifest.snapshot} disabled={!!busy} />
+                <div className="action-row">
+                  <button
+                    className="button"
+                    disabled={!!busy}
+                    onClick={() => void verify(record.packageId)}
+                  >
+                    {busy === record.packageId ? 'Checking…' : 'Verify prepared copy'}
+                  </button>
+                  <Link
+                    className="button button-primary"
+                    to={
+                      '/offline/' + record.packageId + (status?.state === 'stale' ? '?saved=1' : '')
+                    }
+                  >
+                    {status?.state === 'stale' ? 'Present saved version' : 'Open prepared service'}
+                  </Link>
+                  <button
+                    className="button"
+                    disabled={!!busy}
+                    onClick={() => void checkOnline(record.packageId)}
+                  >
+                    Check online changes
+                  </button>
+                  <button
+                    className="text-button"
+                    disabled={!!busy}
+                    onClick={() => void remove(record.packageId)}
+                  >
+                    Remove prepared copy
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </main>
+  );
 }

@@ -4,7 +4,11 @@ export type AuthState =
   | { status: 'loading' | 'anonymous'; profile: null; error: null }
   | { status: 'authenticated'; profile: ProfileWorkspace; error: null }
   | { status: 'error'; profile: null; error: string };
-export type AuthContextValue = AuthState & { service: AuthService; reload(): Promise<void>; signOut(): Promise<void> };
+export type AuthContextValue = AuthState & {
+  service: AuthService;
+  reload(): Promise<void>;
+  signOut(): Promise<void>;
+};
 export const AuthContext = createContext<AuthContextValue | null>(null);
 export function useAuth() {
   const value = useContext(AuthContext);
