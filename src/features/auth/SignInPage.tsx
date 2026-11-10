@@ -60,7 +60,10 @@ export function SignInPage({
           </p>
         </section>
         <section className="open-welcome-signin" aria-labelledby="login-welcome">
-          <h2 id="login-welcome">Welcome to PraisePoint.</h2>
+          <h2 id="login-welcome">
+            Welcome to
+            <br className="welcome-break" /> PraisePoint.
+          </h2>
           <p className="open-welcome-intro">
             Your songs, your slides, your next service.
             <br />
@@ -73,11 +76,28 @@ export function SignInPage({
             }}
             disabled={busy}
           >
-            <span className="google-mark" aria-hidden="true">
-              G
+            <svg className="google-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="#4285f4"
+                d="M21.6 12.2c0-.7-.1-1.4-.2-2.1H12v4h5.4a4.7 4.7 0 0 1-2 3.1v2.6h3.3c1.9-1.8 2.9-4.4 2.9-7.6Z"
+              />
+              <path
+                fill="#34a853"
+                d="M12 22c2.7 0 5-.9 6.7-2.5l-3.3-2.6c-.9.6-2 1-3.4 1-2.6 0-4.9-1.8-5.7-4.2H2.9v2.7A10 10 0 0 0 12 22Z"
+              />
+              <path
+                fill="#fbbc05"
+                d="M6.3 13.7a6 6 0 0 1 0-3.4V7.6H2.9a10 10 0 0 0 0 8.8l3.4-2.7Z"
+              />
+              <path
+                fill="#ea4335"
+                d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.9A9.6 9.6 0 0 0 12 2a10 10 0 0 0-9.1 5.6l3.4 2.7A6 6 0 0 1 12 6.1Z"
+              />
+            </svg>
+            <span className="google-label">
+              {busy ? 'Connecting to Google…' : 'Continue with Google'}
             </span>
-            {busy ? 'Connecting to Google…' : 'Continue with Google'}
-            <ArrowUpRight size={16} />
+            <ArrowUpRight className="google-arrow" size={17} aria-hidden="true" />
           </button>
           {error && (
             <div className="form-error" role="alert">
