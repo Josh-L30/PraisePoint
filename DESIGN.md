@@ -108,3 +108,7 @@ The user selected the fifth panel alternative and authorized deployment. Superse
 ## S38 Sanctuary login — 2026-11-10
 
 The user selected S37 option 1 (Sanctuary) for desktop and mobile and authorized deployment. This supersedes the S26 Evening Calm/Open Horizon login appearance. Reuse the approved full-screen auditorium photograph with a dark left-to-right overlay. Keep the headline open on the left and a single pale translucent sign-in panel on the right; use a 1170px composition, 9% desktop column gap, 62px maximum headline and teal Google button. On phones (700px and below), stack the open headline and compact pale panel with a 35px gap, 16px feature icons and no extra story paragraph. Brand stays top-left; there is one CCF mark. Reduced transparency uses an opaque pale panel. Google OAuth, error recovery, private-work copy and the direct entrance without video are preserved.
+
+## S39 Sanctuary responsive correction - 2026-11-10
+
+Use the stacked Sanctuary composition at 900px and below so portrait iPads and narrow tablet/split-view windows avoid cramped side-by-side sign-in panels. Cap this composition, header and footer at 520px, centered with matching gutters; preserve 23px minimum outer padding on phones and account for safe-area insets. Above 900px retain the open-story/pale-panel columns, with zero-minimum grid tracks. This supersedes S38's 700px stacking breakpoint. All imagery, colors and authentication behavior remain unchanged.

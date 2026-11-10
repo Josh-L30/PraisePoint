@@ -42,7 +42,7 @@ test('Sanctuary honors reduced transparency on tablet and phones', async ({ page
   await cdp.send('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-transparency', value: 'no-preference' }],
   });
-  await page.setViewportSize({ width: 834, height: 1112 });
+  await page.setViewportSize({ width: 1024, height: 1366 });
   await page.goto('/auth');
   await expect(page.locator('.open-welcome-panels')).toHaveCSS('display', 'grid');
   await expect(page.locator('.open-welcome-signin')).toHaveCSS(

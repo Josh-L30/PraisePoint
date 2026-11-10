@@ -32,7 +32,7 @@
 .open-welcome-panels {
   flex: 1;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   align-items: center;
   width: min(1170px, 100%);
   margin: 0 auto;
@@ -182,7 +182,7 @@
     opacity: 0.85;
   }
 }
-@media (min-width: 701px) and (max-width: 1000px) {
+@media (min-width: 901px) and (max-width: 1000px) {
   .open-welcome {
     padding: 30px;
   }
@@ -199,10 +199,16 @@
     padding: 32px 26px;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .open-welcome {
-    padding: 23px 23px max(19px, env(safe-area-inset-bottom));
+    padding: max(23px, env(safe-area-inset-top)) max(23px, env(safe-area-inset-right))
+      max(19px, env(safe-area-inset-bottom)) max(23px, env(safe-area-inset-left));
     background-position: 56% center;
+  }
+  .open-welcome-brand,
+  .open-welcome-footer {
+    width: min(520px, 100%);
+    margin-inline: auto;
   }
   .open-welcome-brand .brand {
     font-size: 21px;
@@ -219,7 +225,7 @@
     align-items: stretch;
     gap: 35px;
     padding: 43px 0;
-    width: 100%;
+    width: min(520px, 100%);
   }
   .open-welcome h1 {
     font-size: clamp(29px, 8vw, 39px);
